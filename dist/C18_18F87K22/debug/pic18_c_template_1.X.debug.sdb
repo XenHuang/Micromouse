@@ -1,0 +1,81 @@
+[p LITE_MODE AUTOSTATIC LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F4620 ]
+[d frameptr 4065 ]
+"63 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\double.c
+[v ___flpack __flpack `(d  1 e 3 0 ]
+"88 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fladd.c
+[v ___fladd __fladd `(d  1 e 3 0 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fldiv.c
+[v ___fldiv __fldiv `(d  1 e 3 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\flmul.c
+[v ___flmul __flmul `(d  1 e 3 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"20 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\flsub.c
+[v ___flsub __flsub `(d  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"20 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"27 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+[v _high_isr high_isr `II(v  1 e 0 0 ]
+"67
+[v _low_isr low_isr `IIL(v  1 e 0 0 ]
+"39 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
+[v _delay delay `(v  1 e 0 0 ]
+"45
+[v _main main `(v  1 e 0 0 ]
+"24 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\system.c
+[v _ConfigureOscillator ConfigureOscillator `(v  1 e 0 0 ]
+"28 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
+[v _InitApp InitApp `(v  1 e 0 0 ]
+"1399 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
+[v _LATD LATD `VEuc  1 e 1 @3980 ]
+"1854
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"2680
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
+"6061
+[v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
+"45 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
+[v _main main `(v  1 e 0 0 ]
+{
+"68
+} 0
+"39
+[v _delay delay `(v  1 e 0 0 ]
+{
+"40
+[v delay@x x `i  1 a 2 34 ]
+"39
+[v delay@ms ms `ui  1 p 2 31 ]
+"43
+} 0
+"28 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
+[v _InitApp InitApp `(v  1 e 0 0 ]
+{
+"39
+} 0
+"24 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\system.c
+[v _ConfigureOscillator ConfigureOscillator `(v  1 e 0 0 ]
+{
+"31
+} 0
+"67 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+[v _low_isr low_isr `IIL(v  1 e 0 0 ]
+{
+"102
+} 0
+"27
+[v _high_isr high_isr `II(v  1 e 0 0 ]
+{
+"63
+} 0
