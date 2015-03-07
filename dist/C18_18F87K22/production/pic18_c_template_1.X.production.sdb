@@ -39,6 +39,8 @@
 [v _InitApp InitApp `(v  1 e 0 0 ]
 "1267 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
+"1854
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
 "2075
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
 "2680
@@ -48,7 +50,7 @@
 "45 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
 [v _main main `(v  1 e 0 0 ]
 {
-"74
+"77
 } 0
 "39
 [v _delay delay `(v  1 e 0 0 ]

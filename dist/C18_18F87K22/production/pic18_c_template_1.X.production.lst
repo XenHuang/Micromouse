@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.34 build -361300703 
-                                                                                               Fri Mar 06 17:36:10 2015
+                                                                                               Fri Mar 06 19:57:28 2015
 
 Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
      1                           	processor	18F4620
@@ -23,715 +23,720 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
     17  0000                     _LATC	set	3979
     18  0000                     _OSCCON	set	4051
     19  0000                     _OSCTUNE	set	3995
-    20  0000                     _TRISC	set	3988
-    21                           
-    22 ;; *************** function _low_isr *****************
-    23 ;; Defined at:
-    24 ;;		line 67 in file "interrupts.c"
-    25 ;; Parameters:    Size  Location     Type
-    26 ;;		None
-    27 ;; Auto vars:     Size  Location     Type
-    28 ;;		None
-    29 ;; Return value:  Size  Location     Type
-    30 ;;		None               void
-    31 ;; Registers used:
-    32 ;;		None
-    33 ;; Tracked objects:
-    34 ;;		On entry : 0/0
-    35 ;;		On exit  : 0/0
-    36 ;;		Unchanged: 0/0
-    37 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+    20  0000                     _TRISB	set	3987
+    21  0000                     _TRISC	set	3988
+    22                           
+    23 ;; *************** function _low_isr *****************
+    24 ;; Defined at:
+    25 ;;		line 67 in file "interrupts.c"
+    26 ;; Parameters:    Size  Location     Type
+    27 ;;		None
+    28 ;; Auto vars:     Size  Location     Type
+    29 ;;		None
+    30 ;; Return value:  Size  Location     Type
+    31 ;;		None               void
+    32 ;; Registers used:
+    33 ;;		None
+    34 ;; Tracked objects:
+    35 ;;		On entry : 0/0
+    36 ;;		On exit  : 0/0
+    37 ;;		Unchanged: 0/0
+    38 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-    38 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+    39 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-    39 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+    40 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-    40 ;;      Temps:         17       0       0       0       0       0       0       0       0       0       0       0       
+    41 ;;      Temps:         17       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-    41 ;;      Totals:        17       0       0       0       0       0       0       0       0       0       0       0       
+    42 ;;      Totals:        17       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-    42 ;;Total ram usage:       17 bytes
-    43 ;; Hardware stack levels used:    1
-    44 ;; Hardware stack levels required when called:    1
-    45 ;; This function calls:
-    46 ;;		Nothing
-    47 ;; This function is called by:
-    48 ;;		Interrupt level 1
-    49 ;; This function uses a non-reentrant model
-    50 ;;
-    51                           
-    52                           	psect	intcodelo
-    53  000018                     __pintcodelo:
-    54                           	opt stack 0
-    55                           
-    56                           ; #config settings
-    57  000018                     _low_isr:
-    58                           	opt stack 28
-    59                           
-    60                           ;incstack = 0
-    61  000018  CFD8 F001          	movff	status,??_low_isr
-    62  00001C  CFE8 F002          	movff	wreg,??_low_isr+1
-    63  000020  CFE0 F003          	movff	bsr,??_low_isr+2
-    64  000024  CFFA F004          	movff	pclath,??_low_isr+3
-    65  000028  CFFB F005          	movff	pclatu,??_low_isr+4
-    66  00002C  CFE9 F006          	movff	fsr0l,??_low_isr+5
-    67  000030  CFEA F007          	movff	fsr0h,??_low_isr+6
-    68  000034  CFE1 F008          	movff	fsr1l,??_low_isr+7
-    69  000038  CFE2 F009          	movff	fsr1h,??_low_isr+8
-    70  00003C  CFD9 F00A          	movff	fsr2l,??_low_isr+9
-    71  000040  CFDA F00B          	movff	fsr2h,??_low_isr+10
-    72  000044  CFF3 F00C          	movff	prodl,??_low_isr+11
-    73  000048  CFF4 F00D          	movff	prodh,??_low_isr+12
-    74  00004C  CFF6 F00E          	movff	tblptrl,??_low_isr+13
-    75  000050  CFF7 F00F          	movff	tblptrh,??_low_isr+14
-    76  000054  CFF8 F010          	movff	tblptru,??_low_isr+15
-    77  000058  CFF5 F011          	movff	tablat,??_low_isr+16
-    78  00005C  C011  FFF5         	movff	??_low_isr+16,tablat
-    79  000060  C010  FFF8         	movff	??_low_isr+15,tblptru
-    80  000064  C00F  FFF7         	movff	??_low_isr+14,tblptrh
-    81  000068  C00E  FFF6         	movff	??_low_isr+13,tblptrl
-    82  00006C  C00D  FFF4         	movff	??_low_isr+12,prodh
-    83  000070  C00C  FFF3         	movff	??_low_isr+11,prodl
-    84  000074  C00B  FFDA         	movff	??_low_isr+10,fsr2h
-    85  000078  C00A  FFD9         	movff	??_low_isr+9,fsr2l
-    86  00007C  C009  FFE2         	movff	??_low_isr+8,fsr1h
-    87  000080  C008  FFE1         	movff	??_low_isr+7,fsr1l
-    88  000084  C007  FFEA         	movff	??_low_isr+6,fsr0h
-    89  000088  C006  FFE9         	movff	??_low_isr+5,fsr0l
-    90  00008C  C005  FFFB         	movff	??_low_isr+4,pclatu
-    91  000090  C004  FFFA         	movff	??_low_isr+3,pclath
-    92  000094  C003  FFE0         	movff	??_low_isr+2,bsr
-    93  000098  C002  FFE8         	movff	??_low_isr+1,wreg
-    94  00009C  C001  FFD8         	movff	??_low_isr,status
-    95  0000A0  0010               	retfie	
-    96  0000A2                     __end_of_low_isr:
-    97                           	opt stack 0
-    98                           pclatu	equ	0xFFB
-    99                           pclath	equ	0xFFA
-   100                           tblptru	equ	0xFF8
-   101                           tblptrh	equ	0xFF7
-   102                           tblptrl	equ	0xFF6
-   103                           tablat	equ	0xFF5
-   104                           prodh	equ	0xFF4
-   105                           prodl	equ	0xFF3
-   106                           fsr0h	equ	0xFEA
-   107                           fsr0l	equ	0xFE9
-   108                           wreg	equ	0xFE8
-   109                           fsr1h	equ	0xFE2
-   110                           fsr1l	equ	0xFE1
-   111                           bsr	equ	0xFE0
-   112                           fsr2h	equ	0xFDA
-   113                           fsr2l	equ	0xFD9
-   114                           status	equ	0xFD8
-   115                           
-   116                           	psect	cinit
-   117  00019C                     __pcinit:
-   118                           	opt stack 0
-   119  00019C                     start_initialization:
-   120                           	opt stack 0
-   121  00019C                     __initialization:
-   122                           	opt stack 0
-   123                           
-   124                           ; Clear objects allocated to COMRAM (2 bytes)
-   125  00019C  6A26               	clrf	(__pbssCOMRAM+1)& (0+255),c
-   126  00019E  6A25               	clrf	__pbssCOMRAM& (0+255),c
-   127  0001A0                     end_of_initialization:
-   128                           	opt stack 0
-   129  0001A0                     __end_of__initialization:
-   130                           	opt stack 0
-   131  0001A0  0100               	movlb	0
-   132  0001A2  EF87  F000         	goto	_main	;jump to C main() function
-   133                           pclatu	equ	0xFFB
-   134                           pclath	equ	0xFFA
-   135                           tblptru	equ	0xFF8
-   136                           tblptrh	equ	0xFF7
-   137                           tblptrl	equ	0xFF6
-   138                           tablat	equ	0xFF5
-   139                           prodh	equ	0xFF4
-   140                           prodl	equ	0xFF3
-   141                           fsr0h	equ	0xFEA
-   142                           fsr0l	equ	0xFE9
-   143                           wreg	equ	0xFE8
-   144                           fsr1h	equ	0xFE2
-   145                           fsr1l	equ	0xFE1
-   146                           bsr	equ	0xFE0
-   147                           fsr2h	equ	0xFDA
-   148                           fsr2l	equ	0xFD9
-   149                           status	equ	0xFD8
-   150                           
-   151                           	psect	bssCOMRAM
-   152  000025                     __pbssCOMRAM:
-   153                           	opt stack 0
-   154  000025                     _delay_time:
-   155                           	opt stack 0
-   156  000025                     	ds	2
-   157                           pclatu	equ	0xFFB
-   158                           pclath	equ	0xFFA
-   159                           tblptru	equ	0xFF8
-   160                           tblptrh	equ	0xFF7
-   161                           tblptrl	equ	0xFF6
-   162                           tablat	equ	0xFF5
-   163                           prodh	equ	0xFF4
-   164                           prodl	equ	0xFF3
-   165                           fsr0h	equ	0xFEA
-   166                           fsr0l	equ	0xFE9
-   167                           wreg	equ	0xFE8
-   168                           fsr1h	equ	0xFE2
-   169                           fsr1l	equ	0xFE1
-   170                           bsr	equ	0xFE0
-   171                           fsr2h	equ	0xFDA
-   172                           fsr2l	equ	0xFD9
-   173                           status	equ	0xFD8
-   174                           
-   175                           	psect	cstackCOMRAM
-   176  000001                     __pcstackCOMRAM:
-   177                           	opt stack 0
-   178  000001                     ??_low_isr:
-   179  000001                     
-   180                           ; 0 bytes @ 0x0
-   181  000001                     	ds	17
-   182  000012                     ??_high_isr:
-   183                           
-   184                           ; 0 bytes @ 0x11
-   185  000012                     	ds	14
-   186  000020                     delay@ms:
-   187                           	opt stack 0
-   188                           
-   189                           ; 2 bytes @ 0x1F
-   190  000020                     	ds	2
-   191  000022                     ??_delay:
-   192                           
-   193                           ; 0 bytes @ 0x21
-   194  000022                     	ds	1
-   195  000023                     delay@x:
-   196                           	opt stack 0
-   197                           
-   198                           ; 2 bytes @ 0x22
-   199  000023                     	ds	2
-   200  000025                     pclatu	equ	0xFFB
-   201                           pclath	equ	0xFFA
-   202                           tblptru	equ	0xFF8
-   203                           tblptrh	equ	0xFF7
-   204                           tblptrl	equ	0xFF6
-   205                           tablat	equ	0xFF5
-   206                           prodh	equ	0xFF4
-   207                           prodl	equ	0xFF3
-   208                           fsr0h	equ	0xFEA
-   209                           fsr0l	equ	0xFE9
-   210                           wreg	equ	0xFE8
-   211                           fsr1h	equ	0xFE2
-   212                           fsr1l	equ	0xFE1
-   213                           bsr	equ	0xFE0
-   214                           fsr2h	equ	0xFDA
-   215                           fsr2l	equ	0xFD9
-   216                           status	equ	0xFD8
-   217                           
-   218                           ; 0 bytes @ 0x24
-   219 ;;
-   220 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
-   221 ;;
-   222 ;; *************** function _main *****************
-   223 ;; Defined at:
-   224 ;;		line 45 in file "main.c"
-   225 ;; Parameters:    Size  Location     Type
-   226 ;;		None
-   227 ;; Auto vars:     Size  Location     Type
-   228 ;;		None
-   229 ;; Return value:  Size  Location     Type
-   230 ;;		None               void
-   231 ;; Registers used:
-   232 ;;		wreg, status,2, status,0, cstack
-   233 ;; Tracked objects:
-   234 ;;		On entry : 0/0
-   235 ;;		On exit  : 0/0
-   236 ;;		Unchanged: 0/0
-   237 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+    43 ;;Total ram usage:       17 bytes
+    44 ;; Hardware stack levels used:    1
+    45 ;; Hardware stack levels required when called:    1
+    46 ;; This function calls:
+    47 ;;		Nothing
+    48 ;; This function is called by:
+    49 ;;		Interrupt level 1
+    50 ;; This function uses a non-reentrant model
+    51 ;;
+    52                           
+    53                           	psect	intcodelo
+    54  000018                     __pintcodelo:
+    55                           	opt stack 0
+    56                           
+    57                           ; #config settings
+    58  000018                     _low_isr:
+    59                           	opt stack 28
+    60                           
+    61                           ;incstack = 0
+    62  000018  CFD8 F001          	movff	status,??_low_isr
+    63  00001C  CFE8 F002          	movff	wreg,??_low_isr+1
+    64  000020  CFE0 F003          	movff	bsr,??_low_isr+2
+    65  000024  CFFA F004          	movff	pclath,??_low_isr+3
+    66  000028  CFFB F005          	movff	pclatu,??_low_isr+4
+    67  00002C  CFE9 F006          	movff	fsr0l,??_low_isr+5
+    68  000030  CFEA F007          	movff	fsr0h,??_low_isr+6
+    69  000034  CFE1 F008          	movff	fsr1l,??_low_isr+7
+    70  000038  CFE2 F009          	movff	fsr1h,??_low_isr+8
+    71  00003C  CFD9 F00A          	movff	fsr2l,??_low_isr+9
+    72  000040  CFDA F00B          	movff	fsr2h,??_low_isr+10
+    73  000044  CFF3 F00C          	movff	prodl,??_low_isr+11
+    74  000048  CFF4 F00D          	movff	prodh,??_low_isr+12
+    75  00004C  CFF6 F00E          	movff	tblptrl,??_low_isr+13
+    76  000050  CFF7 F00F          	movff	tblptrh,??_low_isr+14
+    77  000054  CFF8 F010          	movff	tblptru,??_low_isr+15
+    78  000058  CFF5 F011          	movff	tablat,??_low_isr+16
+    79  00005C  C011  FFF5         	movff	??_low_isr+16,tablat
+    80  000060  C010  FFF8         	movff	??_low_isr+15,tblptru
+    81  000064  C00F  FFF7         	movff	??_low_isr+14,tblptrh
+    82  000068  C00E  FFF6         	movff	??_low_isr+13,tblptrl
+    83  00006C  C00D  FFF4         	movff	??_low_isr+12,prodh
+    84  000070  C00C  FFF3         	movff	??_low_isr+11,prodl
+    85  000074  C00B  FFDA         	movff	??_low_isr+10,fsr2h
+    86  000078  C00A  FFD9         	movff	??_low_isr+9,fsr2l
+    87  00007C  C009  FFE2         	movff	??_low_isr+8,fsr1h
+    88  000080  C008  FFE1         	movff	??_low_isr+7,fsr1l
+    89  000084  C007  FFEA         	movff	??_low_isr+6,fsr0h
+    90  000088  C006  FFE9         	movff	??_low_isr+5,fsr0l
+    91  00008C  C005  FFFB         	movff	??_low_isr+4,pclatu
+    92  000090  C004  FFFA         	movff	??_low_isr+3,pclath
+    93  000094  C003  FFE0         	movff	??_low_isr+2,bsr
+    94  000098  C002  FFE8         	movff	??_low_isr+1,wreg
+    95  00009C  C001  FFD8         	movff	??_low_isr,status
+    96  0000A0  0010               	retfie	
+    97  0000A2                     __end_of_low_isr:
+    98                           	opt stack 0
+    99                           pclatu	equ	0xFFB
+   100                           pclath	equ	0xFFA
+   101                           tblptru	equ	0xFF8
+   102                           tblptrh	equ	0xFF7
+   103                           tblptrl	equ	0xFF6
+   104                           tablat	equ	0xFF5
+   105                           prodh	equ	0xFF4
+   106                           prodl	equ	0xFF3
+   107                           fsr0h	equ	0xFEA
+   108                           fsr0l	equ	0xFE9
+   109                           wreg	equ	0xFE8
+   110                           fsr1h	equ	0xFE2
+   111                           fsr1l	equ	0xFE1
+   112                           bsr	equ	0xFE0
+   113                           fsr2h	equ	0xFDA
+   114                           fsr2l	equ	0xFD9
+   115                           status	equ	0xFD8
+   116                           
+   117                           	psect	cinit
+   118  0001A0                     __pcinit:
+   119                           	opt stack 0
+   120  0001A0                     start_initialization:
+   121                           	opt stack 0
+   122  0001A0                     __initialization:
+   123                           	opt stack 0
+   124                           
+   125                           ; Clear objects allocated to COMRAM (2 bytes)
+   126  0001A0  6A26               	clrf	(__pbssCOMRAM+1)& (0+255),c
+   127  0001A2  6A25               	clrf	__pbssCOMRAM& (0+255),c
+   128  0001A4                     end_of_initialization:
+   129                           	opt stack 0
+   130  0001A4                     __end_of__initialization:
+   131                           	opt stack 0
+   132  0001A4  0100               	movlb	0
+   133  0001A6  EF87  F000         	goto	_main	;jump to C main() function
+   134                           pclatu	equ	0xFFB
+   135                           pclath	equ	0xFFA
+   136                           tblptru	equ	0xFF8
+   137                           tblptrh	equ	0xFF7
+   138                           tblptrl	equ	0xFF6
+   139                           tablat	equ	0xFF5
+   140                           prodh	equ	0xFF4
+   141                           prodl	equ	0xFF3
+   142                           fsr0h	equ	0xFEA
+   143                           fsr0l	equ	0xFE9
+   144                           wreg	equ	0xFE8
+   145                           fsr1h	equ	0xFE2
+   146                           fsr1l	equ	0xFE1
+   147                           bsr	equ	0xFE0
+   148                           fsr2h	equ	0xFDA
+   149                           fsr2l	equ	0xFD9
+   150                           status	equ	0xFD8
+   151                           
+   152                           	psect	bssCOMRAM
+   153  000025                     __pbssCOMRAM:
+   154                           	opt stack 0
+   155  000025                     _delay_time:
+   156                           	opt stack 0
+   157  000025                     	ds	2
+   158                           pclatu	equ	0xFFB
+   159                           pclath	equ	0xFFA
+   160                           tblptru	equ	0xFF8
+   161                           tblptrh	equ	0xFF7
+   162                           tblptrl	equ	0xFF6
+   163                           tablat	equ	0xFF5
+   164                           prodh	equ	0xFF4
+   165                           prodl	equ	0xFF3
+   166                           fsr0h	equ	0xFEA
+   167                           fsr0l	equ	0xFE9
+   168                           wreg	equ	0xFE8
+   169                           fsr1h	equ	0xFE2
+   170                           fsr1l	equ	0xFE1
+   171                           bsr	equ	0xFE0
+   172                           fsr2h	equ	0xFDA
+   173                           fsr2l	equ	0xFD9
+   174                           status	equ	0xFD8
+   175                           
+   176                           	psect	cstackCOMRAM
+   177  000001                     __pcstackCOMRAM:
+   178                           	opt stack 0
+   179  000001                     ??_low_isr:
+   180  000001                     
+   181                           ; 0 bytes @ 0x0
+   182  000001                     	ds	17
+   183  000012                     ??_high_isr:
+   184                           
+   185                           ; 0 bytes @ 0x11
+   186  000012                     	ds	14
+   187  000020                     delay@ms:
+   188                           	opt stack 0
+   189                           
+   190                           ; 2 bytes @ 0x1F
+   191  000020                     	ds	2
+   192  000022                     ??_delay:
+   193                           
+   194                           ; 0 bytes @ 0x21
+   195  000022                     	ds	1
+   196  000023                     delay@x:
+   197                           	opt stack 0
+   198                           
+   199                           ; 2 bytes @ 0x22
+   200  000023                     	ds	2
+   201  000025                     pclatu	equ	0xFFB
+   202                           pclath	equ	0xFFA
+   203                           tblptru	equ	0xFF8
+   204                           tblptrh	equ	0xFF7
+   205                           tblptrl	equ	0xFF6
+   206                           tablat	equ	0xFF5
+   207                           prodh	equ	0xFF4
+   208                           prodl	equ	0xFF3
+   209                           fsr0h	equ	0xFEA
+   210                           fsr0l	equ	0xFE9
+   211                           wreg	equ	0xFE8
+   212                           fsr1h	equ	0xFE2
+   213                           fsr1l	equ	0xFE1
+   214                           bsr	equ	0xFE0
+   215                           fsr2h	equ	0xFDA
+   216                           fsr2l	equ	0xFD9
+   217                           status	equ	0xFD8
+   218                           
+   219                           ; 0 bytes @ 0x24
+   220 ;;
+   221 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   222 ;;
+   223 ;; *************** function _main *****************
+   224 ;; Defined at:
+   225 ;;		line 45 in file "main.c"
+   226 ;; Parameters:    Size  Location     Type
+   227 ;;		None
+   228 ;; Auto vars:     Size  Location     Type
+   229 ;;		None
+   230 ;; Return value:  Size  Location     Type
+   231 ;;		None               void
+   232 ;; Registers used:
+   233 ;;		wreg, status,2, status,0, cstack
+   234 ;; Tracked objects:
+   235 ;;		On entry : 0/0
+   236 ;;		On exit  : 0/0
+   237 ;;		Unchanged: 0/0
+   238 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   238 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   239 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   239 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   240 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   240 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   241 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   241 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   242 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   242 ;;Total ram usage:        0 bytes
-   243 ;; Hardware stack levels required when called:    3
-   244 ;; This function calls:
-   245 ;;		_ConfigureOscillator
-   246 ;;		_InitApp
-   247 ;;		_delay
-   248 ;; This function is called by:
-   249 ;;		Startup code after reset
-   250 ;; This function uses a non-reentrant model
-   251 ;;
-   252                           
-   253                           	psect	text0
-   254  00010E                     __ptext0:
-   255                           	opt stack 0
-   256  00010E                     _main:
-   257                           	opt stack 28
-   258                           
-   259                           ;main.c: 48: OSCCON = 0b01111100;
-   260                           
-   261                           ;incstack = 0
-   262  00010E  0E7C               	movlw	124
-   263  000110  6ED3               	movwf	4051,c	;volatile
-   264                           
-   265                           ;main.c: 50: OSCTUNE = 0b01001111;
-   266  000112  0E4F               	movlw	79
-   267  000114  6E9B               	movwf	3995,c	;volatile
-   268                           
-   269                           ;main.c: 53: ConfigureOscillator();
-   270  000116  ECD4  F000         	call	_ConfigureOscillator	;wreg free
-   271                           
-   272                           ;main.c: 56: InitApp();
-   273  00011A  ECD3  F000         	call	_InitApp	;wreg free
-   274                           
-   275                           ;main.c: 59: TRISC=0;
-   276  00011E  0E00               	movlw	0
-   277  000120  6E94               	movwf	3988,c	;volatile
-   278  000122                     l31:
+   243 ;;Total ram usage:        0 bytes
+   244 ;; Hardware stack levels required when called:    3
+   245 ;; This function calls:
+   246 ;;		_ConfigureOscillator
+   247 ;;		_InitApp
+   248 ;;		_delay
+   249 ;; This function is called by:
+   250 ;;		Startup code after reset
+   251 ;; This function uses a non-reentrant model
+   252 ;;
+   253                           
+   254                           	psect	text0
+   255  00010E                     __ptext0:
+   256                           	opt stack 0
+   257  00010E                     _main:
+   258                           	opt stack 28
+   259                           
+   260                           ;main.c: 48: OSCCON = 0b01111100;
+   261                           
+   262                           ;incstack = 0
+   263  00010E  0E7C               	movlw	124
+   264  000110  6ED3               	movwf	4051,c	;volatile
+   265                           
+   266                           ;main.c: 50: OSCTUNE = 0b01001111;
+   267  000112  0E4F               	movlw	79
+   268  000114  6E9B               	movwf	3995,c	;volatile
+   269                           
+   270                           ;main.c: 53: ConfigureOscillator();
+   271  000116  ECD6  F000         	call	_ConfigureOscillator	;wreg free
+   272                           
+   273                           ;main.c: 56: InitApp();
+   274  00011A  ECD5  F000         	call	_InitApp	;wreg free
+   275                           
+   276                           ;main.c: 59: TRISC=0;
+   277  00011E  0E00               	movlw	0
+   278  000120  6E94               	movwf	3988,c	;volatile
    279                           
-   280                           ;main.c: 61: {
-   281                           ;main.c: 62: LATC=1<<7;
-   282  000122  0E80               	movlw	128
-   283  000124  6E8B               	movwf	3979,c	;volatile
+   280                           ;main.c: 60: TRISB=1<<1;
+   281  000122  0E02               	movlw	2
+   282  000124  6E93               	movwf	3987,c	;volatile
+   283  000126                     l33:
    284                           
-   285                           ;main.c: 63: delay(2);
-   286  000126  0E00               	movlw	0
-   287  000128  6E21               	movwf	delay@ms+1,c
-   288  00012A  0E02               	movlw	2
-   289  00012C  6E20               	movwf	delay@ms,c
-   290  00012E  ECB4  F000         	call	_delay	;wreg free
-   291                           
-   292                           ;main.c: 64: LATC=1<<6;
-   293  000132  0E40               	movlw	64
-   294  000134  6E8B               	movwf	3979,c	;volatile
-   295                           
-   296                           ;main.c: 65: delay(2);
-   297  000136  0E00               	movlw	0
-   298  000138  6E21               	movwf	delay@ms+1,c
-   299  00013A  0E02               	movlw	2
-   300  00013C  6E20               	movwf	delay@ms,c
-   301  00013E  ECB4  F000         	call	_delay	;wreg free
-   302                           
-   303                           ;main.c: 66: LATC=1<<5;
-   304  000142  0E20               	movlw	32
-   305  000144  6E8B               	movwf	3979,c	;volatile
-   306                           
-   307                           ;main.c: 67: delay(2);
-   308  000146  0E00               	movlw	0
-   309  000148  6E21               	movwf	delay@ms+1,c
-   310  00014A  0E02               	movlw	2
-   311  00014C  6E20               	movwf	delay@ms,c
-   312  00014E  ECB4  F000         	call	_delay	;wreg free
-   313                           
-   314                           ;main.c: 68: LATC=1<<4;
-   315  000152  0E10               	movlw	16
-   316  000154  6E8B               	movwf	3979,c	;volatile
-   317                           
-   318                           ;main.c: 69: delay(2);
-   319  000156  0E00               	movlw	0
-   320  000158  6E21               	movwf	delay@ms+1,c
-   321  00015A  0E02               	movlw	2
-   322  00015C  6E20               	movwf	delay@ms,c
-   323  00015E  ECB4  F000         	call	_delay	;wreg free
-   324  000162  D7DF               	goto	l31
-   325  000164  EF51  F000         	goto	start
-   326  000168                     __end_of_main:
-   327                           	opt stack 0
-   328                           pclatu	equ	0xFFB
-   329                           pclath	equ	0xFFA
-   330                           tblptru	equ	0xFF8
-   331                           tblptrh	equ	0xFF7
-   332                           tblptrl	equ	0xFF6
-   333                           tablat	equ	0xFF5
-   334                           prodh	equ	0xFF4
-   335                           prodl	equ	0xFF3
-   336                           fsr0h	equ	0xFEA
-   337                           fsr0l	equ	0xFE9
-   338                           wreg	equ	0xFE8
-   339                           fsr1h	equ	0xFE2
-   340                           fsr1l	equ	0xFE1
-   341                           bsr	equ	0xFE0
-   342                           fsr2h	equ	0xFDA
-   343                           fsr2l	equ	0xFD9
-   344                           status	equ	0xFD8
-   345                           
-   346 ;; *************** function _delay *****************
-   347 ;; Defined at:
-   348 ;;		line 39 in file "main.c"
-   349 ;; Parameters:    Size  Location     Type
-   350 ;;  ms              2   31[COMRAM] unsigned int 
-   351 ;; Auto vars:     Size  Location     Type
-   352 ;;  x               2   34[COMRAM] int 
-   353 ;; Return value:  Size  Location     Type
-   354 ;;		None               void
-   355 ;; Registers used:
-   356 ;;		wreg, status,2, status,0
-   357 ;; Tracked objects:
-   358 ;;		On entry : 0/0
-   359 ;;		On exit  : 0/0
-   360 ;;		Unchanged: 0/0
-   361 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   285                           ;main.c: 64: {
+   286                           ;main.c: 65: LATC=0b10001000;
+   287  000126  0E88               	movlw	136
+   288  000128  6E8B               	movwf	3979,c	;volatile
+   289                           
+   290                           ;main.c: 66: delay(2);
+   291  00012A  0E00               	movlw	0
+   292  00012C  6E21               	movwf	delay@ms+1,c
+   293  00012E  0E02               	movlw	2
+   294  000130  6E20               	movwf	delay@ms,c
+   295  000132  ECB6  F000         	call	_delay	;wreg free
+   296                           
+   297                           ;main.c: 67: LATC=0b01000100;
+   298  000136  0E44               	movlw	68
+   299  000138  6E8B               	movwf	3979,c	;volatile
+   300                           
+   301                           ;main.c: 68: delay(2);
+   302  00013A  0E00               	movlw	0
+   303  00013C  6E21               	movwf	delay@ms+1,c
+   304  00013E  0E02               	movlw	2
+   305  000140  6E20               	movwf	delay@ms,c
+   306  000142  ECB6  F000         	call	_delay	;wreg free
+   307                           
+   308                           ;main.c: 69: LATC=0b00100010;
+   309  000146  0E22               	movlw	34
+   310  000148  6E8B               	movwf	3979,c	;volatile
+   311                           
+   312                           ;main.c: 70: delay(2);
+   313  00014A  0E00               	movlw	0
+   314  00014C  6E21               	movwf	delay@ms+1,c
+   315  00014E  0E02               	movlw	2
+   316  000150  6E20               	movwf	delay@ms,c
+   317  000152  ECB6  F000         	call	_delay	;wreg free
+   318                           
+   319                           ;main.c: 71: LATC=0b00010001;
+   320  000156  0E11               	movlw	17
+   321  000158  6E8B               	movwf	3979,c	;volatile
+   322                           
+   323                           ;main.c: 72: delay(2);
+   324  00015A  0E00               	movlw	0
+   325  00015C  6E21               	movwf	delay@ms+1,c
+   326  00015E  0E02               	movlw	2
+   327  000160  6E20               	movwf	delay@ms,c
+   328  000162  ECB6  F000         	call	_delay	;wreg free
+   329  000166  D7DF               	goto	l33
+   330  000168  EF51  F000         	goto	start
+   331  00016C                     __end_of_main:
+   332                           	opt stack 0
+   333                           pclatu	equ	0xFFB
+   334                           pclath	equ	0xFFA
+   335                           tblptru	equ	0xFF8
+   336                           tblptrh	equ	0xFF7
+   337                           tblptrl	equ	0xFF6
+   338                           tablat	equ	0xFF5
+   339                           prodh	equ	0xFF4
+   340                           prodl	equ	0xFF3
+   341                           fsr0h	equ	0xFEA
+   342                           fsr0l	equ	0xFE9
+   343                           wreg	equ	0xFE8
+   344                           fsr1h	equ	0xFE2
+   345                           fsr1l	equ	0xFE1
+   346                           bsr	equ	0xFE0
+   347                           fsr2h	equ	0xFDA
+   348                           fsr2l	equ	0xFD9
+   349                           status	equ	0xFD8
+   350                           
+   351 ;; *************** function _delay *****************
+   352 ;; Defined at:
+   353 ;;		line 39 in file "main.c"
+   354 ;; Parameters:    Size  Location     Type
+   355 ;;  ms              2   31[COMRAM] unsigned int 
+   356 ;; Auto vars:     Size  Location     Type
+   357 ;;  x               2   34[COMRAM] int 
+   358 ;; Return value:  Size  Location     Type
+   359 ;;		None               void
+   360 ;; Registers used:
+   361 ;;		wreg, status,2, status,0
+   362 ;; Tracked objects:
+   363 ;;		On entry : 0/0
+   364 ;;		On exit  : 0/0
+   365 ;;		Unchanged: 0/0
+   366 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   362 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
+   367 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   363 ;;      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       
+   368 ;;      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   364 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+   369 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   365 ;;      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       
+   370 ;;      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   366 ;;Total ram usage:        5 bytes
-   367 ;; Hardware stack levels used:    1
-   368 ;; Hardware stack levels required when called:    2
-   369 ;; This function calls:
-   370 ;;		Nothing
-   371 ;; This function is called by:
-   372 ;;		_main
-   373 ;; This function uses a non-reentrant model
-   374 ;;
-   375                           
-   376                           	psect	text1
-   377  000168                     __ptext1:
-   378                           	opt stack 0
-   379  000168                     _delay:
-   380                           	opt stack 28
-   381                           
-   382                           ;main.c: 40: int x = 0;
-   383                           
-   384                           ;incstack = 0
-   385  000168  0E00               	movlw	0
-   386  00016A  6E24               	movwf	delay@x+1,c
-   387  00016C  0E00               	movlw	0
-   388  00016E  6E23               	movwf	delay@x,c
-   389                           
-   390                           ;main.c: 41: for (x = 0; x < ms; x++)
-   391  000170  0E00               	movlw	0
-   392  000172  6E24               	movwf	delay@x+1,c
-   393  000174  0E00               	movlw	0
-   394  000176  6E23               	movwf	delay@x,c
-   395  000178  D00A               	goto	l25
-   396  00017A                     l646:
-   397                           
-   398                           ;main.c: 42: _delay((unsigned long)((1)*(32000000/4000.0)));
-   399  00017A  0E0B               	movlw	11
-   400  00017C  6E22               	movwf	??_delay& (0+255),c
-   401  00017E  0E62               	movlw	98
-   402  000180                     u37:
-   403  000180  2EE8               	decfsz	wreg,f,c
-   404  000182  D7FE               	goto	u37
-   405  000184  2E22               	decfsz	??_delay& (0+255),f,c
-   406  000186  D7FC               	goto	u37
-   407  000188  D000               	nop2	
-   408  00018A  4A23               	infsnz	delay@x,f,c
-   409  00018C  2A24               	incf	delay@x+1,f,c
-   410  00018E                     l25:
-   411  00018E  5020               	movf	delay@ms,w,c
-   412  000190  5C23               	subwf	delay@x,w,c
-   413  000192  5021               	movf	delay@ms+1,w,c
-   414  000194  5824               	subwfb	delay@x+1,w,c
-   415  000196  A0D8               	btfss	status,0,c
-   416  000198  D7F0               	goto	l646
-   417  00019A  0012               	return		;funcret
-   418  00019C                     __end_of_delay:
-   419                           	opt stack 0
-   420                           pclatu	equ	0xFFB
-   421                           pclath	equ	0xFFA
-   422                           tblptru	equ	0xFF8
-   423                           tblptrh	equ	0xFF7
-   424                           tblptrl	equ	0xFF6
-   425                           tablat	equ	0xFF5
-   426                           prodh	equ	0xFF4
-   427                           prodl	equ	0xFF3
-   428                           fsr0h	equ	0xFEA
-   429                           fsr0l	equ	0xFE9
-   430                           wreg	equ	0xFE8
-   431                           fsr1h	equ	0xFE2
-   432                           fsr1l	equ	0xFE1
-   433                           bsr	equ	0xFE0
-   434                           fsr2h	equ	0xFDA
-   435                           fsr2l	equ	0xFD9
-   436                           status	equ	0xFD8
-   437                           
-   438 ;; *************** function _InitApp *****************
-   439 ;; Defined at:
-   440 ;;		line 28 in file "user.c"
-   441 ;; Parameters:    Size  Location     Type
-   442 ;;		None
-   443 ;; Auto vars:     Size  Location     Type
-   444 ;;		None
-   445 ;; Return value:  Size  Location     Type
-   446 ;;		None               void
-   447 ;; Registers used:
-   448 ;;		None
-   449 ;; Tracked objects:
-   450 ;;		On entry : 0/0
-   451 ;;		On exit  : 0/0
-   452 ;;		Unchanged: 0/0
-   453 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   371 ;;Total ram usage:        5 bytes
+   372 ;; Hardware stack levels used:    1
+   373 ;; Hardware stack levels required when called:    2
+   374 ;; This function calls:
+   375 ;;		Nothing
+   376 ;; This function is called by:
+   377 ;;		_main
+   378 ;; This function uses a non-reentrant model
+   379 ;;
+   380                           
+   381                           	psect	text1
+   382  00016C                     __ptext1:
+   383                           	opt stack 0
+   384  00016C                     _delay:
+   385                           	opt stack 28
+   386                           
+   387                           ;main.c: 40: int x = 0;
+   388                           
+   389                           ;incstack = 0
+   390  00016C  0E00               	movlw	0
+   391  00016E  6E24               	movwf	delay@x+1,c
+   392  000170  0E00               	movlw	0
+   393  000172  6E23               	movwf	delay@x,c
+   394                           
+   395                           ;main.c: 41: for (x = 0; x < ms; x++)
+   396  000174  0E00               	movlw	0
+   397  000176  6E24               	movwf	delay@x+1,c
+   398  000178  0E00               	movlw	0
+   399  00017A  6E23               	movwf	delay@x,c
+   400  00017C  D00A               	goto	l27
+   401  00017E                     l648:
+   402                           
+   403                           ;main.c: 42: _delay((unsigned long)((1)*(32000000/4000.0)));
+   404  00017E  0E0B               	movlw	11
+   405  000180  6E22               	movwf	??_delay& (0+255),c
+   406  000182  0E62               	movlw	98
+   407  000184                     u37:
+   408  000184  2EE8               	decfsz	wreg,f,c
+   409  000186  D7FE               	goto	u37
+   410  000188  2E22               	decfsz	??_delay& (0+255),f,c
+   411  00018A  D7FC               	goto	u37
+   412  00018C  D000               	nop2	
+   413  00018E  4A23               	infsnz	delay@x,f,c
+   414  000190  2A24               	incf	delay@x+1,f,c
+   415  000192                     l27:
+   416  000192  5020               	movf	delay@ms,w,c
+   417  000194  5C23               	subwf	delay@x,w,c
+   418  000196  5021               	movf	delay@ms+1,w,c
+   419  000198  5824               	subwfb	delay@x+1,w,c
+   420  00019A  A0D8               	btfss	status,0,c
+   421  00019C  D7F0               	goto	l648
+   422  00019E  0012               	return		;funcret
+   423  0001A0                     __end_of_delay:
+   424                           	opt stack 0
+   425                           pclatu	equ	0xFFB
+   426                           pclath	equ	0xFFA
+   427                           tblptru	equ	0xFF8
+   428                           tblptrh	equ	0xFF7
+   429                           tblptrl	equ	0xFF6
+   430                           tablat	equ	0xFF5
+   431                           prodh	equ	0xFF4
+   432                           prodl	equ	0xFF3
+   433                           fsr0h	equ	0xFEA
+   434                           fsr0l	equ	0xFE9
+   435                           wreg	equ	0xFE8
+   436                           fsr1h	equ	0xFE2
+   437                           fsr1l	equ	0xFE1
+   438                           bsr	equ	0xFE0
+   439                           fsr2h	equ	0xFDA
+   440                           fsr2l	equ	0xFD9
+   441                           status	equ	0xFD8
+   442                           
+   443 ;; *************** function _InitApp *****************
+   444 ;; Defined at:
+   445 ;;		line 28 in file "user.c"
+   446 ;; Parameters:    Size  Location     Type
+   447 ;;		None
+   448 ;; Auto vars:     Size  Location     Type
+   449 ;;		None
+   450 ;; Return value:  Size  Location     Type
+   451 ;;		None               void
+   452 ;; Registers used:
+   453 ;;		None
+   454 ;; Tracked objects:
+   455 ;;		On entry : 0/0
+   456 ;;		On exit  : 0/0
+   457 ;;		Unchanged: 0/0
+   458 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   454 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   459 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   455 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   460 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   456 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   461 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   457 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   462 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   458 ;;Total ram usage:        0 bytes
-   459 ;; Hardware stack levels used:    1
-   460 ;; Hardware stack levels required when called:    2
-   461 ;; This function calls:
-   462 ;;		Nothing
-   463 ;; This function is called by:
-   464 ;;		_main
-   465 ;; This function uses a non-reentrant model
-   466 ;;
-   467                           
-   468                           	psect	text2
-   469  0001A6                     __ptext2:
-   470                           	opt stack 0
-   471  0001A6                     _InitApp:
-   472                           	opt stack 28
-   473                           
-   474                           ;incstack = 0
-   475  0001A6  0012               	return		;funcret
-   476  0001A8                     __end_of_InitApp:
-   477                           	opt stack 0
-   478                           pclatu	equ	0xFFB
-   479                           pclath	equ	0xFFA
-   480                           tblptru	equ	0xFF8
-   481                           tblptrh	equ	0xFF7
-   482                           tblptrl	equ	0xFF6
-   483                           tablat	equ	0xFF5
-   484                           prodh	equ	0xFF4
-   485                           prodl	equ	0xFF3
-   486                           fsr0h	equ	0xFEA
-   487                           fsr0l	equ	0xFE9
-   488                           wreg	equ	0xFE8
-   489                           fsr1h	equ	0xFE2
-   490                           fsr1l	equ	0xFE1
-   491                           bsr	equ	0xFE0
-   492                           fsr2h	equ	0xFDA
-   493                           fsr2l	equ	0xFD9
-   494                           status	equ	0xFD8
-   495                           
-   496 ;; *************** function _ConfigureOscillator *****************
-   497 ;; Defined at:
-   498 ;;		line 24 in file "system.c"
-   499 ;; Parameters:    Size  Location     Type
-   500 ;;		None
-   501 ;; Auto vars:     Size  Location     Type
-   502 ;;		None
-   503 ;; Return value:  Size  Location     Type
-   504 ;;		None               void
-   505 ;; Registers used:
-   506 ;;		None
-   507 ;; Tracked objects:
-   508 ;;		On entry : 0/0
-   509 ;;		On exit  : 0/0
-   510 ;;		Unchanged: 0/0
-   511 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   463 ;;Total ram usage:        0 bytes
+   464 ;; Hardware stack levels used:    1
+   465 ;; Hardware stack levels required when called:    2
+   466 ;; This function calls:
+   467 ;;		Nothing
+   468 ;; This function is called by:
+   469 ;;		_main
+   470 ;; This function uses a non-reentrant model
+   471 ;;
+   472                           
+   473                           	psect	text2
+   474  0001AA                     __ptext2:
+   475                           	opt stack 0
+   476  0001AA                     _InitApp:
+   477                           	opt stack 28
+   478                           
+   479                           ;incstack = 0
+   480  0001AA  0012               	return		;funcret
+   481  0001AC                     __end_of_InitApp:
+   482                           	opt stack 0
+   483                           pclatu	equ	0xFFB
+   484                           pclath	equ	0xFFA
+   485                           tblptru	equ	0xFF8
+   486                           tblptrh	equ	0xFF7
+   487                           tblptrl	equ	0xFF6
+   488                           tablat	equ	0xFF5
+   489                           prodh	equ	0xFF4
+   490                           prodl	equ	0xFF3
+   491                           fsr0h	equ	0xFEA
+   492                           fsr0l	equ	0xFE9
+   493                           wreg	equ	0xFE8
+   494                           fsr1h	equ	0xFE2
+   495                           fsr1l	equ	0xFE1
+   496                           bsr	equ	0xFE0
+   497                           fsr2h	equ	0xFDA
+   498                           fsr2l	equ	0xFD9
+   499                           status	equ	0xFD8
+   500                           
+   501 ;; *************** function _ConfigureOscillator *****************
+   502 ;; Defined at:
+   503 ;;		line 24 in file "system.c"
+   504 ;; Parameters:    Size  Location     Type
+   505 ;;		None
+   506 ;; Auto vars:     Size  Location     Type
+   507 ;;		None
+   508 ;; Return value:  Size  Location     Type
+   509 ;;		None               void
+   510 ;; Registers used:
+   511 ;;		None
+   512 ;; Tracked objects:
+   513 ;;		On entry : 0/0
+   514 ;;		On exit  : 0/0
+   515 ;;		Unchanged: 0/0
+   516 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   512 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   517 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   513 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   518 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   514 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   519 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   515 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   520 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   516 ;;Total ram usage:        0 bytes
-   517 ;; Hardware stack levels used:    1
-   518 ;; Hardware stack levels required when called:    2
-   519 ;; This function calls:
-   520 ;;		Nothing
-   521 ;; This function is called by:
-   522 ;;		_main
-   523 ;; This function uses a non-reentrant model
-   524 ;;
-   525                           
-   526                           	psect	text3
-   527  0001A8                     __ptext3:
-   528                           	opt stack 0
-   529  0001A8                     _ConfigureOscillator:
-   530                           	opt stack 28
-   531                           
-   532                           ;incstack = 0
-   533  0001A8  0012               	return		;funcret
-   534  0001AA                     __end_of_ConfigureOscillator:
-   535                           	opt stack 0
-   536                           pclatu	equ	0xFFB
-   537                           pclath	equ	0xFFA
-   538                           tblptru	equ	0xFF8
-   539                           tblptrh	equ	0xFF7
-   540                           tblptrl	equ	0xFF6
-   541                           tablat	equ	0xFF5
-   542                           prodh	equ	0xFF4
-   543                           prodl	equ	0xFF3
-   544                           fsr0h	equ	0xFEA
-   545                           fsr0l	equ	0xFE9
-   546                           wreg	equ	0xFE8
-   547                           fsr1h	equ	0xFE2
-   548                           fsr1l	equ	0xFE1
-   549                           bsr	equ	0xFE0
-   550                           fsr2h	equ	0xFDA
-   551                           fsr2l	equ	0xFD9
-   552                           status	equ	0xFD8
-   553                           
-   554 ;; *************** function _high_isr *****************
-   555 ;; Defined at:
-   556 ;;		line 27 in file "interrupts.c"
-   557 ;; Parameters:    Size  Location     Type
-   558 ;;		None
-   559 ;; Auto vars:     Size  Location     Type
-   560 ;;		None
-   561 ;; Return value:  Size  Location     Type
-   562 ;;		None               void
-   563 ;; Registers used:
-   564 ;;		None
-   565 ;; Tracked objects:
-   566 ;;		On entry : 0/0
-   567 ;;		On exit  : 0/0
-   568 ;;		Unchanged: 0/0
-   569 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   521 ;;Total ram usage:        0 bytes
+   522 ;; Hardware stack levels used:    1
+   523 ;; Hardware stack levels required when called:    2
+   524 ;; This function calls:
+   525 ;;		Nothing
+   526 ;; This function is called by:
+   527 ;;		_main
+   528 ;; This function uses a non-reentrant model
+   529 ;;
+   530                           
+   531                           	psect	text3
+   532  0001AC                     __ptext3:
+   533                           	opt stack 0
+   534  0001AC                     _ConfigureOscillator:
+   535                           	opt stack 28
+   536                           
+   537                           ;incstack = 0
+   538  0001AC  0012               	return		;funcret
+   539  0001AE                     __end_of_ConfigureOscillator:
+   540                           	opt stack 0
+   541                           pclatu	equ	0xFFB
+   542                           pclath	equ	0xFFA
+   543                           tblptru	equ	0xFF8
+   544                           tblptrh	equ	0xFF7
+   545                           tblptrl	equ	0xFF6
+   546                           tablat	equ	0xFF5
+   547                           prodh	equ	0xFF4
+   548                           prodl	equ	0xFF3
+   549                           fsr0h	equ	0xFEA
+   550                           fsr0l	equ	0xFE9
+   551                           wreg	equ	0xFE8
+   552                           fsr1h	equ	0xFE2
+   553                           fsr1l	equ	0xFE1
+   554                           bsr	equ	0xFE0
+   555                           fsr2h	equ	0xFDA
+   556                           fsr2l	equ	0xFD9
+   557                           status	equ	0xFD8
+   558                           
+   559 ;; *************** function _high_isr *****************
+   560 ;; Defined at:
+   561 ;;		line 27 in file "interrupts.c"
+   562 ;; Parameters:    Size  Location     Type
+   563 ;;		None
+   564 ;; Auto vars:     Size  Location     Type
+   565 ;;		None
+   566 ;; Return value:  Size  Location     Type
+   567 ;;		None               void
+   568 ;; Registers used:
+   569 ;;		None
+   570 ;; Tracked objects:
+   571 ;;		On entry : 0/0
+   572 ;;		On exit  : 0/0
+   573 ;;		Unchanged: 0/0
+   574 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   570 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   575 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   571 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   576 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   572 ;;      Temps:         14       0       0       0       0       0       0       0       0       0       0       0       
+   577 ;;      Temps:         14       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   573 ;;      Totals:        14       0       0       0       0       0       0       0       0       0       0       0       
+   578 ;;      Totals:        14       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   574 ;;Total ram usage:       14 bytes
-   575 ;; Hardware stack levels used:    1
-   576 ;; This function calls:
-   577 ;;		Nothing
-   578 ;; This function is called by:
-   579 ;;		Interrupt level 2
-   580 ;; This function uses a non-reentrant model
-   581 ;;
-   582                           
-   583                           	psect	intcode
-   584  000008                     __pintcode:
-   585                           	opt stack 0
-   586  000008                     _high_isr:
-   587                           	opt stack 28
-   588                           
-   589                           ;incstack = 0
-   590  000008  CFFA F012          	movff	pclath,??_high_isr
-   591  00000C  CFFB F013          	movff	pclatu,??_high_isr+1
-   592  000010  CFE9 F014          	movff	fsr0l,??_high_isr+2
-   593  000014  ED53  F000         	call	int_func,f	;refresh shadow registers
-   594                           pclatu	equ	0xFFB
-   595                           pclath	equ	0xFFA
-   596                           tblptru	equ	0xFF8
-   597                           tblptrh	equ	0xFF7
-   598                           tblptrl	equ	0xFF6
-   599                           tablat	equ	0xFF5
-   600                           prodh	equ	0xFF4
-   601                           prodl	equ	0xFF3
-   602                           fsr0h	equ	0xFEA
-   603                           fsr0l	equ	0xFE9
-   604                           wreg	equ	0xFE8
-   605                           fsr1h	equ	0xFE2
-   606                           fsr1l	equ	0xFE1
-   607                           bsr	equ	0xFE0
-   608                           fsr2h	equ	0xFDA
-   609                           fsr2l	equ	0xFD9
-   610                           status	equ	0xFD8
-   611                           
-   612                           	psect	intcode_body
-   613  0000A6                     __pintcode_body:
-   614                           	opt stack 28
-   615  0000A6                     int_func:
-   616                           	opt stack 28
-   617  0000A6  0006               	pop		; remove dummy address from shadow register refresh
-   618  0000A8  CFEA F015          	movff	fsr0h,??_high_isr+3
-   619  0000AC  CFE1 F016          	movff	fsr1l,??_high_isr+4
-   620  0000B0  CFE2 F017          	movff	fsr1h,??_high_isr+5
-   621  0000B4  CFD9 F018          	movff	fsr2l,??_high_isr+6
-   622  0000B8  CFDA F019          	movff	fsr2h,??_high_isr+7
-   623  0000BC  CFF3 F01A          	movff	prodl,??_high_isr+8
-   624  0000C0  CFF4 F01B          	movff	prodh,??_high_isr+9
-   625  0000C4  CFF6 F01C          	movff	tblptrl,??_high_isr+10
-   626  0000C8  CFF7 F01D          	movff	tblptrh,??_high_isr+11
-   627  0000CC  CFF8 F01E          	movff	tblptru,??_high_isr+12
-   628  0000D0  CFF5 F01F          	movff	tablat,??_high_isr+13
-   629  0000D4  C01F  FFF5         	movff	??_high_isr+13,tablat
-   630  0000D8  C01E  FFF8         	movff	??_high_isr+12,tblptru
-   631  0000DC  C01D  FFF7         	movff	??_high_isr+11,tblptrh
-   632  0000E0  C01C  FFF6         	movff	??_high_isr+10,tblptrl
-   633  0000E4  C01B  FFF4         	movff	??_high_isr+9,prodh
-   634  0000E8  C01A  FFF3         	movff	??_high_isr+8,prodl
-   635  0000EC  C019  FFDA         	movff	??_high_isr+7,fsr2h
-   636  0000F0  C018  FFD9         	movff	??_high_isr+6,fsr2l
-   637  0000F4  C017  FFE2         	movff	??_high_isr+5,fsr1h
-   638  0000F8  C016  FFE1         	movff	??_high_isr+4,fsr1l
-   639  0000FC  C015  FFEA         	movff	??_high_isr+3,fsr0h
-   640  000100  C014  FFE9         	movff	??_high_isr+2,fsr0l
-   641  000104  C013  FFFB         	movff	??_high_isr+1,pclatu
-   642  000108  C012  FFFA         	movff	??_high_isr,pclath
-   643  00010C  0011               	retfie		f
-   644  00010E                     __end_of_high_isr:
-   645                           	opt stack 0
-   646  0000                     pclatu	equ	0xFFB
-   647                           pclath	equ	0xFFA
-   648                           tblptru	equ	0xFF8
-   649                           tblptrh	equ	0xFF7
-   650                           tblptrl	equ	0xFF6
-   651                           tablat	equ	0xFF5
-   652                           prodh	equ	0xFF4
-   653                           prodl	equ	0xFF3
-   654                           fsr0h	equ	0xFEA
-   655                           fsr0l	equ	0xFE9
-   656                           wreg	equ	0xFE8
-   657                           fsr1h	equ	0xFE2
-   658                           fsr1l	equ	0xFE1
-   659                           bsr	equ	0xFE0
-   660                           fsr2h	equ	0xFDA
-   661                           fsr2l	equ	0xFD9
-   662                           status	equ	0xFD8
-   663                           pclatu	equ	0xFFB
-   664                           pclath	equ	0xFFA
-   665                           tblptru	equ	0xFF8
-   666                           tblptrh	equ	0xFF7
-   667                           tblptrl	equ	0xFF6
-   668                           tablat	equ	0xFF5
-   669                           prodh	equ	0xFF4
-   670                           prodl	equ	0xFF3
-   671                           fsr0h	equ	0xFEA
-   672                           fsr0l	equ	0xFE9
-   673                           wreg	equ	0xFE8
-   674                           fsr1h	equ	0xFE2
-   675                           fsr1l	equ	0xFE1
-   676                           bsr	equ	0xFE0
-   677                           fsr2h	equ	0xFDA
-   678                           fsr2l	equ	0xFD9
-   679                           status	equ	0xFD8
-   680                           
-   681                           	psect	rparam
-   682  0000                     pclatu	equ	0xFFB
-   683                           pclath	equ	0xFFA
-   684                           tblptru	equ	0xFF8
-   685                           tblptrh	equ	0xFF7
-   686                           tblptrl	equ	0xFF6
-   687                           tablat	equ	0xFF5
-   688                           prodh	equ	0xFF4
-   689                           prodl	equ	0xFF3
-   690                           fsr0h	equ	0xFEA
-   691                           fsr0l	equ	0xFE9
-   692                           wreg	equ	0xFE8
-   693                           fsr1h	equ	0xFE2
-   694                           fsr1l	equ	0xFE1
-   695                           bsr	equ	0xFE0
-   696                           fsr2h	equ	0xFDA
-   697                           fsr2l	equ	0xFD9
-   698                           status	equ	0xFD8
+   579 ;;Total ram usage:       14 bytes
+   580 ;; Hardware stack levels used:    1
+   581 ;; This function calls:
+   582 ;;		Nothing
+   583 ;; This function is called by:
+   584 ;;		Interrupt level 2
+   585 ;; This function uses a non-reentrant model
+   586 ;;
+   587                           
+   588                           	psect	intcode
+   589  000008                     __pintcode:
+   590                           	opt stack 0
+   591  000008                     _high_isr:
+   592                           	opt stack 28
+   593                           
+   594                           ;incstack = 0
+   595  000008  CFFA F012          	movff	pclath,??_high_isr
+   596  00000C  CFFB F013          	movff	pclatu,??_high_isr+1
+   597  000010  CFE9 F014          	movff	fsr0l,??_high_isr+2
+   598  000014  ED53  F000         	call	int_func,f	;refresh shadow registers
+   599                           pclatu	equ	0xFFB
+   600                           pclath	equ	0xFFA
+   601                           tblptru	equ	0xFF8
+   602                           tblptrh	equ	0xFF7
+   603                           tblptrl	equ	0xFF6
+   604                           tablat	equ	0xFF5
+   605                           prodh	equ	0xFF4
+   606                           prodl	equ	0xFF3
+   607                           fsr0h	equ	0xFEA
+   608                           fsr0l	equ	0xFE9
+   609                           wreg	equ	0xFE8
+   610                           fsr1h	equ	0xFE2
+   611                           fsr1l	equ	0xFE1
+   612                           bsr	equ	0xFE0
+   613                           fsr2h	equ	0xFDA
+   614                           fsr2l	equ	0xFD9
+   615                           status	equ	0xFD8
+   616                           
+   617                           	psect	intcode_body
+   618  0000A6                     __pintcode_body:
+   619                           	opt stack 28
+   620  0000A6                     int_func:
+   621                           	opt stack 28
+   622  0000A6  0006               	pop		; remove dummy address from shadow register refresh
+   623  0000A8  CFEA F015          	movff	fsr0h,??_high_isr+3
+   624  0000AC  CFE1 F016          	movff	fsr1l,??_high_isr+4
+   625  0000B0  CFE2 F017          	movff	fsr1h,??_high_isr+5
+   626  0000B4  CFD9 F018          	movff	fsr2l,??_high_isr+6
+   627  0000B8  CFDA F019          	movff	fsr2h,??_high_isr+7
+   628  0000BC  CFF3 F01A          	movff	prodl,??_high_isr+8
+   629  0000C0  CFF4 F01B          	movff	prodh,??_high_isr+9
+   630  0000C4  CFF6 F01C          	movff	tblptrl,??_high_isr+10
+   631  0000C8  CFF7 F01D          	movff	tblptrh,??_high_isr+11
+   632  0000CC  CFF8 F01E          	movff	tblptru,??_high_isr+12
+   633  0000D0  CFF5 F01F          	movff	tablat,??_high_isr+13
+   634  0000D4  C01F  FFF5         	movff	??_high_isr+13,tablat
+   635  0000D8  C01E  FFF8         	movff	??_high_isr+12,tblptru
+   636  0000DC  C01D  FFF7         	movff	??_high_isr+11,tblptrh
+   637  0000E0  C01C  FFF6         	movff	??_high_isr+10,tblptrl
+   638  0000E4  C01B  FFF4         	movff	??_high_isr+9,prodh
+   639  0000E8  C01A  FFF3         	movff	??_high_isr+8,prodl
+   640  0000EC  C019  FFDA         	movff	??_high_isr+7,fsr2h
+   641  0000F0  C018  FFD9         	movff	??_high_isr+6,fsr2l
+   642  0000F4  C017  FFE2         	movff	??_high_isr+5,fsr1h
+   643  0000F8  C016  FFE1         	movff	??_high_isr+4,fsr1l
+   644  0000FC  C015  FFEA         	movff	??_high_isr+3,fsr0h
+   645  000100  C014  FFE9         	movff	??_high_isr+2,fsr0l
+   646  000104  C013  FFFB         	movff	??_high_isr+1,pclatu
+   647  000108  C012  FFFA         	movff	??_high_isr,pclath
+   648  00010C  0011               	retfie		f
+   649  00010E                     __end_of_high_isr:
+   650                           	opt stack 0
+   651  0000                     pclatu	equ	0xFFB
+   652                           pclath	equ	0xFFA
+   653                           tblptru	equ	0xFF8
+   654                           tblptrh	equ	0xFF7
+   655                           tblptrl	equ	0xFF6
+   656                           tablat	equ	0xFF5
+   657                           prodh	equ	0xFF4
+   658                           prodl	equ	0xFF3
+   659                           fsr0h	equ	0xFEA
+   660                           fsr0l	equ	0xFE9
+   661                           wreg	equ	0xFE8
+   662                           fsr1h	equ	0xFE2
+   663                           fsr1l	equ	0xFE1
+   664                           bsr	equ	0xFE0
+   665                           fsr2h	equ	0xFDA
+   666                           fsr2l	equ	0xFD9
+   667                           status	equ	0xFD8
+   668                           pclatu	equ	0xFFB
+   669                           pclath	equ	0xFFA
+   670                           tblptru	equ	0xFF8
+   671                           tblptrh	equ	0xFF7
+   672                           tblptrl	equ	0xFF6
+   673                           tablat	equ	0xFF5
+   674                           prodh	equ	0xFF4
+   675                           prodl	equ	0xFF3
+   676                           fsr0h	equ	0xFEA
+   677                           fsr0l	equ	0xFE9
+   678                           wreg	equ	0xFE8
+   679                           fsr1h	equ	0xFE2
+   680                           fsr1l	equ	0xFE1
+   681                           bsr	equ	0xFE0
+   682                           fsr2h	equ	0xFDA
+   683                           fsr2l	equ	0xFD9
+   684                           status	equ	0xFD8
+   685                           
+   686                           	psect	rparam
+   687  0000                     pclatu	equ	0xFFB
+   688                           pclath	equ	0xFFA
+   689                           tblptru	equ	0xFF8
+   690                           tblptrh	equ	0xFF7
+   691                           tblptrl	equ	0xFF6
+   692                           tablat	equ	0xFF5
+   693                           prodh	equ	0xFF4
+   694                           prodl	equ	0xFF3
+   695                           fsr0h	equ	0xFEA
+   696                           fsr0l	equ	0xFE9
+   697                           wreg	equ	0xFE8
+   698                           fsr1h	equ	0xFE2
+   699                           fsr1l	equ	0xFE1
+   700                           bsr	equ	0xFE0
+   701                           fsr2h	equ	0xFDA
+   702                           fsr2l	equ	0xFD9
+   703                           status	equ	0xFD8
 
 
 Data Sizes:
@@ -1063,44 +1068,45 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.34 build -361300703 
-Symbol Table                                                                                   Fri Mar 06 17:36:10 2015
+Symbol Table                                                                                   Fri Mar 06 19:57:28 2015
 
-                          l31 0122                            l25 018E                            u37 0180  
+                          l33 0126                            l27 0192                            u37 0184  
                           bsr 000FE0                   __CFG_BORV$3 000000                  __CFG_CP0$OFF 000000  
                 __CFG_CP1$OFF 000000                  __CFG_CP2$OFF 000000                  __CFG_CP3$OFF 000000  
-                 __CFG_LVP$ON 000000                           l646 017A                  __CFG_CPB$OFF 000000  
+                 __CFG_LVP$ON 000000                           l648 017E                  __CFG_CPB$OFF 000000  
                 __CFG_CPD$OFF 000000                           wreg 000FE8                  __CFG_WDT$OFF 000000  
                         _LATC 000F8B                          _main 010E                          fsr0h 000FEA  
                         fsr1h 000FE2                          fsr0l 000FE9                          fsr2h 000FDA  
                         fsr1l 000FE1                          fsr2l 000FD9                          pclat 000FFA  
                         prodh 000FF4                          prodl 000FF3                          start 00A2  
                __CFG_IESO$OFF 000000                 __CFG_MCLRE$ON 000000                  ___param_bank 000010  
-             __end_of_InitApp 01A8                         ?_main 0001                         _TRISC 000F94  
-         _ConfigureOscillator 01A8                 __CFG_PWRT$OFF 000000                 __CFG_WRT0$OFF 000000  
-               __CFG_WRT1$OFF 000000                 __CFG_WRT2$OFF 000000                 __CFG_WRT3$OFF 000000  
-              __CFG_EBTR0$OFF 000000                __CFG_FCMEN$OFF 000000                __CFG_EBTR1$OFF 000000  
-              __CFG_EBTR2$OFF 000000                __CFG_EBTR3$OFF 000000                 __CFG_WRTB$OFF 000000  
-               __CFG_WRTC$OFF 000000                 __CFG_WRTD$OFF 000000                __CFG_EBTRB$OFF 000000  
-                       _delay 0168               __end_of_low_isr 00A2                         tablat 000FF5  
-                       status 000FD8          ?_ConfigureOscillator 0001               __initialization 019C  
-                __end_of_main 0168                        ??_main 0025                 __activetblptr 000000  
-                      ?_delay 0020                        _OSCCON 000FD3                     ??_InitApp 0020  
-       ??_ConfigureOscillator 0020                __CFG_XINST$OFF 000000              __end_of_high_isr 010E  
-              __CFG_STVREN$ON 000000                        delay@x 0023                     ??_low_isr 0001  
-                      tblptrh 000FF7                        tblptrl 000FF6                        tblptru 000FF8  
-                  __accesstop 0080       __end_of__initialization 01A0               __CFG_PBADEN$OFF 000000  
-               ___rparam_used 000001                __pcstackCOMRAM 0001                 __end_of_delay 019C  
-                     ??_delay 0022                    _delay_time 0025                       _OSCTUNE 000F9B  
-                   ?_high_isr 0001                       _InitApp 01A6                       __Hparam 0000  
-                     __Lparam 0000                       __pcinit 019C                       __ramtop 1000  
-                     __ptext0 010E                       __ptext1 0168                       __ptext2 01A6  
-                     __ptext3 01A8                       delay@ms 0020                       _low_isr 0018  
-                  ??_high_isr 0012                __pintcode_body 00A6          end_of_initialization 01A0  
-                     int_func 00A6   __end_of_ConfigureOscillator 01AA           start_initialization 019C  
-            __CFG_OSC$INTIO67 000000              __CFG_LPT1OSC$OFF 000000                   __pbssCOMRAM 0025  
-           __size_of_high_isr 0106                      ?_InitApp 0001             __CFG_CCP2MX$PORTC 000000  
-                   __pintcode 0008                   __pintcodelo 0018                      ?_low_isr 0001  
-              __size_of_delay 0034              __CFG_WDTPS$32768 000000              __size_of_InitApp 0002  
-                    __Hrparam 0000                      __Lrparam 0000            __CFG_BOREN$SBORDIS 000000  
-            __size_of_low_isr 008A                      _high_isr 0008                 __size_of_main 005A  
-__size_of_ConfigureOscillator 0002                      intlevel1 0000                      intlevel2 0000  
+             __end_of_InitApp 01AC                         ?_main 0001                         _TRISB 000F93  
+                       _TRISC 000F94           _ConfigureOscillator 01AC                 __CFG_PWRT$OFF 000000  
+               __CFG_WRT0$OFF 000000                 __CFG_WRT1$OFF 000000                 __CFG_WRT2$OFF 000000  
+               __CFG_WRT3$OFF 000000                __CFG_EBTR0$OFF 000000                __CFG_FCMEN$OFF 000000  
+              __CFG_EBTR1$OFF 000000                __CFG_EBTR2$OFF 000000                __CFG_EBTR3$OFF 000000  
+               __CFG_WRTB$OFF 000000                 __CFG_WRTC$OFF 000000                 __CFG_WRTD$OFF 000000  
+              __CFG_EBTRB$OFF 000000                         _delay 016C               __end_of_low_isr 00A2  
+                       tablat 000FF5                         status 000FD8          ?_ConfigureOscillator 0001  
+             __initialization 01A0                  __end_of_main 016C                        ??_main 0025  
+               __activetblptr 000000                        ?_delay 0020                        _OSCCON 000FD3  
+                   ??_InitApp 0020         ??_ConfigureOscillator 0020                __CFG_XINST$OFF 000000  
+            __end_of_high_isr 010E                __CFG_STVREN$ON 000000                        delay@x 0023  
+                   ??_low_isr 0001                        tblptrh 000FF7                        tblptrl 000FF6  
+                      tblptru 000FF8                    __accesstop 0080       __end_of__initialization 01A4  
+             __CFG_PBADEN$OFF 000000                 ___rparam_used 000001                __pcstackCOMRAM 0001  
+               __end_of_delay 01A0                       ??_delay 0022                    _delay_time 0025  
+                     _OSCTUNE 000F9B                     ?_high_isr 0001                       _InitApp 01AA  
+                     __Hparam 0000                       __Lparam 0000                       __pcinit 01A0  
+                     __ramtop 1000                       __ptext0 010E                       __ptext1 016C  
+                     __ptext2 01AA                       __ptext3 01AC                       delay@ms 0020  
+                     _low_isr 0018                    ??_high_isr 0012                __pintcode_body 00A6  
+        end_of_initialization 01A4                       int_func 00A6   __end_of_ConfigureOscillator 01AE  
+         start_initialization 01A0              __CFG_OSC$INTIO67 000000              __CFG_LPT1OSC$OFF 000000  
+                 __pbssCOMRAM 0025             __size_of_high_isr 0106                      ?_InitApp 0001  
+           __CFG_CCP2MX$PORTC 000000                     __pintcode 0008                   __pintcodelo 0018  
+                    ?_low_isr 0001                __size_of_delay 0034              __CFG_WDTPS$32768 000000  
+            __size_of_InitApp 0002                      __Hrparam 0000                      __Lrparam 0000  
+          __CFG_BOREN$SBORDIS 000000              __size_of_low_isr 008A                      _high_isr 0008  
+               __size_of_main 005E  __size_of_ConfigureOscillator 0002                      intlevel1 0000  
+                    intlevel2 0000  

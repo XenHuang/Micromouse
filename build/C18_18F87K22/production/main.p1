@@ -14,6 +14,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _InitApp `(v ~T0 @X0 0 ef ]
 "2075 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
+"1854
+[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
 "1267
 [v _LATC `Vuc ~T0 @X0 0 e@3979 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
@@ -3864,44 +3866,47 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 59: TRISC=0;
 "59
 [e = _TRISC -> -> 0 `i `uc ]
-[; ;main.c: 60: while(1)
+[; ;main.c: 60: TRISB=1<<1;
 "60
-[e :U 404 ]
-[; ;main.c: 61: {
-"61
-{
-[; ;main.c: 62: LATC=1<<7;
-"62
-[e = _LATC -> << -> 1 `i -> 7 `i `uc ]
-[; ;main.c: 63: delay(2);
+[e = _TRISB -> << -> 1 `i -> 1 `i `uc ]
+[; ;main.c: 63: while(1)
 "63
-[e ( _delay (1 -> -> 2 `i `ui ]
-[; ;main.c: 64: LATC=1<<6;
+[e :U 404 ]
+[; ;main.c: 64: {
 "64
-[e = _LATC -> << -> 1 `i -> 6 `i `uc ]
-[; ;main.c: 65: delay(2);
+{
+[; ;main.c: 65: LATC=0b10001000;
 "65
-[e ( _delay (1 -> -> 2 `i `ui ]
-[; ;main.c: 66: LATC=1<<5;
+[e = _LATC -> -> 136 `i `uc ]
+[; ;main.c: 66: delay(2);
 "66
-[e = _LATC -> << -> 1 `i -> 5 `i `uc ]
-[; ;main.c: 67: delay(2);
+[e ( _delay (1 -> -> 2 `i `ui ]
+[; ;main.c: 67: LATC=0b01000100;
 "67
-[e ( _delay (1 -> -> 2 `i `ui ]
-[; ;main.c: 68: LATC=1<<4;
+[e = _LATC -> -> 68 `i `uc ]
+[; ;main.c: 68: delay(2);
 "68
-[e = _LATC -> << -> 1 `i -> 4 `i `uc ]
-[; ;main.c: 69: delay(2);
-"69
 [e ( _delay (1 -> -> 2 `i `ui ]
+[; ;main.c: 69: LATC=0b00100010;
+"69
+[e = _LATC -> -> 34 `i `uc ]
+[; ;main.c: 70: delay(2);
+"70
+[e ( _delay (1 -> -> 2 `i `ui ]
+[; ;main.c: 71: LATC=0b00010001;
+"71
+[e = _LATC -> -> 17 `i `uc ]
+[; ;main.c: 72: delay(2);
 "72
+[e ( _delay (1 -> -> 2 `i `ui ]
+"75
 }
 [e :U 403 ]
-"60
+"63
 [e $U 404  ]
 [e :U 405 ]
-[; ;main.c: 72: }
-[; ;main.c: 74: }
-"74
+[; ;main.c: 75: }
+[; ;main.c: 77: }
+"77
 [e :UE 402 ]
 }
