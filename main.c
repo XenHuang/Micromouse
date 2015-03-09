@@ -42,6 +42,8 @@ void delay(unsigned int ms){
         __delay_ms(1);
 }
 
+     int sensor;
+     
 void main(void)
 {
     //enable 8MHz internal clock
@@ -55,22 +57,24 @@ void main(void)
     /* Initialize I/O and Peripherals for application */
     InitApp();
     
-    /* TODO <INSERT USER APPLICATION CODE HERE> */
-     TRISC=0;
-     TRISB=1<<1;
-     
+     TRISB=2;
+     TRISD=0;
+     ADCON1 =1;
+     ADCON2=0b00001010;
+     ADCON0=0b00101011;
      
     while(1)
     {
-        LATC=0b10001000;
-        delay(2);
-        LATC=0b01000100;
-        delay(2);
-        LATC=0b00100010;
-        delay(2);
-        LATC=0b00010001;
-        delay(2);
         
+        ADCON0bits.GO_DONE = 1;
+        while(ADCON0bits.GO_DONE != 0); //Loop here until A/D conversion completes 
+        sensor = (ADRESH << 2) + (ADRESL >> 6);
+        
+        
+        if(ADRESL > 100)
+            LATD=1;
+        else
+            LATD=0;
        
     }
 

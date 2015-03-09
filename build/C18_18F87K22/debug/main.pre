@@ -5142,6 +5142,8 @@ for (x = 0; x < ms; x++)
 _delay((unsigned long)((1)*(32000000/4000.0)));
 }
 
+int sensor;
+
 void main(void)
 {
 
@@ -5149,20 +5151,31 @@ OSCCON = 0b01111100;
 
 OSCTUNE = 0b01001111;
 
+
 ConfigureOscillator();
 
 
 InitApp();
 
+TRISB=2;
+TRISD=0;
+ADCON1 =1;
+ADCON2=0b00001010;
+ADCON0=0b00101011;
 
-TRISB=0B0000001;
 while(1)
 {
 
-LATD=0b00000001;
-delay(50);
-LATD=0b00000000;
-delay(50);
+ADCON0bits.GO_DONE = 1;
+while(ADCON0bits.GO_DONE != 0);
+sensor = (ADRESH << 2) + (ADRESL >> 6);
+
+
+if(ADRESL > 100)
+LATD=1;
+else
+LATD=0;
+
 }
 
 }

@@ -14,6 +14,50 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _InitApp `(v ~T0 @X0 0 ef ]
 "1854 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
+"2296
+[v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
+"4715
+[v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
+"4645
+[v _ADCON2 `Vuc ~T0 @X0 0 e@4032 ]
+"4805
+[v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
+"4811
+[s S251 :1 `uc 1 :1 `uc 1 ]
+[n S251 . . GO_NOT_DONE ]
+"4815
+[s S252 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S252 . ADON GO_nDONE CHS ]
+"4820
+[s S253 :1 `uc 1 :1 `uc 1 ]
+[n S253 . . GO_NOT_DONE ]
+"4824
+[s S254 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S254 . . GO CHS0 CHS1 CHS2 CHS3 ]
+"4832
+[s S255 :1 `uc 1 :1 `uc 1 ]
+[n S255 . . DONE ]
+"4836
+[s S256 :1 `uc 1 :1 `uc 1 ]
+[n S256 . . NOT_DONE ]
+"4840
+[s S257 :1 `uc 1 :1 `uc 1 ]
+[n S257 . . nDONE ]
+"4844
+[s S258 :1 `uc 1 :1 `uc 1 ]
+[n S258 . . GO_DONE ]
+"4848
+[s S259 :1 `uc 1 :1 `uc 1 ]
+[n S259 . . GODONE ]
+"4810
+[u S250 `S251 1 `S252 1 `S253 1 `S254 1 `S255 1 `S256 1 `S257 1 `S258 1 `S259 1 ]
+[n S250 . . . . . . . . . . ]
+"4853
+[v _ADCON0bits `VS250 ~T0 @X0 0 e@4034 ]
+"4939
+[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
+"4933
+[v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
 "1399
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
@@ -3842,54 +3886,84 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 397 ]
 }
 "45
+[v _sensor `i ~T0 @X0 1 e ]
+[; ;main.c: 45: int sensor;
+"47
 [v _main `(v ~T0 @X0 1 ef ]
-"46
+"48
 {
-[; ;main.c: 45: void main(void)
-[; ;main.c: 46: {
+[; ;main.c: 47: void main(void)
+[; ;main.c: 48: {
 [e :U _main ]
 [f ]
-[; ;main.c: 48: OSCCON = 0b01111100;
-"48
-[e = _OSCCON -> -> 124 `i `uc ]
-[; ;main.c: 50: OSCTUNE = 0b01001111;
+[; ;main.c: 50: OSCCON = 0b01111100;
 "50
-[e = _OSCTUNE -> -> 79 `i `uc ]
-[; ;main.c: 52: ConfigureOscillator();
+[e = _OSCCON -> -> 124 `i `uc ]
+[; ;main.c: 52: OSCTUNE = 0b01001111;
 "52
-[e ( _ConfigureOscillator ..  ]
-[; ;main.c: 55: InitApp();
+[e = _OSCTUNE -> -> 79 `i `uc ]
+[; ;main.c: 55: ConfigureOscillator();
 "55
-[e ( _InitApp ..  ]
-[; ;main.c: 58: TRISB=0B0000001;
+[e ( _ConfigureOscillator ..  ]
+[; ;main.c: 58: InitApp();
 "58
-[e = _TRISB -> -> 1 `i `uc ]
-[; ;main.c: 59: while(1)
-"59
-[e :U 404 ]
-[; ;main.c: 60: {
+[e ( _InitApp ..  ]
+[; ;main.c: 60: TRISB=2;
 "60
-{
-[; ;main.c: 62: LATD=0b00000001;
+[e = _TRISB -> -> 2 `i `uc ]
+[; ;main.c: 61: TRISD=0;
+"61
+[e = _TRISD -> -> 0 `i `uc ]
+[; ;main.c: 62: ADCON1 =1;
 "62
-[e = _LATD -> -> 1 `i `uc ]
-[; ;main.c: 63: delay(50);
+[e = _ADCON1 -> -> 1 `i `uc ]
+[; ;main.c: 63: ADCON2=0b00001010;
 "63
-[e ( _delay (1 -> -> 50 `i `ui ]
-[; ;main.c: 64: LATD=0b00000000;
+[e = _ADCON2 -> -> 10 `i `uc ]
+[; ;main.c: 64: ADCON0=0b00101011;
 "64
-[e = _LATD -> -> 0 `i `uc ]
-[; ;main.c: 65: delay(50);
-"65
-[e ( _delay (1 -> -> 50 `i `ui ]
+[e = _ADCON0 -> -> 43 `i `uc ]
+[; ;main.c: 66: while(1)
 "66
+[e :U 404 ]
+[; ;main.c: 67: {
+"67
+{
+[; ;main.c: 69: ADCON0bits.GO_DONE = 1;
+"69
+[e = . . _ADCON0bits 7 1 -> -> 1 `i `uc ]
+[; ;main.c: 70: while(ADCON0bits.GO_DONE != 0);
+"70
+[e $U 406  ]
+[e :U 407 ]
+[e :U 406 ]
+[e $ != -> . . _ADCON0bits 7 1 `i -> 0 `i 407  ]
+[e :U 408 ]
+[; ;main.c: 71: sensor = (ADRESH << 2) + (ADRESL >> 6);
+"71
+[e = _sensor + << -> _ADRESH `i -> 2 `i >> -> _ADRESL `i -> 6 `i ]
+[; ;main.c: 74: if(ADRESL > 100)
+"74
+[e $ ! > -> _ADRESL `i -> 100 `i 409  ]
+[; ;main.c: 75: LATD=1;
+"75
+[e = _LATD -> -> 1 `i `uc ]
+[e $U 410  ]
+"76
+[e :U 409 ]
+[; ;main.c: 76: else
+[; ;main.c: 77: LATD=0;
+"77
+[e = _LATD -> -> 0 `i `uc ]
+[e :U 410 ]
+"79
 }
 [e :U 403 ]
-"59
+"66
 [e $U 404  ]
 [e :U 405 ]
-[; ;main.c: 66: }
-[; ;main.c: 68: }
-"68
+[; ;main.c: 79: }
+[; ;main.c: 81: }
+"81
 [e :UE 402 ]
 }
