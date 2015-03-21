@@ -43,7 +43,6 @@ void delay(unsigned int ms){
 }
 
     int sensor;
-	int motor;
      
 void main(void)
 {
@@ -58,7 +57,7 @@ void main(void)
     /* Initialize I/O and Peripherals for application */
     InitApp();
    
-	T0CON = 0b11000000;
+	T0CON = 0b11000100;
 		//7.TMR0ON: 1 = Enables Timer()
 		//6.T08BIT: 1 = 8-bit timer, 0 = 16-bit
 		//5.T0CS: 0 = Internal instruction cycle clock(CLKO, not T0CKI)
@@ -97,22 +96,4 @@ void main(void)
 
 }
 
-void intterrupt motro()
-{
-	if(INTCONbits.TMR0IF == 1)
-	{
-		if(motor < 4)
-		motor++;
-		else
-		motor = 0;
 
-		switch(motor)
-		{
-			case 0: LATC = 0b10001000;
-			case 1: LATC = 0b01000100;
-			case 2: LATC = 0b00100010;
-			case 3: LATC = 0b00010001;
-		}	
-		INTCONbits.TMR0IF = 0;
-	} 
-}

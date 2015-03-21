@@ -1,4 +1,26 @@
 Version 3.2 HI-TECH Software Intermediate Code
+"6636 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
+[s S346 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S346 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
+"6646
+[s S347 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S347 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE GIE ]
+"6656
+[s S348 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S348 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE GIEL GIEH ]
+"6666
+[s S349 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S349 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
+"6676
+[s S350 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S350 . . GIEL GIEH ]
+"6635
+[u S345 `S346 1 `S347 1 `S348 1 `S349 1 `S350 1 ]
+[n S345 . . . . . . ]
+"6682
+[v _INTCONbits `VS345 ~T0 @X0 0 e@4082 ]
+"1267
+[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4620.h: 49: extern volatile unsigned char PORTA @ 0xF80;
@@ -3685,29 +3707,101 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[v F4058 `(v ~T0 @X0 1 tf ]
-"27 interrupts.c
-[v _high_isr `IF4058 ~T0 @X0 1 e ]
+"19 interrupts.c
+[v _motor `uc ~T0 @X0 1 e ]
+[i _motor
+-> -> 5 `i `uc
+]
+[; ;interrupts.c: 19: unsigned char motor = 5;
+[v F4059 `(v ~T0 @X0 1 tf ]
+"27
+[v _high_isr `IF4059 ~T0 @X0 1 e ]
 "36
 {
 [; ;interrupts.c: 27: void interrupt high_isr(void)
 [; ;interrupts.c: 36: {
 [e :U _high_isr ]
 [f ]
-[; ;interrupts.c: 63: }
-"63
+[; ;interrupts.c: 46: if(INTCONbits.TMR0IF == 1)
+"46
+[e $ ! == -> . . _INTCONbits 0 2 `i -> 1 `i 392  ]
+[; ;interrupts.c: 47: {
+"47
+{
+[; ;interrupts.c: 48: if(motor < 4)
+"48
+[e $ ! < -> _motor `i -> 4 `i 393  ]
+[; ;interrupts.c: 49: motor++;
+"49
+[e ++ _motor -> -> 1 `i `uc ]
+[e $U 394  ]
+"50
+[e :U 393 ]
+[; ;interrupts.c: 50: else
+[; ;interrupts.c: 51: motor = 0;
+"51
+[e = _motor -> -> 0 `i `uc ]
+[e :U 394 ]
+[; ;interrupts.c: 53: switch(motor)
+"53
+[e $U 396  ]
+[; ;interrupts.c: 54: {
+"54
+{
+[; ;interrupts.c: 55: case 0: LATC = 0b10001000; break;
+"55
+[e :U 397 ]
+[e = _LATC -> -> 136 `i `uc ]
+[e $U 395  ]
+[; ;interrupts.c: 56: case 1: LATC = 0b01000100; break;
+"56
+[e :U 398 ]
+[e = _LATC -> -> 68 `i `uc ]
+[e $U 395  ]
+[; ;interrupts.c: 57: case 2: LATC = 0b00100010; break;
+"57
+[e :U 399 ]
+[e = _LATC -> -> 34 `i `uc ]
+[e $U 395  ]
+[; ;interrupts.c: 58: case 3: LATC = 0b00010001; break;
+"58
+[e :U 400 ]
+[e = _LATC -> -> 17 `i `uc ]
+[e $U 395  ]
+"59
+}
+[; ;interrupts.c: 59: }
+[e $U 395  ]
+"53
+[e :U 396 ]
+[e [\ _motor , $ -> -> 0 `i `uc 397
+ , $ -> -> 1 `i `uc 398
+ , $ -> -> 2 `i `uc 399
+ , $ -> -> 3 `i `uc 400
+ 395 ]
+"59
+[e :U 395 ]
+[; ;interrupts.c: 60: INTCONbits.TMR0IF = 0;
+"60
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+"61
+}
+[e :U 392 ]
+[; ;interrupts.c: 61: }
+[; ;interrupts.c: 65: }
+"65
 [e :UE 391 ]
 }
-[v F4061 `(v ~T0 @X0 1 tf ]
-"67
-[v _low_isr `ILF4061 ~T0 @X0 1 e ]
-"75
+[v F4062 `(v ~T0 @X0 1 tf ]
+"69
+[v _low_isr `ILF4062 ~T0 @X0 1 e ]
+"77
 {
-[; ;interrupts.c: 67: void low_priority interrupt low_isr(void)
-[; ;interrupts.c: 75: {
+[; ;interrupts.c: 69: void low_priority interrupt low_isr(void)
+[; ;interrupts.c: 77: {
 [e :U _low_isr ]
 [f ]
-[; ;interrupts.c: 102: }
-"102
-[e :UE 392 ]
+[; ;interrupts.c: 104: }
+"104
+[e :UE 401 ]
 }

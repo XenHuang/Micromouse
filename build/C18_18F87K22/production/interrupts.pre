@@ -4969,21 +4969,43 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.34\include\stdbool.h"
 typedef unsigned char bool;
 
-# 27 "interrupts.c"
+# 19 "interrupts.c"
+unsigned char motor = 5;
+
+# 27
 void interrupt high_isr(void)
 
 # 36
 {
 
-# 63
+# 46
+if(INTCONbits.TMR0IF == 1)
+{
+if(motor < 4)
+motor++;
+else
+motor = 0;
+
+switch(motor)
+{
+case 0: LATC = 0b10001000; break;
+case 1: LATC = 0b01000100; break;
+case 2: LATC = 0b00100010; break;
+case 3: LATC = 0b00010001; break;
+}
+INTCONbits.TMR0IF = 0;
+}
+
+
+
 }
 
 
 
 void low_priority interrupt low_isr(void)
 
-# 75
+# 77
 {
 
-# 102
+# 104
 }
