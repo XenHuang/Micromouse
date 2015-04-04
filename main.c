@@ -84,7 +84,7 @@ void main(void)
 		//2.TMR0IF 1 = TMR0 Overflow interrupt flag 
 		//1.INT0IF 1 = INT0 interrupt flag
 		//0.RBIF 1 = RB port change interrupt flag
-
+    delay(3000);
 	INTCONbits.GIE = 1;
 
 	TRISC = 0;

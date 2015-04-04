@@ -3897,6 +3897,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 78: INTCON = 0b00100000;
 "78
 [e = _INTCON -> -> 32 `i `uc ]
+[; ;main.c: 87: delay(3000);
+"87
+[e ( _delay (1 -> -> 3000 `i `ui ]
 [; ;main.c: 88: INTCONbits.GIE = 1;
 "88
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]

@@ -29,7 +29,9 @@
 [v _high_isr high_isr `II(v  1 e 0 0 ]
 "69
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
-"47 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
+"39 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
+[v _delay delay `(v  1 e 0 0 ]
+"47
 [v _main main `(v  1 e 0 0 ]
 "24 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\system.c
 [v _ConfigureOscillator ConfigureOscillator `(v  1 e 0 0 ]
@@ -98,6 +100,15 @@
 [v _main main `(v  1 e 0 0 ]
 {
 "97
+} 0
+"39
+[v _delay delay `(v  1 e 0 0 ]
+{
+"40
+[v delay@x x `i  1 a 2 34 ]
+"39
+[v delay@ms ms `ui  1 p 2 31 ]
+"43
 } 0
 "28 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
 [v _InitApp InitApp `(v  1 e 0 0 ]

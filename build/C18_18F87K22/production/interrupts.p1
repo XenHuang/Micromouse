@@ -3748,25 +3748,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 54: {
 "54
 {
-[; ;interrupts.c: 55: case 0: LATC = 0b10001000; break;
+[; ;interrupts.c: 55: case 0: LATC = 0b00011000; break;
 "55
 [e :U 397 ]
-[e = _LATC -> -> 136 `i `uc ]
+[e = _LATC -> -> 24 `i `uc ]
 [e $U 395  ]
-[; ;interrupts.c: 56: case 1: LATC = 0b01000100; break;
+[; ;interrupts.c: 56: case 1: LATC = 0b00100100; break;
 "56
 [e :U 398 ]
-[e = _LATC -> -> 68 `i `uc ]
+[e = _LATC -> -> 36 `i `uc ]
 [e $U 395  ]
-[; ;interrupts.c: 57: case 2: LATC = 0b00100010; break;
+[; ;interrupts.c: 57: case 2: LATC = 0b01000010; break;
 "57
 [e :U 399 ]
-[e = _LATC -> -> 34 `i `uc ]
+[e = _LATC -> -> 66 `i `uc ]
 [e $U 395  ]
-[; ;interrupts.c: 58: case 3: LATC = 0b00010001; break;
+[; ;interrupts.c: 58: case 3: LATC = 0b10000001; break;
 "58
 [e :U 400 ]
-[e = _LATC -> -> 17 `i `uc ]
+[e = _LATC -> -> 129 `i `uc ]
 [e $U 395  ]
 "59
 }

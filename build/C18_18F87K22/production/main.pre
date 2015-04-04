@@ -5165,7 +5165,8 @@ INTCON2 = 0b11110100;
 # 78
 INTCON = 0b00100000;
 
-# 88
+# 87
+delay(3000);
 INTCONbits.GIE = 1;
 
 TRISC = 0;
