@@ -5157,22 +5157,29 @@ ConfigureOscillator();
 
 InitApp();
 
-T0CON = 0b11000100;
+TRISB=2;
+TRISD=0;
+ADCON1 =0b00000001;
 
-# 68
-INTCON2 = 0b11110100;
+# 67
+ADCON2=0b00001010;
+
+# 72
+ADCON0=0b00101011;
 
 # 78
-INTCON = 0b00100000;
-
-# 87
-delay(3000);
-INTCONbits.GIE = 1;
-
-TRISC = 0;
-
 while(1)
 {
+
+ADCON0bits.GO_DONE = 1;
+while(ADCON0bits.GO_DONE != 0);
+sensor = (ADRESH << 2) + (ADRESL >> 6);
+
+
+if(ADRESL > 100)
+LATD=1;
+else
+LATD=0;
 
 }
 

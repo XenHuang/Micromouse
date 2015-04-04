@@ -29,9 +29,7 @@
 [v _high_isr high_isr `II(v  1 e 0 0 ]
 "69
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
-"39 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
-[v _delay delay `(v  1 e 0 0 ]
-"47
+"47 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
 [v _main main `(v  1 e 0 0 ]
 "24 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\system.c
 [v _ConfigureOscillator ConfigureOscillator `(v  1 e 0 0 ]
@@ -39,18 +37,58 @@
 [v _InitApp InitApp `(v  1 e 0 0 ]
 "1267 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
-"2075
-[v _TRISC TRISC `VEuc  1 e 1 @3988 ]
+"1399
+[v _LATD LATD `VEuc  1 e 1 @3980 ]
+"1854
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"2296
+[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
 "2680
 [v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
+"4645
+[v _ADCON2 ADCON2 `VEuc  1 e 1 @4032 ]
+"4715
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
+"4805
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
+[s S143 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_NOT_DONE 1 0 :1:1 
+]
+"4853
+[s S146 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+]
+[s S153 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+]
+[s S160 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 DONE 1 0 :1:1 
+]
+[s S163 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_DONE 1 0 :1:1 
+]
+[s S166 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S169 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[s S172 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GODONE 1 0 :1:1 
+]
+[u S175 . 1 `S143 1 . 1 0 `S146 1 . 1 0 `S143 1 . 1 0 `S153 1 . 1 0 `S160 1 . 1 0 `S163 1 . 1 0 `S166 1 . 1 0 `S169 1 . 1 0 `S172 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES175  1 e 1 @4034 ]
+"4933
+[v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
+"4939
+[v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
 "6061
 [v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
-"6137
-[v _T0CON T0CON `VEuc  1 e 1 @4053 ]
-"6561
-[v _INTCON2 INTCON2 `VEuc  1 e 1 @4081 ]
-"6630
-[v _INTCON INTCON `VEuc  1 e 1 @4082 ]
 [s S21 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
@@ -96,19 +134,12 @@
 [v _INTCONbits INTCONbits `VES61  1 e 1 @4082 ]
 "19 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _motor motor `uc  1 e 1 0 ]
-"47 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
+"45 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
+[v _sensor sensor `i  1 e 2 0 ]
+"47
 [v _main main `(v  1 e 0 0 ]
 {
-"97
-} 0
-"39
-[v _delay delay `(v  1 e 0 0 ]
-{
-"40
-[v delay@x x `i  1 a 2 34 ]
-"39
-[v delay@ms ms `ui  1 p 2 31 ]
-"43
+"93
 } 0
 "28 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
 [v _InitApp InitApp `(v  1 e 0 0 ]
