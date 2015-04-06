@@ -18,6 +18,8 @@
 #endif
 
 #include "user.h"
+#include <pic18f4620.h>
+#include "system.h"
 
 /******************************************************************************/
 /* User Functions                                                             */
@@ -106,8 +108,8 @@ void InitApp(void)
             //0.RBIF 1 = RB port change interrupt flag
 
     /* Enable interrupts */
-    delay(3000);    //wait for settlement
-    INTCONbits.GIE = 1;
+    //delay(3000);    //wait for settlement
+    //INTCONbits.GIE = 1;
 }
 
 void sensorComputation(int sensorTemp[][SENSORCOMPUTATION])
@@ -141,9 +143,7 @@ void sensorUpdate()
     {
         for(j = 0 ; j < NUMSENSORS ; j++)
         {
-            //Mask off and reassign analog channel
-            ADCON0 = ADCON0 & 0b11000011;
-            ADCON0 = ADCON0 | (sensorLocation[j] << 2);
+            ADCON0 = sensorLocation[j];
 
             ADCON0bits.GO_DONE = 1;
             while(ADCON0bits.GO_DONE != 0);

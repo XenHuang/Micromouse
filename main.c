@@ -45,8 +45,6 @@ void main(void)
 
     /* Initialize I/O and Peripherals for application */
     InitApp();
-
-	TRISC = 0;
  
     while(1)
     {
