@@ -39,14 +39,14 @@ void InitApp(void)
     TRISC = 0;
 
     //Sensor Locations
-    //Left Front, RE2
-    TRISEbits.TRISE2=1;
+    //Left Front, RE0
+    TRISEbits.TRISE0=1;
     //Left, RE1
     TRISEbits.TRISE1=1;
     //Right, RB1
     TRISBbits.RB1=1;
-    //Right Front, RB0
-    TRISBbits.RB0=1;
+    //Right Front, RB4
+    TRISBbits.RB4=1;
     //Algorithm Switches
     //WALLHuger, RB3
     TRISBbits.RB3=1;
