@@ -40,18 +40,18 @@ void InitApp(void)
 
     //Sensor Locations
     //Left Front, RE0
-    TRISEbits.TRISE0=1;
-    //Left, RE1
     TRISEbits.TRISE1=1;
+    //Left, RE1
+    TRISEbits.TRISE2=1;
     //Right, RB1
     TRISBbits.RB1=1;
     //Right Front, RB4
-    TRISBbits.RB4=1;
+    TRISBbits.RB0=1;
     //Algorithm Switches
     //WALLHuger, RB3
     TRISBbits.RB3=1;
     //Flood Fill, RB2
-    TRISBbits.RB1=1;
+    TRISBbits.RB2=1;
 
     //Determine Algorithm
     if(PORTBbits.RB3 == TRUE)

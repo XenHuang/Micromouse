@@ -7,10 +7,10 @@
 
 #define SENSORCOMPUTATION 10    //the number of times averaging sensor value, min = 3
 #define NUMSENSORS 4
-#define LEFTSENSORL 0b00011111         //ADCON0 value
-#define RIGHTSENSORL 0b00110011        //ADCON0 value
-#define LEFTFRONTSENSORL 0b00010111    //ADCON0 value
-#define RIGHTFRONTSENSORL 0b00101111   //ADCON0 value
+#define LEFTSENSORL 0b00011011         //ADCON0 value
+#define RIGHTSENSORL 0b00101011        //ADCON0 value
+#define LEFTFRONTSENSORL 0b00011111    //ADCON0 value
+#define RIGHTFRONTSENSORL 0b00110011   //ADCON0 value
 const unsigned char sensorLocation[NUMSENSORS] = {LEFTSENSORL,RIGHTSENSORL,LEFTFRONTSENSORL,RIGHTFRONTSENSORL};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
