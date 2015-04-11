@@ -4972,8 +4972,9 @@ typedef unsigned char bool;
 # 20 "system.h"
 void ConfigureOscillator(void);
 
-# 14 "user.h"
+# 18 "user.h"
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
+const unsigned char sensorCorrection[4] = {22,23,17,17};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 Algorithm algorithm;
@@ -4981,7 +4982,7 @@ Algorithm algorithm;
 int delay_time = 0;
 int sensorValue[4];
 
-# 28
+# 33
 void delay(unsigned int);
 void InitApp(void);
 void sensorUpdate();

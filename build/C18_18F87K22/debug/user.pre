@@ -5042,7 +5042,8 @@ INTCON2 = 0b11110100;
 # 100
 INTCON = 0b00100000;
 
-# 113
+# 112
+INTCONbits.GIE = 1;
 }
 
 void sensorComputation(int sensorTemp[][10])

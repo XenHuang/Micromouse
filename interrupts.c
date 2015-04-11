@@ -27,7 +27,7 @@
 /******************************************************************************/
 
 #define MOTORDELAYMIN 0         //the smaller the faster
-#define MOTORDELAYMAX 30       //the bigger the slower
+#define MOTORDELAYMAX 10       //the bigger the slower
 #define ROTATE90 215            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 4    //factor that the outer/inter steps
 
@@ -41,19 +41,19 @@
 
 #define KCONTROLLERMIN 10
 #define KCONTROLLERMINSTEP 5
-#define KCONTROLLERMID 40
+#define KCONTROLLERMID 60
 #define KCONTROLLERMIDSTEP 15
 #define KCONTROLLERMAX 120
 #define KCONTROLLERMAXSTEP 30
 
 typedef enum {LEFT,RIGHT} Side;
-unsigned char LMotorCounter;
-unsigned char RMotorCounter;
+unsigned char LMotorCounter = 0;
+unsigned char RMotorCounter = 0;
 int MotorDelayCounter = 0;
 int LMotorDelayCounter = 0;
 int RMotorDelayCounter = 0;
 
-void motorCounterUpdate(unsigned char,Side,unsigned char);
+void motorCounterUpdate(Side,unsigned char);
 unsigned char merge(unsigned char,unsigned char);
 void moveMouse(unsigned char);
 void KController();
@@ -89,12 +89,12 @@ void high_isr(void)
                 //Two Side Wall
                 if(sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN)
                 {
-                    KController();
+                    //KController();
                 }
                 //One Side Wall
 
-                motorCounterUpdate(RMotorCounter,RIGHT,0);
-                motorCounterUpdate(LMotorCounter,LEFT,0);
+                motorCounterUpdate(RIGHT,0);
+                motorCounterUpdate(LEFT,0);
                 moveMouse(merge(LMotorCounter,RMotorCounter));
                 
                 MotorDelayCounter = 0;
@@ -147,7 +147,7 @@ void low_isr(void)
 
 }
 
-void motorCounterUpdate(unsigned char motor,Side side, unsigned char reverse)
+void motorCounterUpdate(Side side, unsigned char reverse)
 {
     if(reverse == TRUE)
     {
@@ -159,22 +159,22 @@ void motorCounterUpdate(unsigned char motor,Side side, unsigned char reverse)
     
     if(side == LEFT)
     {
-        switch(motor)
+        switch(LMotorCounter)
         {
-            case 0b00000001: motor << 1; break;
-            case 0b00000010: motor << 1; break;
-            case 0b00000100: motor << 1; break;
-            case 0b00001000: motor = 0b00000001; break;
-            default: motor = 0b00000001;
+            case 0b00000001: LMotorCounter = 0b00000010; break;
+            case 0b00000010: LMotorCounter = 0b00000100; break;
+            case 0b00000100: LMotorCounter = 0b00001000; break;
+            case 0b00001000: LMotorCounter = 0b00000001; break;
+            default: LMotorCounter = 0b00000001;
         }
     } else {    //side == RIGHT
-        switch(motor)
+        switch(RMotorCounter)
         {
-            case 0b00000001: motor = 0b00001000; break;
-            case 0b00000010: motor >> 1; break;
-            case 0b00000100: motor >> 1; break;
-            case 0b00001000: motor >> 1; break;
-            default: motor = 0b00000001;
+            case 0b00000001: RMotorCounter = 0b00001000; break;
+            case 0b00000010: RMotorCounter = 0b00000001; break;
+            case 0b00000100: RMotorCounter = 0b00000010; break;
+            case 0b00001000: RMotorCounter = 0b00000100; break;
+            default: RMotorCounter = 0b00001000;
         }
     }
 }
@@ -182,7 +182,7 @@ void motorCounterUpdate(unsigned char motor,Side side, unsigned char reverse)
 unsigned char merge(unsigned char left,unsigned char right)
 {
     unsigned char merged;
-    merged = left << 4 + right;
+    merged = (left << 4) + right;
     return merged;
 }
 
@@ -218,7 +218,7 @@ void KController()
         correctTo = RIGHT;
         for(;steps > 0; steps--)
         {
-            motorCounterUpdate(RMotorCounter,correctTo,0);
+            motorCounterUpdate(correctTo,0);
             moveMouse(merge(LMotorCounter,RMotorCounter));
         }
     }
@@ -227,7 +227,7 @@ void KController()
         correctTo = LEFT;
         for(;steps > 0; steps--)
         {
-            motorCounterUpdate(LMotorCounter,correctTo,0);
+            motorCounterUpdate(correctTo,0);
             moveMouse(merge(LMotorCounter,RMotorCounter));
         }
     }

@@ -4990,17 +4990,18 @@ void sensorComputation(int[][10]);
 int MIN(int,int);
 int MAX(int,int);
 
-# 43 "interrupts.c"
+# 49 "interrupts.c"
 typedef enum {LEFT,RIGHT} Side;
-unsigned char LMotorCounter;
-unsigned char RMotorCounter;
+unsigned char LMotorCounter = 0;
+unsigned char RMotorCounter = 0;
 int MotorDelayCounter = 0;
 int LMotorDelayCounter = 0;
 int RMotorDelayCounter = 0;
 
-void motorCounterUpdate(unsigned char,Side,unsigned char);
+void motorCounterUpdate(Side,unsigned char);
 unsigned char merge(unsigned char,unsigned char);
 void moveMouse(unsigned char);
+void KController();
 
 int ABS(int);
 
@@ -5008,21 +5009,25 @@ int ABS(int);
 
 void interrupt high_isr(void)
 
-# 67
+# 74
 {
 
-# 77
+# 84
 if(INTCONbits.TMR0IF == 1)
 {
 if(MotorDelayCounter > 30)
 {
 
 
-if(sensorValue[0] > 0 && sensorValue[1] > 0)
+if(sensorValue[0] > 100 && sensorValue[1] > 100)
 {
 
 }
 
+
+motorCounterUpdate(RIGHT,0);
+motorCounterUpdate(LEFT,0);
+moveMouse(merge(LMotorCounter,RMotorCounter));
 
 MotorDelayCounter = 0;
 }
@@ -5039,13 +5044,13 @@ INTCONbits.TMR0IF = 0;
 
 void low_priority interrupt low_isr(void)
 
-# 110
+# 121
 {
 
-# 137
+# 148
 }
 
-void motorCounterUpdate(unsigned char motor,Side side, unsigned char reverse)
+void motorCounterUpdate(Side side, unsigned char reverse)
 {
 if(reverse == TRUE)
 {
@@ -5057,22 +5062,22 @@ side = LEFT;
 
 if(side == LEFT)
 {
-switch(motor)
+switch(LMotorCounter)
 {
-case 0b00000001: motor << 1; break;
-case 0b00000010: motor << 1; break;
-case 0b00000100: motor << 1; break;
-case 0b00001000: motor = 0b00000001; break;
-default: motor = 0b00000001;
+case 0b00000001: LMotorCounter = 0b00000010; break;
+case 0b00000010: LMotorCounter = 0b00000100; break;
+case 0b00000100: LMotorCounter = 0b00001000; break;
+case 0b00001000: LMotorCounter = 0b00000001; break;
+default: LMotorCounter = 0b00000001;
 }
 } else {
-switch(motor)
+switch(RMotorCounter)
 {
-case 0b00000001: motor = 0b00001000; break;
-case 0b00000010: motor >> 1; break;
-case 0b00000100: motor >> 1; break;
-case 0b00001000: motor >> 1; break;
-default: motor = 0b00000001;
+case 0b00000001: RMotorCounter = 0b00001000; break;
+case 0b00000010: RMotorCounter = 0b00000001; break;
+case 0b00000100: RMotorCounter = 0b00000010; break;
+case 0b00001000: RMotorCounter = 0b00000100; break;
+default: RMotorCounter = 0b00001000;
 }
 }
 }
@@ -5080,7 +5085,7 @@ default: motor = 0b00000001;
 unsigned char merge(unsigned char left,unsigned char right)
 {
 unsigned char merged;
-merged = left << 4 + right;
+merged = (left << 4) + right;
 return merged;
 }
 
@@ -5094,4 +5099,39 @@ int ABS(int x)
 {
 if(x<0) x = -x;
 return x;
+}
+
+
+void KController()
+{
+Side correctTo;
+int diff = ABS(sensorValue[0] - sensorValue[1]);
+
+int steps = 0;
+if(diff <= 10)
+steps = 5;
+else if(diff > 10 && diff <= 60)
+steps = 15;
+else if(diff > 60 && diff >= 120)
+steps = 30;
+
+
+if(sensorValue[0] > sensorValue[1])
+{
+correctTo = RIGHT;
+for(;steps > 0; steps--)
+{
+motorCounterUpdate(correctTo,0);
+moveMouse(merge(LMotorCounter,RMotorCounter));
+}
+}
+else
+{
+correctTo = LEFT;
+for(;steps > 0; steps--)
+{
+motorCounterUpdate(correctTo,0);
+moveMouse(merge(LMotorCounter,RMotorCounter));
+}
+}
 }

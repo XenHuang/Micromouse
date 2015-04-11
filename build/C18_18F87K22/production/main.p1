@@ -1,13 +1,13 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"17 user.h
-[c E4059 0 1 .. ]
-[n E4059 . LEFTWALL RIGHTWALL  ]
+"22 user.h
+[c E4060 0 1 .. ]
+[n E4060 . LEFTWALL RIGHTWALL  ]
 [p mainexit ]
 "20 system.h
 [v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
-"29 user.h
+"34 user.h
 [v _InitApp `(v ~T0 @X0 0 ef ]
-"30
+"35
 [v _sensorUpdate `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3696,7 +3696,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;system.h: 20: void ConfigureOscillator(void);
-"14 user.h
+"18 user.h
 [v _sensorLocation `Cuc ~T0 @X0 -> 4 `i e ]
 [i _sensorLocation
 :U ..
@@ -3706,26 +3706,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 51 `i `uc
 ..
 ]
-[; ;user.h: 14: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
-[; ;user.h: 16: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
-"17
-[v _algorithm `E4059 ~T0 @X0 1 e ]
-[; ;user.h: 17: Algorithm algorithm;
+[; ;user.h: 18: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
 "19
+[v _sensorCorrection `Cuc ~T0 @X0 -> 4 `i e ]
+[i _sensorCorrection
+:U ..
+-> -> 22 `i `uc
+-> -> 23 `i `uc
+-> -> 17 `i `uc
+-> -> 17 `i `uc
+..
+]
+[; ;user.h: 19: const unsigned char sensorCorrection[4] = {22,23,17,17};
+[; ;user.h: 21: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
+"22
+[v _algorithm `E4060 ~T0 @X0 1 e ]
+[; ;user.h: 22: Algorithm algorithm;
+"24
 [v _delay_time `i ~T0 @X0 1 e ]
 [i _delay_time
 -> 0 `i
 ]
-[; ;user.h: 19: int delay_time = 0;
-"20
+[; ;user.h: 24: int delay_time = 0;
+"25
 [v _sensorValue `i ~T0 @X0 -> 4 `i e ]
-[; ;user.h: 20: int sensorValue[4];
-[; ;user.h: 28: void delay(unsigned int);
-[; ;user.h: 29: void InitApp(void);
-[; ;user.h: 30: void sensorUpdate();
-[; ;user.h: 31: void sensorComputation(int[][10]);
-[; ;user.h: 32: int MIN(int,int);
-[; ;user.h: 33: int MAX(int,int);
+[; ;user.h: 25: int sensorValue[4];
+[; ;user.h: 33: void delay(unsigned int);
+[; ;user.h: 34: void InitApp(void);
+[; ;user.h: 35: void sensorUpdate();
+[; ;user.h: 36: void sensorComputation(int[][10]);
+[; ;user.h: 37: int MIN(int,int);
+[; ;user.h: 38: int MAX(int,int);
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);

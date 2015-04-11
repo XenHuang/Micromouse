@@ -3,27 +3,27 @@
 [d edition pro ]
 [d chip 18F4620 ]
 [d frameptr 4065 ]
-"17 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.h
-[e E4059 . `uc
+"22 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.h
+[e E4060 . `uc
 LEFTWALL 0
 RIGHTWALL 1
 ]
-"140 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
-[e E4080 . `uc
+"96 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+[e E4081 . `uc
 LEFT 0
 RIGHT 1
 ]
-"141
+"152
 [e E3381 _BOOL `uc
 FALSE 0
 TRUE 1
 ]
-"17 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.h
-[e E4059 . `uc
+"22 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.h
+[e E4060 . `uc
 LEFTWALL 0
 RIGHTWALL 1
 ]
-[e E4057 . `uc
+[e E4058 . `uc
 LEFTWALL 0
 RIGHTWALL 1
 ]
@@ -58,10 +58,18 @@ TRUE 1
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"58 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"65 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _high_isr high_isr `II(v  1 e 0 0 ]
-"102
+"113
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
+"150
+[v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
+"182
+[v _merge merge `(uc  1 e 1 0 ]
+"189
+[v _moveMouse moveMouse `(v  1 e 0 0 ]
+"195
+[v _ABS ABS `(i  1 e 2 0 ]
 "41 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
 [v _main main `(v  1 e 0 0 ]
 "24 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\system.c
@@ -72,11 +80,11 @@ TRUE 1
 [v _sensorComputation sensorComputation `(v  1 e 0 0 ]
 "136
 [v _sensorUpdate sensorUpdate `(v  1 e 0 0 ]
-"159
-[v _MIN MIN `(i  1 e 2 0 ]
 "165
+[v _MIN MIN `(i  1 e 2 0 ]
+"171
 [v _MAX MAX `(i  1 e 2 0 ]
-[s S225 . 1 `uc 1 RB0 1 0 :1:0 
+[s S248 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -86,7 +94,7 @@ TRUE 1
 `uc 1 RB7 1 0 :1:7 
 ]
 "228 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
-[s S265 . 1 `uc 1 INT0 1 0 :1:0 
+[s S288 . 1 `uc 1 INT0 1 0 :1:0 
 `uc 1 INT1 1 0 :1:1 
 `uc 1 INT2 1 0 :1:2 
 `uc 1 CCP2 1 0 :1:3 
@@ -95,7 +103,7 @@ TRUE 1
 `uc 1 KBI2 1 0 :1:6 
 `uc 1 KBI3 1 0 :1:7 
 ]
-[s S274 . 1 `uc 1 AN12 1 0 :1:0 
+[s S297 . 1 `uc 1 AN12 1 0 :1:0 
 `uc 1 AN10 1 0 :1:1 
 `uc 1 AN8 1 0 :1:2 
 `uc 1 AN9 1 0 :1:3 
@@ -104,14 +112,14 @@ TRUE 1
 `uc 1 PGC 1 0 :1:6 
 `uc 1 PGD 1 0 :1:7 
 ]
-[s S283 . 1 `uc 1 . 1 0 :3:0 
+[s S306 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CCP2_PA2 1 0 :1:3 
 ]
-[u S286 . 1 `S225 1 . 1 0 `S265 1 . 1 0 `S274 1 . 1 0 `S283 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES286  1 e 1 @3969 ]
+[u S309 . 1 `S248 1 . 1 0 `S288 1 . 1 0 `S297 1 . 1 0 `S306 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES309  1 e 1 @3969 ]
 "1267
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
-[s S216 . 1 `uc 1 TRISB0 1 0 :1:0 
+[s S239 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -121,11 +129,11 @@ TRUE 1
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "1886
-[u S234 . 1 `S216 1 . 1 0 `S225 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES234  1 e 1 @3987 ]
+[u S257 . 1 `S239 1 . 1 0 `S248 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES257  1 e 1 @3987 ]
 "2075
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-[s S184 . 1 `uc 1 TRISE0 1 0 :1:0 
+[s S207 . 1 `uc 1 TRISE0 1 0 :1:0 
 `uc 1 TRISE1 1 0 :1:1 
 `uc 1 TRISE2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -135,13 +143,13 @@ TRUE 1
 `uc 1 IBF 1 0 :1:7 
 ]
 "2545
-[s S193 . 1 `uc 1 RE0 1 0 :1:0 
+[s S216 . 1 `uc 1 RE0 1 0 :1:0 
 `uc 1 RE1 1 0 :1:1 
 `uc 1 RE2 1 0 :1:2 
 `uc 1 RE3 1 0 :1:3 
 ]
-[u S198 . 1 `S184 1 . 1 0 `S193 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES198  1 e 1 @3990 ]
+[u S221 . 1 `S207 1 . 1 0 `S216 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES221  1 e 1 @3990 ]
 "2680
 [v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
 "4645
@@ -150,38 +158,38 @@ TRUE 1
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
 "4805
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
-[s S344 . 1 `uc 1 . 1 0 :1:0 
+[s S414 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "4853
-[s S347 . 1 `uc 1 ADON 1 0 :1:0 
+[s S417 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 ]
-[s S354 . 1 `uc 1 . 1 0 :1:0 
+[s S424 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
 `uc 1 CHS2 1 0 :1:4 
 `uc 1 CHS3 1 0 :1:5 
 ]
-[s S361 . 1 `uc 1 . 1 0 :1:0 
+[s S431 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S364 . 1 `uc 1 . 1 0 :1:0 
+[s S434 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S367 . 1 `uc 1 . 1 0 :1:0 
+[s S437 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S370 . 1 `uc 1 . 1 0 :1:0 
+[s S440 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S373 . 1 `uc 1 . 1 0 :1:0 
+[s S443 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S376 . 1 `S344 1 . 1 0 `S347 1 . 1 0 `S344 1 . 1 0 `S354 1 . 1 0 `S361 1 . 1 0 `S364 1 . 1 0 `S367 1 . 1 0 `S370 1 . 1 0 `S373 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES376  1 e 1 @4034 ]
+[u S446 . 1 `S414 1 . 1 0 `S417 1 . 1 0 `S414 1 . 1 0 `S424 1 . 1 0 `S431 1 . 1 0 `S434 1 . 1 0 `S437 1 . 1 0 `S440 1 . 1 0 `S443 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES446  1 e 1 @4034 ]
 "4933
 [v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
 "4939
@@ -237,13 +245,19 @@ TRUE 1
 ]
 [u S64 . 1 `S24 1 . 1 0 `S33 1 . 1 0 `S42 1 . 1 0 `S51 1 . 1 0 `S60 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES64  1 e 1 @4082 ]
-"46 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"50 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+[v _LMotorCounter LMotorCounter `uc  1 e 1 0 ]
+"51
+[v _RMotorCounter RMotorCounter `uc  1 e 1 0 ]
+"52
 [v _MotorDelayCounter MotorDelayCounter `i  1 e 2 0 ]
-"14 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.h
+"18 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.h
 [v _sensorLocation sensorLocation `C[4]uc  1 e 4 0 ]
-"17
-[v _algorithm algorithm `E4059  1 e 1 0 ]
-"20
+"19
+[v _sensorCorrection sensorCorrection `C[4]uc  1 e 4 0 ]
+"22
+[v _algorithm algorithm `E4060  1 e 1 0 ]
+"25
 [v _sensorValue sensorValue `[4]i  1 e 8 0 ]
 "41 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
 [v _main main `(v  1 e 0 0 ]
@@ -258,57 +272,57 @@ TRUE 1
 "138
 [v sensorUpdate@j j `i  1 a 2 82 ]
 [v sensorUpdate@i i `i  1 a 2 80 ]
-"157
+"163
 } 0
 "115
 [v _sensorComputation sensorComputation `(v  1 e 0 0 ]
 {
 "117
-[v sensorComputation@j j `i  1 a 2 54 ]
-[v sensorComputation@i i `i  1 a 2 52 ]
-[v sensorComputation@sum sum `i  1 a 2 50 ]
-[v sensorComputation@min min `i  1 a 2 48 ]
-[v sensorComputation@max max `i  1 a 2 46 ]
+[v sensorComputation@j j `i  1 a 2 57 ]
+[v sensorComputation@i i `i  1 a 2 55 ]
+[v sensorComputation@sum sum `i  1 a 2 53 ]
+[v sensorComputation@min min `i  1 a 2 51 ]
+[v sensorComputation@max max `i  1 a 2 49 ]
 "115
-[v sensorComputation@sensorTemp sensorTemp `*.39[10]i  1 p 2 42 ]
+[v sensorComputation@sensorTemp sensorTemp `*.39[10]i  1 p 2 45 ]
 "134
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 {
 "17
-[v ___wmul@product product `ui  1 a 2 35 ]
+[v ___wmul@product product `ui  1 a 2 38 ]
 "15
-[v ___wmul@multiplier multiplier `ui  1 p 2 31 ]
-[v ___wmul@multiplicand multiplicand `ui  1 p 2 33 ]
+[v ___wmul@multiplier multiplier `ui  1 p 2 34 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 36 ]
 "53
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
 {
 "11
-[v ___awdiv@quotient quotient `i  1 a 2 37 ]
+[v ___awdiv@quotient quotient `i  1 a 2 40 ]
 "12
-[v ___awdiv@sign sign `uc  1 a 1 36 ]
-[v ___awdiv@counter counter `uc  1 a 1 35 ]
+[v ___awdiv@sign sign `uc  1 a 1 39 ]
+[v ___awdiv@counter counter `uc  1 a 1 38 ]
 "8
-[v ___awdiv@dividend dividend `i  1 p 2 31 ]
-[v ___awdiv@divisor divisor `i  1 p 2 33 ]
+[v ___awdiv@dividend dividend `i  1 p 2 34 ]
+[v ___awdiv@divisor divisor `i  1 p 2 36 ]
 "42
 } 0
-"159 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
+"165 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
 [v _MIN MIN `(i  1 e 2 0 ]
 {
-[v MIN@a a `i  1 p 2 37 ]
-[v MIN@b b `i  1 p 2 39 ]
-"163
+[v MIN@a a `i  1 p 2 40 ]
+[v MIN@b b `i  1 p 2 42 ]
+"169
 } 0
-"165
+"171
 [v _MAX MAX `(i  1 e 2 0 ]
 {
-[v MAX@a a `i  1 p 2 37 ]
-[v MAX@b b `i  1 p 2 39 ]
-"169
+[v MAX@a a `i  1 p 2 40 ]
+[v MAX@b b `i  1 p 2 42 ]
+"175
 } 0
 "35
 [v _InitApp InitApp `(v  1 e 0 0 ]
@@ -320,13 +334,45 @@ TRUE 1
 {
 "36
 } 0
-"102 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"113 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
 {
-"137
+"148
 } 0
-"58
+"65
 [v _high_isr high_isr `II(v  1 e 0 0 ]
 {
-"98
+"109
+} 0
+"189
+[v _moveMouse moveMouse `(v  1 e 0 0 ]
+{
+[v moveMouse@action action `uc  1 a 1 wreg ]
+[v moveMouse@action action `uc  1 a 1 wreg ]
+"191
+[v moveMouse@action action `uc  1 a 1 17 ]
+"192
+} 0
+"150
+[v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
+{
+[v motorCounterUpdate@side side `E4081  1 a 1 wreg ]
+[v motorCounterUpdate@side side `E4081  1 a 1 wreg ]
+[v motorCounterUpdate@reverse reverse `uc  1 p 1 17 ]
+"152
+[v motorCounterUpdate@side side `E4081  1 a 1 18 ]
+"180
+} 0
+"182
+[v _merge merge `(uc  1 e 1 0 ]
+{
+[v merge@left left `uc  1 a 1 wreg ]
+"184
+[v merge@merged merged `uc  1 a 1 19 ]
+"182
+[v merge@left left `uc  1 a 1 wreg ]
+[v merge@right right `uc  1 p 1 17 ]
+"185
+[v merge@left left `uc  1 a 1 18 ]
+"187
 } 0
