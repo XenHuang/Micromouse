@@ -37,8 +37,14 @@
 #define RIGHTFRONTSENSOR 3       //Sensor value position
 
 #define FRONTWALLMIN 0          // the higher the value the closer
-#define SIDEWALLMIN 0           // the higher the value the closer
+#define SIDEWALLMIN 100           // the higher the value the closer
 
+#define KCONTROLLERMIN 10
+#define KCONTROLLERMINSTEP 5
+#define KCONTROLLERMID 40
+#define KCONTROLLERMIDSTEP 15
+#define KCONTROLLERMAX 120
+#define KCONTROLLERMAXSTEP 30
 
 typedef enum {LEFT,RIGHT} Side;
 unsigned char LMotorCounter;
@@ -50,6 +56,7 @@ int RMotorDelayCounter = 0;
 void motorCounterUpdate(unsigned char,Side,unsigned char);
 unsigned char merge(unsigned char,unsigned char);
 void moveMouse(unsigned char);
+void KController();
 
 int ABS(int);
 
@@ -82,10 +89,14 @@ void high_isr(void)
                 //Two Side Wall
                 if(sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN)
                 {
-                    
+                    KController();
                 }
                 //One Side Wall
 
+                motorCounterUpdate(RMotorCounter,RIGHT,0);
+                motorCounterUpdate(LMotorCounter,LEFT,0);
+                moveMouse(merge(LMotorCounter,RMotorCounter));
+                
                 MotorDelayCounter = 0;
             }
 
@@ -185,4 +196,39 @@ int ABS(int x)
 {
     if(x<0) x = -x;
     return x;
+}
+
+
+void KController()
+{
+    Side correctTo;
+    int diff = ABS(sensorValue[LEFTSENSOR] - sensorValue[RIGHTSENSOR]);
+
+    int steps = 0;
+    if(diff <= KCONTROLLERMIN)
+        steps = KCONTROLLERMINSTEP;
+    else if(diff > KCONTROLLERMIN && diff <= KCONTROLLERMID)
+        steps = KCONTROLLERMIDSTEP;
+    else if(diff > KCONTROLLERMID && diff >= KCONTROLLERMAX)
+        steps = KCONTROLLERMAXSTEP;
+
+
+    if(sensorValue[LEFTSENSOR] > sensorValue[RIGHTSENSOR])
+    {
+        correctTo = RIGHT;
+        for(;steps > 0; steps--)
+        {
+            motorCounterUpdate(RMotorCounter,correctTo,0);
+            moveMouse(merge(LMotorCounter,RMotorCounter));
+        }
+    }
+    else
+    {
+        correctTo = LEFT;
+        for(;steps > 0; steps--)
+        {
+            motorCounterUpdate(LMotorCounter,correctTo,0);
+            moveMouse(merge(LMotorCounter,RMotorCounter));
+        }
+    }
 }

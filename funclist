@@ -1,0 +1,15 @@
+___awdiv: CODE, 4816 0 164
+_MAX: CODE, 5278 0 40
+_delay: CODE, 5186 0 52
+_ConfigureOscillator: CODE, 5396 0 10
+_main: CODE, 5378 0 18
+_high_isr: CODE, 8 0 5110
+_InitApp: CODE, 5118 0 68
+__initialization: CODE, 5356 0 12
+_MIN: CODE, 5238 0 40
+_sensorComputation: CODE, 4102 0 466
+___wmul: CODE, 5318 0 38
+_sensorUpdate: CODE, 4568 0 248
+_low_isr: CODE, 24 0 138
+_sensorLocation: SMALLCONST, 4097 0 4
+Total: 6408
