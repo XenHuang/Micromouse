@@ -1,65 +1,14 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[v F4020 `(v ~T0 @X0 1 tf1`ul ]
-"161 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18.h
-[v __delay `JF4020 ~T0 @X0 0 e ]
-[p i __delay ]
+"17 user.h
+[c E4059 0 1 .. ]
+[n E4059 . LEFTWALL RIGHTWALL  ]
 [p mainexit ]
-"6061 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
-[v _OSCCON `Vuc ~T0 @X0 0 e@4051 ]
-"2680
-[v _OSCTUNE `Vuc ~T0 @X0 0 e@3995 ]
-"19 system.h
+"20 system.h
 [v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
-"13 user.h
+"29 user.h
 [v _InitApp `(v ~T0 @X0 0 ef ]
-"1854 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
-[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
-"2296
-[v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
-"4715
-[v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
-"4645
-[v _ADCON2 `Vuc ~T0 @X0 0 e@4032 ]
-"4805
-[v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
-"4811
-[s S251 :1 `uc 1 :1 `uc 1 ]
-[n S251 . . GO_NOT_DONE ]
-"4815
-[s S252 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
-[n S252 . ADON GO_nDONE CHS ]
-"4820
-[s S253 :1 `uc 1 :1 `uc 1 ]
-[n S253 . . GO_NOT_DONE ]
-"4824
-[s S254 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S254 . . GO CHS0 CHS1 CHS2 CHS3 ]
-"4832
-[s S255 :1 `uc 1 :1 `uc 1 ]
-[n S255 . . DONE ]
-"4836
-[s S256 :1 `uc 1 :1 `uc 1 ]
-[n S256 . . NOT_DONE ]
-"4840
-[s S257 :1 `uc 1 :1 `uc 1 ]
-[n S257 . . nDONE ]
-"4844
-[s S258 :1 `uc 1 :1 `uc 1 ]
-[n S258 . . GO_DONE ]
-"4848
-[s S259 :1 `uc 1 :1 `uc 1 ]
-[n S259 . . GODONE ]
-"4810
-[u S250 `S251 1 `S252 1 `S253 1 `S254 1 `S255 1 `S256 1 `S257 1 `S258 1 `S259 1 ]
-[n S250 . . . . . . . . . . ]
-"4853
-[v _ADCON0bits `VS250 ~T0 @X0 0 e@4034 ]
-"4939
-[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
-"4933
-[v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
-"1399
-[v _LATD `Vuc ~T0 @X0 0 e@3980 ]
+"30
+[v _sensorUpdate `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4620.h: 49: extern volatile unsigned char PORTA @ 0xF80;
@@ -3746,8 +3695,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;system.h: 19: void ConfigureOscillator(void);
-[; ;user.h: 13: void InitApp(void);
+[; ;system.h: 20: void ConfigureOscillator(void);
+"14 user.h
+[v _sensorLocation `Cuc ~T0 @X0 -> 4 `i e ]
+[i _sensorLocation
+:U ..
+-> -> 27 `i `uc
+-> -> 43 `i `uc
+-> -> 31 `i `uc
+-> -> 51 `i `uc
+..
+]
+[; ;user.h: 14: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
+[; ;user.h: 16: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
+"17
+[v _algorithm `E4059 ~T0 @X0 1 e ]
+[; ;user.h: 17: Algorithm algorithm;
+"19
+[v _delay_time `i ~T0 @X0 1 e ]
+[i _delay_time
+-> 0 `i
+]
+[; ;user.h: 19: int delay_time = 0;
+"20
+[v _sensorValue `i ~T0 @X0 -> 4 `i e ]
+[; ;user.h: 20: int sensorValue[4];
+[; ;user.h: 28: void delay(unsigned int);
+[; ;user.h: 29: void InitApp(void);
+[; ;user.h: 30: void sensorUpdate();
+[; ;user.h: 31: void sensorComputation(int[][10]);
+[; ;user.h: 32: int MIN(int,int);
+[; ;user.h: 33: int MAX(int,int);
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
@@ -3848,122 +3826,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;time.h: 57: extern struct tm * localtime(const time_t *) ;
 [; ;time.h: 58: extern size_t strftime(char *, size_t, const char *, const struct tm *) ;
 [; ;time.h: 59: extern time_t mktime(struct tm *);
-"38 main.c
-[v _delay_time `i ~T0 @X0 1 e ]
-[i _delay_time
--> 0 `i
-]
-[; ;main.c: 38: int delay_time = 0;
-"39
-[v _delay `(v ~T0 @X0 1 ef1`ui ]
-{
-[; ;main.c: 39: void delay(unsigned int ms){
-[e :U _delay ]
-[v _ms `ui ~T0 @X0 1 r1 ]
-[f ]
-"40
-[v _x `i ~T0 @X0 1 a ]
-[; ;main.c: 40: int x = 0;
-[e = _x -> 0 `i ]
-[; ;main.c: 41: for (x = 0; x < ms; x++)
-"41
-{
-[e = _x -> 0 `i ]
-[e $U 401  ]
-"42
-[e :U 398 ]
-[; ;main.c: 42: _delay((unsigned long)((1)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"41
-[e ++ _x -> 1 `i ]
-[e :U 401 ]
-[e $ < -> _x `ui _ms 398  ]
-[e :U 399 ]
-"42
-}
-[; ;main.c: 43: }
-"43
-[e :UE 397 ]
-}
-"45
-[v _sensor `i ~T0 @X0 1 e ]
-[; ;main.c: 45: int sensor;
-"47
+"41 main.c
 [v _main `(v ~T0 @X0 1 ef ]
-"48
+"42
 {
-[; ;main.c: 47: void main(void)
-[; ;main.c: 48: {
+[; ;main.c: 41: void main(void)
+[; ;main.c: 42: {
 [e :U _main ]
 [f ]
-[; ;main.c: 50: OSCCON = 0b01111100;
-"50
-[e = _OSCCON -> -> 124 `i `uc ]
-[; ;main.c: 52: OSCTUNE = 0b01001111;
-"52
-[e = _OSCTUNE -> -> 79 `i `uc ]
-[; ;main.c: 55: ConfigureOscillator();
-"55
+[; ;main.c: 44: ConfigureOscillator();
+"44
 [e ( _ConfigureOscillator ..  ]
-[; ;main.c: 58: InitApp();
-"58
+[; ;main.c: 47: InitApp();
+"47
 [e ( _InitApp ..  ]
-[; ;main.c: 60: TRISB=2;
-"60
-[e = _TRISB -> -> 2 `i `uc ]
-[; ;main.c: 61: TRISD=0;
-"61
-[e = _TRISD -> -> 0 `i `uc ]
-[; ;main.c: 62: ADCON1 =0b00000001;
-"62
-[e = _ADCON1 -> -> 1 `i `uc ]
-[; ;main.c: 67: ADCON2=0b00001010;
-"67
-[e = _ADCON2 -> -> 10 `i `uc ]
-[; ;main.c: 72: ADCON0=0b00101011;
-"72
-[e = _ADCON0 -> -> 43 `i `uc ]
-[; ;main.c: 78: while(1)
-"78
-[e :U 404 ]
-[; ;main.c: 79: {
-"79
+[; ;main.c: 49: while(1)
+"49
+[e :U 399 ]
+[; ;main.c: 50: {
+"50
 {
-[; ;main.c: 81: ADCON0bits.GO_DONE = 1;
-"81
-[e = . . _ADCON0bits 7 1 -> -> 1 `i `uc ]
-[; ;main.c: 82: while(ADCON0bits.GO_DONE != 0);
-"82
-[e $U 406  ]
-[e :U 407 ]
-[e :U 406 ]
-[e $ != -> . . _ADCON0bits 7 1 `i -> 0 `i 407  ]
-[e :U 408 ]
-[; ;main.c: 83: sensor = (ADRESH << 2) + (ADRESL >> 6);
-"83
-[e = _sensor + << -> _ADRESH `i -> 2 `i >> -> _ADRESL `i -> 6 `i ]
-[; ;main.c: 86: if(ADRESL > 100)
-"86
-[e $ ! > -> _ADRESL `i -> 100 `i 409  ]
-[; ;main.c: 87: LATD=1;
-"87
-[e = _LATD -> -> 1 `i `uc ]
-[e $U 410  ]
-"88
-[e :U 409 ]
-[; ;main.c: 88: else
-[; ;main.c: 89: LATD=0;
-"89
-[e = _LATD -> -> 0 `i `uc ]
-[e :U 410 ]
-"91
+[; ;main.c: 51: sensorUpdate();
+"51
+[e ( _sensorUpdate ..  ]
+"52
 }
-[e :U 403 ]
-"78
-[e $U 404  ]
-[e :U 405 ]
-[; ;main.c: 91: }
-[; ;main.c: 93: }
-"93
-[e :UE 402 ]
+[e :U 398 ]
+"49
+[e $U 399  ]
+[e :U 400 ]
+[; ;main.c: 52: }
+[; ;main.c: 54: }
+"54
+[e :UE 397 ]
 }

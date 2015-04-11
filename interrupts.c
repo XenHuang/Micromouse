@@ -1,6 +1,5 @@
 /******************************************************************************/
 /*Files to Include                                                            */
-/******************************************************************************/
 
 #if defined(__XC)
     #include <xc.h>         /* XC8 General Include File */
@@ -16,12 +15,44 @@
 #include <stdbool.h>        /* For true/false definition */
 
 #endif
-unsigned char motor = 5;
+
+#include "system.h"
+#include "user.h"
 /******************************************************************************/
 /* Interrupt Routines                                                         */
 /******************************************************************************/
 
 /* High-priority service */
+
+/******************************************************************************/
+
+#define MOTORDELAYMIN 0         //the smaller the faster
+#define MOTORDELAYMAX 30       //the bigger the slower
+#define ROTATE90 215            //steps require for doing 90 turn
+#define SMOOTHROTATEFACTOR 4    //factor that the outer/inter steps
+
+#define LEFTSENSOR 0             //Sensor value position
+#define RIGHTSENSOR 1            //Sensor value position
+#define LEFTFRONTSENSOR 2        //Sensor value position
+#define RIGHTFRONTSENSOR 3       //Sensor value position
+
+#define FRONTWALLMIN 0          // the higher the value the closer
+#define SIDEWALLMIN 0           // the higher the value the closer
+
+
+typedef enum {LEFT,RIGHT} Side;
+unsigned char LMotorCounter;
+unsigned char RMotorCounter;
+int MotorDelayCounter = 0;
+int LMotorDelayCounter = 0;
+int RMotorDelayCounter = 0;
+
+void motorCounterUpdate(unsigned char,Side,unsigned char);
+unsigned char merge(unsigned char,unsigned char);
+void moveMouse(unsigned char);
+
+int ABS(int);
+
 
 #if defined(__XC) || defined(HI_TECH_C)
 void interrupt high_isr(void)
@@ -45,19 +76,21 @@ void high_isr(void)
       /* TODO Add High Priority interrupt routine code here. */
 	if(INTCONbits.TMR0IF == 1)
 	{
-		if(motor < 4)
-		motor++;
-		else
-		motor = 0;
+            if(MotorDelayCounter > MOTORDELAYMAX)
+            {
+                //Three Wall
+                //Two Side Wall
+                if(sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN)
+                {
+                    
+                }
+                //One Side Wall
 
-		switch(motor)
-		{
-			case 0: LATC = 0b00011000; break;
-			case 1: LATC = 0b00100100; break;
-			case 2: LATC = 0b01000010; break;
-			case 3: LATC = 0b10000001; break;
-		}	
-		INTCONbits.TMR0IF = 0;
+                MotorDelayCounter = 0;
+            }
+
+            MotorDelayCounter++;
+            INTCONbits.TMR0IF = 0;
 	} 
 
 #endif
@@ -101,4 +134,55 @@ void low_isr(void)
 
 #endif
 
+}
+
+void motorCounterUpdate(unsigned char motor,Side side, unsigned char reverse)
+{
+    if(reverse == TRUE)
+    {
+        if(side == LEFT)
+            side = RIGHT;
+        else    //side == RIGHT
+            side = LEFT;
+    }
+    
+    if(side == LEFT)
+    {
+        switch(motor)
+        {
+            case 0b00000001: motor << 1; break;
+            case 0b00000010: motor << 1; break;
+            case 0b00000100: motor << 1; break;
+            case 0b00001000: motor = 0b00000001; break;
+            default: motor = 0b00000001;
+        }
+    } else {    //side == RIGHT
+        switch(motor)
+        {
+            case 0b00000001: motor = 0b00001000; break;
+            case 0b00000010: motor >> 1; break;
+            case 0b00000100: motor >> 1; break;
+            case 0b00001000: motor >> 1; break;
+            default: motor = 0b00000001;
+        }
+    }
+}
+
+unsigned char merge(unsigned char left,unsigned char right)
+{
+    unsigned char merged;
+    merged = left << 4 + right;
+    return merged;
+}
+
+void moveMouse(unsigned char action)
+{
+    LATC = action;
+}
+
+
+int ABS(int x)
+{
+    if(x<0) x = -x;
+    return x;
 }

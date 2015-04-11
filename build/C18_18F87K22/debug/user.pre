@@ -1,5 +1,5 @@
 
-# 1 "interrupts.c"
+# 1 "user.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.34\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -4969,11 +4969,9 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.34\include\stdbool.h"
 typedef unsigned char bool;
 
-# 20 "system.h"
-void ConfigureOscillator(void);
-
-# 14 "user.h"
+# 18 "user.h"
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
+const unsigned char sensorCorrection[4] = {22,23,17,17};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 Algorithm algorithm;
@@ -4981,7 +4979,7 @@ Algorithm algorithm;
 int delay_time = 0;
 int sensorValue[4];
 
-# 28
+# 33
 void delay(unsigned int);
 void InitApp(void);
 void sensorUpdate();
@@ -4989,108 +4987,122 @@ void sensorComputation(int[][10]);
 int MIN(int,int);
 int MAX(int,int);
 
-# 43 "interrupts.c"
-typedef enum {LEFT,RIGHT} Side;
-unsigned char LMotorCounter;
-unsigned char RMotorCounter;
-int MotorDelayCounter = 0;
-int LMotorDelayCounter = 0;
-int RMotorDelayCounter = 0;
+# 20 "system.h"
+void ConfigureOscillator(void);
 
-void motorCounterUpdate(unsigned char,Side,unsigned char);
-unsigned char merge(unsigned char,unsigned char);
-void moveMouse(unsigned char);
-
-int ABS(int);
-
-
-
-void interrupt high_isr(void)
-
-# 67
-{
-
-# 77
-if(INTCONbits.TMR0IF == 1)
-{
-if(MotorDelayCounter > 30)
-{
-
-
-if(sensorValue[0] > 0 && sensorValue[1] > 0)
-{
-
+# 29 "user.c"
+void delay(unsigned int ms){
+int x = 0;
+for (x = 0; x < ms; x++)
+_delay((unsigned long)((1)*(32000000/4000.0)));
 }
 
-
-MotorDelayCounter = 0;
-}
-
-MotorDelayCounter++;
-INTCONbits.TMR0IF = 0;
-}
-
-
-
-}
-
-
-
-void low_priority interrupt low_isr(void)
-
-# 110
+void InitApp(void)
 {
 
-# 137
-}
 
-void motorCounterUpdate(unsigned char motor,Side side, unsigned char reverse)
-{
-if(reverse == TRUE)
-{
-if(side == LEFT)
-side = RIGHT;
+TRISC = 0;
+
+
+
+TRISEbits.TRISE1=1;
+
+TRISEbits.TRISE2=1;
+
+TRISBbits.RB1=1;
+
+TRISBbits.RB0=1;
+
+
+TRISBbits.RB3=1;
+
+TRISBbits.RB2=1;
+
+
+if(PORTBbits.RB3 == TRUE)
+algorithm = LEFTWALL;
 else
-side = LEFT;
-}
-
-if(side == LEFT)
-{
-switch(motor)
-{
-case 0b00000001: motor << 1; break;
-case 0b00000010: motor << 1; break;
-case 0b00000100: motor << 1; break;
-case 0b00001000: motor = 0b00000001; break;
-default: motor = 0b00000001;
-}
-} else {
-switch(motor)
-{
-case 0b00000001: motor = 0b00001000; break;
-case 0b00000010: motor >> 1; break;
-case 0b00000100: motor >> 1; break;
-case 0b00001000: motor >> 1; break;
-default: motor = 0b00000001;
-}
-}
-}
-
-unsigned char merge(unsigned char left,unsigned char right)
-{
-unsigned char merged;
-merged = left << 4 + right;
-return merged;
-}
-
-void moveMouse(unsigned char action)
-{
-LATC = action;
-}
+algorithm = RIGHTWALL;
 
 
-int ABS(int x)
+ADCON1 =0b00000001;
+
+# 68
+ADCON2=0b00001010;
+
+# 73
+ADCON0=0b00101011;
+
+# 82
+T0CON = 0b11000100;
+
+# 90
+INTCON2 = 0b11110100;
+
+# 100
+INTCON = 0b00100000;
+
+# 113
+}
+
+void sensorComputation(int sensorTemp[][10])
 {
-if(x<0) x = -x;
-return x;
+int max,min,i,j,sum;
+for(i = 0; i < 4 ; i++)
+{
+for(j = 0 ; j < 10 ; j++)
+{
+if(j == 0)
+{
+sum = min = max = sensorTemp[i][j];
+continue;
+}
+min = MIN(sensorTemp[i][j],min);
+max = MAX(sensorTemp[i][j],max);
+sum += sensorTemp[i][j];
+}
+sum = sum - min - max;
+sensorValue[i] = sum/(10-2);
+}
+}
+
+void sensorUpdate()
+{
+int i,j;
+int sensorTemp[4][10];
+
+
+for(i = 0; i < 10; i++)
+{
+for(j = 0 ; j < 4 ; j++)
+{
+ADCON0 = sensorLocation[j];
+
+ADCON0bits.GO_DONE = 1;
+while(ADCON0bits.GO_DONE != 0);
+sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
+
+
+if(j == 0 || j == 3)
+sensorTemp[j][i] -= sensorCorrection[j];
+else
+sensorTemp[j][i] += sensorCorrection[j];
+}
+}
+
+
+sensorComputation(sensorTemp);
+
+}
+
+int MIN(int a,int b)
+{
+if(a>b) return b;
+return a;
+}
+
+int MAX(int a, int b)
+{
+if(a>b) return a;
+return b;
 }

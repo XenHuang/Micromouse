@@ -4969,13 +4969,133 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.34\include\stdbool.h"
 typedef unsigned char bool;
 
-# 13 "user.h"
-void InitApp(void);
+# 14 "user.h"
+const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
 
-# 28 "user.c"
+typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
+Algorithm algorithm;
+
+int delay_time = 0;
+int sensorValue[4];
+
+# 28
+void delay(unsigned int);
+void InitApp(void);
+void sensorUpdate();
+void sensorComputation(int[][10]);
+int MIN(int,int);
+int MAX(int,int);
+
+# 20 "system.h"
+void ConfigureOscillator(void);
+
+# 29 "user.c"
+void delay(unsigned int ms){
+int x = 0;
+for (x = 0; x < ms; x++)
+_delay((unsigned long)((1)*(32000000/4000.0)));
+}
+
 void InitApp(void)
 {
 
-# 39
+
+TRISC = 0;
+
+
+
+TRISEbits.TRISE1=1;
+
+TRISEbits.TRISE2=1;
+
+TRISBbits.RB1=1;
+
+TRISBbits.RB0=1;
+
+
+TRISBbits.RB3=1;
+
+TRISBbits.RB2=1;
+
+
+if(PORTBbits.RB3 == TRUE)
+algorithm = LEFTWALL;
+else
+algorithm = RIGHTWALL;
+
+
+ADCON1 =0b00000001;
+
+# 68
+ADCON2=0b00001010;
+
+# 73
+ADCON0=0b00101011;
+
+# 82
+T0CON = 0b11000100;
+
+# 90
+INTCON2 = 0b11110100;
+
+# 100
+INTCON = 0b00100000;
+
+# 113
 }
 
+void sensorComputation(int sensorTemp[][10])
+{
+int max,min,i,j,sum;
+for(i = 0; i < 4 ; i++)
+{
+for(j = 0 ; j < 10 ; j++)
+{
+if(j == 0)
+{
+sum = min = max = sensorTemp[i][j];
+continue;
+}
+min = MIN(sensorTemp[i][j],min);
+max = MAX(sensorTemp[i][j],max);
+sum += sensorTemp[i][j];
+}
+sum = sum - min - max;
+sensorValue[i] = sum/(10-2);
+}
+}
+
+void sensorUpdate()
+{
+int i,j;
+int sensorTemp[4][10];
+
+
+for(i = 0; i < 10; i++)
+{
+for(j = 0 ; j < 4 ; j++)
+{
+ADCON0 = sensorLocation[j];
+
+ADCON0bits.GO_DONE = 1;
+while(ADCON0bits.GO_DONE != 0);
+sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
+}
+}
+
+
+sensorComputation(sensorTemp);
+
+}
+
+int MIN(int a,int b)
+{
+if(a>b) return b;
+return a;
+}
+
+int MAX(int a, int b)
+{
+if(a>b) return a;
+return b;
+}

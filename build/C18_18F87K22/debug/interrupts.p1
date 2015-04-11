@@ -1,7 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"17 user.h
-[c E4059 0 1 .. ]
-[n E4059 . LEFTWALL RIGHTWALL  ]
+"22 user.h
+[c E4060 0 1 .. ]
+[n E4060 . LEFTWALL RIGHTWALL  ]
 "6636 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [s S346 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S346 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
@@ -23,8 +23,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "6682
 [v _INTCONbits `VS345 ~T0 @X0 0 e@4082 ]
 "140 interrupts.c
-[c E4080 0 1 .. ]
-[n E4080 . LEFT RIGHT  ]
+[c E4081 0 1 .. ]
+[n E4081 . LEFT RIGHT  ]
 "141
 [c E3381 0 1 .. ]
 [n E3381 _BOOL FALSE TRUE  ]
@@ -3717,7 +3717,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;system.h: 20: void ConfigureOscillator(void);
-"14 user.h
+"18 user.h
 [v _sensorLocation `Cuc ~T0 @X0 -> 4 `i e ]
 [i _sensorLocation
 :U ..
@@ -3727,26 +3727,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 51 `i `uc
 ..
 ]
-[; ;user.h: 14: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
-[; ;user.h: 16: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
-"17
-[v _algorithm `E4059 ~T0 @X0 1 e ]
-[; ;user.h: 17: Algorithm algorithm;
+[; ;user.h: 18: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
 "19
+[v _sensorCorrection `Cuc ~T0 @X0 -> 4 `i e ]
+[i _sensorCorrection
+:U ..
+-> -> 22 `i `uc
+-> -> 23 `i `uc
+-> -> 17 `i `uc
+-> -> 17 `i `uc
+..
+]
+[; ;user.h: 19: const unsigned char sensorCorrection[4] = {22,23,17,17};
+[; ;user.h: 21: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
+"22
+[v _algorithm `E4060 ~T0 @X0 1 e ]
+[; ;user.h: 22: Algorithm algorithm;
+"24
 [v _delay_time `i ~T0 @X0 1 e ]
 [i _delay_time
 -> 0 `i
 ]
-[; ;user.h: 19: int delay_time = 0;
-"20
+[; ;user.h: 24: int delay_time = 0;
+"25
 [v _sensorValue `i ~T0 @X0 -> 4 `i e ]
-[; ;user.h: 20: int sensorValue[4];
-[; ;user.h: 28: void delay(unsigned int);
-[; ;user.h: 29: void InitApp(void);
-[; ;user.h: 30: void sensorUpdate();
-[; ;user.h: 31: void sensorComputation(int[][10]);
-[; ;user.h: 32: int MIN(int,int);
-[; ;user.h: 33: int MAX(int,int);
+[; ;user.h: 25: int sensorValue[4];
+[; ;user.h: 33: void delay(unsigned int);
+[; ;user.h: 34: void InitApp(void);
+[; ;user.h: 35: void sensorUpdate();
+[; ;user.h: 36: void sensorComputation(int[][10]);
+[; ;user.h: 37: int MIN(int,int);
+[; ;user.h: 38: int MAX(int,int);
 [; ;interrupts.c: 43: typedef enum {LEFT,RIGHT} Side;
 "44 interrupts.c
 [v _LMotorCounter `uc ~T0 @X0 1 e ]
@@ -3776,9 +3787,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 51: unsigned char merge(unsigned char,unsigned char);
 [; ;interrupts.c: 52: void moveMouse(unsigned char);
 [; ;interrupts.c: 54: int ABS(int);
-[v F4102 `(v ~T0 @X0 1 tf ]
+[v F4103 `(v ~T0 @X0 1 tf ]
 "58
-[v _high_isr `IF4102 ~T0 @X0 1 e ]
+[v _high_isr `IF4103 ~T0 @X0 1 e ]
 "67
 {
 [; ;interrupts.c: 58: void interrupt high_isr(void)
@@ -3828,9 +3839,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "98
 [e :UE 391 ]
 }
-[v F4105 `(v ~T0 @X0 1 tf ]
+[v F4106 `(v ~T0 @X0 1 tf ]
 "102
-[v _low_isr `ILF4105 ~T0 @X0 1 e ]
+[v _low_isr `ILF4106 ~T0 @X0 1 e ]
 "110
 {
 [; ;interrupts.c: 102: void low_priority interrupt low_isr(void)
@@ -3842,7 +3853,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 395 ]
 }
 "139
-[v _motorCounterUpdate `(v ~T0 @X0 1 ef3`uc`E4080`uc ]
+[v _motorCounterUpdate `(v ~T0 @X0 1 ef3`uc`E4081`uc ]
 "140
 {
 [; ;interrupts.c: 139: void motorCounterUpdate(unsigned char motor,Side side, unsigned char reverse)
@@ -3850,7 +3861,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _motorCounterUpdate ]
 "139
 [v _motor `uc ~T0 @X0 1 r1 ]
-[v _side `E4080 ~T0 @X0 1 r2 ]
+[v _side `E4081 ~T0 @X0 1 r2 ]
 [v _reverse `uc ~T0 @X0 1 r3 ]
 "140
 [f ]
@@ -3862,17 +3873,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;interrupts.c: 143: if(side == LEFT)
 "143
-[e $ ! == -> _side `i -> . `E4080 0 `i 398  ]
+[e $ ! == -> _side `i -> . `E4081 0 `i 398  ]
 [; ;interrupts.c: 144: side = RIGHT;
 "144
-[e = _side . `E4080 1 ]
+[e = _side . `E4081 1 ]
 [e $U 399  ]
 "145
 [e :U 398 ]
 [; ;interrupts.c: 145: else
 [; ;interrupts.c: 146: side = LEFT;
 "146
-[e = _side . `E4080 0 ]
+[e = _side . `E4081 0 ]
 [e :U 399 ]
 "147
 }
@@ -3880,7 +3891,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 147: }
 [; ;interrupts.c: 149: if(side == LEFT)
 "149
-[e $ ! == -> _side `i -> . `E4080 0 `i 400  ]
+[e $ ! == -> _side `i -> . `E4081 0 `i 400  ]
 [; ;interrupts.c: 150: {
 "150
 {

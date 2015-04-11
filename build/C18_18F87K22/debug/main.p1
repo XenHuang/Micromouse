@@ -1,35 +1,14 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"17 user.h
-[c E4059 0 1 .. ]
-[n E4059 . LEFTWALL RIGHTWALL  ]
-"6636 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
-[s S346 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S346 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
-"6646
-[s S347 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S347 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE GIE ]
-"6656
-[s S348 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S348 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE GIEL GIEH ]
-"6666
-[s S349 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S349 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
-"6676
-[s S350 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S350 . . GIEL GIEH ]
-"6635
-[u S345 `S346 1 `S347 1 `S348 1 `S349 1 `S350 1 ]
-[n S345 . . . . . . ]
-"6682
-[v _INTCONbits `VS345 ~T0 @X0 0 e@4082 ]
-"140 interrupts.c
-[c E4080 0 1 .. ]
-[n E4080 . LEFT RIGHT  ]
-"141
-[c E3381 0 1 .. ]
-[n E3381 _BOOL FALSE TRUE  ]
-"1267 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
-[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
+"22 user.h
+[c E4060 0 1 .. ]
+[n E4060 . LEFTWALL RIGHTWALL  ]
+[p mainexit ]
+"20 system.h
+[v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
+"34 user.h
+[v _InitApp `(v ~T0 @X0 0 ef ]
+"35
+[v _sensorUpdate `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4620.h: 49: extern volatile unsigned char PORTA @ 0xF80;
@@ -3717,7 +3696,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;system.h: 20: void ConfigureOscillator(void);
-"14 user.h
+"18 user.h
 [v _sensorLocation `Cuc ~T0 @X0 -> 4 `i e ]
 [i _sensorLocation
 :U ..
@@ -3727,328 +3706,168 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 51 `i `uc
 ..
 ]
-[; ;user.h: 14: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
-[; ;user.h: 16: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
-"17
-[v _algorithm `E4059 ~T0 @X0 1 e ]
-[; ;user.h: 17: Algorithm algorithm;
+[; ;user.h: 18: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
 "19
+[v _sensorCorrection `Cuc ~T0 @X0 -> 4 `i e ]
+[i _sensorCorrection
+:U ..
+-> -> 22 `i `uc
+-> -> 23 `i `uc
+-> -> 17 `i `uc
+-> -> 17 `i `uc
+..
+]
+[; ;user.h: 19: const unsigned char sensorCorrection[4] = {22,23,17,17};
+[; ;user.h: 21: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
+"22
+[v _algorithm `E4060 ~T0 @X0 1 e ]
+[; ;user.h: 22: Algorithm algorithm;
+"24
 [v _delay_time `i ~T0 @X0 1 e ]
 [i _delay_time
 -> 0 `i
 ]
-[; ;user.h: 19: int delay_time = 0;
-"20
+[; ;user.h: 24: int delay_time = 0;
+"25
 [v _sensorValue `i ~T0 @X0 -> 4 `i e ]
-[; ;user.h: 20: int sensorValue[4];
-[; ;user.h: 28: void delay(unsigned int);
-[; ;user.h: 29: void InitApp(void);
-[; ;user.h: 30: void sensorUpdate();
-[; ;user.h: 31: void sensorComputation(int[][10]);
-[; ;user.h: 32: int MIN(int,int);
-[; ;user.h: 33: int MAX(int,int);
-[; ;interrupts.c: 43: typedef enum {LEFT,RIGHT} Side;
-"44 interrupts.c
-[v _LMotorCounter `uc ~T0 @X0 1 e ]
-[; ;interrupts.c: 44: unsigned char LMotorCounter;
-"45
-[v _RMotorCounter `uc ~T0 @X0 1 e ]
-[; ;interrupts.c: 45: unsigned char RMotorCounter;
-"46
-[v _MotorDelayCounter `i ~T0 @X0 1 e ]
-[i _MotorDelayCounter
--> 0 `i
-]
-[; ;interrupts.c: 46: int MotorDelayCounter = 0;
+[; ;user.h: 25: int sensorValue[4];
+[; ;user.h: 33: void delay(unsigned int);
+[; ;user.h: 34: void InitApp(void);
+[; ;user.h: 35: void sensorUpdate();
+[; ;user.h: 36: void sensorComputation(int[][10]);
+[; ;user.h: 37: int MIN(int,int);
+[; ;user.h: 38: int MAX(int,int);
+[; ;stdarg.h: 7: typedef void * va_list[1];
+[; ;stdarg.h: 10: extern void * __va_start(void);
+[; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
+[; ;stdio.h: 24: extern int errno;
+[; ;stdio.h: 55: struct __prbuf
+[; ;stdio.h: 56: {
+[; ;stdio.h: 57: char * ptr;
+[; ;stdio.h: 58: void (* func)(char);
+[; ;stdio.h: 59: };
+[; ;conio.h: 17: extern int errno;
+[; ;conio.h: 20: extern void init_uart(void);
+[; ;conio.h: 22: extern char getch(void);
+[; ;conio.h: 23: extern char getche(void);
+[; ;conio.h: 24: extern void putch(char);
+[; ;conio.h: 25: extern void ungetch(char);
+[; ;conio.h: 27: extern __bit kbhit(void);
+[; ;conio.h: 31: extern char * cgets(char *);
+[; ;conio.h: 32: extern void cputs(const char *);
+[; ;stdio.h: 100: extern int cprintf(char *, ...);
+[; ;stdio.h: 105: extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+[; ;stdio.h: 195: extern char * gets(char *);
+[; ;stdio.h: 196: extern int puts(const char *);
+[; ;stdio.h: 197: extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+[; ;stdio.h: 198: extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+[; ;stdio.h: 199: extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+[; ;stdio.h: 200: extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+[; ;stdio.h: 201: extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+[; ;stdio.h: 202: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+[; ;stdio.h: 206: extern int sprintf(char *, const char *, ...);
+[; ;stdio.h: 207: extern int printf(const char *, ...);
+[; ;stdlib.h: 27: typedef struct {
+[; ;stdlib.h: 28: int rem;
+[; ;stdlib.h: 29: int quot;
+[; ;stdlib.h: 30: } div_t;
+[; ;stdlib.h: 31: typedef struct {
+[; ;stdlib.h: 32: unsigned rem;
+[; ;stdlib.h: 33: unsigned quot;
+[; ;stdlib.h: 34: } udiv_t;
+[; ;stdlib.h: 35: typedef struct {
+[; ;stdlib.h: 36: long quot;
+[; ;stdlib.h: 37: long rem;
+[; ;stdlib.h: 38: } ldiv_t;
+[; ;stdlib.h: 39: typedef struct {
+[; ;stdlib.h: 40: unsigned long quot;
+[; ;stdlib.h: 41: unsigned long rem;
+[; ;stdlib.h: 42: } uldiv_t;
+[; ;stdlib.h: 65: extern double atof(const char *);
+[; ;stdlib.h: 66: extern double strtod(const char *, const char **);
+[; ;stdlib.h: 67: extern int atoi(const char *);
+[; ;stdlib.h: 68: extern unsigned xtoi(const char *);
+[; ;stdlib.h: 69: extern long atol(const char *);
+[; ;stdlib.h: 70: extern long strtol(const char *, char **, int);
+[; ;stdlib.h: 72: extern int rand(void);
+[; ;stdlib.h: 73: extern void srand(unsigned int);
+[; ;stdlib.h: 74: extern void * calloc(size_t, size_t);
+[; ;stdlib.h: 75: extern div_t div(int numer, int denom);
+[; ;stdlib.h: 76: extern udiv_t udiv(unsigned numer, unsigned denom);
+[; ;stdlib.h: 77: extern ldiv_t ldiv(long numer, long denom);
+[; ;stdlib.h: 78: extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+[; ;stdlib.h: 79: extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 80: extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 81: extern unsigned int _rotl(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 82: extern unsigned int _rotr(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 87: extern void * malloc(size_t);
+[; ;stdlib.h: 88: extern void free(void *);
+[; ;stdlib.h: 89: extern void * realloc(void *, size_t);
+[; ;stdlib.h: 98: extern int atexit(void (*)(void));
+[; ;stdlib.h: 99: extern char * getenv(const char *);
+[; ;stdlib.h: 100: extern char ** environ;
+[; ;stdlib.h: 101: extern int system(char *);
+[; ;stdlib.h: 102: extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+[; ;stdlib.h: 103: extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+[; ;stdlib.h: 104: extern int abs(int);
+[; ;stdlib.h: 105: extern long labs(long);
+[; ;stdlib.h: 108: extern char * itoa(char * buf, int val, int base);
+[; ;stdlib.h: 109: extern char * utoa(char * buf, unsigned val, int base);
+[; ;stdlib.h: 114: extern char * ltoa(char * buf, long val, int base);
+[; ;stdlib.h: 115: extern char * ultoa(char * buf, unsigned long val, int base);
+[; ;stdlib.h: 117: extern char * ftoa(float f, int * status);
+[; ;time.h: 13: typedef long time_t;
+[; ;time.h: 14: struct tm {
+[; ;time.h: 15: int tm_sec;
+[; ;time.h: 16: int tm_min;
+[; ;time.h: 17: int tm_hour;
+[; ;time.h: 18: int tm_mday;
+[; ;time.h: 19: int tm_mon;
+[; ;time.h: 20: int tm_year;
+[; ;time.h: 21: int tm_wday;
+[; ;time.h: 22: int tm_yday;
+[; ;time.h: 23: int tm_isdst;
+[; ;time.h: 24: };
+[; ;time.h: 32: extern int time_zone;
+[; ;time.h: 37: extern time_t time(time_t *);
+[; ;time.h: 38: extern int stime(time_t *);
+[; ;time.h: 54: extern char * asctime(const struct tm *) ;
+[; ;time.h: 55: extern char * ctime(const time_t *) ;
+[; ;time.h: 56: extern struct tm * gmtime(const time_t *) ;
+[; ;time.h: 57: extern struct tm * localtime(const time_t *) ;
+[; ;time.h: 58: extern size_t strftime(char *, size_t, const char *, const struct tm *) ;
+[; ;time.h: 59: extern time_t mktime(struct tm *);
+"41 main.c
+[v _main `(v ~T0 @X0 1 ef ]
+"42
+{
+[; ;main.c: 41: void main(void)
+[; ;main.c: 42: {
+[e :U _main ]
+[f ]
+[; ;main.c: 44: ConfigureOscillator();
+"44
+[e ( _ConfigureOscillator ..  ]
+[; ;main.c: 47: InitApp();
 "47
-[v _LMotorDelayCounter `i ~T0 @X0 1 e ]
-[i _LMotorDelayCounter
--> 0 `i
-]
-[; ;interrupts.c: 47: int LMotorDelayCounter = 0;
-"48
-[v _RMotorDelayCounter `i ~T0 @X0 1 e ]
-[i _RMotorDelayCounter
--> 0 `i
-]
-[; ;interrupts.c: 48: int RMotorDelayCounter = 0;
-[; ;interrupts.c: 50: void motorCounterUpdate(unsigned char,Side,unsigned char);
-[; ;interrupts.c: 51: unsigned char merge(unsigned char,unsigned char);
-[; ;interrupts.c: 52: void moveMouse(unsigned char);
-[; ;interrupts.c: 54: int ABS(int);
-[v F4102 `(v ~T0 @X0 1 tf ]
-"58
-[v _high_isr `IF4102 ~T0 @X0 1 e ]
-"67
-{
-[; ;interrupts.c: 58: void interrupt high_isr(void)
-[; ;interrupts.c: 67: {
-[e :U _high_isr ]
-[f ]
-[; ;interrupts.c: 77: if(INTCONbits.TMR0IF == 1)
-"77
-[e $ ! == -> . . _INTCONbits 0 2 `i -> 1 `i 392  ]
-[; ;interrupts.c: 78: {
-"78
-{
-[; ;interrupts.c: 79: if(MotorDelayCounter > 30)
-"79
-[e $ ! > _MotorDelayCounter -> 30 `i 393  ]
-[; ;interrupts.c: 80: {
-"80
-{
-[; ;interrupts.c: 83: if(sensorValue[0] > 0 && sensorValue[1] > 0)
-"83
-[e $ ! && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 0 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 0 `i 394  ]
-[; ;interrupts.c: 84: {
-"84
-{
-"86
-}
-[e :U 394 ]
-[; ;interrupts.c: 86: }
-[; ;interrupts.c: 89: MotorDelayCounter = 0;
-"89
-[e = _MotorDelayCounter -> 0 `i ]
-"90
-}
-[e :U 393 ]
-[; ;interrupts.c: 90: }
-[; ;interrupts.c: 92: MotorDelayCounter++;
-"92
-[e ++ _MotorDelayCounter -> 1 `i ]
-[; ;interrupts.c: 93: INTCONbits.TMR0IF = 0;
-"93
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"94
-}
-[e :U 392 ]
-[; ;interrupts.c: 94: }
-[; ;interrupts.c: 98: }
-"98
-[e :UE 391 ]
-}
-[v F4105 `(v ~T0 @X0 1 tf ]
-"102
-[v _low_isr `ILF4105 ~T0 @X0 1 e ]
-"110
-{
-[; ;interrupts.c: 102: void low_priority interrupt low_isr(void)
-[; ;interrupts.c: 110: {
-[e :U _low_isr ]
-[f ]
-[; ;interrupts.c: 137: }
-"137
-[e :UE 395 ]
-}
-"139
-[v _motorCounterUpdate `(v ~T0 @X0 1 ef3`uc`E4080`uc ]
-"140
-{
-[; ;interrupts.c: 139: void motorCounterUpdate(unsigned char motor,Side side, unsigned char reverse)
-[; ;interrupts.c: 140: {
-[e :U _motorCounterUpdate ]
-"139
-[v _motor `uc ~T0 @X0 1 r1 ]
-[v _side `E4080 ~T0 @X0 1 r2 ]
-[v _reverse `uc ~T0 @X0 1 r3 ]
-"140
-[f ]
-[; ;interrupts.c: 141: if(reverse == TRUE)
-"141
-[e $ ! == -> _reverse `i -> . `E3381 1 `i 397  ]
-[; ;interrupts.c: 142: {
-"142
-{
-[; ;interrupts.c: 143: if(side == LEFT)
-"143
-[e $ ! == -> _side `i -> . `E4080 0 `i 398  ]
-[; ;interrupts.c: 144: side = RIGHT;
-"144
-[e = _side . `E4080 1 ]
-[e $U 399  ]
-"145
-[e :U 398 ]
-[; ;interrupts.c: 145: else
-[; ;interrupts.c: 146: side = LEFT;
-"146
-[e = _side . `E4080 0 ]
+[e ( _InitApp ..  ]
+[; ;main.c: 49: while(1)
+"49
 [e :U 399 ]
-"147
-}
-[e :U 397 ]
-[; ;interrupts.c: 147: }
-[; ;interrupts.c: 149: if(side == LEFT)
-"149
-[e $ ! == -> _side `i -> . `E4080 0 `i 400  ]
-[; ;interrupts.c: 150: {
-"150
+[; ;main.c: 50: {
+"50
 {
-[; ;interrupts.c: 151: switch(motor)
-"151
-[e $U 402  ]
-[; ;interrupts.c: 152: {
-"152
-{
-[; ;interrupts.c: 153: case 0b00000001: motor << 1; break;
-"153
-[e :U 403 ]
-[e << -> _motor `i -> 1 `i ]
-[e $U 401  ]
-[; ;interrupts.c: 154: case 0b00000010: motor << 1; break;
-"154
-[e :U 404 ]
-[e << -> _motor `i -> 1 `i ]
-[e $U 401  ]
-[; ;interrupts.c: 155: case 0b00000100: motor << 1; break;
-"155
-[e :U 405 ]
-[e << -> _motor `i -> 1 `i ]
-[e $U 401  ]
-[; ;interrupts.c: 156: case 0b00001000: motor = 0b00000001; break;
-"156
-[e :U 406 ]
-[e = _motor -> -> 1 `i `uc ]
-[e $U 401  ]
-[; ;interrupts.c: 157: default: motor = 0b00000001;
-"157
-[e :U 407 ]
-[e = _motor -> -> 1 `i `uc ]
-"158
+[; ;main.c: 51: sensorUpdate();
+"51
+[e ( _sensorUpdate ..  ]
+"52
 }
-[; ;interrupts.c: 158: }
-[e $U 401  ]
-"151
-[e :U 402 ]
-[e [\ _motor , $ -> -> 1 `i `uc 403
- , $ -> -> 2 `i `uc 404
- , $ -> -> 4 `i `uc 405
- , $ -> -> 8 `i `uc 406
- 407 ]
-"158
-[e :U 401 ]
-"159
-}
-[; ;interrupts.c: 159: } else {
-[e $U 408  ]
+[e :U 398 ]
+"49
+[e $U 399  ]
 [e :U 400 ]
-{
-[; ;interrupts.c: 160: switch(motor)
-"160
-[e $U 410  ]
-[; ;interrupts.c: 161: {
-"161
-{
-[; ;interrupts.c: 162: case 0b00000001: motor = 0b00001000; break;
-"162
-[e :U 411 ]
-[e = _motor -> -> 8 `i `uc ]
-[e $U 409  ]
-[; ;interrupts.c: 163: case 0b00000010: motor >> 1; break;
-"163
-[e :U 412 ]
-[e >> -> _motor `i -> 1 `i ]
-[e $U 409  ]
-[; ;interrupts.c: 164: case 0b00000100: motor >> 1; break;
-"164
-[e :U 413 ]
-[e >> -> _motor `i -> 1 `i ]
-[e $U 409  ]
-[; ;interrupts.c: 165: case 0b00001000: motor >> 1; break;
-"165
-[e :U 414 ]
-[e >> -> _motor `i -> 1 `i ]
-[e $U 409  ]
-[; ;interrupts.c: 166: default: motor = 0b00000001;
-"166
-[e :U 415 ]
-[e = _motor -> -> 1 `i `uc ]
-"167
-}
-[; ;interrupts.c: 167: }
-[e $U 409  ]
-"160
-[e :U 410 ]
-[e [\ _motor , $ -> -> 1 `i `uc 411
- , $ -> -> 2 `i `uc 412
- , $ -> -> 4 `i `uc 413
- , $ -> -> 8 `i `uc 414
- 415 ]
-"167
-[e :U 409 ]
-"168
-}
-[e :U 408 ]
-[; ;interrupts.c: 168: }
-[; ;interrupts.c: 169: }
-"169
-[e :UE 396 ]
-}
-"171
-[v _merge `(uc ~T0 @X0 1 ef2`uc`uc ]
-"172
-{
-[; ;interrupts.c: 171: unsigned char merge(unsigned char left,unsigned char right)
-[; ;interrupts.c: 172: {
-[e :U _merge ]
-"171
-[v _left `uc ~T0 @X0 1 r1 ]
-[v _right `uc ~T0 @X0 1 r2 ]
-"172
-[f ]
-"173
-[v _merged `uc ~T0 @X0 1 a ]
-[; ;interrupts.c: 173: unsigned char merged;
-[; ;interrupts.c: 174: merged = left << 4 + right;
-"174
-[e = _merged -> << -> _left `i + -> 4 `i -> _right `i `uc ]
-[; ;interrupts.c: 175: return merged;
-"175
-[e ) _merged ]
-[e $UE 416  ]
-[; ;interrupts.c: 176: }
-"176
-[e :UE 416 ]
-}
-"178
-[v _moveMouse `(v ~T0 @X0 1 ef1`uc ]
-"179
-{
-[; ;interrupts.c: 178: void moveMouse(unsigned char action)
-[; ;interrupts.c: 179: {
-[e :U _moveMouse ]
-"178
-[v _action `uc ~T0 @X0 1 r1 ]
-"179
-[f ]
-[; ;interrupts.c: 180: LATC = action;
-"180
-[e = _LATC _action ]
-[; ;interrupts.c: 181: }
-"181
-[e :UE 417 ]
-}
-"184
-[v _ABS `(i ~T0 @X0 1 ef1`i ]
-"185
-{
-[; ;interrupts.c: 184: int ABS(int x)
-[; ;interrupts.c: 185: {
-[e :U _ABS ]
-"184
-[v _x `i ~T0 @X0 1 r1 ]
-"185
-[f ]
-[; ;interrupts.c: 186: if(x<0) x = -x;
-"186
-[e $ ! < _x -> 0 `i 419  ]
-[e = _x -U _x ]
-[e :U 419 ]
-[; ;interrupts.c: 187: return x;
-"187
-[e ) _x ]
-[e $UE 418  ]
-[; ;interrupts.c: 188: }
-"188
-[e :UE 418 ]
+[; ;main.c: 52: }
+[; ;main.c: 54: }
+"54
+[e :UE 397 ]
 }

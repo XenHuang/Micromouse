@@ -4969,11 +4969,25 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.34\include\stdbool.h"
 typedef unsigned char bool;
 
-# 19 "system.h"
+# 20 "system.h"
 void ConfigureOscillator(void);
 
-# 13 "user.h"
+# 14 "user.h"
+const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
+
+typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
+Algorithm algorithm;
+
+int delay_time = 0;
+int sensorValue[4];
+
+# 28
+void delay(unsigned int);
 void InitApp(void);
+void sensorUpdate();
+void sensorComputation(int[][10]);
+int MIN(int,int);
+int MAX(int,int);
 
 # 7 "C:\Program Files (x86)\Microchip\xc8\v1.34\include\stdarg.h"
 typedef void * va_list[1];
@@ -5134,54 +5148,18 @@ extern struct tm * localtime(const time_t *) ;
 extern size_t strftime(char *, size_t, const char *, const struct tm *) ;
 extern time_t mktime(struct tm *);
 
-# 38 "main.c"
-int delay_time = 0;
-void delay(unsigned int ms){
-int x = 0;
-for (x = 0; x < ms; x++)
-_delay((unsigned long)((1)*(32000000/4000.0)));
-}
-
-int sensor;
-
+# 41 "main.c"
 void main(void)
 {
-
-OSCCON = 0b01111100;
-
-OSCTUNE = 0b01001111;
-
 
 ConfigureOscillator();
 
 
 InitApp();
 
-TRISB=2;
-TRISD=0;
-ADCON1 =0b00000001;
-
-# 67
-ADCON2=0b00001010;
-
-# 72
-ADCON0=0b00101011;
-
-# 78
 while(1)
 {
-
-ADCON0bits.GO_DONE = 1;
-while(ADCON0bits.GO_DONE != 0);
-sensor = (ADRESH << 2) + (ADRESL >> 6);
-
-
-if(ADRESL > 100)
-LATD=1;
-else
-LATD=0;
-
+sensorUpdate();
 }
 
 }
-

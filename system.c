@@ -25,6 +25,11 @@ void ConfigureOscillator(void)
 {
     /* TODO Add clock switching code if appropriate.  */
 
+    //enable 8MHz internal clock
+    OSCCON = 0b01111100;
+    //enable internal PLL clock = 32MHz
+    OSCTUNE = 0b01001111;
+
     /* Typical actions in this function are to tweak the oscillator tuning
     register, select new clock sources, and to wait until new clock sources
     are stable before resuming execution of the main project. */
