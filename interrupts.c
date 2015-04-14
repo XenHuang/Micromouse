@@ -27,7 +27,7 @@
 /******************************************************************************/
 
 #define MOTORDELAYMIN 0         //the smaller the faster
-#define MOTORDELAYMAX 10       //the bigger the slower
+#define MOTORDELAYMAX 3       //the bigger the slower
 #define ROTATE90 215            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 4    //factor that the outer/inter steps
 
@@ -40,11 +40,11 @@
 #define SIDEWALLMIN 100           // the higher the value the closer
 
 #define KCONTROLLERMIN 10
-#define KCONTROLLERMINSTEP 5
+#define KCONTROLLERMINSTEP 0
 #define KCONTROLLERMID 60
-#define KCONTROLLERMIDSTEP 15
+#define KCONTROLLERMIDSTEP 10
 #define KCONTROLLERMAX 120
-#define KCONTROLLERMAXSTEP 30
+#define KCONTROLLERMAXSTEP 40
 
 typedef enum {LEFT,RIGHT} Side;
 unsigned char LMotorCounter = 0;
@@ -89,7 +89,7 @@ void high_isr(void)
                 //Two Side Wall
                 if(sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN)
                 {
-                    //KController();
+                    KController();
                 }
                 //One Side Wall
 
@@ -149,15 +149,7 @@ void low_isr(void)
 
 void motorCounterUpdate(Side side, unsigned char reverse)
 {
-    if(reverse == TRUE)
-    {
-        if(side == LEFT)
-            side = RIGHT;
-        else    //side == RIGHT
-            side = LEFT;
-    }
-    
-    if(side == LEFT)
+    if(side == LEFT && reverse == 0)
     {
         switch(LMotorCounter)
         {
@@ -167,7 +159,8 @@ void motorCounterUpdate(Side side, unsigned char reverse)
             case 0b00001000: LMotorCounter = 0b00000001; break;
             default: LMotorCounter = 0b00000001;
         }
-    } else {    //side == RIGHT
+    } else if(side == RIGHT && reverse == 0)
+    {   
         switch(RMotorCounter)
         {
             case 0b00000001: RMotorCounter = 0b00001000; break;
@@ -175,6 +168,26 @@ void motorCounterUpdate(Side side, unsigned char reverse)
             case 0b00000100: RMotorCounter = 0b00000010; break;
             case 0b00001000: RMotorCounter = 0b00000100; break;
             default: RMotorCounter = 0b00001000;
+        }
+    } else if(side == LEFT && reverse == 1)
+    {   
+        switch(LMotorCounter)
+        {
+            case 0b00000001: LMotorCounter = 0b00001000; break;
+            case 0b00000010: LMotorCounter = 0b00000001; break;
+            case 0b00000100: LMotorCounter = 0b00000010; break;
+            case 0b00001000: LMotorCounter = 0b00000100; break;
+            default: LMotorCounter = 0b00001000;
+        }
+    } else if(side == RIGHT && reverse == 1)
+    {
+        switch(RMotorCounter)
+        {
+            case 0b00000001: RMotorCounter = 0b00000010; break;
+            case 0b00000010: RMotorCounter = 0b00000100; break;
+            case 0b00000100: RMotorCounter = 0b00001000; break;
+            case 0b00001000: RMotorCounter = 0b00000001; break;
+            default: RMotorCounter = 0b00000001;
         }
     }
 }
@@ -215,7 +228,7 @@ void KController()
 
     if(sensorValue[LEFTSENSOR] > sensorValue[RIGHTSENSOR])
     {
-        correctTo = RIGHT;
+        correctTo = LEFT;
         for(;steps > 0; steps--)
         {
             motorCounterUpdate(correctTo,0);
@@ -224,7 +237,7 @@ void KController()
     }
     else
     {
-        correctTo = LEFT;
+        correctTo = RIGHT;
         for(;steps > 0; steps--)
         {
             motorCounterUpdate(correctTo,0);

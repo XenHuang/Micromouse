@@ -13,11 +13,6 @@ RIGHTWALL 1
 LEFT 0
 RIGHT 1
 ]
-"152
-[e E3381 _BOOL `uc
-FALSE 0
-TRUE 1
-]
 "22 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.h
 [e E4060 . `uc
 LEFTWALL 0
@@ -64,17 +59,21 @@ TRUE 1
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
 "150
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
-"182
-[v _merge merge `(uc  1 e 1 0 ]
-"189
-[v _moveMouse moveMouse `(v  1 e 0 0 ]
 "195
+[v _merge merge `(uc  1 e 1 0 ]
+"202
+[v _moveMouse moveMouse `(v  1 e 0 0 ]
+"208
 [v _ABS ABS `(i  1 e 2 0 ]
+"215
+[v _KController KController `(v  1 e 0 0 ]
 "41 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
 [v _main main `(v  1 e 0 0 ]
 "24 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\system.c
 [v _ConfigureOscillator ConfigureOscillator `(v  1 e 0 0 ]
-"35 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
+"29 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
+[v _delay delay `(v  1 e 0 0 ]
+"35
 [v _InitApp InitApp `(v  1 e 0 0 ]
 "115
 [v _sensorComputation sensorComputation `(v  1 e 0 0 ]
@@ -84,7 +83,7 @@ TRUE 1
 [v _MIN MIN `(i  1 e 2 0 ]
 "171
 [v _MAX MAX `(i  1 e 2 0 ]
-[s S248 . 1 `uc 1 RB0 1 0 :1:0 
+[s S249 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -94,7 +93,7 @@ TRUE 1
 `uc 1 RB7 1 0 :1:7 
 ]
 "228 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
-[s S288 . 1 `uc 1 INT0 1 0 :1:0 
+[s S289 . 1 `uc 1 INT0 1 0 :1:0 
 `uc 1 INT1 1 0 :1:1 
 `uc 1 INT2 1 0 :1:2 
 `uc 1 CCP2 1 0 :1:3 
@@ -103,7 +102,7 @@ TRUE 1
 `uc 1 KBI2 1 0 :1:6 
 `uc 1 KBI3 1 0 :1:7 
 ]
-[s S297 . 1 `uc 1 AN12 1 0 :1:0 
+[s S298 . 1 `uc 1 AN12 1 0 :1:0 
 `uc 1 AN10 1 0 :1:1 
 `uc 1 AN8 1 0 :1:2 
 `uc 1 AN9 1 0 :1:3 
@@ -112,14 +111,14 @@ TRUE 1
 `uc 1 PGC 1 0 :1:6 
 `uc 1 PGD 1 0 :1:7 
 ]
-[s S306 . 1 `uc 1 . 1 0 :3:0 
+[s S307 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CCP2_PA2 1 0 :1:3 
 ]
-[u S309 . 1 `S248 1 . 1 0 `S288 1 . 1 0 `S297 1 . 1 0 `S306 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES309  1 e 1 @3969 ]
+[u S310 . 1 `S249 1 . 1 0 `S289 1 . 1 0 `S298 1 . 1 0 `S307 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES310  1 e 1 @3969 ]
 "1267
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
-[s S239 . 1 `uc 1 TRISB0 1 0 :1:0 
+[s S240 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -129,11 +128,11 @@ TRUE 1
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "1886
-[u S257 . 1 `S239 1 . 1 0 `S248 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES257  1 e 1 @3987 ]
+[u S258 . 1 `S240 1 . 1 0 `S249 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES258  1 e 1 @3987 ]
 "2075
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-[s S207 . 1 `uc 1 TRISE0 1 0 :1:0 
+[s S208 . 1 `uc 1 TRISE0 1 0 :1:0 
 `uc 1 TRISE1 1 0 :1:1 
 `uc 1 TRISE2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -143,13 +142,13 @@ TRUE 1
 `uc 1 IBF 1 0 :1:7 
 ]
 "2545
-[s S216 . 1 `uc 1 RE0 1 0 :1:0 
+[s S217 . 1 `uc 1 RE0 1 0 :1:0 
 `uc 1 RE1 1 0 :1:1 
 `uc 1 RE2 1 0 :1:2 
 `uc 1 RE3 1 0 :1:3 
 ]
-[u S221 . 1 `S207 1 . 1 0 `S216 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES221  1 e 1 @3990 ]
+[u S222 . 1 `S208 1 . 1 0 `S217 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES222  1 e 1 @3990 ]
 "2680
 [v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
 "4645
@@ -158,38 +157,38 @@ TRUE 1
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
 "4805
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
-[s S414 . 1 `uc 1 . 1 0 :1:0 
+[s S415 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "4853
-[s S417 . 1 `uc 1 ADON 1 0 :1:0 
+[s S418 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 ]
-[s S424 . 1 `uc 1 . 1 0 :1:0 
+[s S425 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
 `uc 1 CHS2 1 0 :1:4 
 `uc 1 CHS3 1 0 :1:5 
 ]
-[s S431 . 1 `uc 1 . 1 0 :1:0 
+[s S432 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S434 . 1 `uc 1 . 1 0 :1:0 
+[s S435 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S437 . 1 `uc 1 . 1 0 :1:0 
+[s S438 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S440 . 1 `uc 1 . 1 0 :1:0 
+[s S441 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S443 . 1 `uc 1 . 1 0 :1:0 
+[s S444 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S446 . 1 `S414 1 . 1 0 `S417 1 . 1 0 `S414 1 . 1 0 `S424 1 . 1 0 `S431 1 . 1 0 `S434 1 . 1 0 `S437 1 . 1 0 `S440 1 . 1 0 `S443 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES446  1 e 1 @4034 ]
+[u S447 . 1 `S415 1 . 1 0 `S418 1 . 1 0 `S415 1 . 1 0 `S425 1 . 1 0 `S432 1 . 1 0 `S435 1 . 1 0 `S438 1 . 1 0 `S441 1 . 1 0 `S444 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES447  1 e 1 @4034 ]
 "4933
 [v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
 "4939
@@ -268,66 +267,75 @@ TRUE 1
 [v _sensorUpdate sensorUpdate `(v  1 e 0 0 ]
 {
 "139
-[v sensorUpdate@sensorTemp sensorTemp `[4][10]i  1 a 80 0 ]
+[v sensorUpdate@sensorTemp sensorTemp `[4][10]i  1 a 80 6 ]
 "138
-[v sensorUpdate@j j `i  1 a 2 82 ]
-[v sensorUpdate@i i `i  1 a 2 80 ]
+[v sensorUpdate@j j `i  1 a 2 88 ]
+[v sensorUpdate@i i `i  1 a 2 86 ]
 "163
 } 0
 "115
 [v _sensorComputation sensorComputation `(v  1 e 0 0 ]
 {
 "117
-[v sensorComputation@j j `i  1 a 2 57 ]
-[v sensorComputation@i i `i  1 a 2 55 ]
-[v sensorComputation@sum sum `i  1 a 2 53 ]
-[v sensorComputation@min min `i  1 a 2 51 ]
-[v sensorComputation@max max `i  1 a 2 49 ]
+[v sensorComputation@j j `i  1 a 2 64 ]
+[v sensorComputation@i i `i  1 a 2 62 ]
+[v sensorComputation@sum sum `i  1 a 2 60 ]
+[v sensorComputation@min min `i  1 a 2 58 ]
+[v sensorComputation@max max `i  1 a 2 56 ]
 "115
-[v sensorComputation@sensorTemp sensorTemp `*.39[10]i  1 p 2 45 ]
+[v sensorComputation@sensorTemp sensorTemp `*.39[10]i  1 p 2 52 ]
 "134
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 {
 "17
-[v ___wmul@product product `ui  1 a 2 38 ]
+[v ___wmul@product product `ui  1 a 2 45 ]
 "15
-[v ___wmul@multiplier multiplier `ui  1 p 2 34 ]
-[v ___wmul@multiplicand multiplicand `ui  1 p 2 36 ]
+[v ___wmul@multiplier multiplier `ui  1 p 2 41 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 43 ]
 "53
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
 {
 "11
-[v ___awdiv@quotient quotient `i  1 a 2 40 ]
+[v ___awdiv@quotient quotient `i  1 a 2 47 ]
 "12
-[v ___awdiv@sign sign `uc  1 a 1 39 ]
-[v ___awdiv@counter counter `uc  1 a 1 38 ]
+[v ___awdiv@sign sign `uc  1 a 1 46 ]
+[v ___awdiv@counter counter `uc  1 a 1 45 ]
 "8
-[v ___awdiv@dividend dividend `i  1 p 2 34 ]
-[v ___awdiv@divisor divisor `i  1 p 2 36 ]
+[v ___awdiv@dividend dividend `i  1 p 2 41 ]
+[v ___awdiv@divisor divisor `i  1 p 2 43 ]
 "42
 } 0
 "165 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
 [v _MIN MIN `(i  1 e 2 0 ]
 {
-[v MIN@a a `i  1 p 2 40 ]
-[v MIN@b b `i  1 p 2 42 ]
+[v MIN@a a `i  1 p 2 47 ]
+[v MIN@b b `i  1 p 2 49 ]
 "169
 } 0
 "171
 [v _MAX MAX `(i  1 e 2 0 ]
 {
-[v MAX@a a `i  1 p 2 40 ]
-[v MAX@b b `i  1 p 2 42 ]
+[v MAX@a a `i  1 p 2 47 ]
+[v MAX@b b `i  1 p 2 49 ]
 "175
 } 0
 "35
 [v _InitApp InitApp `(v  1 e 0 0 ]
 {
 "113
+} 0
+"29
+[v _delay delay `(v  1 e 0 0 ]
+{
+"30
+[v delay@x x `i  1 a 2 44 ]
+"29
+[v delay@ms ms `ui  1 p 2 41 ]
+"33
 } 0
 "24 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\system.c
 [v _ConfigureOscillator ConfigureOscillator `(v  1 e 0 0 ]
@@ -344,14 +352,25 @@ TRUE 1
 {
 "109
 } 0
-"189
+"215
+[v _KController KController `(v  1 e 0 0 ]
+{
+"220
+[v KController@steps steps `i  1 a 2 25 ]
+"218
+[v KController@diff diff `i  1 a 2 23 ]
+"217
+[v KController@correctTo correctTo `E4081  1 a 1 22 ]
+"247
+} 0
+"202
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
 {
 [v moveMouse@action action `uc  1 a 1 wreg ]
 [v moveMouse@action action `uc  1 a 1 wreg ]
-"191
+"204
 [v moveMouse@action action `uc  1 a 1 17 ]
-"192
+"205
 } 0
 "150
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
@@ -361,18 +380,24 @@ TRUE 1
 [v motorCounterUpdate@reverse reverse `uc  1 p 1 17 ]
 "152
 [v motorCounterUpdate@side side `E4081  1 a 1 18 ]
-"180
+"193
 } 0
-"182
+"195
 [v _merge merge `(uc  1 e 1 0 ]
 {
 [v merge@left left `uc  1 a 1 wreg ]
-"184
+"197
 [v merge@merged merged `uc  1 a 1 19 ]
-"182
+"195
 [v merge@left left `uc  1 a 1 wreg ]
 [v merge@right right `uc  1 p 1 17 ]
-"185
+"198
 [v merge@left left `uc  1 a 1 18 ]
-"187
+"200
+} 0
+"208
+[v _ABS ABS `(i  1 e 2 0 ]
+{
+[v ABS@x x `i  1 p 2 17 ]
+"212
 } 0

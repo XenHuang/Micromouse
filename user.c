@@ -108,7 +108,7 @@ void InitApp(void)
             //0.RBIF 1 = RB port change interrupt flag
 
     /* Enable interrupts */
-    // delay(3000);    //wait for settlement
+    delay(1000);    //wait for settlement
     INTCONbits.GIE = 1;
 }
 
