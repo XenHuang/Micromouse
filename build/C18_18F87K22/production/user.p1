@@ -47,10 +47,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S11 . . . . . ]
 "228
 [v _PORTBbits `VS11 ~T0 @X0 0 e@3969 ]
-"57 user.c
-[c E3381 0 1 .. ]
-[n E3381 _BOOL FALSE TRUE  ]
-"4715 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
+"4715
 [v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
 "4645
 [v _ADCON2 `Vuc ~T0 @X0 0 e@4032 ]
@@ -3911,9 +3908,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 54: TRISBbits.RB2=1;
 "54
 [e = . . _TRISBbits 1 2 -> -> 1 `i `uc ]
-[; ;user.c: 57: if(PORTBbits.RB3 == TRUE)
+[; ;user.c: 57: if(PORTBbits.RB3 == 1)
 "57
-[e $ ! == -> . . _PORTBbits 0 3 `i -> . `E3381 1 `i 397  ]
+[e $ ! == -> . . _PORTBbits 0 3 `i -> 1 `i 397  ]
 [; ;user.c: 58: algorithm = LEFTWALL;
 "58
 [e = _algorithm . `E4058 0 ]

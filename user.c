@@ -54,7 +54,7 @@ void InitApp(void)
     TRISBbits.RB2=1;
 
     //Determine Algorithm
-    if(PORTBbits.RB3 == TRUE)
+    if(PORTBbits.RB3 == 1)
         algorithm = LEFTWALL;
     else
         algorithm = RIGHTWALL;

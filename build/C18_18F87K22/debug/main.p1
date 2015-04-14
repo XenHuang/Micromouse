@@ -3711,13 +3711,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _sensorCorrection `Cuc ~T0 @X0 -> 4 `i e ]
 [i _sensorCorrection
 :U ..
--> -> 22 `i `uc
--> -> 23 `i `uc
--> -> 17 `i `uc
--> -> 17 `i `uc
+-> -> 30 `i `uc
+-> -> 30 `i `uc
+-> -> 7 `i `uc
+-> -> 7 `i `uc
 ..
 ]
-[; ;user.h: 19: const unsigned char sensorCorrection[4] = {22,23,17,17};
+[; ;user.h: 19: const unsigned char sensorCorrection[4] = {30,30,7,7};
 [; ;user.h: 21: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 "22
 [v _algorithm `E4060 ~T0 @X0 1 e ]

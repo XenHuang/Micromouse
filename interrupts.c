@@ -27,8 +27,8 @@
 /******************************************************************************/
 
 #define MOTORDELAYMIN 0         //the smaller the faster
-#define MOTORDELAYMAX 3       //the bigger the slower
-#define ROTATE90 215            //steps require for doing 90 turn
+#define MOTORDELAYMAX 2       //the bigger the slower
+#define ROTATE90 200            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 4    //factor that the outer/inter steps
 
 #define LEFTSENSOR 0             //Sensor value position
@@ -36,27 +36,27 @@
 #define LEFTFRONTSENSOR 2        //Sensor value position
 #define RIGHTFRONTSENSOR 3       //Sensor value position
 
-#define FRONTWALLMIN 0          // the higher the value the closer
+#define FRONTWALLMIN 500          // the higher the value the closer
 #define SIDEWALLMIN 100           // the higher the value the closer
 
 #define KCONTROLLERMIN 10
-#define KCONTROLLERMINSTEP 0
-#define KCONTROLLERMID 60
-#define KCONTROLLERMIDSTEP 10
-#define KCONTROLLERMAX 120
-#define KCONTROLLERMAXSTEP 40
+#define KCONTROLLERSTEP 10
 
 typedef enum {LEFT,RIGHT} Side;
 unsigned char LMotorCounter = 0;
 unsigned char RMotorCounter = 0;
+unsigned char controllerSteps = KCONTROLLERSTEP;
 int MotorDelayCounter = 0;
 int LMotorDelayCounter = 0;
 int RMotorDelayCounter = 0;
+int RotateCounter = 0;
+
 
 void motorCounterUpdate(Side,unsigned char);
 unsigned char merge(unsigned char,unsigned char);
 void moveMouse(unsigned char);
 void KController();
+void rotate();
 
 int ABS(int);
 
@@ -85,18 +85,19 @@ void high_isr(void)
 	{
             if(MotorDelayCounter > MOTORDELAYMAX)
             {
-                //Three Wall
                 //Two Side Wall
-                if(sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN)
+                if(RotateCounter > 0)
+                    rotate();
+                else if  ((sensorValue[LEFTFRONTSENSOR] < FRONTWALLMIN && sensorValue[RIGHTFRONTSENSOR] < FRONTWALLMIN)
+                            && (sensorValue[LEFTSENSOR] > SIDEWALLMIN || sensorValue[RIGHTSENSOR] > SIDEWALLMIN ))
                 {
-                    KController();
+                   KController();
+                } else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN )
+                        && (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN) && RotateCounter <= 0) {
+                    RotateCounter = ROTATE90*2;
+                    rotate();
                 }
-                //One Side Wall
-
-                motorCounterUpdate(RIGHT,0);
-                motorCounterUpdate(LEFT,0);
                 moveMouse(merge(LMotorCounter,RMotorCounter));
-                
                 MotorDelayCounter = 0;
             }
 
@@ -149,7 +150,7 @@ void low_isr(void)
 
 void motorCounterUpdate(Side side, unsigned char reverse)
 {
-    if(side == LEFT && reverse == 0)
+    if(side == LEFT && reverse == 1)
     {
         switch(LMotorCounter)
         {
@@ -159,7 +160,7 @@ void motorCounterUpdate(Side side, unsigned char reverse)
             case 0b00001000: LMotorCounter = 0b00000001; break;
             default: LMotorCounter = 0b00000001;
         }
-    } else if(side == RIGHT && reverse == 0)
+    } else if(side == RIGHT && reverse == 1)
     {   
         switch(RMotorCounter)
         {
@@ -169,7 +170,7 @@ void motorCounterUpdate(Side side, unsigned char reverse)
             case 0b00001000: RMotorCounter = 0b00000100; break;
             default: RMotorCounter = 0b00001000;
         }
-    } else if(side == LEFT && reverse == 1)
+    } else if(side == LEFT && reverse == 0)
     {   
         switch(LMotorCounter)
         {
@@ -179,7 +180,7 @@ void motorCounterUpdate(Side side, unsigned char reverse)
             case 0b00001000: LMotorCounter = 0b00000100; break;
             default: LMotorCounter = 0b00001000;
         }
-    } else if(side == RIGHT && reverse == 1)
+    } else if(side == RIGHT && reverse == 0)
     {
         switch(RMotorCounter)
         {
@@ -195,7 +196,7 @@ void motorCounterUpdate(Side side, unsigned char reverse)
 unsigned char merge(unsigned char left,unsigned char right)
 {
     unsigned char merged;
-    merged = (left << 4) + right;
+    merged = left + (right << 4);
     return merged;
 }
 
@@ -218,30 +219,37 @@ void KController()
     int diff = ABS(sensorValue[LEFTSENSOR] - sensorValue[RIGHTSENSOR]);
 
     int steps = 0;
-    if(diff <= KCONTROLLERMIN)
-        steps = KCONTROLLERMINSTEP;
-    else if(diff > KCONTROLLERMIN && diff <= KCONTROLLERMID)
-        steps = KCONTROLLERMIDSTEP;
-    else if(diff > KCONTROLLERMID && diff >= KCONTROLLERMAX)
-        steps = KCONTROLLERMAXSTEP;
-
+    if(controllerSteps > 0)
+    {   
+        motorCounterUpdate(RIGHT,0);
+        motorCounterUpdate(LEFT,0);
+        controllerSteps--;
+        return;
+    }
 
     if(sensorValue[LEFTSENSOR] > sensorValue[RIGHTSENSOR])
     {
         correctTo = LEFT;
-        for(;steps > 0; steps--)
-        {
-            motorCounterUpdate(correctTo,0);
-            moveMouse(merge(LMotorCounter,RMotorCounter));
-        }
+        motorCounterUpdate(correctTo,0);
+        moveMouse(merge(LMotorCounter,RMotorCounter));
     }
     else
     {
         correctTo = RIGHT;
-        for(;steps > 0; steps--)
-        {
-            motorCounterUpdate(correctTo,0);
-            moveMouse(merge(LMotorCounter,RMotorCounter));
-        }
+        motorCounterUpdate(correctTo,0);
+        moveMouse(merge(LMotorCounter,RMotorCounter));
     }
+    controllerSteps = KCONTROLLERSTEP;
+}
+
+void rotate()
+{
+   // if (algorithm == LEFTWALL){
+   // motorCounterUpdate(RIGHT,0);
+   // motorCounterUpdate(LEFT,1);
+   // } else {
+    motorCounterUpdate(LEFT,0);
+    motorCounterUpdate(RIGHT,1);
+  //  }
+    RotateCounter--;
 }

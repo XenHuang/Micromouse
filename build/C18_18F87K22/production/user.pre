@@ -5019,7 +5019,7 @@ TRISBbits.RB3=1;
 TRISBbits.RB2=1;
 
 
-if(PORTBbits.RB3 == TRUE)
+if(PORTBbits.RB3 == 1)
 algorithm = LEFTWALL;
 else
 algorithm = RIGHTWALL;

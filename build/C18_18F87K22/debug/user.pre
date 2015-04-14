@@ -4971,7 +4971,7 @@ typedef unsigned char bool;
 
 # 18 "user.h"
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
-const unsigned char sensorCorrection[4] = {22,23,17,17};
+const unsigned char sensorCorrection[4] = {30,30,7,7};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 Algorithm algorithm;
@@ -5019,7 +5019,7 @@ TRISBbits.RB3=1;
 TRISBbits.RB2=1;
 
 
-if(PORTBbits.RB3 == TRUE)
+if(PORTBbits.RB3 == 1)
 algorithm = LEFTWALL;
 else
 algorithm = RIGHTWALL;
@@ -5042,7 +5042,8 @@ INTCON2 = 0b11110100;
 # 100
 INTCON = 0b00100000;
 
-# 112
+# 111
+delay(1000);
 INTCONbits.GIE = 1;
 }
 
