@@ -29,7 +29,7 @@
 #define MOTORDELAYMIN 0         //the smaller the faster
 #define MOTORDELAYMAX 2       //the bigger the slower
 #define ROTATE90 200            //steps require for doing 90 turn
-#define SMOOTHROTATEFACTOR 4    //factor that the outer/inter steps
+#define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 
 #define LEFTSENSOR 0             //Sensor value position
 #define RIGHTSENSOR 1            //Sensor value position
@@ -47,8 +47,8 @@ unsigned char LMotorCounter = 0;
 unsigned char RMotorCounter = 0;
 unsigned char controllerSteps = KCONTROLLERSTEP;
 int MotorDelayCounter = 0;
-int LMotorDelayCounter = 0;
-int RMotorDelayCounter = 0;
+int LTurnCounter = 0;
+int RTurnCounter = 0;
 int RotateCounter = 0;
 
 
@@ -57,6 +57,7 @@ unsigned char merge(unsigned char,unsigned char);
 void moveMouse(unsigned char);
 void KController();
 void rotate();
+void smoothTurn();
 
 int ABS(int);
 
@@ -85,15 +86,28 @@ void high_isr(void)
 	{
             if(MotorDelayCounter > MOTORDELAYMAX)
             {
-                //Two Side Wall
+                //Continue rotation
                 if(RotateCounter > 0)
                     rotate();
-                else if  ((sensorValue[LEFTFRONTSENSOR] < FRONTWALLMIN && sensorValue[RIGHTFRONTSENSOR] < FRONTWALLMIN)
-                            && (sensorValue[LEFTSENSOR] > SIDEWALLMIN || sensorValue[RIGHTSENSOR] > SIDEWALLMIN ))
-                {
+				else if (LTurnCounter > 0 || RTurnCounter > 0)
+					smoothTurn();
+				else if (sensorValue[LEFTSENSOR] < SIDEWALLMIN && algorithm == LEFTWALL)
+				{
+					RTurnCounter = SMOOTHROTATEFACTOR;
+					smoothTurn();
+				}
+				else if (sensorValue[RIGHTSENSOR] < SIDEWALLMIN && algorithm == RIGHTWALL)
+				{
+					LTurnCounter = SMOOTHROTATEFACTOR;
+					smoothTurn();
+				}
+                else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN )
+                           && (sensorValue[LEFTFRONTSENSOR] < FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] < FRONTWALLMIN))
+                {	// 2 walls
                    KController();
                 } else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN )
-                        && (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN) && RotateCounter <= 0) {
+                        && (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN) && RotateCounter <= 0) 
+				{	// 3 walls
                     RotateCounter = ROTATE90*2;
                     rotate();
                 }
@@ -252,4 +266,16 @@ void rotate()
     motorCounterUpdate(RIGHT,1);
   //  }
     RotateCounter--;
+}
+
+void smoothTurn()
+{
+	if(LTurnCounter > 0)
+	{
+		motorCounterUpdate(LEFT,0);
+		LTurnCounter--;
+	} else if (RTurnCounter > 0){
+		motorCounterUpdate(RIGHT,0);
+		RTurnCounter--;
+	}
 }
