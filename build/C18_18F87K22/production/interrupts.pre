@@ -4974,7 +4974,7 @@ void ConfigureOscillator(void);
 
 # 18 "user.h"
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
-const unsigned char sensorCorrection[4] = {30,30,7,7};
+const unsigned char sensorCorrection[4] = {39,39,71,71};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 Algorithm algorithm;
@@ -4989,16 +4989,18 @@ void sensorUpdate();
 void sensorComputation(int[][10]);
 int MIN(int,int);
 int MAX(int,int);
+void AlgorithmSelection();
 
-# 45 "interrupts.c"
+# 50 "interrupts.c"
 typedef enum {LEFT,RIGHT} Side;
 unsigned char LMotorCounter = 0;
 unsigned char RMotorCounter = 0;
-unsigned char controllerSteps = 10;
+unsigned char controllerSteps = 8;
 int MotorDelayCounter = 0;
-int LMotorDelayCounter = 0;
-int RMotorDelayCounter = 0;
+int LTurnCounter = 0;
+int RTurnCounter = 0;
 int RotateCounter = 0;
+int ReverseCounter = 0;
 
 
 void motorCounterUpdate(Side,unsigned char);
@@ -5006,6 +5008,8 @@ unsigned char merge(unsigned char,unsigned char);
 void moveMouse(unsigned char);
 void KController();
 void rotate();
+void smoothTurn();
+void Reversing();
 
 int ABS(int);
 
@@ -5013,24 +5017,37 @@ int ABS(int);
 
 void interrupt high_isr(void)
 
-# 74
+# 82
 {
 
-# 84
+# 92
 if(INTCONbits.TMR0IF == 1)
 {
 if(MotorDelayCounter > 2)
 {
 
-if(RotateCounter > 0)
+if (ReverseCounter > 0)
+Reversing();
+else if(RotateCounter > 0)
+{
+if ((sensorValue[2] > 700 || sensorValue[3] > 700)) {
+
+ReverseCounter = 15;
+Reversing();
+} else {
 rotate();
-else if ((sensorValue[2] < 500 && sensorValue[3] < 500)
-&& (sensorValue[0] > 100 || sensorValue[1] > 100 ))
+}
+}
+
+# 121
+else if ((sensorValue[0] > 100 && sensorValue[1] > 100 )
+&& (sensorValue[2] < 420 || sensorValue[3] < 420))
 {
 KController();
 } else if ((sensorValue[0] > 100 && sensorValue[1] > 100 )
-&& (sensorValue[2] > 500 || sensorValue[3] > 500) && RotateCounter <= 0) {
-RotateCounter = 200*2;
+&& (sensorValue[2] > 420 || sensorValue[3] > 420) && RotateCounter <= 0)
+{
+RotateCounter = 167*2;
 rotate();
 }
 moveMouse(merge(LMotorCounter,RMotorCounter));
@@ -5049,10 +5066,10 @@ INTCONbits.TMR0IF = 0;
 
 void low_priority interrupt low_isr(void)
 
-# 122
+# 153
 {
 
-# 149
+# 180
 }
 
 void motorCounterUpdate(Side side, unsigned char reverse)
@@ -5125,7 +5142,7 @@ void KController()
 Side correctTo;
 int diff = ABS(sensorValue[0] - sensorValue[1]);
 
-int steps = 0;
+
 if(controllerSteps > 0)
 {
 motorCounterUpdate(RIGHT,0);
@@ -5146,17 +5163,42 @@ correctTo = RIGHT;
 motorCounterUpdate(correctTo,0);
 moveMouse(merge(LMotorCounter,RMotorCounter));
 }
-controllerSteps = 10;
+
+if(diff > 150)
+controllerSteps = 1;
+else if(diff <= 150 && diff > 30)
+controllerSteps = 4;
+else
+controllerSteps = 8;
 }
 
 void rotate()
 {
-
-
-
-
+if (algorithm == LEFTWALL){
+motorCounterUpdate(RIGHT,0);
+motorCounterUpdate(LEFT,1);
+} else {
 motorCounterUpdate(LEFT,0);
 motorCounterUpdate(RIGHT,1);
-
+}
 RotateCounter--;
+}
+
+void smoothTurn()
+{
+if(LTurnCounter > 0)
+{
+motorCounterUpdate(LEFT,0);
+LTurnCounter--;
+} else if (RTurnCounter > 0){
+motorCounterUpdate(RIGHT,0);
+RTurnCounter--;
+}
+}
+
+void Reversing()
+{
+motorCounterUpdate(RIGHT,1);
+motorCounterUpdate(LEFT,1);
+ReverseCounter--;
 }

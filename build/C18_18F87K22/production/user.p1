@@ -30,23 +30,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S113 . . . ]
 "1886
 [v _TRISBbits `VS113 ~T0 @X0 0 e@3987 ]
-"193
-[s S12 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S12 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
-"203
-[s S13 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S13 . INT0 INT1 INT2 CCP2 KBI0 KBI1 KBI2 KBI3 ]
-"213
-[s S14 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S14 . AN12 AN10 AN8 AN9 AN11 PGM PGC PGD ]
-"223
-[s S15 :3 `uc 1 :1 `uc 1 ]
-[n S15 . . CCP2_PA2 ]
-"192
-[u S11 `S12 1 `S13 1 `S14 1 `S15 1 ]
-[n S11 . . . . . ]
-"228
-[v _PORTBbits `VS11 ~T0 @X0 0 e@3969 ]
 "4715
 [v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
 "4645
@@ -59,7 +42,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _INTCON2 `Vuc ~T0 @X0 0 e@4081 ]
 "6630
 [v _INTCON `Vuc ~T0 @X0 0 e@4082 ]
-"6636
+"39 user.h
+[v _AlgorithmSelection `(v ~T0 @X0 0 ef ]
+"6636 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [s S346 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S346 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
 "6646
@@ -79,12 +64,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S345 . . . . . . ]
 "6682
 [v _INTCONbits `VS345 ~T0 @X0 0 e@4082 ]
-[v F4071 `i ~T0 @X0 -> 10 `i t ]
-"37 user.h
-[v _MIN `(i ~T0 @X0 0 ef2`i`i ]
-"38
-[v _MAX `(i ~T0 @X0 0 ef2`i`i ]
-"4811 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
+"4811
 [s S251 :1 `uc 1 :1 `uc 1 ]
 [n S251 . . GO_NOT_DONE ]
 "4815
@@ -116,10 +96,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S250 . . . . . . . . . . ]
 "4853
 [v _ADCON0bits `VS250 ~T0 @X0 0 e@4034 ]
-"4939
-[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
 "4933
 [v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
+[v F4071 `i ~T0 @X0 -> 10 `i t ]
+"37 user.h
+[v _MIN `(i ~T0 @X0 0 ef2`i`i ]
+"38
+[v _MAX `(i ~T0 @X0 0 ef2`i`i ]
+"4939 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
+[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4620.h: 49: extern volatile unsigned char PORTA @ 0xF80;
@@ -3821,13 +3806,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _sensorCorrection `Cuc ~T0 @X0 -> 4 `i e ]
 [i _sensorCorrection
 :U ..
--> -> 30 `i `uc
--> -> 30 `i `uc
--> -> 7 `i `uc
--> -> 7 `i `uc
+-> -> 39 `i `uc
+-> -> 39 `i `uc
+-> -> 71 `i `uc
+-> -> 71 `i `uc
 ..
 ]
-[; ;user.h: 19: const unsigned char sensorCorrection[4] = {30,30,7,7};
+[; ;user.h: 19: const unsigned char sensorCorrection[4] = {39,39,71,71};
 [; ;user.h: 21: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 "22
 [v _algorithm `E4058 ~T0 @X0 1 e ]
@@ -3847,6 +3832,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.h: 36: void sensorComputation(int[][10]);
 [; ;user.h: 37: int MIN(int,int);
 [; ;user.h: 38: int MAX(int,int);
+[; ;user.h: 39: void AlgorithmSelection();
 [; ;system.h: 20: void ConfigureOscillator(void);
 "29 user.c
 [v _delay `(v ~T0 @X0 1 ef1`ui ]
@@ -3908,281 +3894,309 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 54: TRISBbits.RB2=1;
 "54
 [e = . . _TRISBbits 1 2 -> -> 1 `i `uc ]
-[; ;user.c: 57: if(PORTBbits.RB3 == 1)
-"57
-[e $ ! == -> . . _PORTBbits 0 3 `i -> 1 `i 397  ]
-[; ;user.c: 58: algorithm = LEFTWALL;
+[; ;user.c: 58: ADCON1 =0b00000001;
 "58
-[e = _algorithm . `E4058 0 ]
-[e $U 398  ]
-"59
-[e :U 397 ]
-[; ;user.c: 59: else
-[; ;user.c: 60: algorithm = RIGHTWALL;
-"60
-[e = _algorithm . `E4058 1 ]
-[e :U 398 ]
-[; ;user.c: 63: ADCON1 =0b00000001;
-"63
 [e = _ADCON1 -> -> 1 `i `uc ]
-[; ;user.c: 68: ADCON2=0b00001010;
-"68
+[; ;user.c: 63: ADCON2=0b00001010;
+"63
 [e = _ADCON2 -> -> 10 `i `uc ]
-[; ;user.c: 73: ADCON0=0b00101011;
-"73
+[; ;user.c: 68: ADCON0=0b00101011;
+"68
 [e = _ADCON0 -> -> 43 `i `uc ]
-[; ;user.c: 82: T0CON = 0b11000100;
-"82
+[; ;user.c: 77: T0CON = 0b11000100;
+"77
 [e = _T0CON -> -> 196 `i `uc ]
-[; ;user.c: 90: INTCON2 = 0b11110100;
-"90
+[; ;user.c: 85: INTCON2 = 0b11110100;
+"85
 [e = _INTCON2 -> -> 244 `i `uc ]
-[; ;user.c: 100: INTCON = 0b00100000;
-"100
+[; ;user.c: 95: INTCON = 0b00100000;
+"95
 [e = _INTCON -> -> 32 `i `uc ]
-[; ;user.c: 111: delay(1000);
-"111
+[; ;user.c: 105: AlgorithmSelection();
+"105
+[e ( _AlgorithmSelection ..  ]
+[; ;user.c: 108: delay(1000);
+"108
 [e ( _delay (1 -> -> 1000 `i `ui ]
-[; ;user.c: 112: INTCONbits.GIE = 1;
-"112
+[; ;user.c: 109: INTCONbits.GIE = 1;
+"109
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;user.c: 113: }
-"113
+[; ;user.c: 110: }
+"110
 [e :UE 396 ]
 }
-"115
-[v _sensorComputation `(v ~T0 @X0 1 ef1`*F4071 ]
-"116
+"112
+[v _AlgorithmSelection `(v ~T0 @X0 1 ef ]
+"113
 {
-[; ;user.c: 115: void sensorComputation(int sensorTemp[][10])
-[; ;user.c: 116: {
-[e :U _sensorComputation ]
-[v F4086 `i ~T0 @X0 -> 10 `i t ]
-"115
-[v _sensorTemp `*F4086 ~T0 @X0 1 r1 ]
-"116
+[; ;user.c: 112: void AlgorithmSelection()
+[; ;user.c: 113: {
+[e :U _AlgorithmSelection ]
 [f ]
+[; ;user.c: 114: ADCON0 = 0b00100111;
+"114
+[e = _ADCON0 -> -> 39 `i `uc ]
+[; ;user.c: 116: ADCON0bits.GO_DONE = 1;
+"116
+[e = . . _ADCON0bits 7 1 -> -> 1 `i `uc ]
+[; ;user.c: 117: while(ADCON0bits.GO_DONE != 0);
 "117
+[e $U 398  ]
+[e :U 399 ]
+[e :U 398 ]
+[e $ != -> . . _ADCON0bits 7 1 `i -> 0 `i 399  ]
+[e :U 400 ]
+[; ;user.c: 119: if(ADRESL > 0b10000000)
+"119
+[e $ ! > -> _ADRESL `i -> 128 `i 401  ]
+[; ;user.c: 120: algorithm = LEFTWALL;
+"120
+[e = _algorithm . `E4058 0 ]
+[e $U 402  ]
+"121
+[e :U 401 ]
+[; ;user.c: 121: else
+[; ;user.c: 122: algorithm = RIGHTWALL;
+"122
+[e = _algorithm . `E4058 1 ]
+[e :U 402 ]
+[; ;user.c: 124: }
+"124
+[e :UE 397 ]
+}
+"125
+[v _sensorComputation `(v ~T0 @X0 1 ef1`*F4071 ]
+"126
+{
+[; ;user.c: 125: void sensorComputation(int sensorTemp[][10])
+[; ;user.c: 126: {
+[e :U _sensorComputation ]
+[v F4087 `i ~T0 @X0 -> 10 `i t ]
+"125
+[v _sensorTemp `*F4087 ~T0 @X0 1 r1 ]
+"126
+[f ]
+"127
 [v _max `i ~T0 @X0 1 a ]
 [v _min `i ~T0 @X0 1 a ]
 [v _i `i ~T0 @X0 1 a ]
 [v _j `i ~T0 @X0 1 a ]
 [v _sum `i ~T0 @X0 1 a ]
-[; ;user.c: 117: int max,min,i,j,sum;
-[; ;user.c: 118: for(i = 0; i < 4 ; i++)
-"118
+[; ;user.c: 127: int max,min,i,j,sum;
+[; ;user.c: 128: for(i = 0; i < 4 ; i++)
+"128
 {
 [e = _i -> 0 `i ]
-[e $ < _i -> 4 `i 400  ]
-[e $U 401  ]
-"119
-[e :U 400 ]
-[; ;user.c: 119: {
+[e $ < _i -> 4 `i 404  ]
+[e $U 405  ]
+"129
+[e :U 404 ]
+[; ;user.c: 129: {
 {
-[; ;user.c: 120: for(j = 0 ; j < 10 ; j++)
-"120
+[; ;user.c: 130: for(j = 0 ; j < 10 ; j++)
+"130
 {
 [e = _j -> 0 `i ]
-[e $ < _j -> 10 `i 403  ]
-[e $U 404  ]
-"121
-[e :U 403 ]
-[; ;user.c: 121: {
-{
-[; ;user.c: 122: if(j == 0)
-"122
-[e $ ! == _j -> 0 `i 406  ]
-[; ;user.c: 123: {
-"123
-{
-[; ;user.c: 124: sum = min = max = sensorTemp[i][j];
-"124
-[e = _sum = _min = _max *U + &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x * -> -> _j `ui `ux -> -> # *U &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x `ui `ux ]
-[; ;user.c: 125: continue;
-"125
-[e $U 405  ]
-"126
-}
-[e :U 406 ]
-[; ;user.c: 126: }
-[; ;user.c: 127: min = MIN(sensorTemp[i][j],min);
-"127
-[e = _min ( _MIN (2 , *U + &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x * -> -> _j `ui `ux -> -> # *U &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x `ui `ux _min ]
-[; ;user.c: 128: max = MAX(sensorTemp[i][j],max);
-"128
-[e = _max ( _MAX (2 , *U + &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x * -> -> _j `ui `ux -> -> # *U &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x `ui `ux _max ]
-[; ;user.c: 129: sum += sensorTemp[i][j];
-"129
-[e =+ _sum *U + &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x * -> -> _j `ui `ux -> -> # *U &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x `ui `ux ]
-"130
-}
-"120
-[e :U 405 ]
-[e ++ _j -> 1 `i ]
-[e $ < _j -> 10 `i 403  ]
-[e :U 404 ]
-"130
-}
-[; ;user.c: 130: }
-[; ;user.c: 131: sum = sum - min - max;
+[e $ < _j -> 10 `i 407  ]
+[e $U 408  ]
 "131
-[e = _sum - - _sum _min _max ]
-[; ;user.c: 132: sensorValue[i] = sum/(10-2);
-"132
-[e = *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux / _sum - -> 10 `i -> 2 `i ]
-"133
-}
-"118
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 4 `i 400  ]
-[e :U 401 ]
-"133
-}
-[; ;user.c: 133: }
-[; ;user.c: 134: }
-"134
-[e :UE 399 ]
-}
-"136
-[v _sensorUpdate `(v ~T0 @X0 1 ef ]
-"137
+[e :U 407 ]
+[; ;user.c: 131: {
 {
-[; ;user.c: 136: void sensorUpdate()
-[; ;user.c: 137: {
+[; ;user.c: 132: if(j == 0)
+"132
+[e $ ! == _j -> 0 `i 410  ]
+[; ;user.c: 133: {
+"133
+{
+[; ;user.c: 134: sum = min = max = sensorTemp[i][j];
+"134
+[e = _sum = _min = _max *U + &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x * -> -> _j `ui `ux -> -> # *U &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x `ui `ux ]
+[; ;user.c: 135: continue;
+"135
+[e $U 409  ]
+"136
+}
+[e :U 410 ]
+[; ;user.c: 136: }
+[; ;user.c: 137: min = MIN(sensorTemp[i][j],min);
+"137
+[e = _min ( _MIN (2 , *U + &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x * -> -> _j `ui `ux -> -> # *U &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x `ui `ux _min ]
+[; ;user.c: 138: max = MAX(sensorTemp[i][j],max);
+"138
+[e = _max ( _MAX (2 , *U + &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x * -> -> _j `ui `ux -> -> # *U &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x `ui `ux _max ]
+[; ;user.c: 139: sum += sensorTemp[i][j];
+"139
+[e =+ _sum *U + &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x * -> -> _j `ui `ux -> -> # *U &U *U + _sensorTemp * -> _i `x -> * -> # *U &U *U _sensorTemp `ui -> -> 10 `i `ui `x `ui `ux ]
+"140
+}
+"130
+[e :U 409 ]
+[e ++ _j -> 1 `i ]
+[e $ < _j -> 10 `i 407  ]
+[e :U 408 ]
+"140
+}
+[; ;user.c: 140: }
+[; ;user.c: 141: sum = sum - min - max;
+"141
+[e = _sum - - _sum _min _max ]
+[; ;user.c: 142: sensorValue[i] = sum/(10-2);
+"142
+[e = *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux / _sum - -> 10 `i -> 2 `i ]
+"143
+}
+"128
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 4 `i 404  ]
+[e :U 405 ]
+"143
+}
+[; ;user.c: 143: }
+[; ;user.c: 144: }
+"144
+[e :UE 403 ]
+}
+"146
+[v _sensorUpdate `(v ~T0 @X0 1 ef ]
+"147
+{
+[; ;user.c: 146: void sensorUpdate()
+[; ;user.c: 147: {
 [e :U _sensorUpdate ]
 [f ]
-"138
+"148
 [v _i `i ~T0 @X0 1 a ]
 [v _j `i ~T0 @X0 1 a ]
-[v F4095 `i ~T0 @X0 -> 10 `i t ]
-"139
-[v _sensorTemp `F4095 ~T0 @X0 -> 4 `i a ]
-[; ;user.c: 138: int i,j;
-[; ;user.c: 139: int sensorTemp[4][10];
-[; ;user.c: 142: for(i = 0; i < 10; i++)
-"142
+[v F4096 `i ~T0 @X0 -> 10 `i t ]
+"149
+[v _sensorTemp `F4096 ~T0 @X0 -> 4 `i a ]
+[; ;user.c: 148: int i,j;
+[; ;user.c: 149: int sensorTemp[4][10];
+[; ;user.c: 152: for(i = 0; i < 10; i++)
+"152
 {
 [e = _i -> 0 `i ]
-[e $ < _i -> 10 `i 408  ]
-[e $U 409  ]
-"143
-[e :U 408 ]
-[; ;user.c: 143: {
+[e $ < _i -> 10 `i 412  ]
+[e $U 413  ]
+"153
+[e :U 412 ]
+[; ;user.c: 153: {
 {
-[; ;user.c: 144: for(j = 0 ; j < 4 ; j++)
-"144
+[; ;user.c: 154: for(j = 0 ; j < 4 ; j++)
+"154
 {
 [e = _j -> 0 `i ]
-[e $ < _j -> 4 `i 411  ]
-[e $U 412  ]
-"145
-[e :U 411 ]
-[; ;user.c: 145: {
-{
-[; ;user.c: 146: ADCON0 = sensorLocation[j];
-"146
-[e = _ADCON0 *U + &U _sensorLocation * -> -> _j `ui `ux -> -> # *U &U _sensorLocation `ui `ux ]
-[; ;user.c: 148: ADCON0bits.GO_DONE = 1;
-"148
-[e = . . _ADCON0bits 7 1 -> -> 1 `i `uc ]
-[; ;user.c: 149: while(ADCON0bits.GO_DONE != 0);
-"149
-[e $U 414  ]
-[e :U 415 ]
-[e :U 414 ]
-[e $ != -> . . _ADCON0bits 7 1 `i -> 0 `i 415  ]
-[e :U 416 ]
-[; ;user.c: 150: sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
-"150
-[e = *U + &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux * -> -> _i `ui `ux -> -> # *U &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux `ui `ux + << -> _ADRESH `i -> 2 `i >> -> _ADRESL `i -> 6 `i ]
-[; ;user.c: 153: if(j == 0 || j == 3)
-"153
-[e $ ! || == _j -> 0 `i == _j -> 3 `i 417  ]
-[; ;user.c: 154: sensorTemp[j][i] -= sensorCorrection[j];
-"154
-[e =- *U + &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux * -> -> _i `ui `ux -> -> # *U &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux `ui `ux -> *U + &U _sensorCorrection * -> -> _j `ui `ux -> -> # *U &U _sensorCorrection `ui `ux `i ]
-[e $U 418  ]
+[e $ < _j -> 4 `i 415  ]
+[e $U 416  ]
 "155
-[e :U 417 ]
-[; ;user.c: 155: else
-[; ;user.c: 156: sensorTemp[j][i] += sensorCorrection[j];
+[e :U 415 ]
+[; ;user.c: 155: {
+{
+[; ;user.c: 156: ADCON0 = sensorLocation[j];
 "156
-[e =+ *U + &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux * -> -> _i `ui `ux -> -> # *U &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux `ui `ux -> *U + &U _sensorCorrection * -> -> _j `ui `ux -> -> # *U &U _sensorCorrection `ui `ux `i ]
+[e = _ADCON0 *U + &U _sensorLocation * -> -> _j `ui `ux -> -> # *U &U _sensorLocation `ui `ux ]
+[; ;user.c: 158: ADCON0bits.GO_DONE = 1;
+"158
+[e = . . _ADCON0bits 7 1 -> -> 1 `i `uc ]
+[; ;user.c: 159: while(ADCON0bits.GO_DONE != 0);
+"159
+[e $U 418  ]
+[e :U 419 ]
 [e :U 418 ]
-"157
-}
-"144
-[e ++ _j -> 1 `i ]
-[e $ < _j -> 4 `i 411  ]
-[e :U 412 ]
-"157
-}
-"158
-}
-"142
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10 `i 408  ]
-[e :U 409 ]
-"158
-}
-[; ;user.c: 157: }
-[; ;user.c: 158: }
-[; ;user.c: 161: sensorComputation(sensorTemp);
-"161
-[e ( _sensorComputation (1 &U _sensorTemp ]
-[; ;user.c: 163: }
-"163
-[e :UE 407 ]
-}
-"165
-[v _MIN `(i ~T0 @X0 1 ef2`i`i ]
-"166
-{
-[; ;user.c: 165: int MIN(int a,int b)
-[; ;user.c: 166: {
-[e :U _MIN ]
-"165
-[v _a `i ~T0 @X0 1 r1 ]
-[v _b `i ~T0 @X0 1 r2 ]
-"166
-[f ]
-[; ;user.c: 167: if(a>b) return b;
-"167
-[e $ ! > _a _b 420  ]
-[e ) _b ]
-[e $UE 419  ]
+[e $ != -> . . _ADCON0bits 7 1 `i -> 0 `i 419  ]
 [e :U 420 ]
-[; ;user.c: 168: return a;
-"168
-[e ) _a ]
-[e $UE 419  ]
-[; ;user.c: 169: }
-"169
-[e :UE 419 ]
+[; ;user.c: 160: sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
+"160
+[e = *U + &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux * -> -> _i `ui `ux -> -> # *U &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux `ui `ux + << -> _ADRESH `i -> 2 `i >> -> _ADRESL `i -> 6 `i ]
+[; ;user.c: 163: if(j == 0 || j == 3)
+"163
+[e $ ! || == _j -> 0 `i == _j -> 3 `i 421  ]
+[; ;user.c: 164: sensorTemp[j][i] -= sensorCorrection[j];
+"164
+[e =- *U + &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux * -> -> _i `ui `ux -> -> # *U &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux `ui `ux -> *U + &U _sensorCorrection * -> -> _j `ui `ux -> -> # *U &U _sensorCorrection `ui `ux `i ]
+[e $U 422  ]
+"165
+[e :U 421 ]
+[; ;user.c: 165: else
+[; ;user.c: 166: sensorTemp[j][i] += sensorCorrection[j];
+"166
+[e =+ *U + &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux * -> -> _i `ui `ux -> -> # *U &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux `ui `ux -> *U + &U _sensorCorrection * -> -> _j `ui `ux -> -> # *U &U _sensorCorrection `ui `ux `i ]
+[e :U 422 ]
+"167
 }
+"154
+[e ++ _j -> 1 `i ]
+[e $ < _j -> 4 `i 415  ]
+[e :U 416 ]
+"167
+}
+"168
+}
+"152
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 10 `i 412  ]
+[e :U 413 ]
+"168
+}
+[; ;user.c: 167: }
+[; ;user.c: 168: }
+[; ;user.c: 171: sensorComputation(sensorTemp);
 "171
-[v _MAX `(i ~T0 @X0 1 ef2`i`i ]
-"172
+[e ( _sensorComputation (1 &U _sensorTemp ]
+[; ;user.c: 173: }
+"173
+[e :UE 411 ]
+}
+"175
+[v _MIN `(i ~T0 @X0 1 ef2`i`i ]
+"176
 {
-[; ;user.c: 171: int MAX(int a, int b)
-[; ;user.c: 172: {
-[e :U _MAX ]
-"171
+[; ;user.c: 175: int MIN(int a,int b)
+[; ;user.c: 176: {
+[e :U _MIN ]
+"175
 [v _a `i ~T0 @X0 1 r1 ]
 [v _b `i ~T0 @X0 1 r2 ]
-"172
+"176
 [f ]
-[; ;user.c: 173: if(a>b) return a;
-"173
-[e $ ! > _a _b 422  ]
-[e ) _a ]
-[e $UE 421  ]
-[e :U 422 ]
-[; ;user.c: 174: return b;
-"174
+[; ;user.c: 177: if(a>b) return b;
+"177
+[e $ ! > _a _b 424  ]
 [e ) _b ]
-[e $UE 421  ]
-[; ;user.c: 175: }
-"175
-[e :UE 421 ]
+[e $UE 423  ]
+[e :U 424 ]
+[; ;user.c: 178: return a;
+"178
+[e ) _a ]
+[e $UE 423  ]
+[; ;user.c: 179: }
+"179
+[e :UE 423 ]
+}
+"181
+[v _MAX `(i ~T0 @X0 1 ef2`i`i ]
+"182
+{
+[; ;user.c: 181: int MAX(int a, int b)
+[; ;user.c: 182: {
+[e :U _MAX ]
+"181
+[v _a `i ~T0 @X0 1 r1 ]
+[v _b `i ~T0 @X0 1 r2 ]
+"182
+[f ]
+[; ;user.c: 183: if(a>b) return a;
+"183
+[e $ ! > _a _b 426  ]
+[e ) _a ]
+[e $UE 425  ]
+[e :U 426 ]
+[; ;user.c: 184: return b;
+"184
+[e ) _b ]
+[e $UE 425  ]
+[; ;user.c: 185: }
+"185
+[e :UE 425 ]
 }

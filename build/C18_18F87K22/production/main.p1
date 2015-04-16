@@ -3711,13 +3711,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _sensorCorrection `Cuc ~T0 @X0 -> 4 `i e ]
 [i _sensorCorrection
 :U ..
--> -> 30 `i `uc
--> -> 30 `i `uc
--> -> 7 `i `uc
--> -> 7 `i `uc
+-> -> 39 `i `uc
+-> -> 39 `i `uc
+-> -> 71 `i `uc
+-> -> 71 `i `uc
 ..
 ]
-[; ;user.h: 19: const unsigned char sensorCorrection[4] = {30,30,7,7};
+[; ;user.h: 19: const unsigned char sensorCorrection[4] = {39,39,71,71};
 [; ;user.h: 21: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 "22
 [v _algorithm `E4060 ~T0 @X0 1 e ]
@@ -3737,6 +3737,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.h: 36: void sensorComputation(int[][10]);
 [; ;user.h: 37: int MIN(int,int);
 [; ;user.h: 38: int MAX(int,int);
+[; ;user.h: 39: void AlgorithmSelection();
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);

@@ -53,11 +53,6 @@ void InitApp(void)
     //Flood Fill, RB2
     TRISBbits.RB2=1;
 
-    //Determine Algorithm
-    if(PORTBbits.RB3 == 1)
-        algorithm = LEFTWALL;
-    else
-        algorithm = RIGHTWALL;
 
     /* Setup analog functionality and port direction */
     ADCON1 =0b00000001;
@@ -107,11 +102,26 @@ void InitApp(void)
             //1.INT0IF 1 = INT0 interrupt flag
             //0.RBIF 1 = RB port change interrupt flag
 
+    AlgorithmSelection();
+    
     /* Enable interrupts */
     delay(1000);    //wait for settlement
     INTCONbits.GIE = 1;
 }
 
+void AlgorithmSelection()
+{
+     ADCON0 = 0b00100111;
+
+     ADCON0bits.GO_DONE = 1;
+     while(ADCON0bits.GO_DONE != 0);
+     
+     if(ADRESL > 0b10000000)
+         algorithm = LEFTWALL;
+     else
+         algorithm = RIGHTWALL;
+     
+}
 void sensorComputation(int sensorTemp[][SENSORCOMPUTATION])
 {
     int max,min,i,j,sum;
