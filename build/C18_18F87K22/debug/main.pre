@@ -4974,7 +4974,7 @@ void ConfigureOscillator(void);
 
 # 18 "user.h"
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
-const unsigned char sensorCorrection[4] = {39,39,71,71};
+const unsigned char sensorCorrection[4] = {0,0,0,0};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 Algorithm algorithm;

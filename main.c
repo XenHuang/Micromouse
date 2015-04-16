@@ -48,7 +48,7 @@ void main(void)
  
     while(1)
     {
-	sensorUpdate();
+        sensorUpdate();
     }
 
 }

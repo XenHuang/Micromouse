@@ -31,6 +31,8 @@
 #define ROTATE90 167            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 #define REVERSEFACTOR 15         //factor that helps correct the 180 turn
+#define FORWARDFACTOR 460         //factor that helps forward till 90 degree turn
+#define FORWARDFACTOR2 200         //factor that helps forward till 90 degree turn
 
 #define LEFTSENSOR 0             //Sensor value position
 #define RIGHTSENSOR 1            //Sensor value position
@@ -38,11 +40,12 @@
 #define RIGHTFRONTSENSOR 3       //Sensor value position
 
 #define FRONTWALLMIN 420          // the higher the value the closer
-#define SIDEWALLMIN 100           // the higher the value the closer
+#define FRONTWALLMAX 100 
+#define SIDEWALLMIN 120           // the higher the value the closer
 #define FRONTWALLMAX 700
 
 #define KCONTROLLERMAX 150
-#define KCONTROLLERMID 30
+#define KCONTROLLERMID 20
 #define KCONTROLLERSTEP 8
 #define KCONTROLLERSTEPMID 4
 #define KCONTROLLERSTEPMAX 1
@@ -56,15 +59,19 @@ int LTurnCounter = 0;
 int RTurnCounter = 0;
 int RotateCounter = 0;
 int ReverseCounter = 0;
+int ForwardCounter = 0;
+Side rotatingSide;
+unsigned char justTurned = FALSE;
 
 
 void motorCounterUpdate(Side,unsigned char);
 unsigned char merge(unsigned char,unsigned char);
 void moveMouse(unsigned char);
 void KController();
-void rotate();
+void rotate(Side);
 void smoothTurn();
 void Reversing();
+void forward();
 
 int ABS(int);
 
@@ -94,7 +101,9 @@ void high_isr(void)
             if(MotorDelayCounter > MOTORDELAYMAX)
             {
                 //Continue rotation
-                if (ReverseCounter > 0)
+                if (ForwardCounter > 0)
+                    forward();
+                else if (ReverseCounter > 0)
 					Reversing();
                 else if(RotateCounter > 0)
                 {
@@ -103,33 +112,82 @@ void high_isr(void)
                         ReverseCounter = REVERSEFACTOR;
                         Reversing();
                     } else {
-                    rotate();
+                    rotate(rotatingSide);
                     }
                 }
-//				else if (LTurnCounter > 0 || RTurnCounter > 0)
-//					smoothTurn();
-//				else if (sensorValue[LEFTSENSOR] < SIDEWALLMIN && algorithm == LEFTWALL)
-//				{
-//					RTurnCounter = SMOOTHROTATEFACTOR;
-//					smoothTurn();
-//				}
-//				else if (sensorValue[RIGHTSENSOR] < SIDEWALLMIN && algorithm == RIGHTWALL)
-//				{
-//					LTurnCounter = SMOOTHROTATEFACTOR;
-//					smoothTurn();
-//				}
+				else if (LTurnCounter > 0 || RTurnCounter > 0) {
+					//smoothTurn();
+                }
+				else if (sensorValue[LEFTSENSOR] < SIDEWALLMIN || (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN && sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN)
+                        && sensorValue[RIGHTSENSOR] > SIDEWALLMIN  && algorithm == LEFTWALL)
+				{
+                   // if(justTurned == FALSE)
+                    ForwardCounter = FORWARDFACTOR;
+                  //  else
+                  // ForwardCounter = FORWARDFACTOR2;
+                    
+                    forward();
+                    RotateCounter = ROTATE90;
+                    rotatingSide = LEFT;
+                  //  justTurned = TRUE;
+					//RTurnCounter = SMOOTHROTATEFACTOR;
+					//smoothTurn();
+				}
+				else if (sensorValue[RIGHTSENSOR] < SIDEWALLMIN && (sensorValue[LEFTFRONTSENSOR] < FRONTWALLMAX || sensorValue[RIGHTFRONTSENSOR] < FRONTWALLMAX)
+                        && sensorValue[LEFTSENSOR] > SIDEWALLMIN && algorithm == LEFTWALL)
+				{
+                 //   if(justTurned == FALSE)
+                    ForwardCounter = FORWARDFACTOR;
+                  //  else
+                 //   ForwardCounter = FORWARDFACTOR2;
+                    forward();
+                    RotateCounter = ROTATE90;          
+                    rotatingSide = RIGHT;
+                //    justTurned = TRUE;
+					//RTurnCounter = SMOOTHROTATEFACTOR;
+					//smoothTurn();
+				}                
                 else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN )
                            && (sensorValue[LEFTFRONTSENSOR] < FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] < FRONTWALLMIN))
                 {	// 2 walls
                    KController();
-                } else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN )
-                        && (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN) && RotateCounter <= 0) 
+                  // justTurned = FALSE;
+               }else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN )
+                        && (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN && sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN) && RotateCounter <= 0) 
 				{	// 3 walls
                     RotateCounter = ROTATE90*2;
-                    rotate();
-                }
+                    rotate(rotatingSide);
+                } 
+                    
+//				else if (sensorValue[RIGHTSENSOR] < SIDEWALLMIN && algorithm == RIGHTWALL)
+//				{
+//                    if(justTurned == FALSE)
+//                    ForwardCounter = FORWARDFACTOR;
+//                    else
+//                    ForwardCounter = FORWARDFACTOR2;
+//                    
+//                    rotatingSide = RIGHT;
+//                    justTurned = TRUE;
+//					//LTurnCounter = SMOOTHROTATEFACTOR;
+//					//smoothTurn();
+//				}                
+//				else if (sensorValue[LEFTSENSOR] < SIDEWALLMIN && (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN)
+//                        && sensorValue[RIGHTSENSOR] > SIDEWALLMIN && algorithm == RIGHTWALL)
+//				{
+//                    if(justTurned == FALSE)
+//                    ForwardCounter = FORWARDFACTOR;
+//                    else
+//                    ForwardCounter = FORWARDFACTOR2;
+//                    
+//                    rotatingSide = LEFT;
+//                    justTurned = TRUE;
+					//LTurnCounter = SMOOTHROTATEFACTOR;
+					//smoothTurn();
+				//}
+   
                 moveMouse(merge(LMotorCounter,RMotorCounter));
                 MotorDelayCounter = 0;
+              
             }
 
             MotorDelayCounter++;
@@ -279,9 +337,9 @@ void KController()
         controllerSteps = KCONTROLLERSTEP;
 }
 
-void rotate()
+void rotate(Side side)
 {
-    if (algorithm == LEFTWALL){
+    if (side == LEFT){
         motorCounterUpdate(RIGHT,0);
         motorCounterUpdate(LEFT,1);
     } else {
@@ -308,4 +366,11 @@ void Reversing()
         motorCounterUpdate(RIGHT,1);
         motorCounterUpdate(LEFT,1);
         ReverseCounter--;
+}
+
+void forward()
+{
+        motorCounterUpdate(RIGHT,0);
+        motorCounterUpdate(LEFT,0);
+        ForwardCounter--;
 }
