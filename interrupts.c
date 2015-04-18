@@ -32,7 +32,7 @@
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 #define REVERSEFACTOR 15         //factor that helps correct the 180 turn
 #define FORWARDFACTOR 420         //factor that helps forward till 90 degree turn
-#define FORWARDFACTOR2 200         //factor that helps forward till 90 degree turn
+#define FORWARDFACTOR2 380         //factor that helps forward till 90 degree turn
 
 #define LEFTSENSOR 0             //Sensor value position
 #define RIGHTSENSOR 1            //Sensor value position
@@ -42,9 +42,10 @@
 // Higher the value the closer
 #define FRONTWALLMIN 420          // 2,3 senses distance closer than this rotates
 #define FRONTWALLMAX 140          // 2,3 senses distance further than this makes left/right turn
-#define SIDEWALLMIN 90           // 0,1 senses distance further than this makes left/right turn
+#define WALLINONEHALFCELL 100         // Is there a frontwall after one and half cell.
+#define SIDEWALLMIN 70           // 0,1 senses distance further than this makes left/right turn
 #define SIDEWALLMIN2 100
-#define FRONTWALLMAX2 850         // 2,3 senses distance closer than this then reverse
+#define FRONTWALLMAX2 800         // 2,3 senses distance closer than this then reverse
 
 #define KCONTROLLERMAX 150        // Maximum diff bettween 0,1 sensors value
 #define KCONTROLLERMID 20
@@ -63,7 +64,7 @@ int RotateCounter = 0;
 int ReverseCounter = 0;
 int ForwardCounter = 0;
 Side rotatingSide;
-unsigned char justTurned = FALSE;
+unsigned char justTurned = 0;  
 
 
 void motorCounterUpdate(Side,unsigned char);
@@ -103,59 +104,64 @@ void high_isr(void)
             if(MotorDelayCounter > MOTORDELAYMAX)
             {
                 //Continue rotation
-                if (ForwardCounter > 0)
+                if (ForwardCounter > 0)      //keep forwarding until counter goes to 0
                     forward();
-                else if (ReverseCounter > 0)
+                else if (ReverseCounter > 0)   //keep reversing until counter goes to 0
 					Reversing();
-                else if(RotateCounter > 0)
+                else if(RotateCounter > 0)      //keep rotating until counter goes to 0
                 {
+                    // If front left or front right has a wall closer than 800, reverse 15 steps
                     if ((sensorValue[LEFTFRONTSENSOR] > FRONTWALLMAX2 || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMAX2)) {
-
                         ReverseCounter = REVERSEFACTOR;
                         Reversing();
-                    } else {
+                    } else {  //else rotate which side?
                     rotate(rotatingSide);
                     }
                 }
-				else if (LTurnCounter > 0 || RTurnCounter > 0) {
-					//smoothTurn();
-                }
-				else if (sensorValue[LEFTSENSOR] < SIDEWALLMIN && algorithm == LEFTWALL)
-//                    || (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN)
-//                        && sensorValue[RIGHTSENSOR] > SIDEWALLMIN  && algorithm == LEFTWALL)
+//				else if (LTurnCounter > 0 || RTurnCounter > 0) {
+//					//smoothTurn();
+//                }
+				else if (sensorValue[LEFTSENSOR] < SIDEWALLMIN && algorithm == LEFTWALL)    // Always left turn if left sensor senses less than 70 in upper left direction.
 				{
-                   // if(justTurned == FALSE)
+                    if(justTurned == 0) { //if just rotate, forward lower step of 380.
                     ForwardCounter = FORWARDFACTOR;
-                  //  else
-                  // ForwardCounter = FORWARDFACTOR2;
-                    
-                    forward();
+                    }else {  //if not just rotate, forward step of 420.
+                   ForwardCounter = FORWARDFACTOR2;
+                    }
+                    forward();   //forward with given forward factor
                     RotateCounter = ROTATE90;
                     rotatingSide = LEFT;
-                  //  justTurned = TRUE;
+                    justTurned = 1;   //enable just turned.
 					//RTurnCounter = SMOOTHROTATEFACTOR;
 					//smoothTurn();
 				}
-				else if (sensorValue[RIGHTSENSOR] < SIDEWALLMIN && (sensorValue[LEFTFRONTSENSOR] < FRONTWALLMAX || sensorValue[RIGHTFRONTSENSOR] < FRONTWALLMAX)
-                        && sensorValue[LEFTSENSOR] > SIDEWALLMIN && algorithm == LEFTWALL)
+                //Right turn if upper left has wall && front has wall in 1.5 cells && upper right has no wall.
+                //if (right sensor senses less than 70) && (both front sensor senses greater than 100) && (left sensor senses higher than 70) 
+				else if (sensorValue[RIGHTSENSOR] < SIDEWALLMIN && (sensorValue[LEFTFRONTSENSOR] > WALLINONEHALFCELL && sensorValue[RIGHTFRONTSENSOR] > WALLINONEHALFCELL)
+                        && sensorValue[LEFTSENSOR] > SIDEWALLMIN && algorithm == LEFTWALL)   
 				{
-                 //   if(justTurned == FALSE)
+                    if(justTurned == 0) { //if just rotate, forward lower step of 380.
                     ForwardCounter = FORWARDFACTOR;
-                  //  else
-                 //   ForwardCounter = FORWARDFACTOR2;
-                    forward();
+                    } else  {  //if not just rotate, forward step of 420.
+                    ForwardCounter = FORWARDFACTOR2;
+                    }
+                    forward();   //forward with given forward factor
                     RotateCounter = ROTATE90;          
                     rotatingSide = RIGHT;
-                //    justTurned = TRUE;
+                    justTurned = 1;   //enable just turned.
 					//RTurnCounter = SMOOTHROTATEFACTOR;
 					//smoothTurn();
-				}                
+				} 
+                // Go forward and self correct if upper left and upper right have walls and no wall in the front
+                //if (right sensor and left sensor senses greater than 70) && (either front sensors senses less than 420)
                 else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN2 )
                            && (sensorValue[LEFTFRONTSENSOR] < FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] < FRONTWALLMIN))
                 {	// 2 walls
                    KController();
-                  // justTurned = FALSE;
-               }else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN )
+                   justTurned = 0;  //disable just turned
+               }
+                
+                else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN )
                         && (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN && sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN) && RotateCounter <= 0) 
 				{	// 3 walls
                     RotateCounter = ROTATE90*2;
@@ -187,7 +193,10 @@ void high_isr(void)
 					//LTurnCounter = SMOOTHROTATEFACTOR;
 					//smoothTurn();
 				//}
-   
+               else {
+              motorCounterUpdate(RIGHT,0);
+              motorCounterUpdate(LEFT,0);
+               }
                 moveMouse(merge(LMotorCounter,RMotorCounter));
                 MotorDelayCounter = 0;
               

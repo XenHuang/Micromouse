@@ -8,15 +8,10 @@
 LEFTWALL 0
 RIGHTWALL 1
 ]
-"64 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"65 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [e E4082 . `uc
 LEFT 0
 RIGHT 1
-]
-"65
-[e E3381 _BOOL `uc
-FALSE 0
-TRUE 1
 ]
 "22 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.h
 [e E4060 . `uc
@@ -53,25 +48,25 @@ RIGHTWALL 1
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"81 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"82 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _high_isr high_isr `II(v  1 e 0 0 ]
-"205
+"209
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
-"242
+"246
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
-"287
+"291
 [v _merge merge `(uc  1 e 1 0 ]
-"294
+"298
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
-"300
+"304
 [v _ABS ABS `(i  1 e 2 0 ]
-"307
+"311
 [v _KController KController `(v  1 e 0 0 ]
-"342
+"346
 [v _rotate rotate `(v  1 e 0 0 ]
-"366
+"370
 [v _Reversing Reversing `(v  1 e 0 0 ]
-"373
+"377
 [v _forward forward `(v  1 e 0 0 ]
 "41 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
 [v _main main `(v  1 e 0 0 ]
@@ -93,7 +88,7 @@ RIGHTWALL 1
 [v _MAX MAX `(i  1 e 2 0 ]
 "1267 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
-[s S261 . 1 `uc 1 TRISB0 1 0 :1:0 
+[s S263 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -103,7 +98,7 @@ RIGHTWALL 1
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "1886
-[s S270 . 1 `uc 1 RB0 1 0 :1:0 
+[s S272 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -112,11 +107,11 @@ RIGHTWALL 1
 `uc 1 RB6 1 0 :1:6 
 `uc 1 RB7 1 0 :1:7 
 ]
-[u S279 . 1 `S261 1 . 1 0 `S270 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES279  1 e 1 @3987 ]
+[u S281 . 1 `S263 1 . 1 0 `S272 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES281  1 e 1 @3987 ]
 "2075
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-[s S229 . 1 `uc 1 TRISE0 1 0 :1:0 
+[s S231 . 1 `uc 1 TRISE0 1 0 :1:0 
 `uc 1 TRISE1 1 0 :1:1 
 `uc 1 TRISE2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -126,13 +121,13 @@ RIGHTWALL 1
 `uc 1 IBF 1 0 :1:7 
 ]
 "2545
-[s S238 . 1 `uc 1 RE0 1 0 :1:0 
+[s S240 . 1 `uc 1 RE0 1 0 :1:0 
 `uc 1 RE1 1 0 :1:1 
 `uc 1 RE2 1 0 :1:2 
 `uc 1 RE3 1 0 :1:3 
 ]
-[u S243 . 1 `S229 1 . 1 0 `S238 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES243  1 e 1 @3990 ]
+[u S245 . 1 `S231 1 . 1 0 `S240 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES245  1 e 1 @3990 ]
 "2680
 [v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
 "4645
@@ -141,38 +136,38 @@ RIGHTWALL 1
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
 "4805
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
-[s S358 . 1 `uc 1 . 1 0 :1:0 
+[s S360 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "4853
-[s S361 . 1 `uc 1 ADON 1 0 :1:0 
+[s S363 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 ]
-[s S368 . 1 `uc 1 . 1 0 :1:0 
+[s S370 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
 `uc 1 CHS2 1 0 :1:4 
 `uc 1 CHS3 1 0 :1:5 
 ]
-[s S375 . 1 `uc 1 . 1 0 :1:0 
+[s S377 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S378 . 1 `uc 1 . 1 0 :1:0 
+[s S380 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S381 . 1 `uc 1 . 1 0 :1:0 
+[s S383 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S384 . 1 `uc 1 . 1 0 :1:0 
+[s S386 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S387 . 1 `uc 1 . 1 0 :1:0 
+[s S389 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S390 . 1 `S358 1 . 1 0 `S361 1 . 1 0 `S358 1 . 1 0 `S368 1 . 1 0 `S375 1 . 1 0 `S378 1 . 1 0 `S381 1 . 1 0 `S384 1 . 1 0 `S387 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES390  1 e 1 @4034 ]
+[u S392 . 1 `S360 1 . 1 0 `S363 1 . 1 0 `S360 1 . 1 0 `S370 1 . 1 0 `S377 1 . 1 0 `S380 1 . 1 0 `S383 1 . 1 0 `S386 1 . 1 0 `S389 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES392  1 e 1 @4034 ]
 "4933
 [v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
 "4939
@@ -185,7 +180,7 @@ RIGHTWALL 1
 [v _INTCON2 INTCON2 `VEuc  1 e 1 @4081 ]
 "6630
 [v _INTCON INTCON `VEuc  1 e 1 @4082 ]
-[s S30 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S27 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -195,7 +190,7 @@ RIGHTWALL 1
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "6682
-[s S39 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S36 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -204,7 +199,7 @@ RIGHTWALL 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S48 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S45 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -213,7 +208,7 @@ RIGHTWALL 1
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[s S57 . 1 `uc 1 . 1 0 :1:0 
+[s S54 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -222,32 +217,34 @@ RIGHTWALL 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S66 . 1 `uc 1 . 1 0 :6:0 
+[s S63 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S70 . 1 `S30 1 . 1 0 `S39 1 . 1 0 `S48 1 . 1 0 `S57 1 . 1 0 `S66 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES70  1 e 1 @4082 ]
-"55 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+[u S67 . 1 `S27 1 . 1 0 `S36 1 . 1 0 `S45 1 . 1 0 `S54 1 . 1 0 `S63 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES67  1 e 1 @4082 ]
+"56 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _LMotorCounter LMotorCounter `uc  1 e 1 0 ]
-"56
-[v _RMotorCounter RMotorCounter `uc  1 e 1 0 ]
 "57
-[v _controllerSteps controllerSteps `uc  1 e 1 0 ]
+[v _RMotorCounter RMotorCounter `uc  1 e 1 0 ]
 "58
-[v _MotorDelayCounter MotorDelayCounter `i  1 e 2 0 ]
+[v _controllerSteps controllerSteps `uc  1 e 1 0 ]
 "59
-[v _LTurnCounter LTurnCounter `i  1 e 2 0 ]
+[v _MotorDelayCounter MotorDelayCounter `i  1 e 2 0 ]
 "60
-[v _RTurnCounter RTurnCounter `i  1 e 2 0 ]
+[v _LTurnCounter LTurnCounter `i  1 e 2 0 ]
 "61
-[v _RotateCounter RotateCounter `i  1 e 2 0 ]
+[v _RTurnCounter RTurnCounter `i  1 e 2 0 ]
 "62
-[v _ReverseCounter ReverseCounter `i  1 e 2 0 ]
+[v _RotateCounter RotateCounter `i  1 e 2 0 ]
 "63
-[v _ForwardCounter ForwardCounter `i  1 e 2 0 ]
+[v _ReverseCounter ReverseCounter `i  1 e 2 0 ]
 "64
+[v _ForwardCounter ForwardCounter `i  1 e 2 0 ]
+"65
 [v _rotatingSide rotatingSide `E4082  1 e 1 0 ]
+"66
+[v _justTurned justTurned `uc  1 e 1 0 ]
 "18 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.h
 [v _sensorLocation sensorLocation `C[4]uc  1 e 4 0 ]
 "19
@@ -345,79 +342,79 @@ RIGHTWALL 1
 {
 "36
 } 0
-"205 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"209 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
 {
-"240
+"244
 } 0
-"81
+"82
 [v _high_isr high_isr `II(v  1 e 0 0 ]
 {
-"201
+"205
 } 0
-"342
+"346
 [v _rotate rotate `(v  1 e 0 0 ]
 {
 [v rotate@side side `E4082  1 a 1 wreg ]
 [v rotate@side side `E4082  1 a 1 wreg ]
-"344
+"348
 [v rotate@side side `E4082  1 a 1 19 ]
-"352
+"356
 } 0
-"373
+"377
 [v _forward forward `(v  1 e 0 0 ]
 {
-"378
+"382
 } 0
-"366
+"370
 [v _Reversing Reversing `(v  1 e 0 0 ]
 {
-"371
+"375
 } 0
-"307
+"311
 [v _KController KController `(v  1 e 0 0 ]
 {
-"310
+"314
 [v KController@diff diff `i  1 a 2 23 ]
-"309
+"313
 [v KController@correctTo correctTo `E4082  1 a 1 22 ]
-"340
+"344
 } 0
-"294
+"298
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
 {
 [v moveMouse@action action `uc  1 a 1 wreg ]
 [v moveMouse@action action `uc  1 a 1 wreg ]
-"296
+"300
 [v moveMouse@action action `uc  1 a 1 17 ]
-"297
+"301
 } 0
-"242
+"246
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
 {
 [v motorCounterUpdate@side side `E4082  1 a 1 wreg ]
 [v motorCounterUpdate@side side `E4082  1 a 1 wreg ]
 [v motorCounterUpdate@reverse reverse `uc  1 p 1 17 ]
-"244
+"248
 [v motorCounterUpdate@side side `E4082  1 a 1 18 ]
-"285
+"289
 } 0
-"287
+"291
 [v _merge merge `(uc  1 e 1 0 ]
 {
 [v merge@left left `uc  1 a 1 wreg ]
-"289
+"293
 [v merge@merged merged `uc  1 a 1 19 ]
-"287
+"291
 [v merge@left left `uc  1 a 1 wreg ]
 [v merge@right right `uc  1 p 1 17 ]
-"290
+"294
 [v merge@left left `uc  1 a 1 18 ]
-"292
+"296
 } 0
-"300
+"304
 [v _ABS ABS `(i  1 e 2 0 ]
 {
 [v ABS@x x `i  1 p 2 17 ]
-"304
+"308
 } 0

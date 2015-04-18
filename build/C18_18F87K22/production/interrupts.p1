@@ -2,12 +2,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "22 user.h
 [c E4060 0 1 .. ]
 [n E4060 . LEFTWALL RIGHTWALL  ]
-"65 interrupts.c
+"66 interrupts.c
 [c E4082 0 1 .. ]
 [n E4082 . LEFT RIGHT  ]
-"66
-[c E3381 0 1 .. ]
-[n E3381 _BOOL FALSE TRUE  ]
 "6636 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [s S346 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S346 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
@@ -28,17 +25,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S345 . . . . . . ]
 "6682
 [v _INTCONbits `VS345 ~T0 @X0 0 e@4082 ]
-"76 interrupts.c
+"77 interrupts.c
 [v _forward `(v ~T0 @X0 0 ef ]
-"75
+"76
 [v _Reversing `(v ~T0 @X0 0 ef ]
-"73
+"74
 [v _rotate `(v ~T0 @X0 0 ef1`E4082 ]
-"72
+"73
 [v _KController `(v ~T0 @X0 0 ef ]
-"71
-[v _moveMouse `(v ~T0 @X0 0 ef1`uc ]
 "70
+[v _motorCounterUpdate `(v ~T0 @X0 0 ef2`E4082`uc ]
+"72
+[v _moveMouse `(v ~T0 @X0 0 ef1`uc ]
+"71
 [v _merge `(uc ~T0 @X0 0 ef2`uc`uc ]
 "1267 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [v _LATC `Vuc ~T0 @X0 0 e@3979 ]
@@ -3744,13 +3743,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _sensorCorrection `Cuc ~T0 @X0 -> 4 `i e ]
 [i _sensorCorrection
 :U ..
--> -> 24 `i `uc
--> -> 24 `i `uc
--> -> 6 `i `uc
--> -> 6 `i `uc
+-> -> 54 `i `uc
+-> -> 54 `i `uc
+-> -> 29 `i `uc
+-> -> 29 `i `uc
 ..
 ]
-[; ;user.h: 19: const unsigned char sensorCorrection[4] = {24,24,6,6};
+[; ;user.h: 19: const unsigned char sensorCorrection[4] = {54,54,29,29};
 [; ;user.h: 21: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 "22
 [v _algorithm `E4060 ~T0 @X0 1 e ]
@@ -3771,806 +3770,855 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.h: 37: int MIN(int,int);
 [; ;user.h: 38: int MAX(int,int);
 [; ;user.h: 39: void AlgorithmSelection();
-[; ;interrupts.c: 55: typedef enum {LEFT,RIGHT} Side;
-"56 interrupts.c
+[; ;interrupts.c: 56: typedef enum {LEFT,RIGHT} Side;
+"57 interrupts.c
 [v _LMotorCounter `uc ~T0 @X0 1 e ]
 [i _LMotorCounter
 -> -> 0 `i `uc
 ]
-[; ;interrupts.c: 56: unsigned char LMotorCounter = 0;
-"57
+[; ;interrupts.c: 57: unsigned char LMotorCounter = 0;
+"58
 [v _RMotorCounter `uc ~T0 @X0 1 e ]
 [i _RMotorCounter
 -> -> 0 `i `uc
 ]
-[; ;interrupts.c: 57: unsigned char RMotorCounter = 0;
-"58
+[; ;interrupts.c: 58: unsigned char RMotorCounter = 0;
+"59
 [v _controllerSteps `uc ~T0 @X0 1 e ]
 [i _controllerSteps
 -> -> 8 `i `uc
 ]
-[; ;interrupts.c: 58: unsigned char controllerSteps = 8;
-"59
+[; ;interrupts.c: 59: unsigned char controllerSteps = 8;
+"60
 [v _MotorDelayCounter `i ~T0 @X0 1 e ]
 [i _MotorDelayCounter
 -> 0 `i
 ]
-[; ;interrupts.c: 59: int MotorDelayCounter = 0;
-"60
+[; ;interrupts.c: 60: int MotorDelayCounter = 0;
+"61
 [v _LTurnCounter `i ~T0 @X0 1 e ]
 [i _LTurnCounter
 -> 0 `i
 ]
-[; ;interrupts.c: 60: int LTurnCounter = 0;
-"61
+[; ;interrupts.c: 61: int LTurnCounter = 0;
+"62
 [v _RTurnCounter `i ~T0 @X0 1 e ]
 [i _RTurnCounter
 -> 0 `i
 ]
-[; ;interrupts.c: 61: int RTurnCounter = 0;
-"62
+[; ;interrupts.c: 62: int RTurnCounter = 0;
+"63
 [v _RotateCounter `i ~T0 @X0 1 e ]
 [i _RotateCounter
 -> 0 `i
 ]
-[; ;interrupts.c: 62: int RotateCounter = 0;
-"63
+[; ;interrupts.c: 63: int RotateCounter = 0;
+"64
 [v _ReverseCounter `i ~T0 @X0 1 e ]
 [i _ReverseCounter
 -> 0 `i
 ]
-[; ;interrupts.c: 63: int ReverseCounter = 0;
-"64
+[; ;interrupts.c: 64: int ReverseCounter = 0;
+"65
 [v _ForwardCounter `i ~T0 @X0 1 e ]
 [i _ForwardCounter
 -> 0 `i
 ]
-[; ;interrupts.c: 64: int ForwardCounter = 0;
-"65
-[v _rotatingSide `E4082 ~T0 @X0 1 e ]
-[; ;interrupts.c: 65: Side rotatingSide;
+[; ;interrupts.c: 65: int ForwardCounter = 0;
 "66
+[v _rotatingSide `E4082 ~T0 @X0 1 e ]
+[; ;interrupts.c: 66: Side rotatingSide;
+"67
 [v _justTurned `uc ~T0 @X0 1 e ]
 [i _justTurned
--> . `E3381 0 `uc
+-> -> 0 `i `uc
 ]
-[; ;interrupts.c: 66: unsigned char justTurned = FALSE;
-[; ;interrupts.c: 69: void motorCounterUpdate(Side,unsigned char);
-[; ;interrupts.c: 70: unsigned char merge(unsigned char,unsigned char);
-[; ;interrupts.c: 71: void moveMouse(unsigned char);
-[; ;interrupts.c: 72: void KController();
-[; ;interrupts.c: 73: void rotate(Side);
-[; ;interrupts.c: 74: void smoothTurn();
-[; ;interrupts.c: 75: void Reversing();
-[; ;interrupts.c: 76: void forward();
-[; ;interrupts.c: 78: int ABS(int);
+[; ;interrupts.c: 67: unsigned char justTurned = 0;
+[; ;interrupts.c: 70: void motorCounterUpdate(Side,unsigned char);
+[; ;interrupts.c: 71: unsigned char merge(unsigned char,unsigned char);
+[; ;interrupts.c: 72: void moveMouse(unsigned char);
+[; ;interrupts.c: 73: void KController();
+[; ;interrupts.c: 74: void rotate(Side);
+[; ;interrupts.c: 75: void smoothTurn();
+[; ;interrupts.c: 76: void Reversing();
+[; ;interrupts.c: 77: void forward();
+[; ;interrupts.c: 79: int ABS(int);
 [v F4115 `(v ~T0 @X0 1 tf ]
-"82
+"83
 [v _high_isr `IF4115 ~T0 @X0 1 e ]
-"91
+"92
 {
-[; ;interrupts.c: 82: void interrupt high_isr(void)
-[; ;interrupts.c: 91: {
+[; ;interrupts.c: 83: void interrupt high_isr(void)
+[; ;interrupts.c: 92: {
 [e :U _high_isr ]
 [f ]
-[; ;interrupts.c: 101: if(INTCONbits.TMR0IF == 1)
-"101
-[e $ ! == -> . . _INTCONbits 0 2 `i -> 1 `i 392  ]
-[; ;interrupts.c: 102: {
+[; ;interrupts.c: 102: if(INTCONbits.TMR0IF == 1)
 "102
-{
-[; ;interrupts.c: 103: if(MotorDelayCounter > 2)
+[e $ ! == -> . . _INTCONbits 0 2 `i -> 1 `i 392  ]
+[; ;interrupts.c: 103: {
 "103
-[e $ ! > _MotorDelayCounter -> 2 `i 393  ]
-[; ;interrupts.c: 104: {
-"104
 {
-[; ;interrupts.c: 106: if (ForwardCounter > 0)
-"106
-[e $ ! > _ForwardCounter -> 0 `i 394  ]
-[; ;interrupts.c: 107: forward();
+[; ;interrupts.c: 104: if(MotorDelayCounter > 2)
+"104
+[e $ ! > _MotorDelayCounter -> 2 `i 393  ]
+[; ;interrupts.c: 105: {
+"105
+{
+[; ;interrupts.c: 107: if (ForwardCounter > 0)
 "107
+[e $ ! > _ForwardCounter -> 0 `i 394  ]
+[; ;interrupts.c: 108: forward();
+"108
 [e ( _forward ..  ]
 [e $U 395  ]
-"108
-[e :U 394 ]
-[; ;interrupts.c: 108: else if (ReverseCounter > 0)
-[e $ ! > _ReverseCounter -> 0 `i 396  ]
-[; ;interrupts.c: 109: Reversing();
 "109
+[e :U 394 ]
+[; ;interrupts.c: 109: else if (ReverseCounter > 0)
+[e $ ! > _ReverseCounter -> 0 `i 396  ]
+[; ;interrupts.c: 110: Reversing();
+"110
 [e ( _Reversing ..  ]
 [e $U 397  ]
-"110
-[e :U 396 ]
-[; ;interrupts.c: 110: else if(RotateCounter > 0)
-[e $ ! > _RotateCounter -> 0 `i 398  ]
-[; ;interrupts.c: 111: {
 "111
-{
-[; ;interrupts.c: 112: if ((sensorValue[2] > 850 || sensorValue[3] > 850)) {
+[e :U 396 ]
+[; ;interrupts.c: 111: else if(RotateCounter > 0)
+[e $ ! > _RotateCounter -> 0 `i 398  ]
+[; ;interrupts.c: 112: {
 "112
-[e $ ! || > *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 850 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 850 `i 399  ]
 {
-[; ;interrupts.c: 114: ReverseCounter = 15;
+[; ;interrupts.c: 114: if ((sensorValue[2] > 800 || sensorValue[3] > 800)) {
 "114
-[e = _ReverseCounter -> 15 `i ]
-[; ;interrupts.c: 115: Reversing();
+[e $ ! || > *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 800 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 800 `i 399  ]
+{
+[; ;interrupts.c: 115: ReverseCounter = 15;
 "115
-[e ( _Reversing ..  ]
+[e = _ReverseCounter -> 15 `i ]
+[; ;interrupts.c: 116: Reversing();
 "116
+[e ( _Reversing ..  ]
+"117
 }
-[; ;interrupts.c: 116: } else {
+[; ;interrupts.c: 117: } else {
 [e $U 400  ]
 [e :U 399 ]
 {
-[; ;interrupts.c: 117: rotate(rotatingSide);
-"117
-[e ( _rotate (1 _rotatingSide ]
+[; ;interrupts.c: 118: rotate(rotatingSide);
 "118
-}
-[e :U 400 ]
+[e ( _rotate (1 _rotatingSide ]
 "119
 }
-[; ;interrupts.c: 118: }
-[; ;interrupts.c: 119: }
-[e $U 401  ]
+[e :U 400 ]
 "120
+}
+[; ;interrupts.c: 119: }
+[; ;interrupts.c: 120: }
+[e $U 401  ]
+"124
 [e :U 398 ]
-[; ;interrupts.c: 120: else if (LTurnCounter > 0 || RTurnCounter > 0) {
-[e $ ! || > _LTurnCounter -> 0 `i > _RTurnCounter -> 0 `i 402  ]
+[; ;interrupts.c: 124: else if (sensorValue[0] < 70 && algorithm == LEFTWALL)
+[e $ ! && < *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i == -> _algorithm `i -> . `E4060 0 `i 402  ]
+[; ;interrupts.c: 125: {
+"125
 {
-"122
-}
-[; ;interrupts.c: 122: }
-[e $U 403  ]
-"123
-[e :U 402 ]
-[; ;interrupts.c: 123: else if (sensorValue[0] < 90 && algorithm == LEFTWALL)
-[e $ ! && < *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i == -> _algorithm `i -> . `E4060 0 `i 404  ]
-[; ;interrupts.c: 126: {
+[; ;interrupts.c: 126: if(justTurned == 0) {
 "126
+[e $ ! == -> _justTurned `i -> 0 `i 403  ]
 {
-[; ;interrupts.c: 128: ForwardCounter = 420;
+[; ;interrupts.c: 127: ForwardCounter = 420;
+"127
+[e = _ForwardCounter -> 420 `i ]
 "128
-[e = _ForwardCounter -> 420 `i ]
-[; ;interrupts.c: 132: forward();
-"132
-[e ( _forward ..  ]
-[; ;interrupts.c: 133: RotateCounter = 167;
-"133
-[e = _RotateCounter -> 167 `i ]
-[; ;interrupts.c: 134: rotatingSide = LEFT;
-"134
-[e = _rotatingSide . `E4082 0 ]
-"138
 }
-[; ;interrupts.c: 138: }
-[e $U 405  ]
-"139
-[e :U 404 ]
-[; ;interrupts.c: 139: else if (sensorValue[1] < 90 && (sensorValue[2] < 140 || sensorValue[3] < 140)
-[; ;interrupts.c: 140: && sensorValue[0] > 90 && algorithm == LEFTWALL)
-"140
-[e $ ! && && && < *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i || < *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 140 `i < *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 140 `i > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i == -> _algorithm `i -> . `E4060 0 `i 406  ]
-[; ;interrupts.c: 141: {
-"141
-{
-[; ;interrupts.c: 143: ForwardCounter = 420;
-"143
-[e = _ForwardCounter -> 420 `i ]
-[; ;interrupts.c: 146: forward();
-"146
-[e ( _forward ..  ]
-[; ;interrupts.c: 147: RotateCounter = 167;
-"147
-[e = _RotateCounter -> 167 `i ]
-[; ;interrupts.c: 148: rotatingSide = RIGHT;
-"148
-[e = _rotatingSide . `E4082 1 ]
-"152
-}
-[; ;interrupts.c: 152: }
-[e $U 407  ]
-"153
-[e :U 406 ]
-[; ;interrupts.c: 153: else if ((sensorValue[0] > 90 && sensorValue[1] > 100 )
-[; ;interrupts.c: 154: && (sensorValue[2] < 420 || sensorValue[3] < 420))
-"154
-[e $ ! && && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 100 `i || < *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i < *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i 408  ]
-[; ;interrupts.c: 155: {
-"155
-{
-[; ;interrupts.c: 156: KController();
-"156
-[e ( _KController ..  ]
-"158
-}
-[; ;interrupts.c: 158: }else if ((sensorValue[0] > 90 && sensorValue[1] > 90 )
-[e $U 409  ]
-[e :U 408 ]
-[; ;interrupts.c: 159: && (sensorValue[2] > 420 && sensorValue[3] > 420) && RotateCounter <= 0)
-"159
-[e $ ! && && && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i && > *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i <= _RotateCounter -> 0 `i 410  ]
-[; ;interrupts.c: 160: {
-"160
-{
-[; ;interrupts.c: 161: RotateCounter = 167*2;
-"161
-[e = _RotateCounter * -> 167 `i -> 2 `i ]
-[; ;interrupts.c: 162: rotate(rotatingSide);
-"162
-[e ( _rotate (1 _rotatingSide ]
-"163
-}
-[e :U 410 ]
-"191
-[e :U 409 ]
-[e :U 407 ]
-[e :U 405 ]
+[; ;interrupts.c: 128: }else {
+[e $U 404  ]
 [e :U 403 ]
+{
+[; ;interrupts.c: 129: ForwardCounter = 380;
+"129
+[e = _ForwardCounter -> 380 `i ]
+"130
+}
+[e :U 404 ]
+[; ;interrupts.c: 130: }
+[; ;interrupts.c: 131: forward();
+"131
+[e ( _forward ..  ]
+[; ;interrupts.c: 132: RotateCounter = 167;
+"132
+[e = _RotateCounter -> 167 `i ]
+[; ;interrupts.c: 133: rotatingSide = LEFT;
+"133
+[e = _rotatingSide . `E4082 0 ]
+[; ;interrupts.c: 134: justTurned = 1;
+"134
+[e = _justTurned -> -> 1 `i `uc ]
+"137
+}
+[; ;interrupts.c: 137: }
+[e $U 405  ]
+"140
+[e :U 402 ]
+[; ;interrupts.c: 140: else if (sensorValue[1] < 70 && (sensorValue[2] > 100 && sensorValue[3] > 100)
+[; ;interrupts.c: 141: && sensorValue[0] > 70 && algorithm == LEFTWALL)
+"141
+[e $ ! && && && < *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i && > *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 100 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 100 `i > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i == -> _algorithm `i -> . `E4060 0 `i 406  ]
+[; ;interrupts.c: 142: {
+"142
+{
+[; ;interrupts.c: 143: if(justTurned == 0) {
+"143
+[e $ ! == -> _justTurned `i -> 0 `i 407  ]
+{
+[; ;interrupts.c: 144: ForwardCounter = 420;
+"144
+[e = _ForwardCounter -> 420 `i ]
+"145
+}
+[; ;interrupts.c: 145: } else {
+[e $U 408  ]
+[e :U 407 ]
+{
+[; ;interrupts.c: 146: ForwardCounter = 380;
+"146
+[e = _ForwardCounter -> 380 `i ]
+"147
+}
+[e :U 408 ]
+[; ;interrupts.c: 147: }
+[; ;interrupts.c: 148: forward();
+"148
+[e ( _forward ..  ]
+[; ;interrupts.c: 149: RotateCounter = 167;
+"149
+[e = _RotateCounter -> 167 `i ]
+[; ;interrupts.c: 150: rotatingSide = RIGHT;
+"150
+[e = _rotatingSide . `E4082 1 ]
+[; ;interrupts.c: 151: justTurned = 1;
+"151
+[e = _justTurned -> -> 1 `i `uc ]
+"154
+}
+[; ;interrupts.c: 154: }
+[e $U 409  ]
+"157
+[e :U 406 ]
+[; ;interrupts.c: 157: else if ((sensorValue[0] > 70 && sensorValue[1] > 100 )
+[; ;interrupts.c: 158: && (sensorValue[2] < 420 || sensorValue[3] < 420))
+"158
+[e $ ! && && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 100 `i || < *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i < *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i 410  ]
+[; ;interrupts.c: 159: {
+"159
+{
+[; ;interrupts.c: 160: KController();
+"160
+[e ( _KController ..  ]
+[; ;interrupts.c: 161: justTurned = 0;
+"161
+[e = _justTurned -> -> 0 `i `uc ]
+"162
+}
+[; ;interrupts.c: 162: }
+[e $U 411  ]
+"164
+[e :U 410 ]
+[; ;interrupts.c: 164: else if ((sensorValue[0] > 70 && sensorValue[1] > 70 )
+[; ;interrupts.c: 165: && (sensorValue[2] > 420 && sensorValue[3] > 420) && RotateCounter <= 0)
+"165
+[e $ ! && && && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i && > *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i <= _RotateCounter -> 0 `i 412  ]
+[; ;interrupts.c: 166: {
+"166
+{
+[; ;interrupts.c: 167: RotateCounter = 167*2;
+"167
+[e = _RotateCounter * -> 167 `i -> 2 `i ]
+[; ;interrupts.c: 168: rotate(rotatingSide);
+"168
+[e ( _rotate (1 _rotatingSide ]
+"169
+}
+[; ;interrupts.c: 169: }
+[e $U 413  ]
+"196
+[e :U 412 ]
+[; ;interrupts.c: 196: else {
+{
+[; ;interrupts.c: 197: motorCounterUpdate(RIGHT,0);
+"197
+[e ( _motorCounterUpdate (2 , . `E4082 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 198: motorCounterUpdate(LEFT,0);
+"198
+[e ( _motorCounterUpdate (2 , . `E4082 0 -> -> 0 `i `uc ]
+"199
+}
+[e :U 413 ]
+[e :U 411 ]
+[e :U 409 ]
+[e :U 405 ]
 [e :U 401 ]
 [e :U 397 ]
 [e :U 395 ]
-[; ;interrupts.c: 163: }
-[; ;interrupts.c: 191: moveMouse(merge(LMotorCounter,RMotorCounter));
+[; ;interrupts.c: 199: }
+[; ;interrupts.c: 200: moveMouse(merge(LMotorCounter,RMotorCounter));
+"200
 [e ( _moveMouse (1 ( _merge (2 , _LMotorCounter _RMotorCounter ]
-[; ;interrupts.c: 192: MotorDelayCounter = 0;
-"192
+[; ;interrupts.c: 201: MotorDelayCounter = 0;
+"201
 [e = _MotorDelayCounter -> 0 `i ]
-"194
+"203
 }
 [e :U 393 ]
-[; ;interrupts.c: 194: }
-[; ;interrupts.c: 196: MotorDelayCounter++;
-"196
+[; ;interrupts.c: 203: }
+[; ;interrupts.c: 205: MotorDelayCounter++;
+"205
 [e ++ _MotorDelayCounter -> 1 `i ]
-[; ;interrupts.c: 197: INTCONbits.TMR0IF = 0;
-"197
+[; ;interrupts.c: 206: INTCONbits.TMR0IF = 0;
+"206
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"198
+"207
 }
 [e :U 392 ]
-[; ;interrupts.c: 198: }
-[; ;interrupts.c: 202: }
-"202
+[; ;interrupts.c: 207: }
+[; ;interrupts.c: 211: }
+"211
 [e :UE 391 ]
 }
 [v F4118 `(v ~T0 @X0 1 tf ]
-"206
+"215
 [v _low_isr `ILF4118 ~T0 @X0 1 e ]
-"214
+"223
 {
-[; ;interrupts.c: 206: void low_priority interrupt low_isr(void)
-[; ;interrupts.c: 214: {
+[; ;interrupts.c: 215: void low_priority interrupt low_isr(void)
+[; ;interrupts.c: 223: {
 [e :U _low_isr ]
 [f ]
-[; ;interrupts.c: 241: }
-"241
-[e :UE 411 ]
+[; ;interrupts.c: 250: }
+"250
+[e :UE 414 ]
 }
-"243
+"252
 [v _motorCounterUpdate `(v ~T0 @X0 1 ef2`E4082`uc ]
-"244
+"253
 {
-[; ;interrupts.c: 243: void motorCounterUpdate(Side side, unsigned char reverse)
-[; ;interrupts.c: 244: {
+[; ;interrupts.c: 252: void motorCounterUpdate(Side side, unsigned char reverse)
+[; ;interrupts.c: 253: {
 [e :U _motorCounterUpdate ]
-"243
+"252
 [v _side `E4082 ~T0 @X0 1 r1 ]
 [v _reverse `uc ~T0 @X0 1 r2 ]
-"244
-[f ]
-[; ;interrupts.c: 245: if(side == LEFT && reverse == 1)
-"245
-[e $ ! && == -> _side `i -> . `E4082 0 `i == -> _reverse `i -> 1 `i 413  ]
-[; ;interrupts.c: 246: {
-"246
-{
-[; ;interrupts.c: 247: switch(LMotorCounter)
-"247
-[e $U 415  ]
-[; ;interrupts.c: 248: {
-"248
-{
-[; ;interrupts.c: 249: case 0b00000001: LMotorCounter = 0b00000010; break;
-"249
-[e :U 416 ]
-[e = _LMotorCounter -> -> 2 `i `uc ]
-[e $U 414  ]
-[; ;interrupts.c: 250: case 0b00000010: LMotorCounter = 0b00000100; break;
-"250
-[e :U 417 ]
-[e = _LMotorCounter -> -> 4 `i `uc ]
-[e $U 414  ]
-[; ;interrupts.c: 251: case 0b00000100: LMotorCounter = 0b00001000; break;
-"251
-[e :U 418 ]
-[e = _LMotorCounter -> -> 8 `i `uc ]
-[e $U 414  ]
-[; ;interrupts.c: 252: case 0b00001000: LMotorCounter = 0b00000001; break;
-"252
-[e :U 419 ]
-[e = _LMotorCounter -> -> 1 `i `uc ]
-[e $U 414  ]
-[; ;interrupts.c: 253: default: LMotorCounter = 0b00000001;
 "253
-[e :U 420 ]
-[e = _LMotorCounter -> -> 1 `i `uc ]
+[f ]
+[; ;interrupts.c: 254: if(side == LEFT && reverse == 1)
 "254
-}
-[; ;interrupts.c: 254: }
-[e $U 414  ]
-"247
-[e :U 415 ]
-[e [\ _LMotorCounter , $ -> -> 1 `i `uc 416
- , $ -> -> 2 `i `uc 417
- , $ -> -> 4 `i `uc 418
- , $ -> -> 8 `i `uc 419
- 420 ]
-"254
-[e :U 414 ]
+[e $ ! && == -> _side `i -> . `E4082 0 `i == -> _reverse `i -> 1 `i 416  ]
+[; ;interrupts.c: 255: {
 "255
-}
-[; ;interrupts.c: 255: } else if(side == RIGHT && reverse == 1)
-[e $U 421  ]
-[e :U 413 ]
-[e $ ! && == -> _side `i -> . `E4082 1 `i == -> _reverse `i -> 1 `i 422  ]
-[; ;interrupts.c: 256: {
+{
+[; ;interrupts.c: 256: switch(LMotorCounter)
 "256
-{
-[; ;interrupts.c: 257: switch(RMotorCounter)
+[e $U 418  ]
+[; ;interrupts.c: 257: {
 "257
-[e $U 424  ]
-[; ;interrupts.c: 258: {
+{
+[; ;interrupts.c: 258: case 0b00000001: LMotorCounter = 0b00000010; break;
 "258
-{
-[; ;interrupts.c: 259: case 0b00000001: RMotorCounter = 0b00001000; break;
-"259
-[e :U 425 ]
-[e = _RMotorCounter -> -> 8 `i `uc ]
-[e $U 423  ]
-[; ;interrupts.c: 260: case 0b00000010: RMotorCounter = 0b00000001; break;
-"260
-[e :U 426 ]
-[e = _RMotorCounter -> -> 1 `i `uc ]
-[e $U 423  ]
-[; ;interrupts.c: 261: case 0b00000100: RMotorCounter = 0b00000010; break;
-"261
-[e :U 427 ]
-[e = _RMotorCounter -> -> 2 `i `uc ]
-[e $U 423  ]
-[; ;interrupts.c: 262: case 0b00001000: RMotorCounter = 0b00000100; break;
-"262
-[e :U 428 ]
-[e = _RMotorCounter -> -> 4 `i `uc ]
-[e $U 423  ]
-[; ;interrupts.c: 263: default: RMotorCounter = 0b00001000;
-"263
-[e :U 429 ]
-[e = _RMotorCounter -> -> 8 `i `uc ]
-"264
-}
-[; ;interrupts.c: 264: }
-[e $U 423  ]
-"257
-[e :U 424 ]
-[e [\ _RMotorCounter , $ -> -> 1 `i `uc 425
- , $ -> -> 2 `i `uc 426
- , $ -> -> 4 `i `uc 427
- , $ -> -> 8 `i `uc 428
- 429 ]
-"264
-[e :U 423 ]
-"265
-}
-[; ;interrupts.c: 265: } else if(side == LEFT && reverse == 0)
-[e $U 430  ]
-[e :U 422 ]
-[e $ ! && == -> _side `i -> . `E4082 0 `i == -> _reverse `i -> 0 `i 431  ]
-[; ;interrupts.c: 266: {
-"266
-{
-[; ;interrupts.c: 267: switch(LMotorCounter)
-"267
-[e $U 433  ]
-[; ;interrupts.c: 268: {
-"268
-{
-[; ;interrupts.c: 269: case 0b00000001: LMotorCounter = 0b00001000; break;
-"269
-[e :U 434 ]
-[e = _LMotorCounter -> -> 8 `i `uc ]
-[e $U 432  ]
-[; ;interrupts.c: 270: case 0b00000010: LMotorCounter = 0b00000001; break;
-"270
-[e :U 435 ]
-[e = _LMotorCounter -> -> 1 `i `uc ]
-[e $U 432  ]
-[; ;interrupts.c: 271: case 0b00000100: LMotorCounter = 0b00000010; break;
-"271
-[e :U 436 ]
+[e :U 419 ]
 [e = _LMotorCounter -> -> 2 `i `uc ]
-[e $U 432  ]
-[; ;interrupts.c: 272: case 0b00001000: LMotorCounter = 0b00000100; break;
-"272
-[e :U 437 ]
+[e $U 417  ]
+[; ;interrupts.c: 259: case 0b00000010: LMotorCounter = 0b00000100; break;
+"259
+[e :U 420 ]
 [e = _LMotorCounter -> -> 4 `i `uc ]
-[e $U 432  ]
-[; ;interrupts.c: 273: default: LMotorCounter = 0b00001000;
-"273
-[e :U 438 ]
-[e = _LMotorCounter -> -> 8 `i `uc ]
-"274
-}
-[; ;interrupts.c: 274: }
-[e $U 432  ]
-"267
-[e :U 433 ]
-[e [\ _LMotorCounter , $ -> -> 1 `i `uc 434
- , $ -> -> 2 `i `uc 435
- , $ -> -> 4 `i `uc 436
- , $ -> -> 8 `i `uc 437
- 438 ]
-"274
-[e :U 432 ]
-"275
-}
-[; ;interrupts.c: 275: } else if(side == RIGHT && reverse == 0)
-[e $U 439  ]
-[e :U 431 ]
-[e $ ! && == -> _side `i -> . `E4082 1 `i == -> _reverse `i -> 0 `i 440  ]
-[; ;interrupts.c: 276: {
-"276
-{
-[; ;interrupts.c: 277: switch(RMotorCounter)
-"277
-[e $U 442  ]
-[; ;interrupts.c: 278: {
-"278
-{
-[; ;interrupts.c: 279: case 0b00000001: RMotorCounter = 0b00000010; break;
-"279
-[e :U 443 ]
-[e = _RMotorCounter -> -> 2 `i `uc ]
-[e $U 441  ]
-[; ;interrupts.c: 280: case 0b00000010: RMotorCounter = 0b00000100; break;
-"280
-[e :U 444 ]
-[e = _RMotorCounter -> -> 4 `i `uc ]
-[e $U 441  ]
-[; ;interrupts.c: 281: case 0b00000100: RMotorCounter = 0b00001000; break;
-"281
-[e :U 445 ]
-[e = _RMotorCounter -> -> 8 `i `uc ]
-[e $U 441  ]
-[; ;interrupts.c: 282: case 0b00001000: RMotorCounter = 0b00000001; break;
-"282
-[e :U 446 ]
-[e = _RMotorCounter -> -> 1 `i `uc ]
-[e $U 441  ]
-[; ;interrupts.c: 283: default: RMotorCounter = 0b00000001;
-"283
-[e :U 447 ]
-[e = _RMotorCounter -> -> 1 `i `uc ]
-"284
-}
-[; ;interrupts.c: 284: }
-[e $U 441  ]
-"277
-[e :U 442 ]
-[e [\ _RMotorCounter , $ -> -> 1 `i `uc 443
- , $ -> -> 2 `i `uc 444
- , $ -> -> 4 `i `uc 445
- , $ -> -> 8 `i `uc 446
- 447 ]
-"284
-[e :U 441 ]
-"285
-}
-[e :U 440 ]
-"286
-[e :U 439 ]
-[e :U 430 ]
+[e $U 417  ]
+[; ;interrupts.c: 260: case 0b00000100: LMotorCounter = 0b00001000; break;
+"260
 [e :U 421 ]
-[; ;interrupts.c: 285: }
-[; ;interrupts.c: 286: }
-[e :UE 412 ]
+[e = _LMotorCounter -> -> 8 `i `uc ]
+[e $U 417  ]
+[; ;interrupts.c: 261: case 0b00001000: LMotorCounter = 0b00000001; break;
+"261
+[e :U 422 ]
+[e = _LMotorCounter -> -> 1 `i `uc ]
+[e $U 417  ]
+[; ;interrupts.c: 262: default: LMotorCounter = 0b00000001;
+"262
+[e :U 423 ]
+[e = _LMotorCounter -> -> 1 `i `uc ]
+"263
 }
-"288
-[v _merge `(uc ~T0 @X0 1 ef2`uc`uc ]
-"289
+[; ;interrupts.c: 263: }
+[e $U 417  ]
+"256
+[e :U 418 ]
+[e [\ _LMotorCounter , $ -> -> 1 `i `uc 419
+ , $ -> -> 2 `i `uc 420
+ , $ -> -> 4 `i `uc 421
+ , $ -> -> 8 `i `uc 422
+ 423 ]
+"263
+[e :U 417 ]
+"264
+}
+[; ;interrupts.c: 264: } else if(side == RIGHT && reverse == 1)
+[e $U 424  ]
+[e :U 416 ]
+[e $ ! && == -> _side `i -> . `E4082 1 `i == -> _reverse `i -> 1 `i 425  ]
+[; ;interrupts.c: 265: {
+"265
 {
-[; ;interrupts.c: 288: unsigned char merge(unsigned char left,unsigned char right)
-[; ;interrupts.c: 289: {
-[e :U _merge ]
+[; ;interrupts.c: 266: switch(RMotorCounter)
+"266
+[e $U 427  ]
+[; ;interrupts.c: 267: {
+"267
+{
+[; ;interrupts.c: 268: case 0b00000001: RMotorCounter = 0b00001000; break;
+"268
+[e :U 428 ]
+[e = _RMotorCounter -> -> 8 `i `uc ]
+[e $U 426  ]
+[; ;interrupts.c: 269: case 0b00000010: RMotorCounter = 0b00000001; break;
+"269
+[e :U 429 ]
+[e = _RMotorCounter -> -> 1 `i `uc ]
+[e $U 426  ]
+[; ;interrupts.c: 270: case 0b00000100: RMotorCounter = 0b00000010; break;
+"270
+[e :U 430 ]
+[e = _RMotorCounter -> -> 2 `i `uc ]
+[e $U 426  ]
+[; ;interrupts.c: 271: case 0b00001000: RMotorCounter = 0b00000100; break;
+"271
+[e :U 431 ]
+[e = _RMotorCounter -> -> 4 `i `uc ]
+[e $U 426  ]
+[; ;interrupts.c: 272: default: RMotorCounter = 0b00001000;
+"272
+[e :U 432 ]
+[e = _RMotorCounter -> -> 8 `i `uc ]
+"273
+}
+[; ;interrupts.c: 273: }
+[e $U 426  ]
+"266
+[e :U 427 ]
+[e [\ _RMotorCounter , $ -> -> 1 `i `uc 428
+ , $ -> -> 2 `i `uc 429
+ , $ -> -> 4 `i `uc 430
+ , $ -> -> 8 `i `uc 431
+ 432 ]
+"273
+[e :U 426 ]
+"274
+}
+[; ;interrupts.c: 274: } else if(side == LEFT && reverse == 0)
+[e $U 433  ]
+[e :U 425 ]
+[e $ ! && == -> _side `i -> . `E4082 0 `i == -> _reverse `i -> 0 `i 434  ]
+[; ;interrupts.c: 275: {
+"275
+{
+[; ;interrupts.c: 276: switch(LMotorCounter)
+"276
+[e $U 436  ]
+[; ;interrupts.c: 277: {
+"277
+{
+[; ;interrupts.c: 278: case 0b00000001: LMotorCounter = 0b00001000; break;
+"278
+[e :U 437 ]
+[e = _LMotorCounter -> -> 8 `i `uc ]
+[e $U 435  ]
+[; ;interrupts.c: 279: case 0b00000010: LMotorCounter = 0b00000001; break;
+"279
+[e :U 438 ]
+[e = _LMotorCounter -> -> 1 `i `uc ]
+[e $U 435  ]
+[; ;interrupts.c: 280: case 0b00000100: LMotorCounter = 0b00000010; break;
+"280
+[e :U 439 ]
+[e = _LMotorCounter -> -> 2 `i `uc ]
+[e $U 435  ]
+[; ;interrupts.c: 281: case 0b00001000: LMotorCounter = 0b00000100; break;
+"281
+[e :U 440 ]
+[e = _LMotorCounter -> -> 4 `i `uc ]
+[e $U 435  ]
+[; ;interrupts.c: 282: default: LMotorCounter = 0b00001000;
+"282
+[e :U 441 ]
+[e = _LMotorCounter -> -> 8 `i `uc ]
+"283
+}
+[; ;interrupts.c: 283: }
+[e $U 435  ]
+"276
+[e :U 436 ]
+[e [\ _LMotorCounter , $ -> -> 1 `i `uc 437
+ , $ -> -> 2 `i `uc 438
+ , $ -> -> 4 `i `uc 439
+ , $ -> -> 8 `i `uc 440
+ 441 ]
+"283
+[e :U 435 ]
+"284
+}
+[; ;interrupts.c: 284: } else if(side == RIGHT && reverse == 0)
+[e $U 442  ]
+[e :U 434 ]
+[e $ ! && == -> _side `i -> . `E4082 1 `i == -> _reverse `i -> 0 `i 443  ]
+[; ;interrupts.c: 285: {
+"285
+{
+[; ;interrupts.c: 286: switch(RMotorCounter)
+"286
+[e $U 445  ]
+[; ;interrupts.c: 287: {
+"287
+{
+[; ;interrupts.c: 288: case 0b00000001: RMotorCounter = 0b00000010; break;
 "288
+[e :U 446 ]
+[e = _RMotorCounter -> -> 2 `i `uc ]
+[e $U 444  ]
+[; ;interrupts.c: 289: case 0b00000010: RMotorCounter = 0b00000100; break;
+"289
+[e :U 447 ]
+[e = _RMotorCounter -> -> 4 `i `uc ]
+[e $U 444  ]
+[; ;interrupts.c: 290: case 0b00000100: RMotorCounter = 0b00001000; break;
+"290
+[e :U 448 ]
+[e = _RMotorCounter -> -> 8 `i `uc ]
+[e $U 444  ]
+[; ;interrupts.c: 291: case 0b00001000: RMotorCounter = 0b00000001; break;
+"291
+[e :U 449 ]
+[e = _RMotorCounter -> -> 1 `i `uc ]
+[e $U 444  ]
+[; ;interrupts.c: 292: default: RMotorCounter = 0b00000001;
+"292
+[e :U 450 ]
+[e = _RMotorCounter -> -> 1 `i `uc ]
+"293
+}
+[; ;interrupts.c: 293: }
+[e $U 444  ]
+"286
+[e :U 445 ]
+[e [\ _RMotorCounter , $ -> -> 1 `i `uc 446
+ , $ -> -> 2 `i `uc 447
+ , $ -> -> 4 `i `uc 448
+ , $ -> -> 8 `i `uc 449
+ 450 ]
+"293
+[e :U 444 ]
+"294
+}
+[e :U 443 ]
+"295
+[e :U 442 ]
+[e :U 433 ]
+[e :U 424 ]
+[; ;interrupts.c: 294: }
+[; ;interrupts.c: 295: }
+[e :UE 415 ]
+}
+"297
+[v _merge `(uc ~T0 @X0 1 ef2`uc`uc ]
+"298
+{
+[; ;interrupts.c: 297: unsigned char merge(unsigned char left,unsigned char right)
+[; ;interrupts.c: 298: {
+[e :U _merge ]
+"297
 [v _left `uc ~T0 @X0 1 r1 ]
 [v _right `uc ~T0 @X0 1 r2 ]
-"289
-[f ]
-"290
-[v _merged `uc ~T0 @X0 1 a ]
-[; ;interrupts.c: 290: unsigned char merged;
-[; ;interrupts.c: 291: merged = left + (right << 4);
-"291
-[e = _merged -> + -> _left `i << -> _right `i -> 4 `i `uc ]
-[; ;interrupts.c: 292: return merged;
-"292
-[e ) _merged ]
-[e $UE 448  ]
-[; ;interrupts.c: 293: }
-"293
-[e :UE 448 ]
-}
-"295
-[v _moveMouse `(v ~T0 @X0 1 ef1`uc ]
-"296
-{
-[; ;interrupts.c: 295: void moveMouse(unsigned char action)
-[; ;interrupts.c: 296: {
-[e :U _moveMouse ]
-"295
-[v _action `uc ~T0 @X0 1 r1 ]
-"296
-[f ]
-[; ;interrupts.c: 297: LATC = action;
-"297
-[e = _LATC _action ]
-[; ;interrupts.c: 298: }
 "298
-[e :UE 449 ]
-}
-"301
-[v _ABS `(i ~T0 @X0 1 ef1`i ]
-"302
-{
-[; ;interrupts.c: 301: int ABS(int x)
-[; ;interrupts.c: 302: {
-[e :U _ABS ]
-"301
-[v _x `i ~T0 @X0 1 r1 ]
-"302
 [f ]
-[; ;interrupts.c: 303: if(x<0) x = -x;
-"303
-[e $ ! < _x -> 0 `i 451  ]
-[e = _x -U _x ]
-[e :U 451 ]
-[; ;interrupts.c: 304: return x;
+"299
+[v _merged `uc ~T0 @X0 1 a ]
+[; ;interrupts.c: 299: unsigned char merged;
+[; ;interrupts.c: 300: merged = left + (right << 4);
+"300
+[e = _merged -> + -> _left `i << -> _right `i -> 4 `i `uc ]
+[; ;interrupts.c: 301: return merged;
+"301
+[e ) _merged ]
+[e $UE 451  ]
+[; ;interrupts.c: 302: }
+"302
+[e :UE 451 ]
+}
 "304
-[e ) _x ]
-[e $UE 450  ]
-[; ;interrupts.c: 305: }
+[v _moveMouse `(v ~T0 @X0 1 ef1`uc ]
 "305
-[e :UE 450 ]
-}
-"308
-[v _KController `(v ~T0 @X0 1 ef ]
-"309
 {
-[; ;interrupts.c: 308: void KController()
-[; ;interrupts.c: 309: {
-[e :U _KController ]
+[; ;interrupts.c: 304: void moveMouse(unsigned char action)
+[; ;interrupts.c: 305: {
+[e :U _moveMouse ]
+"304
+[v _action `uc ~T0 @X0 1 r1 ]
+"305
 [f ]
-"310
-[v _correctTo `E4082 ~T0 @X0 1 a ]
-"311
-[v _diff `i ~T0 @X0 1 a ]
-[; ;interrupts.c: 310: Side correctTo;
-[; ;interrupts.c: 311: int diff = ABS(sensorValue[0] - sensorValue[1]);
-[e = _diff ( _ABS (1 - *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
-[; ;interrupts.c: 314: if(controllerSteps > 0)
-"314
-[e $ ! > -> _controllerSteps `i -> 0 `i 453  ]
-[; ;interrupts.c: 315: {
-"315
-{
-[; ;interrupts.c: 316: motorCounterUpdate(RIGHT,0);
-"316
-[e ( _motorCounterUpdate (2 , . `E4082 1 -> -> 0 `i `uc ]
-[; ;interrupts.c: 317: motorCounterUpdate(LEFT,0);
-"317
-[e ( _motorCounterUpdate (2 , . `E4082 0 -> -> 0 `i `uc ]
-[; ;interrupts.c: 318: controllerSteps--;
-"318
-[e -- _controllerSteps -> -> 1 `i `uc ]
-[; ;interrupts.c: 319: return;
-"319
-[e $UE 452  ]
-"320
-}
-[e :U 453 ]
-[; ;interrupts.c: 320: }
-[; ;interrupts.c: 322: if(sensorValue[0] > sensorValue[1])
-"322
-[e $ ! > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux 454  ]
-[; ;interrupts.c: 323: {
-"323
-{
-[; ;interrupts.c: 324: correctTo = LEFT;
-"324
-[e = _correctTo . `E4082 0 ]
-[; ;interrupts.c: 325: motorCounterUpdate(correctTo,0);
-"325
-[e ( _motorCounterUpdate (2 , _correctTo -> -> 0 `i `uc ]
-[; ;interrupts.c: 326: moveMouse(merge(LMotorCounter,RMotorCounter));
-"326
-[e ( _moveMouse (1 ( _merge (2 , _LMotorCounter _RMotorCounter ]
-"327
-}
-[; ;interrupts.c: 327: }
-[e $U 455  ]
-"328
-[e :U 454 ]
-[; ;interrupts.c: 328: else
-[; ;interrupts.c: 329: {
-"329
-{
-[; ;interrupts.c: 330: correctTo = RIGHT;
-"330
-[e = _correctTo . `E4082 1 ]
-[; ;interrupts.c: 331: motorCounterUpdate(correctTo,0);
-"331
-[e ( _motorCounterUpdate (2 , _correctTo -> -> 0 `i `uc ]
-[; ;interrupts.c: 332: moveMouse(merge(LMotorCounter,RMotorCounter));
-"332
-[e ( _moveMouse (1 ( _merge (2 , _LMotorCounter _RMotorCounter ]
-"333
-}
-[e :U 455 ]
-[; ;interrupts.c: 333: }
-[; ;interrupts.c: 335: if(diff > 150)
-"335
-[e $ ! > _diff -> 150 `i 456  ]
-[; ;interrupts.c: 336: controllerSteps = 1;
-"336
-[e = _controllerSteps -> -> 1 `i `uc ]
-[e $U 457  ]
-"337
-[e :U 456 ]
-[; ;interrupts.c: 337: else if(diff <= 150 && diff > 20)
-[e $ ! && <= _diff -> 150 `i > _diff -> 20 `i 458  ]
-[; ;interrupts.c: 338: controllerSteps = 4;
-"338
-[e = _controllerSteps -> -> 4 `i `uc ]
-[e $U 459  ]
-"339
-[e :U 458 ]
-[; ;interrupts.c: 339: else
-[; ;interrupts.c: 340: controllerSteps = 8;
-"340
-[e = _controllerSteps -> -> 8 `i `uc ]
-[e :U 459 ]
-[e :U 457 ]
-[; ;interrupts.c: 341: }
-"341
+[; ;interrupts.c: 306: LATC = action;
+"306
+[e = _LATC _action ]
+[; ;interrupts.c: 307: }
+"307
 [e :UE 452 ]
 }
-"343
-[v _rotate `(v ~T0 @X0 1 ef1`E4082 ]
-"344
+"310
+[v _ABS `(i ~T0 @X0 1 ef1`i ]
+"311
 {
-[; ;interrupts.c: 343: void rotate(Side side)
-[; ;interrupts.c: 344: {
-[e :U _rotate ]
-"343
-[v _side `E4082 ~T0 @X0 1 r1 ]
-"344
+[; ;interrupts.c: 310: int ABS(int x)
+[; ;interrupts.c: 311: {
+[e :U _ABS ]
+"310
+[v _x `i ~T0 @X0 1 r1 ]
+"311
 [f ]
-[; ;interrupts.c: 345: if (side == LEFT){
-"345
-[e $ ! == -> _side `i -> . `E4082 0 `i 461  ]
+[; ;interrupts.c: 312: if(x<0) x = -x;
+"312
+[e $ ! < _x -> 0 `i 454  ]
+[e = _x -U _x ]
+[e :U 454 ]
+[; ;interrupts.c: 313: return x;
+"313
+[e ) _x ]
+[e $UE 453  ]
+[; ;interrupts.c: 314: }
+"314
+[e :UE 453 ]
+}
+"317
+[v _KController `(v ~T0 @X0 1 ef ]
+"318
 {
-[; ;interrupts.c: 346: motorCounterUpdate(RIGHT,0);
-"346
+[; ;interrupts.c: 317: void KController()
+[; ;interrupts.c: 318: {
+[e :U _KController ]
+[f ]
+"319
+[v _correctTo `E4082 ~T0 @X0 1 a ]
+"320
+[v _diff `i ~T0 @X0 1 a ]
+[; ;interrupts.c: 319: Side correctTo;
+[; ;interrupts.c: 320: int diff = ABS(sensorValue[0] - sensorValue[1]);
+[e = _diff ( _ABS (1 - *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[; ;interrupts.c: 323: if(controllerSteps > 0)
+"323
+[e $ ! > -> _controllerSteps `i -> 0 `i 456  ]
+[; ;interrupts.c: 324: {
+"324
+{
+[; ;interrupts.c: 325: motorCounterUpdate(RIGHT,0);
+"325
 [e ( _motorCounterUpdate (2 , . `E4082 1 -> -> 0 `i `uc ]
-[; ;interrupts.c: 347: motorCounterUpdate(LEFT,1);
+[; ;interrupts.c: 326: motorCounterUpdate(LEFT,0);
+"326
+[e ( _motorCounterUpdate (2 , . `E4082 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 327: controllerSteps--;
+"327
+[e -- _controllerSteps -> -> 1 `i `uc ]
+[; ;interrupts.c: 328: return;
+"328
+[e $UE 455  ]
+"329
+}
+[e :U 456 ]
+[; ;interrupts.c: 329: }
+[; ;interrupts.c: 331: if(sensorValue[0] > sensorValue[1])
+"331
+[e $ ! > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux 457  ]
+[; ;interrupts.c: 332: {
+"332
+{
+[; ;interrupts.c: 333: correctTo = LEFT;
+"333
+[e = _correctTo . `E4082 0 ]
+[; ;interrupts.c: 334: motorCounterUpdate(correctTo,0);
+"334
+[e ( _motorCounterUpdate (2 , _correctTo -> -> 0 `i `uc ]
+[; ;interrupts.c: 335: moveMouse(merge(LMotorCounter,RMotorCounter));
+"335
+[e ( _moveMouse (1 ( _merge (2 , _LMotorCounter _RMotorCounter ]
+"336
+}
+[; ;interrupts.c: 336: }
+[e $U 458  ]
+"337
+[e :U 457 ]
+[; ;interrupts.c: 337: else
+[; ;interrupts.c: 338: {
+"338
+{
+[; ;interrupts.c: 339: correctTo = RIGHT;
+"339
+[e = _correctTo . `E4082 1 ]
+[; ;interrupts.c: 340: motorCounterUpdate(correctTo,0);
+"340
+[e ( _motorCounterUpdate (2 , _correctTo -> -> 0 `i `uc ]
+[; ;interrupts.c: 341: moveMouse(merge(LMotorCounter,RMotorCounter));
+"341
+[e ( _moveMouse (1 ( _merge (2 , _LMotorCounter _RMotorCounter ]
+"342
+}
+[e :U 458 ]
+[; ;interrupts.c: 342: }
+[; ;interrupts.c: 344: if(diff > 150)
+"344
+[e $ ! > _diff -> 150 `i 459  ]
+[; ;interrupts.c: 345: controllerSteps = 1;
+"345
+[e = _controllerSteps -> -> 1 `i `uc ]
+[e $U 460  ]
+"346
+[e :U 459 ]
+[; ;interrupts.c: 346: else if(diff <= 150 && diff > 20)
+[e $ ! && <= _diff -> 150 `i > _diff -> 20 `i 461  ]
+[; ;interrupts.c: 347: controllerSteps = 4;
 "347
-[e ( _motorCounterUpdate (2 , . `E4082 0 -> -> 1 `i `uc ]
-"348
-}
-[; ;interrupts.c: 348: } else {
+[e = _controllerSteps -> -> 4 `i `uc ]
 [e $U 462  ]
+"348
 [e :U 461 ]
-{
-[; ;interrupts.c: 349: motorCounterUpdate(LEFT,0);
+[; ;interrupts.c: 348: else
+[; ;interrupts.c: 349: controllerSteps = 8;
 "349
-[e ( _motorCounterUpdate (2 , . `E4082 0 -> -> 0 `i `uc ]
-[; ;interrupts.c: 350: motorCounterUpdate(RIGHT,1);
-"350
-[e ( _motorCounterUpdate (2 , . `E4082 1 -> -> 1 `i `uc ]
-"351
-}
+[e = _controllerSteps -> -> 8 `i `uc ]
 [e :U 462 ]
-[; ;interrupts.c: 351: }
-[; ;interrupts.c: 352: RotateCounter--;
+[e :U 460 ]
+[; ;interrupts.c: 350: }
+"350
+[e :UE 455 ]
+}
 "352
-[e -- _RotateCounter -> 1 `i ]
-[; ;interrupts.c: 353: }
+[v _rotate `(v ~T0 @X0 1 ef1`E4082 ]
 "353
-[e :UE 460 ]
-}
-"355
-[v _smoothTurn `(v ~T0 @X0 1 ef ]
-"356
 {
-[; ;interrupts.c: 355: void smoothTurn()
-[; ;interrupts.c: 356: {
-[e :U _smoothTurn ]
+[; ;interrupts.c: 352: void rotate(Side side)
+[; ;interrupts.c: 353: {
+[e :U _rotate ]
+"352
+[v _side `E4082 ~T0 @X0 1 r1 ]
+"353
 [f ]
-[; ;interrupts.c: 357: if(LTurnCounter > 0)
-"357
-[e $ ! > _LTurnCounter -> 0 `i 464  ]
-[; ;interrupts.c: 358: {
-"358
+[; ;interrupts.c: 354: if (side == LEFT){
+"354
+[e $ ! == -> _side `i -> . `E4082 0 `i 464  ]
 {
-[; ;interrupts.c: 359: motorCounterUpdate(LEFT,0);
-"359
-[e ( _motorCounterUpdate (2 , . `E4082 0 -> -> 0 `i `uc ]
-[; ;interrupts.c: 360: LTurnCounter--;
-"360
-[e -- _LTurnCounter -> 1 `i ]
-"361
+[; ;interrupts.c: 355: motorCounterUpdate(RIGHT,0);
+"355
+[e ( _motorCounterUpdate (2 , . `E4082 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 356: motorCounterUpdate(LEFT,1);
+"356
+[e ( _motorCounterUpdate (2 , . `E4082 0 -> -> 1 `i `uc ]
+"357
 }
-[; ;interrupts.c: 361: } else if (RTurnCounter > 0){
+[; ;interrupts.c: 357: } else {
 [e $U 465  ]
 [e :U 464 ]
-[e $ ! > _RTurnCounter -> 0 `i 466  ]
 {
-[; ;interrupts.c: 362: motorCounterUpdate(RIGHT,0);
-"362
-[e ( _motorCounterUpdate (2 , . `E4082 1 -> -> 0 `i `uc ]
-[; ;interrupts.c: 363: RTurnCounter--;
-"363
-[e -- _RTurnCounter -> 1 `i ]
-"364
+[; ;interrupts.c: 358: motorCounterUpdate(LEFT,0);
+"358
+[e ( _motorCounterUpdate (2 , . `E4082 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 359: motorCounterUpdate(RIGHT,1);
+"359
+[e ( _motorCounterUpdate (2 , . `E4082 1 -> -> 1 `i `uc ]
+"360
 }
-[e :U 466 ]
-"365
 [e :U 465 ]
-[; ;interrupts.c: 364: }
-[; ;interrupts.c: 365: }
+[; ;interrupts.c: 360: }
+[; ;interrupts.c: 361: RotateCounter--;
+"361
+[e -- _RotateCounter -> 1 `i ]
+[; ;interrupts.c: 362: }
+"362
 [e :UE 463 ]
 }
-"367
-[v _Reversing `(v ~T0 @X0 1 ef ]
-"368
+"364
+[v _smoothTurn `(v ~T0 @X0 1 ef ]
+"365
 {
-[; ;interrupts.c: 367: void Reversing()
-[; ;interrupts.c: 368: {
+[; ;interrupts.c: 364: void smoothTurn()
+[; ;interrupts.c: 365: {
+[e :U _smoothTurn ]
+[f ]
+[; ;interrupts.c: 366: if(LTurnCounter > 0)
+"366
+[e $ ! > _LTurnCounter -> 0 `i 467  ]
+[; ;interrupts.c: 367: {
+"367
+{
+[; ;interrupts.c: 368: motorCounterUpdate(LEFT,0);
+"368
+[e ( _motorCounterUpdate (2 , . `E4082 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 369: LTurnCounter--;
+"369
+[e -- _LTurnCounter -> 1 `i ]
+"370
+}
+[; ;interrupts.c: 370: } else if (RTurnCounter > 0){
+[e $U 468  ]
+[e :U 467 ]
+[e $ ! > _RTurnCounter -> 0 `i 469  ]
+{
+[; ;interrupts.c: 371: motorCounterUpdate(RIGHT,0);
+"371
+[e ( _motorCounterUpdate (2 , . `E4082 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 372: RTurnCounter--;
+"372
+[e -- _RTurnCounter -> 1 `i ]
+"373
+}
+[e :U 469 ]
+"374
+[e :U 468 ]
+[; ;interrupts.c: 373: }
+[; ;interrupts.c: 374: }
+[e :UE 466 ]
+}
+"376
+[v _Reversing `(v ~T0 @X0 1 ef ]
+"377
+{
+[; ;interrupts.c: 376: void Reversing()
+[; ;interrupts.c: 377: {
 [e :U _Reversing ]
 [f ]
-[; ;interrupts.c: 369: motorCounterUpdate(RIGHT,1);
-"369
+[; ;interrupts.c: 378: motorCounterUpdate(RIGHT,1);
+"378
 [e ( _motorCounterUpdate (2 , . `E4082 1 -> -> 1 `i `uc ]
-[; ;interrupts.c: 370: motorCounterUpdate(LEFT,1);
-"370
+[; ;interrupts.c: 379: motorCounterUpdate(LEFT,1);
+"379
 [e ( _motorCounterUpdate (2 , . `E4082 0 -> -> 1 `i `uc ]
-[; ;interrupts.c: 371: ReverseCounter--;
-"371
+[; ;interrupts.c: 380: ReverseCounter--;
+"380
 [e -- _ReverseCounter -> 1 `i ]
-[; ;interrupts.c: 372: }
-"372
-[e :UE 467 ]
+[; ;interrupts.c: 381: }
+"381
+[e :UE 470 ]
 }
-"374
+"383
 [v _forward `(v ~T0 @X0 1 ef ]
-"375
+"384
 {
-[; ;interrupts.c: 374: void forward()
-[; ;interrupts.c: 375: {
+[; ;interrupts.c: 383: void forward()
+[; ;interrupts.c: 384: {
 [e :U _forward ]
 [f ]
-[; ;interrupts.c: 376: motorCounterUpdate(RIGHT,0);
-"376
+[; ;interrupts.c: 385: motorCounterUpdate(RIGHT,0);
+"385
 [e ( _motorCounterUpdate (2 , . `E4082 1 -> -> 0 `i `uc ]
-[; ;interrupts.c: 377: motorCounterUpdate(LEFT,0);
-"377
+[; ;interrupts.c: 386: motorCounterUpdate(LEFT,0);
+"386
 [e ( _motorCounterUpdate (2 , . `E4082 0 -> -> 0 `i `uc ]
-[; ;interrupts.c: 378: ForwardCounter--;
-"378
+[; ;interrupts.c: 387: ForwardCounter--;
+"387
 [e -- _ForwardCounter -> 1 `i ]
-[; ;interrupts.c: 379: }
-"379
-[e :UE 468 ]
+[; ;interrupts.c: 388: }
+"388
+[e :UE 471 ]
 }
