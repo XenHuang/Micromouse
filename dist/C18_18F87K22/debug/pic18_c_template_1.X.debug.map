@@ -5,7 +5,7 @@ Linker command line:
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.34\dat\en_msgs.txt -cs \
   -h+dist/C18_18F87K22/debug\pic18_c_template_1.X.debug.sym \
   --cmf=dist/C18_18F87K22/debug\pic18_c_template_1.X.debug.cmf -z -Q18F4620 \
-  -oC:\Users\X\AppData\Local\Temp\s46k.6 \
+  -oC:\Users\X\AppData\Local\Temp\s54o.6 \
   -Mdist/C18_18F87K22/debug/pic18_c_template_1.X.debug.map -E1 -ver=XC8 \
   -ASTACK=0DEh-0eeeh -pstack=STACK -ACODE=00h-0FCFFh -ACONST=00h-0FCFFh \
   -ASMALLCONST=01000h-010FFhx237 -AMEDIUMCONST=01000h-0FCFFh \
@@ -27,7 +27,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\X\AppData\Local\Temp\s46k.obj \
+  C:\Users\X\AppData\Local\Temp\s54o.obj \
   dist/C18_18F87K22/debug\pic18_c_template_1.X.debug.obj 
 
 Object code version is 3.11
@@ -40,7 +40,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\X\AppData\Local\Temp\s46k.obj
+C:\Users\X\AppData\Local\Temp\s54o.obj
                 end_init                             A2       A2        4        C       0
                 reset_vec                             0        0        6        0       0
                 idloc                            200000   200000        8   200000       0
@@ -49,32 +49,32 @@ dist/C18_18F87K22/debug\pic18_c_template_1.X.debug.obj
                 intcodelo                            18       18       8A        C       0
                 intcode                               8        8       10        4       0
                 smallconst                         1000     1000        A      800       0
-                text20                             1A88     1A88       1A      805       0
-                text19                             1AB6     1AB6       10      805       0
-                text18                             1682     1682       F4      805       0
-                text17                             1AD0     1AD0        8      805       0
-                text16                             1776     1776       DA      805       0
-                text15                             1A6C     1A6C       1C      805       0
-                text14                             1A50     1A50       1C      805       0
-                text13                             1922     1922       3C      805       0
-                intcode_body                       100A     100A      280      805       0
-                text10                             1AC6     1AC6        A      805       0
-                text9                              1A32     1A32       1E      805       0
-                text8                              195E     195E       34      805       0
-                text7                              18E6     18E6       3C      805       0
-                text6                              1A0A     1A0A       28      805       0
-                text5                              19E2     19E2       28      805       0
-                text4                              1850     1850       96      805       0
-                text3                              19BA     19BA       28      805       0
-                text2                              128A     128A      22C      805       0
-                text1                              14B6     14B6      1CC      805       0
-                text0                              1AA2     1AA2       14      805       0
+                text20                             1A6E     1A6E       1A      805       0
+                text19                             1A9C     1A9C       10      805       0
+                text18                             1668     1668       F4      805       0
+                text17                             1AB6     1AB6        8      805       0
+                text16                             175C     175C       DA      805       0
+                text15                             1A52     1A52       1C      805       0
+                text14                             1A36     1A36       1C      805       0
+                text13                             1908     1908       3C      805       0
+                intcode_body                       100A     100A      266      805       0
+                text10                             1AAC     1AAC        A      805       0
+                text9                              1A18     1A18       1E      805       0
+                text8                              1944     1944       34      805       0
+                text7                              18CC     18CC       3C      805       0
+                text6                              19F0     19F0       28      805       0
+                text5                              19C8     19C8       28      805       0
+                text4                              1836     1836       96      805       0
+                text3                              19A0     19A0       28      805       0
+                text2                              1270     1270      22C      805       0
+                text1                              149C     149C      1CC      805       0
+                text0                              1A88     1A88       14      805       0
                 cstackCOMRAM                          1        1       3C        1       1
                 cstackBANK0                          80       80       5E       80       1
                 dataCOMRAM                           58       58        1        1       1
                 bssCOMRAM                            3D       3D       1B        1       1
-                cinit                              1992     1992       28      805       0
-                idataCOMRAM                        1AD8     1AD8        1      805       0
+                cinit                              1978     1978       28      805       0
+                idataCOMRAM                        1ABE     1ABE        1      805       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -84,28 +84,28 @@ TOTAL           Name                               Link     Load   Length     Sp
                 intcodelo                            18       18       8A         0
                 intcode                               8        8       10         0
                 reset_vec                             0        0        6         0
-                text20                             1A88     1A88       1A         0
-                text19                             1AB6     1AB6       10         0
-                text18                             1682     1682       F4         0
-                text17                             1AD0     1AD0        8         0
-                text16                             1776     1776       DA         0
-                text15                             1A6C     1A6C       1C         0
-                text14                             1A50     1A50       1C         0
-                text13                             1922     1922       3C         0
-                intcode_body                       100A     100A      280         0
-                text10                             1AC6     1AC6        A         0
-                text9                              1A32     1A32       1E         0
-                text8                              195E     195E       34         0
-                text7                              18E6     18E6       3C         0
-                text6                              1A0A     1A0A       28         0
-                text5                              19E2     19E2       28         0
-                text4                              1850     1850       96         0
-                text3                              19BA     19BA       28         0
-                text2                              128A     128A      22C         0
-                text1                              14B6     14B6      1CC         0
-                text0                              1AA2     1AA2       14         0
-                cinit                              1992     1992       28         0
-                idataCOMRAM                        1AD8     1AD8        1         0
+                text20                             1A6E     1A6E       1A         0
+                text19                             1A9C     1A9C       10         0
+                text18                             1668     1668       F4         0
+                text17                             1AB6     1AB6        8         0
+                text16                             175C     175C       DA         0
+                text15                             1A52     1A52       1C         0
+                text14                             1A36     1A36       1C         0
+                text13                             1908     1908       3C         0
+                intcode_body                       100A     100A      266         0
+                text10                             1AAC     1AAC        A         0
+                text9                              1A18     1A18       1E         0
+                text8                              1944     1944       34         0
+                text7                              18CC     18CC       3C         0
+                text6                              19F0     19F0       28         0
+                text5                              19C8     19C8       28         0
+                text4                              1836     1836       96         0
+                text3                              19A0     19A0       28         0
+                text2                              1270     1270      22C         0
+                text1                              149C     149C      1CC         0
+                text0                              1A88     1A88       14         0
+                cinit                              1978     1978       28         0
+                idataCOMRAM                        1ABE     1ABE        1         0
 
         CLASS   CONST          
 
@@ -180,7 +180,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
                 intcodelo                      000018  00008E  0000A6         C       0  CODE    
                 cstackBANK0                    000080  00005E  0000DE        80       1  BANK0   
                 smallconst                     001000  00000A  00100A       800       0  SMALLCON
-                intcode_body                   00100A  000ACF  001AD9       805       0  CODE    
+                intcode_body                   00100A  000AB5  001ABF       805       0  CODE    
                 idloc                          200000  000008  200008    200000       0  IDLOC   
                 config                         300000  00000E  30000E    300000       0  CONFIG  
 
@@ -209,13 +209,13 @@ UNUSED ADDRESS RANGES
                          000F00-000F7F               80
         CODE             000006-000007                2
                          0000A6-000FFF              F5A
-                         001AD9-00FCFF             E227
+                         001ABF-00FCFF             E241
         COMRAM           000059-00007F               27
         CONST            000006-000007                2
                          0000A6-000FFF              F5A
-                         001AD9-00FCFF             E227
+                         001ABF-00FCFF             E241
         EEDATA           F00000-F003FF              400
-        MEDIUMCONST      001AD9-00FCFF             E227
+        MEDIUMCONST      001ABF-00FCFF             E241
         RAM              0000DE-000EEE              100
                          000F00-000F7F               80
         SFR              000F80-000F9B               1C
@@ -224,7 +224,7 @@ UNUSED ADDRESS RANGES
                          000FE0-000FE2                3
                          000FE8-000FEA                3
                          000FF0-000FFB                C
-        SMALLCONST       001AD9-00FCFF              100
+        SMALLCONST       001ABF-00FCFF              100
         STACK            0000DE-000EEE              E11
 
                                   Symbol Table
@@ -241,33 +241,33 @@ MAX@a                         cstackCOMRAM 00002E
 MAX@b                         cstackCOMRAM 000030
 MIN@a                         cstackCOMRAM 00002E
 MIN@b                         cstackCOMRAM 000030
-_ABS                          text20       001A88
+_ABS                          text20       001A6E
 _ADCON0                       (abs)        000FC2
 _ADCON0bits                   (abs)        000FC2
 _ADCON1                       (abs)        000FC1
 _ADCON2                       (abs)        000FC0
 _ADRESH                       (abs)        000FC4
 _ADRESL                       (abs)        000FC3
-_AlgorithmSelection           text9        001A32
-_ConfigureOscillator          text10       001AC6
+_AlgorithmSelection           text9        001A18
+_ConfigureOscillator          text10       001AAC
 _ForwardCounter               bssCOMRAM    000045
 _INTCON                       (abs)        000FF2
 _INTCON2                      (abs)        000FF1
 _INTCONbits                   (abs)        000FF2
-_InitApp                      text7        0018E6
-_KController                  text16       001776
+_InitApp                      text7        0018CC
+_KController                  text16       00175C
 _LATC                         (abs)        000F8B
 _LMotorCounter                bssCOMRAM    000053
 _LTurnCounter                 bssCOMRAM    000047
-_MAX                          text6        001A0A
-_MIN                          text5        0019E2
+_MAX                          text6        0019F0
+_MIN                          text5        0019C8
 _MotorDelayCounter            bssCOMRAM    000049
 _OSCCON                       (abs)        000FD3
 _OSCTUNE                      (abs)        000F9B
 _RMotorCounter                bssCOMRAM    000054
 _RTurnCounter                 bssCOMRAM    00004B
 _ReverseCounter               bssCOMRAM    00004D
-_Reversing                    text15       001A6C
+_Reversing                    text15       001A52
 _RotateCounter                bssCOMRAM    00004F
 _T0CON                        (abs)        000FD5
 _TRISBbits                    (abs)        000F93
@@ -489,7 +489,7 @@ __Ltext9                      text9        000000
 __S0                          (abs)        30000E
 __S1                          (abs)        0000DE
 __S2                          (abs)        000000
-___awdiv                      text4        001850
+___awdiv                      text4        001836
 ___awdiv@counter              cstackCOMRAM 00002C
 ___awdiv@dividend             cstackCOMRAM 000028
 ___awdiv@divisor              cstackCOMRAM 00002A
@@ -500,67 +500,67 @@ ___intlo_sp                   stack        000000
 ___param_bank                 (abs)        000010
 ___rparam_used                (abs)        000001
 ___sp                         stack        000000
-___wmul                       text3        0019BA
+___wmul                       text3        0019A0
 ___wmul@multiplicand          cstackCOMRAM 00002A
 ___wmul@multiplier            cstackCOMRAM 000028
 ___wmul@product               cstackCOMRAM 00002C
 __accesstop                   (abs)        000080
 __activetblptr                (abs)        000002
-__end_of_ABS                  text20       001AA2
-__end_of_AlgorithmSelection   text9        001A50
-__end_of_ConfigureOscillator  text10       001AD0
-__end_of_InitApp              text7        001922
-__end_of_KController          text16       001850
-__end_of_MAX                  text6        001A32
-__end_of_MIN                  text5        001A0A
-__end_of_Reversing            text15       001A88
-__end_of___awdiv              text4        0018E6
-__end_of___wmul               text3        0019E2
-__end_of__initialization      cinit        0019B0
-__end_of_delay                text8        001992
-__end_of_forward              text14       001A6C
-__end_of_high_isr             intcode_body 00128A
+__end_of_ABS                  text20       001A88
+__end_of_AlgorithmSelection   text9        001A36
+__end_of_ConfigureOscillator  text10       001AB6
+__end_of_InitApp              text7        001908
+__end_of_KController          text16       001836
+__end_of_MAX                  text6        001A18
+__end_of_MIN                  text5        0019F0
+__end_of_Reversing            text15       001A6E
+__end_of___awdiv              text4        0018CC
+__end_of___wmul               text3        0019C8
+__end_of__initialization      cinit        001996
+__end_of_delay                text8        001978
+__end_of_forward              text14       001A52
+__end_of_high_isr             intcode_body 001270
 __end_of_low_isr              intcodelo    0000A2
-__end_of_main                 text0        001AB6
-__end_of_merge                text19       001AC6
-__end_of_motorCounterUpdate   text18       001776
-__end_of_moveMouse            text17       001AD8
-__end_of_rotate               text13       00195E
-__end_of_sensorComputation    text2        0014B6
+__end_of_main                 text0        001A9C
+__end_of_merge                text19       001AAC
+__end_of_motorCounterUpdate   text18       00175C
+__end_of_moveMouse            text17       001ABE
+__end_of_rotate               text13       001944
+__end_of_sensorComputation    text2        00149C
 __end_of_sensorCorrection     smallconst   001005
 __end_of_sensorLocation       smallconst   001009
-__end_of_sensorUpdate         text1        001682
-__initialization              cinit        001992
+__end_of_sensorUpdate         text1        001668
+__initialization              cinit        001978
 __mediumconst                 mediumconst  000000
 __pbssCOMRAM                  bssCOMRAM    00003D
-__pcinit                      cinit        001992
+__pcinit                      cinit        001978
 __pcstackBANK0                cstackBANK0  000080
 __pcstackCOMRAM               cstackCOMRAM 000001
 __pdataCOMRAM                 dataCOMRAM   000058
-__pidataCOMRAM                idataCOMRAM  001AD8
+__pidataCOMRAM                idataCOMRAM  001ABE
 __pintcode                    intcode      000008
 __pintcode_body               intcode_body 00100A
 __pintcodelo                  intcodelo    000018
 __psmallconst                 smallconst   001000
-__ptext0                      text0        001AA2
-__ptext1                      text1        0014B6
-__ptext10                     text10       001AC6
-__ptext13                     text13       001922
-__ptext14                     text14       001A50
-__ptext15                     text15       001A6C
-__ptext16                     text16       001776
-__ptext17                     text17       001AD0
-__ptext18                     text18       001682
-__ptext19                     text19       001AB6
-__ptext2                      text2        00128A
-__ptext20                     text20       001A88
-__ptext3                      text3        0019BA
-__ptext4                      text4        001850
-__ptext5                      text5        0019E2
-__ptext6                      text6        001A0A
-__ptext7                      text7        0018E6
-__ptext8                      text8        00195E
-__ptext9                      text9        001A32
+__ptext0                      text0        001A88
+__ptext1                      text1        00149C
+__ptext10                     text10       001AAC
+__ptext13                     text13       001908
+__ptext14                     text14       001A36
+__ptext15                     text15       001A52
+__ptext16                     text16       00175C
+__ptext17                     text17       001AB6
+__ptext18                     text18       001668
+__ptext19                     text19       001A9C
+__ptext2                      text2        001270
+__ptext20                     text20       001A6E
+__ptext3                      text3        0019A0
+__ptext4                      text4        001836
+__ptext5                      text5        0019C8
+__ptext6                      text6        0019F0
+__ptext7                      text7        0018CC
+__ptext8                      text8        001944
+__ptext9                      text9        001A18
 __ramtop                      ramtop       001000
 __size_of_ABS                 (abs)        000000
 __size_of_AlgorithmSelection  (abs)        000000
@@ -586,26 +586,26 @@ __size_of_sensorUpdate        (abs)        000000
 __smallconst                  smallconst   001000
 _algorithm                    bssCOMRAM    000055
 _controllerSteps              dataCOMRAM   000058
-_delay                        text8        00195E
+_delay                        text8        001944
 _delay_time                   bssCOMRAM    000051
-_forward                      text14       001A50
+_forward                      text14       001A36
 _high_isr                     intcode      000008
 _justTurned                   bssCOMRAM    000056
 _low_isr                      intcodelo    000018
-_main                         text0        001AA2
-_merge                        text19       001AB6
-_motorCounterUpdate           text18       001682
-_moveMouse                    text17       001AD0
-_rotate                       text13       001922
+_main                         text0        001A88
+_merge                        text19       001A9C
+_motorCounterUpdate           text18       001668
+_moveMouse                    text17       001AB6
+_rotate                       text13       001908
 _rotatingSide                 bssCOMRAM    000057
-_sensorComputation            text2        00128A
+_sensorComputation            text2        001270
 _sensorCorrection             smallconst   001001
 _sensorLocation               smallconst   001005
-_sensorUpdate                 text1        0014B6
+_sensorUpdate                 text1        00149C
 _sensorValue                  bssCOMRAM    00003D
 delay@ms                      cstackCOMRAM 000028
 delay@x                       cstackCOMRAM 00002B
-end_of_initialization         cinit        0019B0
+end_of_initialization         cinit        001996
 int_func                      intcode_body 00100A
 intlevel0                     text         000000
 intlevel1                     text         000000
@@ -630,7 +630,7 @@ sensorUpdate@sensorTemp       cstackBANK0  00008A
 stackhi                       (abs)        000EEE
 stacklo                       (abs)        0000DE
 start                         init         0000A2
-start_initialization          cinit        001992
+start_initialization          cinit        001978
 
 
 FUNCTION INFORMATION:
@@ -987,7 +987,7 @@ Total ram usage:        0 bytes
 
  *************** function _low_isr *****************
  Defined at:
-		line 203 in file "interrupts.c"
+		line 205 in file "interrupts.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1017,7 +1017,7 @@ Total ram usage:       17 bytes
 
  *************** function _high_isr *****************
  Defined at:
-		line 80 in file "interrupts.c"
+		line 81 in file "interrupts.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1052,7 +1052,7 @@ Total ram usage:       14 bytes
 
  *************** function _rotate *****************
  Defined at:
-		line 340 in file "interrupts.c"
+		line 342 in file "interrupts.c"
  Parameters:    Size  Location     Type
   side            1    wreg     enum E4082
  Auto vars:     Size  Location     Type
@@ -1082,7 +1082,7 @@ Total ram usage:        1 bytes
 
  *************** function _forward *****************
  Defined at:
-		line 371 in file "interrupts.c"
+		line 373 in file "interrupts.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1112,7 +1112,7 @@ Total ram usage:        0 bytes
 
  *************** function _Reversing *****************
  Defined at:
-		line 364 in file "interrupts.c"
+		line 366 in file "interrupts.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1142,7 +1142,7 @@ Total ram usage:        0 bytes
 
  *************** function _KController *****************
  Defined at:
-		line 305 in file "interrupts.c"
+		line 307 in file "interrupts.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1176,7 +1176,7 @@ Total ram usage:        5 bytes
 
  *************** function _moveMouse *****************
  Defined at:
-		line 292 in file "interrupts.c"
+		line 294 in file "interrupts.c"
  Parameters:    Size  Location     Type
   action          1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -1206,7 +1206,7 @@ Total ram usage:        1 bytes
 
  *************** function _motorCounterUpdate *****************
  Defined at:
-		line 240 in file "interrupts.c"
+		line 242 in file "interrupts.c"
  Parameters:    Size  Location     Type
   side            1    wreg     enum E4082
   reverse         1   17[COMRAM] unsigned char 
@@ -1240,7 +1240,7 @@ Total ram usage:        2 bytes
 
  *************** function _merge *****************
  Defined at:
-		line 285 in file "interrupts.c"
+		line 287 in file "interrupts.c"
  Parameters:    Size  Location     Type
   left            1    wreg     unsigned char 
   right           1   17[COMRAM] unsigned char 
@@ -1272,7 +1272,7 @@ Total ram usage:        3 bytes
 
  *************** function _ABS *****************
  Defined at:
-		line 298 in file "interrupts.c"
+		line 300 in file "interrupts.c"
  Parameters:    Size  Location     Type
   x               2   17[COMRAM] int 
  Auto vars:     Size  Location     Type
@@ -1304,54 +1304,54 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 interrupts.c
-		_KController   		CODE           	1776	0000	219
-		_Reversing     		CODE           	1A6C	0000	29
-		_moveMouse     		CODE           	1AD0	0000	9
-		_forward       		CODE           	1A50	0000	29
-		_high_isr      		CODE           	0008	0000	657
-		_merge         		CODE           	1AB6	0000	17
-		_motorCounterUp		CODE           	1682	0000	245
-		_rotate        		CODE           	1922	0000	61
-		_ABS           		CODE           	1A88	0000	27
+		_KController   		CODE           	175C	0000	219
+		_Reversing     		CODE           	1A52	0000	29
+		_moveMouse     		CODE           	1AB6	0000	9
+		_forward       		CODE           	1A36	0000	29
+		_high_isr      		CODE           	0008	0000	631
+		_merge         		CODE           	1A9C	0000	17
+		_motorCounterUp		CODE           	1668	0000	245
+		_rotate        		CODE           	1908	0000	61
+		_ABS           		CODE           	1A6E	0000	27
 		_low_isr       		CODE           	0018	0000	139
 
-interrupts.c estimated size: 1432
+interrupts.c estimated size: 1406
 
 shared
-		__initializatio		CODE           	1992	0000	31
+		__initializatio		CODE           	1978	0000	31
 		_sensorCorrecti		SMALLCONST     	1001	0000	5
 		_sensorLocation		SMALLCONST     	1005	0000	5
 
 shared estimated size: 41
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\awdiv.c
-		___awdiv       		CODE           	1850	0000	151
+		___awdiv       		CODE           	1836	0000	151
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\awdiv.c estimated size: 151
 
 user.c
-		_MAX           		CODE           	1A0A	0000	41
-		_delay         		CODE           	195E	0000	53
-		_AlgorithmSelec		CODE           	1A32	0000	31
-		_InitApp       		CODE           	18E6	0000	61
-		_MIN           		CODE           	19E2	0000	41
-		_sensorComputat		CODE           	128A	0000	557
-		_sensorUpdate  		CODE           	14B6	0000	461
+		_MAX           		CODE           	19F0	0000	41
+		_delay         		CODE           	1944	0000	53
+		_AlgorithmSelec		CODE           	1A18	0000	31
+		_InitApp       		CODE           	18CC	0000	61
+		_MIN           		CODE           	19C8	0000	41
+		_sensorComputat		CODE           	1270	0000	557
+		_sensorUpdate  		CODE           	149C	0000	461
 
 user.c estimated size: 1245
 
 main.c
-		_main          		CODE           	1AA2	0000	21
+		_main          		CODE           	1A88	0000	21
 
 main.c estimated size: 21
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
-		___wmul        		CODE           	19BA	0000	41
+		___wmul        		CODE           	19A0	0000	41
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c estimated size: 41
 
 system.c
-		_ConfigureOscil		CODE           	1AC6	0000	11
+		_ConfigureOscil		CODE           	1AAC	0000	11
 
 system.c estimated size: 11
 

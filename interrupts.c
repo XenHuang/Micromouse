@@ -31,7 +31,7 @@
 #define ROTATE90 167            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 #define REVERSEFACTOR 15         //factor that helps correct the 180 turn
-#define FORWARDFACTOR 460         //factor that helps forward till 90 degree turn
+#define FORWARDFACTOR 420         //factor that helps forward till 90 degree turn
 #define FORWARDFACTOR2 200         //factor that helps forward till 90 degree turn
 
 #define LEFTSENSOR 0             //Sensor value position
@@ -39,12 +39,14 @@
 #define LEFTFRONTSENSOR 2        //Sensor value position
 #define RIGHTFRONTSENSOR 3       //Sensor value position
 
-#define FRONTWALLMIN 420          // the higher the value the closer
-#define FRONTWALLMAX 100 
-#define SIDEWALLMIN 120           // the higher the value the closer
-#define FRONTWALLMAX 700
+// Higher the value the closer
+#define FRONTWALLMIN 420          // 2,3 senses distance closer than this rotates
+#define FRONTWALLMAX 140          // 2,3 senses distance further than this makes left/right turn
+#define SIDEWALLMIN 90           // 0,1 senses distance further than this makes left/right turn
+#define SIDEWALLMIN2 100
+#define FRONTWALLMAX2 850         // 2,3 senses distance closer than this then reverse
 
-#define KCONTROLLERMAX 150
+#define KCONTROLLERMAX 150        // Maximum diff bettween 0,1 sensors value
 #define KCONTROLLERMID 20
 #define KCONTROLLERSTEP 8
 #define KCONTROLLERSTEPMID 4
@@ -107,7 +109,7 @@ void high_isr(void)
 					Reversing();
                 else if(RotateCounter > 0)
                 {
-                    if ((sensorValue[LEFTFRONTSENSOR] > FRONTWALLMAX || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMAX)) {
+                    if ((sensorValue[LEFTFRONTSENSOR] > FRONTWALLMAX2 || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMAX2)) {
 
                         ReverseCounter = REVERSEFACTOR;
                         Reversing();
@@ -118,8 +120,9 @@ void high_isr(void)
 				else if (LTurnCounter > 0 || RTurnCounter > 0) {
 					//smoothTurn();
                 }
-				else if (sensorValue[LEFTSENSOR] < SIDEWALLMIN || (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN && sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN)
-                        && sensorValue[RIGHTSENSOR] > SIDEWALLMIN  && algorithm == LEFTWALL)
+				else if (sensorValue[LEFTSENSOR] < SIDEWALLMIN && algorithm == LEFTWALL)
+//                    || (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN)
+//                        && sensorValue[RIGHTSENSOR] > SIDEWALLMIN  && algorithm == LEFTWALL)
 				{
                    // if(justTurned == FALSE)
                     ForwardCounter = FORWARDFACTOR;
@@ -147,7 +150,7 @@ void high_isr(void)
 					//RTurnCounter = SMOOTHROTATEFACTOR;
 					//smoothTurn();
 				}                
-                else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN )
+                else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN2 )
                            && (sensorValue[LEFTFRONTSENSOR] < FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] < FRONTWALLMIN))
                 {	// 2 walls
                    KController();
@@ -329,7 +332,7 @@ void KController()
         moveMouse(merge(LMotorCounter,RMotorCounter));
     }
     
-    if(diff > KCONTROLLERMAX)
+    if(diff > KCONTROLLERMAX)    
         controllerSteps = KCONTROLLERSTEPMAX;
     else if(diff <= KCONTROLLERMAX && diff > KCONTROLLERMID)
         controllerSteps = KCONTROLLERSTEPMID;

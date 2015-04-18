@@ -4974,7 +4974,7 @@ void ConfigureOscillator(void);
 
 # 18 "user.h"
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
-const unsigned char sensorCorrection[4] = {22,22,35,35};
+const unsigned char sensorCorrection[4] = {24,24,6,6};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 Algorithm algorithm;
@@ -4991,7 +4991,7 @@ int MIN(int,int);
 int MAX(int,int);
 void AlgorithmSelection();
 
-# 53 "interrupts.c"
+# 55 "interrupts.c"
 typedef enum {LEFT,RIGHT} Side;
 unsigned char LMotorCounter = 0;
 unsigned char RMotorCounter = 0;
@@ -5021,10 +5021,10 @@ int ABS(int);
 
 void interrupt high_isr(void)
 
-# 89
+# 91
 {
 
-# 99
+# 101
 if(INTCONbits.TMR0IF == 1)
 {
 if(MotorDelayCounter > 2)
@@ -5036,7 +5036,7 @@ else if (ReverseCounter > 0)
 Reversing();
 else if(RotateCounter > 0)
 {
-if ((sensorValue[2] > 700 || sensorValue[3] > 700)) {
+if ((sensorValue[2] > 850 || sensorValue[3] > 850)) {
 
 ReverseCounter = 15;
 Reversing();
@@ -5047,11 +5047,12 @@ rotate(rotatingSide);
 else if (LTurnCounter > 0 || RTurnCounter > 0) {
 
 }
-else if (sensorValue[0] < 120 || (sensorValue[2] > 420 && sensorValue[3] > 420)
-&& sensorValue[1] > 120 && algorithm == LEFTWALL)
+else if (sensorValue[0] < 90 && algorithm == LEFTWALL)
+
+
 {
 
-ForwardCounter = 460;
+ForwardCounter = 420;
 
 
 
@@ -5062,11 +5063,11 @@ rotatingSide = LEFT;
 
 
 }
-else if (sensorValue[1] < 120 && (sensorValue[2] < 700 || sensorValue[3] < 700)
-&& sensorValue[0] > 120 && algorithm == LEFTWALL)
+else if (sensorValue[1] < 90 && (sensorValue[2] < 140 || sensorValue[3] < 140)
+&& sensorValue[0] > 90 && algorithm == LEFTWALL)
 {
 
-ForwardCounter = 460;
+ForwardCounter = 420;
 
 
 forward();
@@ -5076,19 +5077,19 @@ rotatingSide = RIGHT;
 
 
 }
-else if ((sensorValue[0] > 120 && sensorValue[1] > 120 )
+else if ((sensorValue[0] > 90 && sensorValue[1] > 100 )
 && (sensorValue[2] < 420 || sensorValue[3] < 420))
 {
 KController();
 
-}else if ((sensorValue[0] > 120 && sensorValue[1] > 120 )
+}else if ((sensorValue[0] > 90 && sensorValue[1] > 90 )
 && (sensorValue[2] > 420 && sensorValue[3] > 420) && RotateCounter <= 0)
 {
 RotateCounter = 167*2;
 rotate(rotatingSide);
 }
 
-# 188
+# 191
 moveMouse(merge(LMotorCounter,RMotorCounter));
 MotorDelayCounter = 0;
 
@@ -5106,10 +5107,10 @@ INTCONbits.TMR0IF = 0;
 
 void low_priority interrupt low_isr(void)
 
-# 211
+# 214
 {
 
-# 238
+# 241
 }
 
 void motorCounterUpdate(Side side, unsigned char reverse)
