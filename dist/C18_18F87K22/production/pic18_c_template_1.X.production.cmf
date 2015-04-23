@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\X\AppData\Local\Temp\s5v0.obj
+$C:\Users\X\AppData\Local\Temp\sv4.obj
 idloc IDLOC 0 200000 200000 8 1
 reset_vec CODE 0 0 0 4 1
 end_init CODE 0 A2 A2 4 1
@@ -289,28 +289,28 @@ $dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 1964 text8 CODE >32:C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
 1974 text8 CODE >31:C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
 1984 text8 CODE >33:C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
-1986 cinit CODE >1700:C:\Users\X\AppData\Local\Temp\s5v0.
-1986 cinit CODE >1702:C:\Users\X\AppData\Local\Temp\s5v0.
-1986 cinit CODE >1705:C:\Users\X\AppData\Local\Temp\s5v0.
-1986 cinit CODE >1762:C:\Users\X\AppData\Local\Temp\s5v0.
-198A cinit CODE >1763:C:\Users\X\AppData\Local\Temp\s5v0.
-198C cinit CODE >1764:C:\Users\X\AppData\Local\Temp\s5v0.
-198C cinit CODE >1765:C:\Users\X\AppData\Local\Temp\s5v0.
-198E cinit CODE >1766:C:\Users\X\AppData\Local\Temp\s5v0.
-1990 cinit CODE >1767:C:\Users\X\AppData\Local\Temp\s5v0.
-1992 cinit CODE >1772:C:\Users\X\AppData\Local\Temp\s5v0.
-1994 cinit CODE >1773:C:\Users\X\AppData\Local\Temp\s5v0.
-1996 cinit CODE >1774:C:\Users\X\AppData\Local\Temp\s5v0.
-1998 cinit CODE >1775:C:\Users\X\AppData\Local\Temp\s5v0.
-199A cinit CODE >1776:C:\Users\X\AppData\Local\Temp\s5v0.
-199C cinit CODE >1777:C:\Users\X\AppData\Local\Temp\s5v0.
-199E cinit CODE >1778:C:\Users\X\AppData\Local\Temp\s5v0.
-19A0 cinit CODE >1779:C:\Users\X\AppData\Local\Temp\s5v0.
-19A4 cinit CODE >1785:C:\Users\X\AppData\Local\Temp\s5v0.
-19A4 cinit CODE >1787:C:\Users\X\AppData\Local\Temp\s5v0.
-19A6 cinit CODE >1788:C:\Users\X\AppData\Local\Temp\s5v0.
-19A8 cinit CODE >1789:C:\Users\X\AppData\Local\Temp\s5v0.
-19AA cinit CODE >1790:C:\Users\X\AppData\Local\Temp\s5v0.
+1986 cinit CODE >1700:C:\Users\X\AppData\Local\Temp\sv4.
+1986 cinit CODE >1702:C:\Users\X\AppData\Local\Temp\sv4.
+1986 cinit CODE >1705:C:\Users\X\AppData\Local\Temp\sv4.
+1986 cinit CODE >1762:C:\Users\X\AppData\Local\Temp\sv4.
+198A cinit CODE >1763:C:\Users\X\AppData\Local\Temp\sv4.
+198C cinit CODE >1764:C:\Users\X\AppData\Local\Temp\sv4.
+198C cinit CODE >1765:C:\Users\X\AppData\Local\Temp\sv4.
+198E cinit CODE >1766:C:\Users\X\AppData\Local\Temp\sv4.
+1990 cinit CODE >1767:C:\Users\X\AppData\Local\Temp\sv4.
+1992 cinit CODE >1772:C:\Users\X\AppData\Local\Temp\sv4.
+1994 cinit CODE >1773:C:\Users\X\AppData\Local\Temp\sv4.
+1996 cinit CODE >1774:C:\Users\X\AppData\Local\Temp\sv4.
+1998 cinit CODE >1775:C:\Users\X\AppData\Local\Temp\sv4.
+199A cinit CODE >1776:C:\Users\X\AppData\Local\Temp\sv4.
+199C cinit CODE >1777:C:\Users\X\AppData\Local\Temp\sv4.
+199E cinit CODE >1778:C:\Users\X\AppData\Local\Temp\sv4.
+19A0 cinit CODE >1779:C:\Users\X\AppData\Local\Temp\sv4.
+19A4 cinit CODE >1785:C:\Users\X\AppData\Local\Temp\sv4.
+19A4 cinit CODE >1787:C:\Users\X\AppData\Local\Temp\sv4.
+19A6 cinit CODE >1788:C:\Users\X\AppData\Local\Temp\sv4.
+19A8 cinit CODE >1789:C:\Users\X\AppData\Local\Temp\sv4.
+19AA cinit CODE >1790:C:\Users\X\AppData\Local\Temp\sv4.
 19AE text3 CODE >15:C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
 19AE text3 CODE >37:C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
 19BA text3 CODE >38:C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
@@ -385,7 +385,7 @@ __Hspace_2 0 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.product
 __CFG_IESO$OFF 0 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __end_of_KController 1844 0 CODE 0 text16 dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\X\AppData\Local\Temp\s5v0.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\X\AppData\Local\Temp\sv4.obj
 delay@x 2B 0 COMRAM 1 cstackCOMRAM dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __CFG_MCLRE$ON 0 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
@@ -399,9 +399,9 @@ MIN@a 2E 0 COMRAM 1 cstackCOMRAM dist/C18_18F87K22/production\pic18_c_template_1
 MIN@b 30 0 COMRAM 1 cstackCOMRAM dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __Lsmallconst 1000 0 SMALLCONST 0 smallconst dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 _LATC F8B 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
-___sp 0 0 STACK 2 stack C:\Users\X\AppData\Local\Temp\s5v0.obj
+___sp 0 0 STACK 2 stack C:\Users\X\AppData\Local\Temp\sv4.obj
 _main 1A96 0 CODE 0 text0 dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
-start A2 0 CODE 0 init C:\Users\X\AppData\Local\Temp\s5v0.obj
+start A2 0 CODE 0 init C:\Users\X\AppData\Local\Temp\sv4.obj
 __size_of___awdiv 0 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __size_of_main 0 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 _sensorUpdate 14AA 0 CODE 0 text1 dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
@@ -415,11 +415,11 @@ __size_of_moveMouse 0 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.
 __size_of_low_isr 0 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 _rotatingSide 57 0 COMRAM 1 bssCOMRAM dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 _justTurned 56 0 COMRAM 1 bssCOMRAM dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
-__accesstop 80 0 ABS 0 - C:\Users\X\AppData\Local\Temp\s5v0.obj
-intlevel0 0 0 CODE 0 text C:\Users\X\AppData\Local\Temp\s5v0.obj
-intlevel1 0 0 CODE 0 text C:\Users\X\AppData\Local\Temp\s5v0.obj
-intlevel2 0 0 CODE 0 text C:\Users\X\AppData\Local\Temp\s5v0.obj
-intlevel3 0 0 CODE 0 text C:\Users\X\AppData\Local\Temp\s5v0.obj
+__accesstop 80 0 ABS 0 - C:\Users\X\AppData\Local\Temp\sv4.obj
+intlevel0 0 0 CODE 0 text C:\Users\X\AppData\Local\Temp\sv4.obj
+intlevel1 0 0 CODE 0 text C:\Users\X\AppData\Local\Temp\sv4.obj
+intlevel2 0 0 CODE 0 text C:\Users\X\AppData\Local\Temp\sv4.obj
+intlevel3 0 0 CODE 0 text C:\Users\X\AppData\Local\Temp\sv4.obj
 _sensorLocation 1005 0 SMALLCONST 0 smallconst dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 _InitApp 18DA 0 CODE 0 text7 dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
@@ -446,8 +446,8 @@ _ADRESH FC4 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.producti
 _ADRESL FC3 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __end_of_sensorComputation 14AA 0 CODE 0 text2 dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 ___awdiv@dividend 28 0 COMRAM 1 cstackCOMRAM dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
-___inthi_sp 0 0 STACK 2 stack C:\Users\X\AppData\Local\Temp\s5v0.obj
-___intlo_sp 0 0 STACK 2 stack C:\Users\X\AppData\Local\Temp\s5v0.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\X\AppData\Local\Temp\sv4.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\X\AppData\Local\Temp\sv4.obj
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 merge@right 12 0 COMRAM 1 cstackCOMRAM dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __Hintcode_body 0 0 ABS 0 intcode_body dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
@@ -520,7 +520,7 @@ __Hbank14 0 0 ABS 0 bank14 dist/C18_18F87K22/production\pic18_c_template_1.X.pro
 __Hbank15 0 0 ABS 0 bank15 dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __Hbigram 0 0 ABS 0 bigram dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
-__smallconst 1000 0 SMALLCONST 0 smallconst C:\Users\X\AppData\Local\Temp\s5v0.obj
+__smallconst 1000 0 SMALLCONST 0 smallconst C:\Users\X\AppData\Local\Temp\sv4.obj
 __Hcomram 0 0 ABS 0 comram dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __Hconfig 30000E 0 CONFIG 0 config dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __CFG_LPT1OSC$OFF 0 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
@@ -655,8 +655,8 @@ __Lfarbss 0 0 FARRAM 0 farbss dist/C18_18F87K22/production\pic18_c_template_1.X.
 __Lfardata 0 0 FARRAM 0 fardata dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 _Reversing 1A60 0 CODE 0 text15 dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 _low_isr 18 0 CODE 0 intcodelo dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
-stackhi F7F 0 ABS 0 - C:\Users\X\AppData\Local\Temp\s5v0.obj
-stacklo DE 0 ABS 0 - C:\Users\X\AppData\Local\Temp\s5v0.obj
+stackhi F7F 0 ABS 0 - C:\Users\X\AppData\Local\Temp\sv4.obj
+stacklo DE 0 ABS 0 - C:\Users\X\AppData\Local\Temp\sv4.obj
 sensorComputation@sensorTemp 33 0 COMRAM 1 cstackCOMRAM dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __Lintcode 8 0 CODE 0 intcode dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 _OSCTUNE F9B 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
@@ -713,7 +713,7 @@ __Ltext17 0 0 ABS 0 text17 dist/C18_18F87K22/production\pic18_c_template_1.X.pro
 __Ltext18 0 0 ABS 0 text18 dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __Ltext19 0 0 ABS 0 text19 dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __Ltext20 0 0 ABS 0 text20 dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
-__ramtop 1000 0 RAM 0 ramtop C:\Users\X\AppData\Local\Temp\s5v0.obj
+__ramtop 1000 0 RAM 0 ramtop C:\Users\X\AppData\Local\Temp\sv4.obj
 __Lpowerup A2 0 CODE 0 powerup dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj
 __size_of_ConfigureOscillator 0 0 ABS 0 - dist/C18_18F87K22/production\pic18_c_template_1.X.production.obj

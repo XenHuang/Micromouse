@@ -3743,13 +3743,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _sensorCorrection `Cuc ~T0 @X0 -> 4 `i e ]
 [i _sensorCorrection
 :U ..
--> -> 54 `i `uc
--> -> 54 `i `uc
--> -> 29 `i `uc
--> -> 29 `i `uc
+-> -> 23 `i `uc
+-> -> 23 `i `uc
+-> -> 4 `i `uc
+-> -> 4 `i `uc
 ..
 ]
-[; ;user.h: 19: const unsigned char sensorCorrection[4] = {54,54,29,29};
+[; ;user.h: 19: const unsigned char sensorCorrection[4] = {23,23,4,4};
 [; ;user.h: 21: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 "22
 [v _algorithm `E4060 ~T0 @X0 1 e ]
@@ -3915,8 +3915,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 401  ]
 "124
 [e :U 398 ]
-[; ;interrupts.c: 124: else if (sensorValue[0] < 70 && algorithm == LEFTWALL)
-[e $ ! && < *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i == -> _algorithm `i -> . `E4060 0 `i 402  ]
+[; ;interrupts.c: 124: else if (sensorValue[0] < 90 && algorithm == LEFTWALL)
+[e $ ! && < *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i == -> _algorithm `i -> . `E4060 0 `i 402  ]
 [; ;interrupts.c: 125: {
 "125
 {
@@ -3924,9 +3924,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "126
 [e $ ! == -> _justTurned `i -> 0 `i 403  ]
 {
-[; ;interrupts.c: 127: ForwardCounter = 420;
+[; ;interrupts.c: 127: ForwardCounter = 400;
 "127
-[e = _ForwardCounter -> 420 `i ]
+[e = _ForwardCounter -> 400 `i ]
 "128
 }
 [; ;interrupts.c: 128: }else {
@@ -3958,10 +3958,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 405  ]
 "140
 [e :U 402 ]
-[; ;interrupts.c: 140: else if (sensorValue[1] < 70 && (sensorValue[2] > 100 && sensorValue[3] > 100)
-[; ;interrupts.c: 141: && sensorValue[0] > 70 && algorithm == LEFTWALL)
+[; ;interrupts.c: 140: else if (sensorValue[1] < 120 && (sensorValue[2] > 75 && sensorValue[3] > 75)
+[; ;interrupts.c: 141: && sensorValue[0] > 90 && algorithm == LEFTWALL)
 "141
-[e $ ! && && && < *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i && > *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 100 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 100 `i > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i == -> _algorithm `i -> . `E4060 0 `i 406  ]
+[e $ ! && && && < *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 120 `i && > *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 75 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 75 `i > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i == -> _algorithm `i -> . `E4060 0 `i 406  ]
 [; ;interrupts.c: 142: {
 "142
 {
@@ -3969,9 +3969,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "143
 [e $ ! == -> _justTurned `i -> 0 `i 407  ]
 {
-[; ;interrupts.c: 144: ForwardCounter = 420;
+[; ;interrupts.c: 144: ForwardCounter = 400;
 "144
-[e = _ForwardCounter -> 420 `i ]
+[e = _ForwardCounter -> 400 `i ]
 "145
 }
 [; ;interrupts.c: 145: } else {
@@ -4003,10 +4003,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 409  ]
 "157
 [e :U 406 ]
-[; ;interrupts.c: 157: else if ((sensorValue[0] > 70 && sensorValue[1] > 100 )
+[; ;interrupts.c: 157: else if ((sensorValue[0] > 90 && sensorValue[1] > 90 )
 [; ;interrupts.c: 158: && (sensorValue[2] < 420 || sensorValue[3] < 420))
 "158
-[e $ ! && && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 100 `i || < *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i < *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i 410  ]
+[e $ ! && && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i || < *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i < *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i 410  ]
 [; ;interrupts.c: 159: {
 "159
 {
@@ -4022,10 +4022,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 411  ]
 "164
 [e :U 410 ]
-[; ;interrupts.c: 164: else if ((sensorValue[0] > 70 && sensorValue[1] > 70 )
+[; ;interrupts.c: 164: else if ((sensorValue[0] > 90 && sensorValue[1] > 90 )
 [; ;interrupts.c: 165: && (sensorValue[2] > 420 && sensorValue[3] > 420) && RotateCounter <= 0)
 "165
-[e $ ! && && && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 70 `i && > *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i <= _RotateCounter -> 0 `i 412  ]
+[e $ ! && && && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 90 `i && > *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 420 `i <= _RotateCounter -> 0 `i 412  ]
 [; ;interrupts.c: 166: {
 "166
 {
@@ -4478,9 +4478,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 459 ]
 [; ;interrupts.c: 346: else if(diff <= 150 && diff > 20)
 [e $ ! && <= _diff -> 150 `i > _diff -> 20 `i 461  ]
-[; ;interrupts.c: 347: controllerSteps = 4;
+[; ;interrupts.c: 347: controllerSteps = 6;
 "347
-[e = _controllerSteps -> -> 4 `i `uc ]
+[e = _controllerSteps -> -> 6 `i `uc ]
 [e $U 462  ]
 "348
 [e :U 461 ]

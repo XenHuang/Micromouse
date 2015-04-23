@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.34 build -361300703 
-                                                                                               Sat Apr 18 01:26:53 2015
+                                                                                               Wed Apr 22 18:44:37 2015
 
 Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
      1                           	processor	18F4620
@@ -53,10 +53,10 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
     47  001000  00                 	db	0
     48  001001                     _sensorCorrection:
     49                           	opt stack 0
-    50  001001  36                 	db	54
-    51  001002  36                 	db	54
-    52  001003  1D                 	db	29
-    53  001004  1D                 	db	29
+    50  001001  17                 	db	23
+    51  001002  17                 	db	23
+    52  001003  04                 	db	4
+    53  001004  04                 	db	4
     54  001005                     __end_of_sensorCorrection:
     55                           	opt stack 0
     56  001005                     _sensorLocation:
@@ -2198,12 +2198,12 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2127  0010B6  D0B6               	goto	i2l56
   2128  0010B8                     i2l1600:
   2129                           
-  2130                           ;interrupts.c: 124: else if (sensorValue[0] < 70 && algorithm == LEFTWALL)
+  2130                           ;interrupts.c: 124: else if (sensorValue[0] < 90 && algorithm == LEFTWALL)
   2131  0010B8  BE3E               	btfsc	_sensorValue+1,7,c
   2132  0010BA  D006               	goto	i2l1602
   2133  0010BC  503E               	movf	_sensorValue+1,w,c
   2134  0010BE  E11E               	bnz	i2l1618
-  2135  0010C0  0E46               	movlw	70
+  2135  0010C0  0E5A               	movlw	90
   2136  0010C2  5C3D               	subwf	_sensorValue,w,c
   2137  0010C4  B0D8               	btfsc	status,0,c
   2138  0010C6  D01A               	goto	i2l1618
@@ -2218,10 +2218,10 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2147  0010D0  A4D8               	btfss	status,2,c
   2148  0010D2  D004               	goto	i2l1608
   2149                           
-  2150                           ;interrupts.c: 127: ForwardCounter = 420;
+  2150                           ;interrupts.c: 127: ForwardCounter = 400;
   2151  0010D4  0E01               	movlw	1
   2152  0010D6  6E46               	movwf	_ForwardCounter+1,c
-  2153  0010D8  0EA4               	movlw	164
+  2153  0010D8  0E90               	movlw	144
   2154  0010DA  D003               	goto	L6
   2155  0010DC                     i2l1608:
   2156                           
@@ -2257,14 +2257,14 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2186  0010FA  D094               	goto	i2l56
   2187  0010FC                     i2l1618:
   2188                           
-  2189                           ;interrupts.c: 140: else if (sensorValue[1] < 70 && (sensorValue[2] > 100 && sensorValue
-      +                          [3] > 100)
-  2190                           ;interrupts.c: 141: && sensorValue[0] > 70 && algorithm == LEFTWALL)
+  2189                           ;interrupts.c: 140: else if (sensorValue[1] < 120 && (sensorValue[2] > 75 && sensorValue
+      +                          [3] > 75)
+  2190                           ;interrupts.c: 141: && sensorValue[0] > 90 && algorithm == LEFTWALL)
   2191  0010FC  BE40               	btfsc	_sensorValue+3,7,c
   2192  0010FE  D006               	goto	i2l1620
   2193  001100  5040               	movf	_sensorValue+3,w,c
   2194  001102  E134               	bnz	i2l1642
-  2195  001104  0E46               	movlw	70
+  2195  001104  0E78               	movlw	120
   2196  001106  5C3F               	subwf	_sensorValue+2,w,c
   2197  001108  B0D8               	btfsc	status,0,c
   2198  00110A  D030               	goto	i2l1642
@@ -2273,7 +2273,7 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2201  00110E  D02E               	goto	i2l1642
   2202  001110  5042               	movf	_sensorValue+5,w,c
   2203  001112  E104               	bnz	i2u115_40
-  2204  001114  0E65               	movlw	101
+  2204  001114  0E4C               	movlw	76
   2205  001116  5C41               	subwf	_sensorValue+4,w,c
   2206  001118  A0D8               	btfss	status,0,c
   2207  00111A  D028               	goto	i2l1642
@@ -2282,7 +2282,7 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2210  00111E  D026               	goto	i2l1642
   2211  001120  5044               	movf	_sensorValue+7,w,c
   2212  001122  E104               	bnz	i2u116_40
-  2213  001124  0E65               	movlw	101
+  2213  001124  0E4C               	movlw	76
   2214  001126  5C43               	subwf	_sensorValue+6,w,c
   2215  001128  A0D8               	btfss	status,0,c
   2216  00112A  D020               	goto	i2l1642
@@ -2291,7 +2291,7 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2219  00112E  D01E               	goto	i2l1642
   2220  001130  503E               	movf	_sensorValue+1,w,c
   2221  001132  E104               	bnz	i2u117_40
-  2222  001134  0E47               	movlw	71
+  2222  001134  0E5B               	movlw	91
   2223  001136  5C3D               	subwf	_sensorValue,w,c
   2224  001138  A0D8               	btfss	status,0,c
   2225  00113A  D018               	goto	i2l1642
@@ -2306,10 +2306,10 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2234  001144  A4D8               	btfss	status,2,c
   2235  001146  D004               	goto	i2l1632
   2236                           
-  2237                           ;interrupts.c: 144: ForwardCounter = 420;
+  2237                           ;interrupts.c: 144: ForwardCounter = 400;
   2238  001148  0E01               	movlw	1
   2239  00114A  6E46               	movwf	_ForwardCounter+1,c
-  2240  00114C  0EA4               	movlw	164
+  2240  00114C  0E90               	movlw	144
   2241  00114E  D003               	goto	L8
   2242  001150                     i2l1632:
   2243                           
@@ -2339,13 +2339,13 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2267  00116A  D7C5               	goto	i2l1616
   2268  00116C                     i2l1642:
   2269                           
-  2270                           ;interrupts.c: 157: else if ((sensorValue[0] > 70 && sensorValue[1] > 100 )
+  2270                           ;interrupts.c: 157: else if ((sensorValue[0] > 90 && sensorValue[1] > 90 )
   2271                           ;interrupts.c: 158: && (sensorValue[2] < 420 || sensorValue[3] < 420))
   2272  00116C  BE3E               	btfsc	_sensorValue+1,7,c
   2273  00116E  D021               	goto	i2l1654
   2274  001170  503E               	movf	_sensorValue+1,w,c
   2275  001172  E104               	bnz	i2u120_40
-  2276  001174  0E47               	movlw	71
+  2276  001174  0E5B               	movlw	91
   2277  001176  5C3D               	subwf	_sensorValue,w,c
   2278  001178  A0D8               	btfss	status,0,c
   2279  00117A  D01B               	goto	i2l1654
@@ -2354,7 +2354,7 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2282  00117E  D019               	goto	i2l1654
   2283  001180  5040               	movf	_sensorValue+3,w,c
   2284  001182  E104               	bnz	i2u121_40
-  2285  001184  0E65               	movlw	101
+  2285  001184  0E5B               	movlw	91
   2286  001186  5C3F               	subwf	_sensorValue+2,w,c
   2287  001188  A0D8               	btfss	status,0,c
   2288  00118A  D013               	goto	i2l1654
@@ -2385,14 +2385,14 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2313  0011B0  D7A3               	goto	L9
   2314  0011B2                     i2l1654:
   2315                           
-  2316                           ;interrupts.c: 164: else if ((sensorValue[0] > 70 && sensorValue[1] > 70 )
+  2316                           ;interrupts.c: 164: else if ((sensorValue[0] > 90 && sensorValue[1] > 90 )
   2317                           ;interrupts.c: 165: && (sensorValue[2] > 420 && sensorValue[3] > 420) && RotateCounter <
       +                          = 0)
   2318  0011B2  BE3E               	btfsc	_sensorValue+1,7,c
   2319  0011B4  D02C               	goto	i2l1668
   2320  0011B6  503E               	movf	_sensorValue+1,w,c
   2321  0011B8  E104               	bnz	i2u124_40
-  2322  0011BA  0E47               	movlw	71
+  2322  0011BA  0E5B               	movlw	91
   2323  0011BC  5C3D               	subwf	_sensorValue,w,c
   2324  0011BE  A0D8               	btfss	status,0,c
   2325  0011C0  D026               	goto	i2l1668
@@ -2401,7 +2401,7 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2328  0011C4  D024               	goto	i2l1668
   2329  0011C6  5040               	movf	_sensorValue+3,w,c
   2330  0011C8  E104               	bnz	i2u125_40
-  2331  0011CA  0E47               	movlw	71
+  2331  0011CA  0E5B               	movlw	91
   2332  0011CC  5C3F               	subwf	_sensorValue+2,w,c
   2333  0011CE  A0D8               	btfss	status,0,c
   2334  0011D0  D01E               	goto	i2l1668
@@ -2987,8 +2987,8 @@ Microchip Technology Omniscient Code Generator (Lite mode) build 201502162209
   2894  001836  D002               	goto	i2l1518
   2895  001838                     i2u95_40:
   2896                           
-  2897                           ;interrupts.c: 347: controllerSteps = 4;
-  2898  001838  0E04               	movlw	4
+  2897                           ;interrupts.c: 347: controllerSteps = 6;
+  2898  001838  0E06               	movlw	6
   2899  00183A  D001               	goto	L11
   2900  00183C                     i2l1518:
   2901                           
@@ -4033,7 +4033,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.34 build -361300703 
-Symbol Table                                                                                   Sat Apr 18 01:26:53 2015
+Symbol Table                                                                                   Wed Apr 22 18:44:37 2015
 
                 ___awdiv@sign 002D                            bsr 000FE0           ___wmul@multiplicand 002A  
                  __CFG_BORV$3 000000                  __CFG_CP0$OFF 000000                  __CFG_CP1$OFF 000000  

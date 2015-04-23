@@ -4974,7 +4974,7 @@ void ConfigureOscillator(void);
 
 # 18 "user.h"
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
-const unsigned char sensorCorrection[4] = {54,54,29,29};
+const unsigned char sensorCorrection[4] = {23,23,4,4};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 Algorithm algorithm;
@@ -5047,10 +5047,10 @@ rotate(rotatingSide);
 
 
 
-else if (sensorValue[0] < 70 && algorithm == LEFTWALL)
+else if (sensorValue[0] < 90 && algorithm == LEFTWALL)
 {
 if(justTurned == 0) {
-ForwardCounter = 420;
+ForwardCounter = 400;
 }else {
 ForwardCounter = 380;
 }
@@ -5063,11 +5063,11 @@ justTurned = 1;
 }
 
 
-else if (sensorValue[1] < 70 && (sensorValue[2] > 100 && sensorValue[3] > 100)
-&& sensorValue[0] > 70 && algorithm == LEFTWALL)
+else if (sensorValue[1] < 120 && (sensorValue[2] > 75 && sensorValue[3] > 75)
+&& sensorValue[0] > 90 && algorithm == LEFTWALL)
 {
 if(justTurned == 0) {
-ForwardCounter = 420;
+ForwardCounter = 400;
 } else {
 ForwardCounter = 380;
 }
@@ -5080,14 +5080,14 @@ justTurned = 1;
 }
 
 
-else if ((sensorValue[0] > 70 && sensorValue[1] > 100 )
+else if ((sensorValue[0] > 90 && sensorValue[1] > 90 )
 && (sensorValue[2] < 420 || sensorValue[3] < 420))
 {
 KController();
 justTurned = 0;
 }
 
-else if ((sensorValue[0] > 70 && sensorValue[1] > 70 )
+else if ((sensorValue[0] > 90 && sensorValue[1] > 90 )
 && (sensorValue[2] > 420 && sensorValue[3] > 420) && RotateCounter <= 0)
 {
 RotateCounter = 167*2;
@@ -5217,7 +5217,7 @@ moveMouse(merge(LMotorCounter,RMotorCounter));
 if(diff > 150)
 controllerSteps = 1;
 else if(diff <= 150 && diff > 20)
-controllerSteps = 4;
+controllerSteps = 6;
 else
 controllerSteps = 8;
 }

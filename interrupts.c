@@ -31,7 +31,7 @@
 #define ROTATE90 167            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 #define REVERSEFACTOR 15         //factor that helps correct the 180 turn
-#define FORWARDFACTOR 420         //factor that helps forward till 90 degree turn
+#define FORWARDFACTOR 400          //factor that helps forward till 90 degree turn
 #define FORWARDFACTOR2 380         //factor that helps forward till 90 degree turn
 
 #define LEFTSENSOR 0             //Sensor value position
@@ -42,15 +42,15 @@
 // Higher the value the closer
 #define FRONTWALLMIN 420          // 2,3 senses distance closer than this rotates
 #define FRONTWALLMAX 140          // 2,3 senses distance further than this makes left/right turn
-#define WALLINONEHALFCELL 100         // Is there a frontwall after one and half cell.
-#define SIDEWALLMIN 70           // 0,1 senses distance further than this makes left/right turn
+#define WALLINONEHALFCELL 75         // Is there a frontwall after one and half cell.
+#define SIDEWALLMIN 90           // 0,1 senses distance further than this makes left/right turn
 #define SIDEWALLMIN2 100
 #define FRONTWALLMAX2 800         // 2,3 senses distance closer than this then reverse
 
 #define KCONTROLLERMAX 150        // Maximum diff bettween 0,1 sensors value
 #define KCONTROLLERMID 20
 #define KCONTROLLERSTEP 8
-#define KCONTROLLERSTEPMID 4
+#define KCONTROLLERSTEPMID 6
 #define KCONTROLLERSTEPMAX 1
 
 typedef enum {LEFT,RIGHT} Side;
@@ -137,7 +137,7 @@ void high_isr(void)
 				}
                 //Right turn if upper left has wall && front has wall in 1.5 cells && upper right has no wall.
                 //if (right sensor senses less than 70) && (both front sensor senses greater than 100) && (left sensor senses higher than 70) 
-				else if (sensorValue[RIGHTSENSOR] < SIDEWALLMIN && (sensorValue[LEFTFRONTSENSOR] > WALLINONEHALFCELL && sensorValue[RIGHTFRONTSENSOR] > WALLINONEHALFCELL)
+				else if (sensorValue[RIGHTSENSOR] < 120 && (sensorValue[LEFTFRONTSENSOR] > WALLINONEHALFCELL && sensorValue[RIGHTFRONTSENSOR] > WALLINONEHALFCELL)
                         && sensorValue[LEFTSENSOR] > SIDEWALLMIN && algorithm == LEFTWALL)   
 				{
                     if(justTurned == 0) { //if just rotate, forward lower step of 380.
@@ -154,7 +154,7 @@ void high_isr(void)
 				} 
                 // Go forward and self correct if upper left and upper right have walls and no wall in the front
                 //if (right sensor and left sensor senses greater than 70) && (either front sensors senses less than 420)
-                else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN2 )
+                else if ((sensorValue[LEFTSENSOR] > SIDEWALLMIN && sensorValue[RIGHTSENSOR] > SIDEWALLMIN )
                            && (sensorValue[LEFTFRONTSENSOR] < FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] < FRONTWALLMIN))
                 {	// 2 walls
                    KController();

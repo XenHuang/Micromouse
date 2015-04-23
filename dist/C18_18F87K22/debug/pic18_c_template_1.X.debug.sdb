@@ -8,7 +8,7 @@
 LEFTWALL 0
 RIGHTWALL 1
 ]
-"65 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"66 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [e E4082 . `uc
 LEFT 0
 RIGHT 1
@@ -48,25 +48,25 @@ RIGHTWALL 1
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"82 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"83 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _high_isr high_isr `II(v  1 e 0 0 ]
-"209
+"215
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
-"246
+"252
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
-"291
+"297
 [v _merge merge `(uc  1 e 1 0 ]
-"298
-[v _moveMouse moveMouse `(v  1 e 0 0 ]
 "304
+[v _moveMouse moveMouse `(v  1 e 0 0 ]
+"310
 [v _ABS ABS `(i  1 e 2 0 ]
-"311
+"317
 [v _KController KController `(v  1 e 0 0 ]
-"346
+"352
 [v _rotate rotate `(v  1 e 0 0 ]
-"370
+"376
 [v _Reversing Reversing `(v  1 e 0 0 ]
-"377
+"383
 [v _forward forward `(v  1 e 0 0 ]
 "41 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
 [v _main main `(v  1 e 0 0 ]
@@ -223,27 +223,27 @@ RIGHTWALL 1
 ]
 [u S67 . 1 `S27 1 . 1 0 `S36 1 . 1 0 `S45 1 . 1 0 `S54 1 . 1 0 `S63 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES67  1 e 1 @4082 ]
-"56 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"57 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _LMotorCounter LMotorCounter `uc  1 e 1 0 ]
-"57
-[v _RMotorCounter RMotorCounter `uc  1 e 1 0 ]
 "58
-[v _controllerSteps controllerSteps `uc  1 e 1 0 ]
+[v _RMotorCounter RMotorCounter `uc  1 e 1 0 ]
 "59
-[v _MotorDelayCounter MotorDelayCounter `i  1 e 2 0 ]
+[v _controllerSteps controllerSteps `uc  1 e 1 0 ]
 "60
-[v _LTurnCounter LTurnCounter `i  1 e 2 0 ]
+[v _MotorDelayCounter MotorDelayCounter `i  1 e 2 0 ]
 "61
-[v _RTurnCounter RTurnCounter `i  1 e 2 0 ]
+[v _LTurnCounter LTurnCounter `i  1 e 2 0 ]
 "62
-[v _RotateCounter RotateCounter `i  1 e 2 0 ]
+[v _RTurnCounter RTurnCounter `i  1 e 2 0 ]
 "63
-[v _ReverseCounter ReverseCounter `i  1 e 2 0 ]
+[v _RotateCounter RotateCounter `i  1 e 2 0 ]
 "64
-[v _ForwardCounter ForwardCounter `i  1 e 2 0 ]
+[v _ReverseCounter ReverseCounter `i  1 e 2 0 ]
 "65
-[v _rotatingSide rotatingSide `E4082  1 e 1 0 ]
+[v _ForwardCounter ForwardCounter `i  1 e 2 0 ]
 "66
+[v _rotatingSide rotatingSide `E4082  1 e 1 0 ]
+"67
 [v _justTurned justTurned `uc  1 e 1 0 ]
 "18 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.h
 [v _sensorLocation sensorLocation `C[4]uc  1 e 4 0 ]
@@ -342,79 +342,79 @@ RIGHTWALL 1
 {
 "36
 } 0
-"209 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"215 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
 {
-"244
+"250
 } 0
-"82
+"83
 [v _high_isr high_isr `II(v  1 e 0 0 ]
 {
-"205
+"211
 } 0
-"346
+"352
 [v _rotate rotate `(v  1 e 0 0 ]
 {
 [v rotate@side side `E4082  1 a 1 wreg ]
 [v rotate@side side `E4082  1 a 1 wreg ]
-"348
+"354
 [v rotate@side side `E4082  1 a 1 19 ]
-"356
+"362
 } 0
-"377
+"383
 [v _forward forward `(v  1 e 0 0 ]
 {
-"382
+"388
 } 0
-"370
+"376
 [v _Reversing Reversing `(v  1 e 0 0 ]
 {
-"375
+"381
 } 0
-"311
+"317
 [v _KController KController `(v  1 e 0 0 ]
 {
-"314
+"320
 [v KController@diff diff `i  1 a 2 23 ]
-"313
+"319
 [v KController@correctTo correctTo `E4082  1 a 1 22 ]
-"344
+"350
 } 0
-"298
+"304
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
 {
 [v moveMouse@action action `uc  1 a 1 wreg ]
 [v moveMouse@action action `uc  1 a 1 wreg ]
-"300
+"306
 [v moveMouse@action action `uc  1 a 1 17 ]
-"301
+"307
 } 0
-"246
+"252
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
 {
 [v motorCounterUpdate@side side `E4082  1 a 1 wreg ]
 [v motorCounterUpdate@side side `E4082  1 a 1 wreg ]
 [v motorCounterUpdate@reverse reverse `uc  1 p 1 17 ]
-"248
+"254
 [v motorCounterUpdate@side side `E4082  1 a 1 18 ]
-"289
+"295
 } 0
-"291
+"297
 [v _merge merge `(uc  1 e 1 0 ]
 {
 [v merge@left left `uc  1 a 1 wreg ]
-"293
+"299
 [v merge@merged merged `uc  1 a 1 19 ]
-"291
+"297
 [v merge@left left `uc  1 a 1 wreg ]
 [v merge@right right `uc  1 p 1 17 ]
-"294
+"300
 [v merge@left left `uc  1 a 1 18 ]
-"296
+"302
 } 0
-"304
+"310
 [v _ABS ABS `(i  1 e 2 0 ]
 {
 [v ABS@x x `i  1 p 2 17 ]
-"308
+"314
 } 0
