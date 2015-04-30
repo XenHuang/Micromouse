@@ -4971,7 +4971,7 @@ typedef unsigned char bool;
 
 # 18 "user.h"
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
-const unsigned char sensorCorrection[4] = {26,26,35,35};
+const unsigned char sensorCorrection[4] = {0,0,21,21};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 Algorithm algorithm;

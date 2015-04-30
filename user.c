@@ -139,7 +139,7 @@ void sensorComputation(int sensorTemp[][SENSORCOMPUTATION])
             sum += sensorTemp[i][j];
         }
         sum = sum - min - max;
-        sensorValue[i] = sum/(SENSORCOMPUTATION-2);
+        sensorValue[i] = sum/(SENSORCOMPUTATION-2);   //131 133 80 81
     }
 }
 
