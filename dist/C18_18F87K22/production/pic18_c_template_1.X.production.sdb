@@ -8,8 +8,8 @@
 LEFTWALL 0
 RIGHTWALL 1
 ]
-"68 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
-[e E4082 . `uc
+"71 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+[e E4142 . `uc
 LEFT 0
 RIGHT 1
 ]
@@ -48,25 +48,25 @@ RIGHTWALL 1
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"86 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"98 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _high_isr high_isr `II(v  1 e 0 0 ]
-"229
+"296
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
-"266
+"333
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
-"311
+"378
 [v _merge merge `(uc  1 e 1 0 ]
-"318
+"385
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
-"324
+"391
 [v _ABS ABS `(i  1 e 2 0 ]
-"331
+"398
 [v _KController KController `(v  1 e 0 0 ]
-"368
+"519
 [v _rotate rotate `(v  1 e 0 0 ]
-"392
+"543
 [v _Reversing Reversing `(v  1 e 0 0 ]
-"399
+"550
 [v _forward forward `(v  1 e 0 0 ]
 "41 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
 [v _main main `(v  1 e 0 0 ]
@@ -88,7 +88,7 @@ RIGHTWALL 1
 [v _MAX MAX `(i  1 e 2 0 ]
 "1267 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
-[s S264 . 1 `uc 1 TRISB0 1 0 :1:0 
+[s S272 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -98,7 +98,7 @@ RIGHTWALL 1
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "1886
-[s S273 . 1 `uc 1 RB0 1 0 :1:0 
+[s S281 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -107,11 +107,11 @@ RIGHTWALL 1
 `uc 1 RB6 1 0 :1:6 
 `uc 1 RB7 1 0 :1:7 
 ]
-[u S282 . 1 `S264 1 . 1 0 `S273 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES282  1 e 1 @3987 ]
+[u S290 . 1 `S272 1 . 1 0 `S281 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES290  1 e 1 @3987 ]
 "2075
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-[s S232 . 1 `uc 1 TRISE0 1 0 :1:0 
+[s S240 . 1 `uc 1 TRISE0 1 0 :1:0 
 `uc 1 TRISE1 1 0 :1:1 
 `uc 1 TRISE2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -121,13 +121,13 @@ RIGHTWALL 1
 `uc 1 IBF 1 0 :1:7 
 ]
 "2545
-[s S241 . 1 `uc 1 RE0 1 0 :1:0 
+[s S249 . 1 `uc 1 RE0 1 0 :1:0 
 `uc 1 RE1 1 0 :1:1 
 `uc 1 RE2 1 0 :1:2 
 `uc 1 RE3 1 0 :1:3 
 ]
-[u S246 . 1 `S232 1 . 1 0 `S241 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES246  1 e 1 @3990 ]
+[u S254 . 1 `S240 1 . 1 0 `S249 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES254  1 e 1 @3990 ]
 "2680
 [v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
 "4645
@@ -136,38 +136,38 @@ RIGHTWALL 1
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
 "4805
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
-[s S361 . 1 `uc 1 . 1 0 :1:0 
+[s S369 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "4853
-[s S364 . 1 `uc 1 ADON 1 0 :1:0 
+[s S372 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 ]
-[s S371 . 1 `uc 1 . 1 0 :1:0 
+[s S379 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
 `uc 1 CHS2 1 0 :1:4 
 `uc 1 CHS3 1 0 :1:5 
 ]
-[s S378 . 1 `uc 1 . 1 0 :1:0 
+[s S386 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S381 . 1 `uc 1 . 1 0 :1:0 
+[s S389 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S384 . 1 `uc 1 . 1 0 :1:0 
+[s S392 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S387 . 1 `uc 1 . 1 0 :1:0 
+[s S395 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S390 . 1 `uc 1 . 1 0 :1:0 
+[s S398 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S393 . 1 `S361 1 . 1 0 `S364 1 . 1 0 `S361 1 . 1 0 `S371 1 . 1 0 `S378 1 . 1 0 `S381 1 . 1 0 `S384 1 . 1 0 `S387 1 . 1 0 `S390 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES393  1 e 1 @4034 ]
+[u S401 . 1 `S369 1 . 1 0 `S372 1 . 1 0 `S369 1 . 1 0 `S379 1 . 1 0 `S386 1 . 1 0 `S389 1 . 1 0 `S392 1 . 1 0 `S395 1 . 1 0 `S398 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES401  1 e 1 @4034 ]
 "4933
 [v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
 "4939
@@ -223,30 +223,38 @@ RIGHTWALL 1
 ]
 [u S67 . 1 `S27 1 . 1 0 `S36 1 . 1 0 `S45 1 . 1 0 `S54 1 . 1 0 `S63 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES67  1 e 1 @4082 ]
-"59 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"62 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _LMotorCounter LMotorCounter `uc  1 e 1 0 ]
-"60
-[v _RMotorCounter RMotorCounter `uc  1 e 1 0 ]
-"61
-[v _controllerSteps controllerSteps `uc  1 e 1 0 ]
-"62
-[v _MotorDelayCounter MotorDelayCounter `i  1 e 2 0 ]
 "63
-[v _LTurnCounter LTurnCounter `i  1 e 2 0 ]
+[v _RMotorCounter RMotorCounter `uc  1 e 1 0 ]
 "64
-[v _RTurnCounter RTurnCounter `i  1 e 2 0 ]
+[v _controllerSteps controllerSteps `uc  1 e 1 0 ]
 "65
-[v _RotateCounter RotateCounter `i  1 e 2 0 ]
+[v _MotorDelayCounter MotorDelayCounter `i  1 e 2 0 ]
 "66
-[v _ReverseCounter ReverseCounter `i  1 e 2 0 ]
+[v _LTurnCounter LTurnCounter `i  1 e 2 0 ]
 "67
-[v _ForwardCounter ForwardCounter `i  1 e 2 0 ]
+[v _RTurnCounter RTurnCounter `i  1 e 2 0 ]
 "68
-[v _rotatingSide rotatingSide `E4082  1 e 1 0 ]
+[v _RotateCounter RotateCounter `i  1 e 2 0 ]
 "69
-[v _justTurned justTurned `uc  1 e 1 0 ]
+[v _ReverseCounter ReverseCounter `i  1 e 2 0 ]
 "70
+[v _ForwardCounter ForwardCounter `i  1 e 2 0 ]
+"71
+[v _rotatingSide rotatingSide `E4142  1 e 1 0 ]
+"72
+[v _justTurned justTurned `uc  1 e 1 0 ]
+"73
 [v _TurnRight TurnRight `i  1 e 2 0 ]
+"74
+[v _TurnLeft TurnLeft `i  1 e 2 0 ]
+"79
+[v _TurnedRight TurnedRight `i  1 e 2 0 ]
+"80
+[v _TurnedLeft TurnedLeft `i  1 e 2 0 ]
+"81
+[v _Deadend Deadend `i  1 e 2 0 ]
 "18 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.h
 [v _sensorLocation sensorLocation `C[4]uc  1 e 4 0 ]
 "19
@@ -264,60 +272,60 @@ RIGHTWALL 1
 [v _sensorUpdate sensorUpdate `(v  1 e 0 0 ]
 {
 "149
-[v sensorUpdate@sensorTemp sensorTemp `[4][10]i  1 a 80 16 ]
+[v sensorUpdate@sensorTemp sensorTemp `[4][10]i  1 a 80 28 ]
 "148
-[v sensorUpdate@j j `i  1 a 2 98 ]
-[v sensorUpdate@i i `i  1 a 2 96 ]
+[v sensorUpdate@j j `i  1 a 2 110 ]
+[v sensorUpdate@i i `i  1 a 2 108 ]
 "173
 } 0
 "125
 [v _sensorComputation sensorComputation `(v  1 e 0 0 ]
 {
 "127
-[v sensorComputation@j j `i  1 a 2 8 ]
-[v sensorComputation@i i `i  1 a 2 6 ]
-[v sensorComputation@sum sum `i  1 a 2 4 ]
-[v sensorComputation@min min `i  1 a 2 2 ]
-[v sensorComputation@max max `i  1 a 2 0 ]
+[v sensorComputation@j j `i  1 a 2 20 ]
+[v sensorComputation@i i `i  1 a 2 18 ]
+[v sensorComputation@sum sum `i  1 a 2 16 ]
+[v sensorComputation@min min `i  1 a 2 14 ]
+[v sensorComputation@max max `i  1 a 2 12 ]
 "125
-[v sensorComputation@sensorTemp sensorTemp `*.39[10]i  1 p 2 50 ]
+[v sensorComputation@sensorTemp sensorTemp `*.39[10]i  1 p 2 8 ]
 "144
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 {
 "17
-[v ___wmul@product product `ui  1 a 2 43 ]
+[v ___wmul@product product `ui  1 a 2 39 ]
 "15
-[v ___wmul@multiplier multiplier `ui  1 p 2 39 ]
-[v ___wmul@multiplicand multiplicand `ui  1 p 2 41 ]
+[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
 "53
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
 {
 "11
-[v ___awdiv@quotient quotient `i  1 a 2 45 ]
+[v ___awdiv@quotient quotient `i  1 a 2 6 ]
 "12
-[v ___awdiv@sign sign `uc  1 a 1 44 ]
-[v ___awdiv@counter counter `uc  1 a 1 43 ]
+[v ___awdiv@sign sign `uc  1 a 1 5 ]
+[v ___awdiv@counter counter `uc  1 a 1 4 ]
 "8
-[v ___awdiv@dividend dividend `i  1 p 2 39 ]
-[v ___awdiv@divisor divisor `i  1 p 2 41 ]
+[v ___awdiv@dividend dividend `i  1 p 2 0 ]
+[v ___awdiv@divisor divisor `i  1 p 2 2 ]
 "42
 } 0
 "175 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\user.c
 [v _MIN MIN `(i  1 e 2 0 ]
 {
-[v MIN@a a `i  1 p 2 45 ]
-[v MIN@b b `i  1 p 2 47 ]
+[v MIN@a a `i  1 p 2 4 ]
+[v MIN@b b `i  1 p 2 6 ]
 "179
 } 0
 "181
 [v _MAX MAX `(i  1 e 2 0 ]
 {
-[v MAX@a a `i  1 p 2 45 ]
-[v MAX@b b `i  1 p 2 47 ]
+[v MAX@a a `i  1 p 2 4 ]
+[v MAX@b b `i  1 p 2 6 ]
 "185
 } 0
 "35
@@ -329,7 +337,7 @@ RIGHTWALL 1
 [v _delay delay `(v  1 e 0 0 ]
 {
 "30
-[v delay@x x `i  1 a 2 42 ]
+[v delay@x x `i  1 a 2 0 ]
 "29
 [v delay@ms ms `ui  1 p 2 39 ]
 "33
@@ -344,79 +352,79 @@ RIGHTWALL 1
 {
 "36
 } 0
-"229 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"296 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
 {
-"264
+"331
 } 0
-"86
+"98
 [v _high_isr high_isr `II(v  1 e 0 0 ]
 {
-"225
+"292
 } 0
-"368
+"519
 [v _rotate rotate `(v  1 e 0 0 ]
 {
-[v rotate@side side `E4082  1 a 1 wreg ]
-[v rotate@side side `E4082  1 a 1 wreg ]
-"370
-[v rotate@side side `E4082  1 a 1 19 ]
-"378
+[v rotate@side side `E4142  1 a 1 wreg ]
+[v rotate@side side `E4142  1 a 1 wreg ]
+"521
+[v rotate@side side `E4142  1 a 1 19 ]
+"529
 } 0
-"399
+"550
 [v _forward forward `(v  1 e 0 0 ]
 {
-"404
+"555
 } 0
-"392
+"543
 [v _Reversing Reversing `(v  1 e 0 0 ]
 {
-"397
+"548
 } 0
-"331
+"398
 [v _KController KController `(v  1 e 0 0 ]
 {
-"334
+"401
 [v KController@diff diff `i  1 a 2 23 ]
-"333
-[v KController@correctTo correctTo `E4082  1 a 1 22 ]
-"366
+"400
+[v KController@correctTo correctTo `E4142  1 a 1 22 ]
+"516
 } 0
-"318
+"385
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
 {
 [v moveMouse@action action `uc  1 a 1 wreg ]
 [v moveMouse@action action `uc  1 a 1 wreg ]
-"320
+"387
 [v moveMouse@action action `uc  1 a 1 17 ]
-"321
+"388
 } 0
-"266
+"333
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
 {
-[v motorCounterUpdate@side side `E4082  1 a 1 wreg ]
-[v motorCounterUpdate@side side `E4082  1 a 1 wreg ]
+[v motorCounterUpdate@side side `E4142  1 a 1 wreg ]
+[v motorCounterUpdate@side side `E4142  1 a 1 wreg ]
 [v motorCounterUpdate@reverse reverse `uc  1 p 1 17 ]
-"268
-[v motorCounterUpdate@side side `E4082  1 a 1 18 ]
-"309
+"335
+[v motorCounterUpdate@side side `E4142  1 a 1 18 ]
+"376
 } 0
-"311
+"378
 [v _merge merge `(uc  1 e 1 0 ]
 {
 [v merge@left left `uc  1 a 1 wreg ]
-"313
+"380
 [v merge@merged merged `uc  1 a 1 19 ]
-"311
+"378
 [v merge@left left `uc  1 a 1 wreg ]
 [v merge@right right `uc  1 p 1 17 ]
-"314
+"381
 [v merge@left left `uc  1 a 1 18 ]
-"316
+"383
 } 0
-"324
+"391
 [v _ABS ABS `(i  1 e 2 0 ]
 {
 [v ABS@x x `i  1 p 2 17 ]
-"328
+"395
 } 0
