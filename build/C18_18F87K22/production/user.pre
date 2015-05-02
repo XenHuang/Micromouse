@@ -4969,7 +4969,11 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.34\include\stdbool.h"
 typedef unsigned char bool;
 
+<<<<<<< HEAD
 # 15 "user.h"
+=======
+# 14 "user.h"
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
@@ -4979,7 +4983,11 @@ int delay_time = 0;
 int sensorCorrection[4];
 int sensorValue[4];
 
+<<<<<<< HEAD
 # 30
+=======
+# 29
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 void delay(unsigned int);
 void InitApp(void);
 void sensorUpdate(unsigned char);
@@ -5044,7 +5052,10 @@ AlgorithmSelection();
 
 
 delay(1000);
+<<<<<<< HEAD
 
+=======
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 }
 
 void AlgorithmSelection()
@@ -5060,6 +5071,10 @@ else
 algorithm = RIGHTWALL;
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 void setCorrection()
 {
 int sideAvg,frontAvg;
@@ -5111,6 +5126,10 @@ ADCON0 = sensorLocation[j];
 ADCON0bits.GO_DONE = 1;
 while(ADCON0bits.GO_DONE != 0);
 sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
+<<<<<<< HEAD
+=======
+
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 }
 }
 

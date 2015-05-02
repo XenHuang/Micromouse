@@ -1,5 +1,9 @@
 Version 3.2 HI-TECH Software Intermediate Code
+<<<<<<< HEAD
 "18 user.h
+=======
+"17 user.h
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [c E4059 0 1 .. ]
 [n E4059 . LEFTWALL RIGHTWALL  ]
 "71 interrupts.c
@@ -33,6 +37,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Reversing `(v ~T0 @X0 0 ef ]
 "89
 [v _rotate `(v ~T0 @X0 0 ef1`E4145 ]
+<<<<<<< HEAD
+=======
+"88
+[v _KController `(v ~T0 @X0 0 ef ]
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 "85
 [v _motorCounterUpdate `(v ~T0 @X0 0 ef2`E4145`uc ]
 "87
@@ -3728,7 +3737,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;system.h: 20: void ConfigureOscillator(void);
+<<<<<<< HEAD
 "15 user.h
+=======
+"14 user.h
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [v _sensorLocation `Cuc ~T0 @X0 -> 4 `i e ]
 [i _sensorLocation
 :U ..
@@ -3738,16 +3751,26 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 51 `i `uc
 ..
 ]
+<<<<<<< HEAD
 [; ;user.h: 15: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
 [; ;user.h: 17: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 "18
 [v _algorithm `E4059 ~T0 @X0 1 e ]
 [; ;user.h: 18: Algorithm algorithm;
 "20
+=======
+[; ;user.h: 14: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
+[; ;user.h: 16: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
+"17
+[v _algorithm `E4059 ~T0 @X0 1 e ]
+[; ;user.h: 17: Algorithm algorithm;
+"19
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [v _delay_time `i ~T0 @X0 1 e ]
 [i _delay_time
 -> 0 `i
 ]
+<<<<<<< HEAD
 [; ;user.h: 20: int delay_time = 0;
 "21
 [v _sensorCorrection `i ~T0 @X0 -> 4 `i e ]
@@ -3763,6 +3786,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.h: 35: int MAX(int,int);
 [; ;user.h: 36: void AlgorithmSelection();
 [; ;user.h: 37: void setCorrection();
+=======
+[; ;user.h: 19: int delay_time = 0;
+"20
+[v _sensorCorrection `i ~T0 @X0 -> 4 `i e ]
+[; ;user.h: 20: int sensorCorrection[4];
+"21
+[v _sensorValue `i ~T0 @X0 -> 4 `i e ]
+[; ;user.h: 21: int sensorValue[4];
+[; ;user.h: 29: void delay(unsigned int);
+[; ;user.h: 30: void InitApp(void);
+[; ;user.h: 31: void sensorUpdate(unsigned char);
+[; ;user.h: 32: void sensorComputation(int[][10],unsigned char);
+[; ;user.h: 33: int MIN(int,int);
+[; ;user.h: 34: int MAX(int,int);
+[; ;user.h: 35: void AlgorithmSelection();
+[; ;user.h: 36: void setCorrection();
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [; ;math.h: 30: extern double fabs(double);
 [; ;math.h: 31: extern double floor(double);
 [; ;math.h: 32: extern double ceil(double);
@@ -3852,10 +3892,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 70: int ControllerCounter = 0;
 "71
 [v _rotatingSide `E4145 ~T0 @X0 1 e ]
+<<<<<<< HEAD
 [i _rotatingSide
 . `E4145 0
 ]
 [; ;interrupts.c: 71: Side rotatingSide = LEFT;
+=======
+[; ;interrupts.c: 71: Side rotatingSide;
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 "72
 [v _justTurned `uc ~T0 @X0 1 e ]
 [i _justTurned
@@ -3924,12 +3968,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 90: void smoothTurn();
 [; ;interrupts.c: 91: void Reversing();
 [; ;interrupts.c: 92: void forward();
+<<<<<<< HEAD
 [; ;interrupts.c: 93: void FrontController();
 [; ;interrupts.c: 95: int ABS(int);
 [v F4189 `(v ~T0 @X0 1 tf ]
 "99
 [v _high_isr `IF4189 ~T0 @X0 1 e ]
 "108
+=======
+[; ;interrupts.c: 94: int ABS(int);
+[v F4187 `(v ~T0 @X0 1 tf ]
+"98
+[v _high_isr `IF4187 ~T0 @X0 1 e ]
+"107
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 {
 [; ;interrupts.c: 99: void interrupt high_isr(void)
 [; ;interrupts.c: 108: {
@@ -3985,6 +4037,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _forward ..  ]
 "142
 }
+<<<<<<< HEAD
 [; ;interrupts.c: 142: }
 [e $U 398  ]
 "144
@@ -4313,12 +4366,366 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 280: }
 [e $U 425  ]
 "273
+=======
+[e :U 400 ]
+"136
+}
+[; ;interrupts.c: 135: }
+[; ;interrupts.c: 136: }
+[e $U 401  ]
+"137
+[e :U 398 ]
+[; ;interrupts.c: 137: else if (sensorValue[0] < 95 && TurnLeft > 95 && algorithm == LEFTWALL)
+[e $ ! && && < *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 95 `i > _TurnLeft -> 95 `i == -> _algorithm `i -> . `E4059 0 `i 402  ]
+[; ;interrupts.c: 138: {
+"138
+{
+[; ;interrupts.c: 139: TurnLeft = sensorValue[0];
+"139
+[e = _TurnLeft *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[; ;interrupts.c: 140: if(justTurned == 0) {
+"140
+[e $ ! == -> _justTurned `i -> 0 `i 403  ]
+{
+[; ;interrupts.c: 141: ForwardCounter = 420;
+"141
+[e = _ForwardCounter -> 420 `i ]
+"142
+}
+[; ;interrupts.c: 142: }else {
+[e $U 404  ]
+[e :U 403 ]
+{
+[; ;interrupts.c: 143: ForwardCounter = 400;
+"143
+[e = _ForwardCounter -> 400 `i ]
+"144
+}
+[e :U 404 ]
+[; ;interrupts.c: 144: }
+[; ;interrupts.c: 145: forward();
+"145
+[e ( _forward ..  ]
+"146
+}
+[; ;interrupts.c: 146: }
+[e $U 405  ]
+"147
+[e :U 402 ]
+[; ;interrupts.c: 147: else if (TurnLeft < 95)
+[e $ ! < _TurnLeft -> 95 `i 406  ]
+[; ;interrupts.c: 148: {
+"148
+{
+[; ;interrupts.c: 149: RotateCounter = 167;
+"149
+[e = _RotateCounter -> 167 `i ]
+[; ;interrupts.c: 150: rotatingSide = LEFT;
+"150
+[e = _rotatingSide . `E4145 0 ]
+[; ;interrupts.c: 151: justTurned = 1;
+"151
+[e = _justTurned -> -> 1 `i `uc ]
+[; ;interrupts.c: 152: TurnRight= 200;
+"152
+[e = _TurnRight -> 200 `i ]
+[; ;interrupts.c: 153: TurnLeft = 300;
+"153
+[e = _TurnLeft -> 300 `i ]
+[; ;interrupts.c: 154: TurnedLeft = 1;
+"154
+[e = _TurnedLeft -> 1 `i ]
+"155
+}
+[; ;interrupts.c: 155: }
+[e $U 407  ]
+"158
+[e :U 406 ]
+[; ;interrupts.c: 158: else if (sensorValue[1] < 91 && algorithm == LEFTWALL)
+[e $ ! && < *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 91 `i == -> _algorithm `i -> . `E4059 0 `i 408  ]
+[; ;interrupts.c: 159: {
+"159
+{
+[; ;interrupts.c: 160: TurnRight = sensorValue[1];
+"160
+[e = _TurnRight *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[; ;interrupts.c: 161: if(justTurned == 0) {
+"161
+[e $ ! == -> _justTurned `i -> 0 `i 409  ]
+{
+[; ;interrupts.c: 162: ForwardCounter = 450;
+"162
+[e = _ForwardCounter -> 450 `i ]
+"163
+}
+[; ;interrupts.c: 163: } else {
+[e $U 410  ]
+[e :U 409 ]
+{
+[; ;interrupts.c: 164: ForwardCounter = 410;
+"164
+[e = _ForwardCounter -> 410 `i ]
+"165
+}
+[e :U 410 ]
+[; ;interrupts.c: 165: }
+[; ;interrupts.c: 166: forward();
+"166
+[e ( _forward ..  ]
+"167
+}
+[; ;interrupts.c: 167: }
+[e $U 411  ]
+"171
+[e :U 408 ]
+[; ;interrupts.c: 171: else if (TurnRight < 91 && sensorValue[3] > 380)
+[e $ ! && < _TurnRight -> 91 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 380 `i 412  ]
+[; ;interrupts.c: 172: {
+"172
+{
+[; ;interrupts.c: 173: RotateCounter = 167;
+"173
+[e = _RotateCounter -> 167 `i ]
+[; ;interrupts.c: 174: rotatingSide = RIGHT;
+"174
+[e = _rotatingSide . `E4145 1 ]
+[; ;interrupts.c: 175: justTurned = 1;
+"175
+[e = _justTurned -> -> 1 `i `uc ]
+[; ;interrupts.c: 176: TurnedRight = 1;
+"176
+[e = _TurnedRight -> 1 `i ]
+[; ;interrupts.c: 177: TurnLeft = 300;
+"177
+[e = _TurnLeft -> 300 `i ]
+[; ;interrupts.c: 178: TurnRight = 300;
+"178
+[e = _TurnRight -> 300 `i ]
+"179
+}
+[; ;interrupts.c: 179: }
+[e $U 413  ]
+"180
+[e :U 412 ]
+[; ;interrupts.c: 180: else if (TurnRight < 91 && sensorValue[3] < 380) {
+[e $ ! && < _TurnRight -> 91 `i < *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 380 `i 414  ]
+{
+[; ;interrupts.c: 181: KController();
+"181
+[e ( _KController ..  ]
+"182
+}
+[; ;interrupts.c: 182: }
+[e $U 415  ]
+"183
+[e :U 414 ]
+[; ;interrupts.c: 183: else if ((sensorValue[0] > 95 && sensorValue[1] > 91 )
+[; ;interrupts.c: 184: && (sensorValue[3] > 380) && RotateCounter <= 0)
+"184
+[e $ ! && && && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 95 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 91 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 380 `i <= _RotateCounter -> 0 `i 416  ]
+[; ;interrupts.c: 185: {
+"185
+{
+[; ;interrupts.c: 186: Deadend = 1;
+"186
+[e = _Deadend -> 1 `i ]
+[; ;interrupts.c: 187: RotateCounter = 167*2;
+"187
+[e = _RotateCounter * -> 167 `i -> 2 `i ]
+[; ;interrupts.c: 188: rotate(rotatingSide);
+"188
+[e ( _rotate (1 _rotatingSide ]
+[; ;interrupts.c: 189: justTurned = 1;
+"189
+[e = _justTurned -> -> 1 `i `uc ]
+[; ;interrupts.c: 190: TurnRight= 200;
+"190
+[e = _TurnRight -> 200 `i ]
+[; ;interrupts.c: 191: TurnLeft = 300;
+"191
+[e = _TurnLeft -> 300 `i ]
+[; ;interrupts.c: 192: TurnedLeft = 0;
+"192
+[e = _TurnedLeft -> 0 `i ]
+[; ;interrupts.c: 193: TurnedRight = 0;
+"193
+[e = _TurnedRight -> 0 `i ]
+"194
+}
+[; ;interrupts.c: 194: }
+[e $U 417  ]
+"195
+[e :U 416 ]
+[; ;interrupts.c: 195: else if ((sensorValue[0] > 95 && sensorValue[1] > 91))
+[e $ ! && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 95 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 91 `i 418  ]
+[; ;interrupts.c: 196: {
+"196
+{
+[; ;interrupts.c: 197: if (sensorValue[3] < 80 || sensorValue[2] < 120){
+"197
+[e $ ! || < *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 80 `i < *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 120 `i 419  ]
+{
+[; ;interrupts.c: 198: KController();
+"198
+[e ( _KController ..  ]
+"199
+}
+[; ;interrupts.c: 199: }
+[e $U 420  ]
+"200
+[e :U 419 ]
+[; ;interrupts.c: 200: else {
+{
+[; ;interrupts.c: 201: motorCounterUpdate(RIGHT,0);
+"201
+[e ( _motorCounterUpdate (2 , . `E4145 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 202: motorCounterUpdate(LEFT,0);
+"202
+[e ( _motorCounterUpdate (2 , . `E4145 0 -> -> 0 `i `uc ]
+"203
+}
+[e :U 420 ]
+"204
+}
+[; ;interrupts.c: 203: }
+[; ;interrupts.c: 204: }
+[e $U 421  ]
+"205
+[e :U 418 ]
+[; ;interrupts.c: 205: else {
+{
+[; ;interrupts.c: 206: motorCounterUpdate(RIGHT,0);
+"206
+[e ( _motorCounterUpdate (2 , . `E4145 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 207: motorCounterUpdate(LEFT,0);
+"207
+[e ( _motorCounterUpdate (2 , . `E4145 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 208: justTurned = 0;
+"208
+[e = _justTurned -> -> 0 `i `uc ]
+[; ;interrupts.c: 209: TurnedLeft = 0;
+"209
+[e = _TurnedLeft -> 0 `i ]
+[; ;interrupts.c: 210: TurnedRight = 0;
+"210
+[e = _TurnedRight -> 0 `i ]
+[; ;interrupts.c: 211: TurnRight = 200;
+"211
+[e = _TurnRight -> 200 `i ]
+[; ;interrupts.c: 212: TurnLeft = 300;
+"212
+[e = _TurnLeft -> 300 `i ]
+"213
+}
+[e :U 421 ]
+[e :U 417 ]
+[e :U 415 ]
+[e :U 413 ]
+[e :U 411 ]
+[e :U 407 ]
+[e :U 405 ]
+[e :U 401 ]
+[e :U 397 ]
+[e :U 395 ]
+[; ;interrupts.c: 213: }
+[; ;interrupts.c: 214: moveMouse(merge(LMotorCounter,RMotorCounter));
+"214
+[e ( _moveMouse (1 ( _merge (2 , _LMotorCounter _RMotorCounter ]
+[; ;interrupts.c: 215: MotorDelayCounter = 0;
+"215
+[e = _MotorDelayCounter -> 0 `i ]
+"217
+}
+[e :U 393 ]
+[; ;interrupts.c: 217: }
+[; ;interrupts.c: 219: MotorDelayCounter++;
+"219
+[e ++ _MotorDelayCounter -> 1 `i ]
+[; ;interrupts.c: 220: INTCONbits.TMR0IF = 0;
+"220
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+"221
+}
+[e :U 392 ]
+[; ;interrupts.c: 221: }
+[; ;interrupts.c: 225: }
+"225
+[e :UE 391 ]
+}
+[v F4190 `(v ~T0 @X0 1 tf ]
+"229
+[v _low_isr `ILF4190 ~T0 @X0 1 e ]
+"237
+{
+[; ;interrupts.c: 229: void low_priority interrupt low_isr(void)
+[; ;interrupts.c: 237: {
+[e :U _low_isr ]
+[f ]
+[; ;interrupts.c: 264: }
+"264
+[e :UE 422 ]
+}
+"266
+[v _motorCounterUpdate `(v ~T0 @X0 1 ef2`E4145`uc ]
+"267
+{
+[; ;interrupts.c: 266: void motorCounterUpdate(Side side, unsigned char reverse)
+[; ;interrupts.c: 267: {
+[e :U _motorCounterUpdate ]
+"266
+[v _side `E4145 ~T0 @X0 1 r1 ]
+[v _reverse `uc ~T0 @X0 1 r2 ]
+"267
+[f ]
+[; ;interrupts.c: 268: if(side == LEFT && reverse == 1)
+"268
+[e $ ! && == -> _side `i -> . `E4145 0 `i == -> _reverse `i -> 1 `i 424  ]
+[; ;interrupts.c: 269: {
+"269
+{
+[; ;interrupts.c: 270: switch(LMotorCounter)
+"270
+[e $U 426  ]
+[; ;interrupts.c: 271: {
+"271
+{
+[; ;interrupts.c: 272: case 0b00000001: LMotorCounter = 0b00000010; break;
+"272
+[e :U 427 ]
+[e = _LMotorCounter -> -> 2 `i `uc ]
+[e $U 425  ]
+[; ;interrupts.c: 273: case 0b00000010: LMotorCounter = 0b00000100; break;
+"273
+[e :U 428 ]
+[e = _LMotorCounter -> -> 4 `i `uc ]
+[e $U 425  ]
+[; ;interrupts.c: 274: case 0b00000100: LMotorCounter = 0b00001000; break;
+"274
+[e :U 429 ]
+[e = _LMotorCounter -> -> 8 `i `uc ]
+[e $U 425  ]
+[; ;interrupts.c: 275: case 0b00001000: LMotorCounter = 0b00000001; break;
+"275
+[e :U 430 ]
+[e = _LMotorCounter -> -> 1 `i `uc ]
+[e $U 425  ]
+[; ;interrupts.c: 276: default: LMotorCounter = 0b00000001;
+"276
+[e :U 431 ]
+[e = _LMotorCounter -> -> 1 `i `uc ]
+"277
+}
+[; ;interrupts.c: 277: }
+[e $U 425  ]
+"270
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [e :U 426 ]
 [e [\ _LMotorCounter , $ -> -> 1 `i `uc 427
  , $ -> -> 2 `i `uc 428
  , $ -> -> 4 `i `uc 429
  , $ -> -> 8 `i `uc 430
  431 ]
+<<<<<<< HEAD
 "280
 [e :U 425 ]
 "281
@@ -4365,12 +4772,61 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 290: }
 [e $U 434  ]
 "283
+=======
+"277
+[e :U 425 ]
+"278
+}
+[; ;interrupts.c: 278: } else if(side == RIGHT && reverse == 1)
+[e $U 432  ]
+[e :U 424 ]
+[e $ ! && == -> _side `i -> . `E4145 1 `i == -> _reverse `i -> 1 `i 433  ]
+[; ;interrupts.c: 279: {
+"279
+{
+[; ;interrupts.c: 280: switch(RMotorCounter)
+"280
+[e $U 435  ]
+[; ;interrupts.c: 281: {
+"281
+{
+[; ;interrupts.c: 282: case 0b00000001: RMotorCounter = 0b00001000; break;
+"282
+[e :U 436 ]
+[e = _RMotorCounter -> -> 8 `i `uc ]
+[e $U 434  ]
+[; ;interrupts.c: 283: case 0b00000010: RMotorCounter = 0b00000001; break;
+"283
+[e :U 437 ]
+[e = _RMotorCounter -> -> 1 `i `uc ]
+[e $U 434  ]
+[; ;interrupts.c: 284: case 0b00000100: RMotorCounter = 0b00000010; break;
+"284
+[e :U 438 ]
+[e = _RMotorCounter -> -> 2 `i `uc ]
+[e $U 434  ]
+[; ;interrupts.c: 285: case 0b00001000: RMotorCounter = 0b00000100; break;
+"285
+[e :U 439 ]
+[e = _RMotorCounter -> -> 4 `i `uc ]
+[e $U 434  ]
+[; ;interrupts.c: 286: default: RMotorCounter = 0b00001000;
+"286
+[e :U 440 ]
+[e = _RMotorCounter -> -> 8 `i `uc ]
+"287
+}
+[; ;interrupts.c: 287: }
+[e $U 434  ]
+"280
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [e :U 435 ]
 [e [\ _RMotorCounter , $ -> -> 1 `i `uc 436
  , $ -> -> 2 `i `uc 437
  , $ -> -> 4 `i `uc 438
  , $ -> -> 8 `i `uc 439
  440 ]
+<<<<<<< HEAD
 "290
 [e :U 434 ]
 "291
@@ -4417,12 +4873,61 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 300: }
 [e $U 443  ]
 "293
+=======
+"287
+[e :U 434 ]
+"288
+}
+[; ;interrupts.c: 288: } else if(side == LEFT && reverse == 0)
+[e $U 441  ]
+[e :U 433 ]
+[e $ ! && == -> _side `i -> . `E4145 0 `i == -> _reverse `i -> 0 `i 442  ]
+[; ;interrupts.c: 289: {
+"289
+{
+[; ;interrupts.c: 290: switch(LMotorCounter)
+"290
+[e $U 444  ]
+[; ;interrupts.c: 291: {
+"291
+{
+[; ;interrupts.c: 292: case 0b00000001: LMotorCounter = 0b00001000; break;
+"292
+[e :U 445 ]
+[e = _LMotorCounter -> -> 8 `i `uc ]
+[e $U 443  ]
+[; ;interrupts.c: 293: case 0b00000010: LMotorCounter = 0b00000001; break;
+"293
+[e :U 446 ]
+[e = _LMotorCounter -> -> 1 `i `uc ]
+[e $U 443  ]
+[; ;interrupts.c: 294: case 0b00000100: LMotorCounter = 0b00000010; break;
+"294
+[e :U 447 ]
+[e = _LMotorCounter -> -> 2 `i `uc ]
+[e $U 443  ]
+[; ;interrupts.c: 295: case 0b00001000: LMotorCounter = 0b00000100; break;
+"295
+[e :U 448 ]
+[e = _LMotorCounter -> -> 4 `i `uc ]
+[e $U 443  ]
+[; ;interrupts.c: 296: default: LMotorCounter = 0b00001000;
+"296
+[e :U 449 ]
+[e = _LMotorCounter -> -> 8 `i `uc ]
+"297
+}
+[; ;interrupts.c: 297: }
+[e $U 443  ]
+"290
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [e :U 444 ]
 [e [\ _LMotorCounter , $ -> -> 1 `i `uc 445
  , $ -> -> 2 `i `uc 446
  , $ -> -> 4 `i `uc 447
  , $ -> -> 8 `i `uc 448
  449 ]
+<<<<<<< HEAD
 "300
 [e :U 443 ]
 "301
@@ -4469,12 +4974,61 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 310: }
 [e $U 452  ]
 "303
+=======
+"297
+[e :U 443 ]
+"298
+}
+[; ;interrupts.c: 298: } else if(side == RIGHT && reverse == 0)
+[e $U 450  ]
+[e :U 442 ]
+[e $ ! && == -> _side `i -> . `E4145 1 `i == -> _reverse `i -> 0 `i 451  ]
+[; ;interrupts.c: 299: {
+"299
+{
+[; ;interrupts.c: 300: switch(RMotorCounter)
+"300
+[e $U 453  ]
+[; ;interrupts.c: 301: {
+"301
+{
+[; ;interrupts.c: 302: case 0b00000001: RMotorCounter = 0b00000010; break;
+"302
+[e :U 454 ]
+[e = _RMotorCounter -> -> 2 `i `uc ]
+[e $U 452  ]
+[; ;interrupts.c: 303: case 0b00000010: RMotorCounter = 0b00000100; break;
+"303
+[e :U 455 ]
+[e = _RMotorCounter -> -> 4 `i `uc ]
+[e $U 452  ]
+[; ;interrupts.c: 304: case 0b00000100: RMotorCounter = 0b00001000; break;
+"304
+[e :U 456 ]
+[e = _RMotorCounter -> -> 8 `i `uc ]
+[e $U 452  ]
+[; ;interrupts.c: 305: case 0b00001000: RMotorCounter = 0b00000001; break;
+"305
+[e :U 457 ]
+[e = _RMotorCounter -> -> 1 `i `uc ]
+[e $U 452  ]
+[; ;interrupts.c: 306: default: RMotorCounter = 0b00000001;
+"306
+[e :U 458 ]
+[e = _RMotorCounter -> -> 1 `i `uc ]
+"307
+}
+[; ;interrupts.c: 307: }
+[e $U 452  ]
+"300
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [e :U 453 ]
 [e [\ _RMotorCounter , $ -> -> 1 `i `uc 454
  , $ -> -> 2 `i `uc 455
  , $ -> -> 4 `i `uc 456
  , $ -> -> 8 `i `uc 457
  458 ]
+<<<<<<< HEAD
 "310
 [e :U 452 ]
 "311
@@ -4627,6 +5181,159 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 355: else
 [; ;interrupts.c: 356: {
 "356
+=======
+"307
+[e :U 452 ]
+"308
+}
+[e :U 451 ]
+"309
+[e :U 450 ]
+[e :U 441 ]
+[e :U 432 ]
+[; ;interrupts.c: 308: }
+[; ;interrupts.c: 309: }
+[e :UE 423 ]
+}
+"311
+[v _merge `(uc ~T0 @X0 1 ef2`uc`uc ]
+"312
+{
+[; ;interrupts.c: 311: unsigned char merge(unsigned char left,unsigned char right)
+[; ;interrupts.c: 312: {
+[e :U _merge ]
+"311
+[v _left `uc ~T0 @X0 1 r1 ]
+[v _right `uc ~T0 @X0 1 r2 ]
+"312
+[f ]
+"313
+[v _merged `uc ~T0 @X0 1 a ]
+[; ;interrupts.c: 313: unsigned char merged;
+[; ;interrupts.c: 314: merged = left + (right << 4);
+"314
+[e = _merged -> + -> _left `i << -> _right `i -> 4 `i `uc ]
+[; ;interrupts.c: 315: return merged;
+"315
+[e ) _merged ]
+[e $UE 459  ]
+[; ;interrupts.c: 316: }
+"316
+[e :UE 459 ]
+}
+"318
+[v _moveMouse `(v ~T0 @X0 1 ef1`uc ]
+"319
+{
+[; ;interrupts.c: 318: void moveMouse(unsigned char action)
+[; ;interrupts.c: 319: {
+[e :U _moveMouse ]
+"318
+[v _action `uc ~T0 @X0 1 r1 ]
+"319
+[f ]
+[; ;interrupts.c: 320: LATC = action;
+"320
+[e = _LATC _action ]
+[; ;interrupts.c: 321: }
+"321
+[e :UE 460 ]
+}
+"324
+[v _ABS `(i ~T0 @X0 1 ef1`i ]
+"325
+{
+[; ;interrupts.c: 324: int ABS(int x)
+[; ;interrupts.c: 325: {
+[e :U _ABS ]
+"324
+[v _x `i ~T0 @X0 1 r1 ]
+"325
+[f ]
+[; ;interrupts.c: 326: if(x<0) x = -x;
+"326
+[e $ ! < _x -> 0 `i 462  ]
+[e = _x -U _x ]
+[e :U 462 ]
+[; ;interrupts.c: 327: return x;
+"327
+[e ) _x ]
+[e $UE 461  ]
+[; ;interrupts.c: 328: }
+"328
+[e :UE 461 ]
+}
+"331
+[v _KController `(v ~T0 @X0 1 ef ]
+"332
+{
+[; ;interrupts.c: 331: void KController()
+[; ;interrupts.c: 332: {
+[e :U _KController ]
+[f ]
+"333
+[v _correctTo `E4145 ~T0 @X0 1 a ]
+"334
+[v _diff `i ~T0 @X0 1 a ]
+[; ;interrupts.c: 333: Side correctTo;
+[; ;interrupts.c: 334: int diff = 0;
+[e = _diff -> 0 `i ]
+[; ;interrupts.c: 335: if((sensorValue[0] > 95 && sensorValue[1] > 91))
+"335
+[e $ ! && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 95 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 91 `i 464  ]
+[; ;interrupts.c: 336: {
+"336
+{
+[; ;interrupts.c: 337: diff = ABS(sensorValue[1] - sensorValue[0]);
+"337
+[e = _diff ( _ABS (1 - *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[; ;interrupts.c: 339: if(controllerSteps > 0)
+"339
+[e $ ! > -> _controllerSteps `i -> 0 `i 465  ]
+[; ;interrupts.c: 340: {
+"340
+{
+[; ;interrupts.c: 341: motorCounterUpdate(RIGHT,0);
+"341
+[e ( _motorCounterUpdate (2 , . `E4145 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 342: motorCounterUpdate(LEFT,0);
+"342
+[e ( _motorCounterUpdate (2 , . `E4145 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 343: controllerSteps--;
+"343
+[e -- _controllerSteps -> -> 1 `i `uc ]
+[; ;interrupts.c: 344: return;
+"344
+[e $UE 463  ]
+"345
+}
+[e :U 465 ]
+[; ;interrupts.c: 345: }
+[; ;interrupts.c: 347: if(sensorValue[0] > sensorValue[1])
+"347
+[e $ ! > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux 466  ]
+[; ;interrupts.c: 348: {
+"348
+{
+[; ;interrupts.c: 350: correctTo = LEFT;
+"350
+[e = _correctTo . `E4145 0 ]
+[; ;interrupts.c: 351: motorCounterUpdate(correctTo,0);
+"351
+[e ( _motorCounterUpdate (2 , _correctTo -> -> 0 `i `uc ]
+[; ;interrupts.c: 352: moveMouse(merge(LMotorCounter,RMotorCounter));
+"352
+[e ( _moveMouse (1 ( _merge (2 , _LMotorCounter _RMotorCounter ]
+"353
+}
+[; ;interrupts.c: 353: }
+[e $U 467  ]
+"354
+[e :U 466 ]
+[; ;interrupts.c: 354: else
+[; ;interrupts.c: 355: {
+"355
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 {
 [; ;interrupts.c: 357: correctTo = RIGHT;
 "357
@@ -4641,17 +5348,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 467 ]
 [; ;interrupts.c: 360: }
+<<<<<<< HEAD
 [; ;interrupts.c: 362: if(diff > 60)
 "362
 [e $ ! > _diff -> 60 `i 468  ]
+=======
+[; ;interrupts.c: 362: if(diff > 80)
+"362
+[e $ ! > _diff -> 80 `i 468  ]
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [; ;interrupts.c: 363: controllerSteps = 1;
 "363
 [e = _controllerSteps -> -> 1 `i `uc ]
 [e $U 469  ]
 "364
 [e :U 468 ]
+<<<<<<< HEAD
 [; ;interrupts.c: 364: else if(diff <= 60 && diff > 20)
 [e $ ! && <= _diff -> 60 `i > _diff -> 20 `i 470  ]
+=======
+[; ;interrupts.c: 364: else if(diff <= 80 && diff > 30)
+[e $ ! && <= _diff -> 80 `i > _diff -> 30 `i 470  ]
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [; ;interrupts.c: 365: controllerSteps = 5;
 "365
 [e = _controllerSteps -> -> 5 `i `uc ]
@@ -4664,6 +5382,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _controllerSteps -> -> 10 `i `uc ]
 [e :U 471 ]
 [e :U 469 ]
+<<<<<<< HEAD
 "368
 }
 [; ;interrupts.c: 368: }
@@ -4721,10 +5440,56 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 384: motorCounterUpdate(RIGHT,0);
 "384
 [e ( _motorCounterUpdate (2 , . `E4145 1 -> -> 0 `i `uc ]
+=======
+"369
+}
+[; ;interrupts.c: 369: }
+[e $U 472  ]
+"370
+[e :U 464 ]
+[; ;interrupts.c: 370: else if((sensorValue[0] > 95))
+[e $ ! > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 95 `i 473  ]
+[; ;interrupts.c: 371: {
+"371
+{
+"374
+}
+[; ;interrupts.c: 374: }
+[e $U 474  ]
+"375
+[e :U 473 ]
+[; ;interrupts.c: 375: else if(((sensorValue[0] > 95 && sensorValue[1] > 91) && sensorValue[3] > 80))
+[e $ ! && && > *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 95 `i > *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 91 `i > *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 80 `i 475  ]
+[; ;interrupts.c: 376: {
+"376
+{
+[; ;interrupts.c: 377: diff = ABS(sensorValue[3] - sensorValue[2]);
+"377
+[e = _diff ( _ABS (1 - *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[; ;interrupts.c: 379: if(controllerSteps > 0)
+"379
+[e $ ! > -> _controllerSteps `i -> 0 `i 476  ]
+[; ;interrupts.c: 380: {
+"380
+{
+[; ;interrupts.c: 381: motorCounterUpdate(RIGHT,0);
+"381
+[e ( _motorCounterUpdate (2 , . `E4145 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 382: motorCounterUpdate(LEFT,0);
+"382
+[e ( _motorCounterUpdate (2 , . `E4145 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 383: controllerSteps--;
+"383
+[e -- _controllerSteps -> -> 1 `i `uc ]
+[; ;interrupts.c: 384: return;
+"384
+[e $UE 463  ]
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 "385
 }
 [e :U 476 ]
 [; ;interrupts.c: 385: }
+<<<<<<< HEAD
 [; ;interrupts.c: 386: if (sensorValue[2] > 475) {
 "386
 [e $ ! > *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 475 `i 477  ]
@@ -4813,9 +5578,70 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 414: else
 [; ;interrupts.c: 415: controllerSteps = 10;
 "415
+=======
+[; ;interrupts.c: 387: if(sensorValue[2] > sensorValue[3])
+"387
+[e $ ! > *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux 477  ]
+[; ;interrupts.c: 388: {
+"388
+{
+[; ;interrupts.c: 390: correctTo = LEFT;
+"390
+[e = _correctTo . `E4145 0 ]
+[; ;interrupts.c: 391: motorCounterUpdate(correctTo,0);
+"391
+[e ( _motorCounterUpdate (2 , _correctTo -> -> 0 `i `uc ]
+[; ;interrupts.c: 392: moveMouse(merge(LMotorCounter,RMotorCounter));
+"392
+[e ( _moveMouse (1 ( _merge (2 , _LMotorCounter _RMotorCounter ]
+"393
+}
+[; ;interrupts.c: 393: }
+[e $U 478  ]
+"394
+[e :U 477 ]
+[; ;interrupts.c: 394: else
+[; ;interrupts.c: 395: {
+"395
+{
+[; ;interrupts.c: 397: correctTo = RIGHT;
+"397
+[e = _correctTo . `E4145 1 ]
+[; ;interrupts.c: 398: motorCounterUpdate(correctTo,0);
+"398
+[e ( _motorCounterUpdate (2 , _correctTo -> -> 0 `i `uc ]
+[; ;interrupts.c: 399: moveMouse(merge(LMotorCounter,RMotorCounter));
+"399
+[e ( _moveMouse (1 ( _merge (2 , _LMotorCounter _RMotorCounter ]
+"400
+}
+[e :U 478 ]
+[; ;interrupts.c: 400: }
+[; ;interrupts.c: 402: if(diff > 80)
+"402
+[e $ ! > _diff -> 80 `i 479  ]
+[; ;interrupts.c: 403: controllerSteps = 1;
+"403
+[e = _controllerSteps -> -> 1 `i `uc ]
+[e $U 480  ]
+"404
+[e :U 479 ]
+[; ;interrupts.c: 404: else if(diff <= 80 && diff > 30)
+[e $ ! && <= _diff -> 80 `i > _diff -> 30 `i 481  ]
+[; ;interrupts.c: 405: controllerSteps = 5;
+"405
+[e = _controllerSteps -> -> 5 `i `uc ]
+[e $U 482  ]
+"406
+[e :U 481 ]
+[; ;interrupts.c: 406: else
+[; ;interrupts.c: 407: controllerSteps = 10;
+"407
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [e = _controllerSteps -> -> 10 `i `uc ]
 [e :U 484 ]
 [e :U 482 ]
+<<<<<<< HEAD
 [; ;interrupts.c: 416: }
 "416
 [e :UE 473 ]
@@ -4898,10 +5724,116 @@ Version 3.2 HI-TECH Software Intermediate Code
 "441
 [e -- _RTurnCounter -> 1 `i ]
 "442
+=======
+[e :U 480 ]
+"410
+}
+[; ;interrupts.c: 410: }
+[e $U 483  ]
+"411
+[e :U 475 ]
+[; ;interrupts.c: 411: else {
+{
+[; ;interrupts.c: 412: motorCounterUpdate(RIGHT,0);
+"412
+[e ( _motorCounterUpdate (2 , . `E4145 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 413: motorCounterUpdate(LEFT,0);
+"413
+[e ( _motorCounterUpdate (2 , . `E4145 0 -> -> 0 `i `uc ]
+"414
+}
+[e :U 483 ]
+[e :U 474 ]
+[e :U 472 ]
+[; ;interrupts.c: 414: }
+[; ;interrupts.c: 415: }
+"415
+[e :UE 463 ]
+}
+"418
+[v _rotate `(v ~T0 @X0 1 ef1`E4145 ]
+"419
+{
+[; ;interrupts.c: 418: void rotate(Side side)
+[; ;interrupts.c: 419: {
+[e :U _rotate ]
+"418
+[v _side `E4145 ~T0 @X0 1 r1 ]
+"419
+[f ]
+[; ;interrupts.c: 420: if (side == LEFT){
+"420
+[e $ ! == -> _side `i -> . `E4145 0 `i 485  ]
+{
+[; ;interrupts.c: 421: motorCounterUpdate(RIGHT,0);
+"421
+[e ( _motorCounterUpdate (2 , . `E4145 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 422: motorCounterUpdate(LEFT,1);
+"422
+[e ( _motorCounterUpdate (2 , . `E4145 0 -> -> 1 `i `uc ]
+"423
+}
+[; ;interrupts.c: 423: } else {
+[e $U 486  ]
+[e :U 485 ]
+{
+[; ;interrupts.c: 424: motorCounterUpdate(LEFT,0);
+"424
+[e ( _motorCounterUpdate (2 , . `E4145 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 425: motorCounterUpdate(RIGHT,1);
+"425
+[e ( _motorCounterUpdate (2 , . `E4145 1 -> -> 1 `i `uc ]
+"426
+}
+[e :U 486 ]
+[; ;interrupts.c: 426: }
+[; ;interrupts.c: 427: RotateCounter--;
+"427
+[e -- _RotateCounter -> 1 `i ]
+[; ;interrupts.c: 428: }
+"428
+[e :UE 484 ]
+}
+"430
+[v _smoothTurn `(v ~T0 @X0 1 ef ]
+"431
+{
+[; ;interrupts.c: 430: void smoothTurn()
+[; ;interrupts.c: 431: {
+[e :U _smoothTurn ]
+[f ]
+[; ;interrupts.c: 432: if(LTurnCounter > 0)
+"432
+[e $ ! > _LTurnCounter -> 0 `i 488  ]
+[; ;interrupts.c: 433: {
+"433
+{
+[; ;interrupts.c: 434: motorCounterUpdate(LEFT,0);
+"434
+[e ( _motorCounterUpdate (2 , . `E4145 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 435: LTurnCounter--;
+"435
+[e -- _LTurnCounter -> 1 `i ]
+"436
+}
+[; ;interrupts.c: 436: } else if (RTurnCounter > 0){
+[e $U 489  ]
+[e :U 488 ]
+[e $ ! > _RTurnCounter -> 0 `i 490  ]
+{
+[; ;interrupts.c: 437: motorCounterUpdate(RIGHT,0);
+"437
+[e ( _motorCounterUpdate (2 , . `E4145 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 438: RTurnCounter--;
+"438
+[e -- _RTurnCounter -> 1 `i ]
+"439
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 }
 [e :U 491 ]
 "443
 [e :U 490 ]
+<<<<<<< HEAD
 [; ;interrupts.c: 442: }
 [; ;interrupts.c: 443: }
 [e :UE 488 ]
@@ -4947,4 +5879,53 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 471: }
 "471
 [e :UE 493 ]
+=======
+"440
+[e :U 489 ]
+[; ;interrupts.c: 439: }
+[; ;interrupts.c: 440: }
+[e :UE 487 ]
+}
+"442
+[v _Reversing `(v ~T0 @X0 1 ef ]
+"443
+{
+[; ;interrupts.c: 442: void Reversing()
+[; ;interrupts.c: 443: {
+[e :U _Reversing ]
+[f ]
+[; ;interrupts.c: 444: motorCounterUpdate(RIGHT,1);
+"444
+[e ( _motorCounterUpdate (2 , . `E4145 1 -> -> 1 `i `uc ]
+[; ;interrupts.c: 445: motorCounterUpdate(LEFT,1);
+"445
+[e ( _motorCounterUpdate (2 , . `E4145 0 -> -> 1 `i `uc ]
+[; ;interrupts.c: 446: ReverseCounter--;
+"446
+[e -- _ReverseCounter -> 1 `i ]
+[; ;interrupts.c: 447: }
+"447
+[e :UE 491 ]
+}
+"449
+[v _forward `(v ~T0 @X0 1 ef ]
+"450
+{
+[; ;interrupts.c: 449: void forward()
+[; ;interrupts.c: 450: {
+[e :U _forward ]
+[f ]
+[; ;interrupts.c: 451: motorCounterUpdate(RIGHT,0);
+"451
+[e ( _motorCounterUpdate (2 , . `E4145 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 452: motorCounterUpdate(LEFT,0);
+"452
+[e ( _motorCounterUpdate (2 , . `E4145 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 453: ForwardCounter--;
+"453
+[e -- _ForwardCounter -> 1 `i ]
+[; ;interrupts.c: 454: }
+"454
+[e :UE 492 ]
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 }

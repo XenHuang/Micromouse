@@ -4972,7 +4972,11 @@ typedef unsigned char bool;
 # 20 "system.h"
 void ConfigureOscillator(void);
 
+<<<<<<< HEAD
 # 15 "user.h"
+=======
+# 14 "user.h"
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
@@ -4982,7 +4986,11 @@ int delay_time = 0;
 int sensorCorrection[4];
 int sensorValue[4];
 
+<<<<<<< HEAD
 # 30
+=======
+# 29
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 void delay(unsigned int);
 void InitApp(void);
 void sensorUpdate(unsigned char);
@@ -5103,6 +5111,7 @@ TurnRight = 0;
 TurnLeft = 0;
 }
 }
+<<<<<<< HEAD
 
 else if (TurnLeft == 1){
 RotateCounter = 167;
@@ -5120,6 +5129,11 @@ TurnRight = 0;
 
 else if (sensorValue[0] < 90 && algorithm == LEFTWALL) {
 TurnLeft = 1;
+=======
+else if (sensorValue[0] < 95 && TurnLeft > 95 && algorithm == LEFTWALL)
+{
+TurnLeft = sensorValue[0];
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 if(justTurned == 0) {
 ForwardCounter = 420;
 }else {
@@ -5127,9 +5141,26 @@ ForwardCounter = 400;
 }
 forward();
 }
+<<<<<<< HEAD
 
 else if (sensorValue[1] < 91 && algorithm == LEFTWALL) {
 TurnRight = 1;
+=======
+else if (TurnLeft < 95)
+{
+RotateCounter = 167;
+rotatingSide = LEFT;
+justTurned = 1;
+TurnRight= 200;
+TurnLeft = 300;
+TurnedLeft = 1;
+}
+
+
+else if (sensorValue[1] < 91 && algorithm == LEFTWALL)
+{
+TurnRight = sensorValue[1];
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 if(justTurned == 0) {
 ForwardCounter = 450;
 } else {
@@ -5138,13 +5169,33 @@ ForwardCounter = 410;
 forward();
 }
 
+<<<<<<< HEAD
 else if ((sensorValue[0] > 90 && sensorValue[1] > 91 )
 && (sensorValue[3] > 475 && sensorValue[2] > 475) && RotateCounter <= 0)
+=======
+
+
+else if (TurnRight < 91 && sensorValue[3] > 380)
+{
+RotateCounter = 167;
+rotatingSide = RIGHT;
+justTurned = 1;
+TurnedRight = 1;
+TurnLeft = 300;
+TurnRight = 300;
+}
+else if (TurnRight < 91 && sensorValue[3] < 380) {
+KController();
+}
+else if ((sensorValue[0] > 95 && sensorValue[1] > 91 )
+&& (sensorValue[3] > 380) && RotateCounter <= 0)
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 {
 RotateCounter = 167*2;
 rotatingSide = LEFT;
 justTurned = 1;
 }
+<<<<<<< HEAD
 
 else if ((sensorValue[0] > 90 && sensorValue[1] > 91)) {
 if (sensorValue[3] < 200 || sensorValue[2] < 200){
@@ -5153,6 +5204,9 @@ ControllerCounter = 5;
 }
 
 # 212
+=======
+}
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 else {
 motorCounterUpdate(RIGHT,0);
 motorCounterUpdate(LEFT,0);
@@ -5175,10 +5229,17 @@ INTCONbits.TMR0IF = 0;
 
 void low_priority interrupt low_isr(void)
 
+<<<<<<< HEAD
 # 240
 {
 
 # 267
+=======
+# 237
+{
+
+# 264
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 }
 
 void motorCounterUpdate(Side side, unsigned char reverse)
@@ -5286,10 +5347,16 @@ motorCounterUpdate(RIGHT,0);
 motorCounterUpdate(LEFT,0);
 }
 }
+<<<<<<< HEAD
 
 void FrontController() {
 int diff2 = ABS(sensorValue[3] - sensorValue[2]);
 Side correctTo;
+=======
+else if(((sensorValue[0] > 95 && sensorValue[1] > 91) && sensorValue[3] > 80))
+{
+diff = ABS(sensorValue[3] - sensorValue[2]);
+>>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 
 if(controllerSteps > 0)
 {
