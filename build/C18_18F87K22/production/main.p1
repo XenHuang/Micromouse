@@ -1,14 +1,36 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"22 user.h
-[c E4060 0 1 .. ]
-[n E4060 . LEFTWALL RIGHTWALL  ]
+"18 user.h
+[c E4059 0 1 .. ]
+[n E4059 . LEFTWALL RIGHTWALL  ]
 [p mainexit ]
 "20 system.h
 [v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
-"34 user.h
+"31 user.h
 [v _InitApp `(v ~T0 @X0 0 ef ]
-"35
-[v _sensorUpdate `(v ~T0 @X0 0 ef ]
+"32
+[v _sensorUpdate `(v ~T0 @X0 0 ef1`uc ]
+"37
+[v _setCorrection `(v ~T0 @X0 0 ef ]
+"6636 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
+[s S346 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S346 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
+"6646
+[s S347 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S347 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE GIE ]
+"6656
+[s S348 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S348 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE GIEL GIEH ]
+"6666
+[s S349 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S349 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
+"6676
+[s S350 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S350 . . GIEL GIEH ]
+"6635
+[u S345 `S346 1 `S347 1 `S348 1 `S349 1 `S350 1 ]
+[n S345 . . . . . . ]
+"6682
+[v _INTCONbits `VS345 ~T0 @X0 0 e@4082 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4620.h: 49: extern volatile unsigned char PORTA @ 0xF80;
@@ -3696,7 +3718,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;system.h: 20: void ConfigureOscillator(void);
-"18 user.h
+"15 user.h
 [v _sensorLocation `Cuc ~T0 @X0 -> 4 `i e ]
 [i _sensorLocation
 :U ..
@@ -3706,38 +3728,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 51 `i `uc
 ..
 ]
-[; ;user.h: 18: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
-"19
-[v _sensorCorrection `Cuc ~T0 @X0 -> 4 `i e ]
-[i _sensorCorrection
-:U ..
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 21 `i `uc
--> -> 21 `i `uc
-..
-]
-[; ;user.h: 19: const unsigned char sensorCorrection[4] = {0,0,21,21};
-[; ;user.h: 21: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
-"22
-[v _algorithm `E4060 ~T0 @X0 1 e ]
-[; ;user.h: 22: Algorithm algorithm;
-"24
+[; ;user.h: 15: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
+[; ;user.h: 17: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
+"18
+[v _algorithm `E4059 ~T0 @X0 1 e ]
+[; ;user.h: 18: Algorithm algorithm;
+"20
 [v _delay_time `i ~T0 @X0 1 e ]
 [i _delay_time
 -> 0 `i
 ]
-[; ;user.h: 24: int delay_time = 0;
-"25
+[; ;user.h: 20: int delay_time = 0;
+"21
+[v _sensorCorrection `i ~T0 @X0 -> 4 `i e ]
+[; ;user.h: 21: int sensorCorrection[4];
+"22
 [v _sensorValue `i ~T0 @X0 -> 4 `i e ]
-[; ;user.h: 25: int sensorValue[4];
-[; ;user.h: 33: void delay(unsigned int);
-[; ;user.h: 34: void InitApp(void);
-[; ;user.h: 35: void sensorUpdate();
-[; ;user.h: 36: void sensorComputation(int[][10]);
-[; ;user.h: 37: int MIN(int,int);
-[; ;user.h: 38: int MAX(int,int);
-[; ;user.h: 39: void AlgorithmSelection();
+[; ;user.h: 22: int sensorValue[4];
+[; ;user.h: 30: void delay(unsigned int);
+[; ;user.h: 31: void InitApp(void);
+[; ;user.h: 32: void sensorUpdate(unsigned char);
+[; ;user.h: 33: void sensorComputation(int[][10],unsigned char);
+[; ;user.h: 34: int MIN(int,int);
+[; ;user.h: 35: int MAX(int,int);
+[; ;user.h: 36: void AlgorithmSelection();
+[; ;user.h: 37: void setCorrection();
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
@@ -3852,23 +3867,32 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 47: InitApp();
 "47
 [e ( _InitApp ..  ]
-[; ;main.c: 49: while(1)
+[; ;main.c: 48: sensorUpdate(1);
+"48
+[e ( _sensorUpdate (1 -> -> 1 `i `uc ]
+[; ;main.c: 49: setCorrection();
 "49
-[e :U 399 ]
-[; ;main.c: 50: {
+[e ( _setCorrection ..  ]
+[; ;main.c: 50: INTCONbits.GIE = 1;
 "50
-{
-[; ;main.c: 51: sensorUpdate();
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;main.c: 51: while(1)
 "51
-[e ( _sensorUpdate ..  ]
+[e :U 399 ]
+[; ;main.c: 52: {
 "52
+{
+[; ;main.c: 53: sensorUpdate(0);
+"53
+[e ( _sensorUpdate (1 -> -> 0 `i `uc ]
+"54
 }
 [e :U 398 ]
-"49
+"51
 [e $U 399  ]
 [e :U 400 ]
-[; ;main.c: 52: }
 [; ;main.c: 54: }
-"54
+[; ;main.c: 56: }
+"56
 [e :UE 397 ]
 }
