@@ -32,11 +32,11 @@
 #define ROTATE90 167            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 #define REVERSEFACTOR 15         //factor that helps correct the 180 turn
-#define LEFTFORWARDFACTOR 420          //factor that helps forward till 90 degree turn
-#define LEFTFORWARDFACTOR2 400         //factor that helps forward till 90 degree turn
-#define RIGHTFORWARDFACTOR 450
-#define RIGHTFORWARDFACTOR2 410
-#define CONTROLLERFACTOR 5
+#define LEFTFORWARDFACTOR 450          //factor that helps forward till 90 degree turn
+#define LEFTFORWARDFACTOR2 410         //factor that helps forward till 90 degree turn
+#define RIGHTFORWARDFACTOR 430
+#define RIGHTFORWARDFACTOR2 390
+#define CONTROLLERFACTOR 3
 
 #define LEFTSENSOR 0             //Sensor value position
 #define RIGHTSENSOR 1            //Sensor value position
@@ -44,9 +44,9 @@
 #define RIGHTFRONTSENSOR 3       //Sensor value position
 
 // Higher the value the closer
-#define FRONTHASWALL 475          // 2,3 senses distance further than this makes left/right turn
+#define FRONTHASWALL 510         // 2,3 senses distance further than this makes left/right turn
 #define FRONTWALLMAX2 800         // 2,3 senses distance closer than this then reverse
-#define RIGHTHASWALL 91
+#define RIGHTHASWALL 90
 #define LEFTHASWALL 90
 
 #define IDEALFRONT 475
@@ -60,7 +60,7 @@
 typedef enum {LEFT,RIGHT} Side;
 unsigned char LMotorCounter = 0;
 unsigned char RMotorCounter = 0;
-unsigned char controllerSteps = KCONTROLLERSTEP;
+unsigned char ignoreControll = KCONTROLLERSTEP;
 int MotorDelayCounter = 0;
 int LTurnCounter = 0;
 int RTurnCounter = 0;
@@ -124,9 +124,6 @@ void high_isr(void)
                      KController();
                      if (sensorValue[RIGHTFRONTSENSOR] > 200 && sensorValue[LEFTFRONTSENSOR] > 200){
                          ControllerCounter = 0;
-                         RotateCounter = ROTATE90*2;
-                         rotatingSide = LEFT;
-                         
                      }
      
                 }
@@ -164,7 +161,7 @@ void high_isr(void)
                        TurnLeft = 0;
 				}
                 
-                else if (TurnRight == 1 && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL && sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL) {
+                else if (TurnRight == 1 && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL-20 && sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL-20) {
                      RotateCounter = ROTATE90;          
                      rotatingSide = RIGHT;
                      justTurned = 1;
@@ -199,10 +196,11 @@ void high_isr(void)
                     justTurned = 1;                
                 } 
                 
-                else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL)) {
-                    if (sensorValue[RIGHTFRONTSENSOR] < 200 || sensorValue[LEFTFRONTSENSOR] < 200){
+                else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL) && sensorValue[RIGHTFRONTSENSOR] < 200 && sensorValue[LEFTFRONTSENSOR] < 200 ) {
+                  
                          ControllerCounter = CONTROLLERFACTOR;
-                    }
+                         justTurned = 0;
+                    
                 }
 //                    else {
 //                         motorCounterUpdate(RIGHT,0);
@@ -335,48 +333,41 @@ void KController()
 {  
     Side correctTo;
     int diff = 0;
-    if(controllerSteps > 0){   
+    if(ignoreControll > 0){   
         motorCounterUpdate(RIGHT,0);
         motorCounterUpdate(LEFT,0);
-        controllerSteps--;
+        ignoreControll--;
         ControllerCounter--;
         return;
-                }
-    if((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL))//has both walls
-    {  
-        diff = ABS(sensorValue[RIGHTSENSOR] - sensorValue[LEFTSENSOR]);
+    }
+    
+    diff = ABS(sensorValue[RIGHTSENSOR] - sensorValue[LEFTSENSOR]);
        // errorD = errorP - oldErrorP;
     if(sensorValue[LEFTSENSOR] > sensorValue[RIGHTSENSOR])
     {
         correctTo = LEFT;
         motorCounterUpdate(correctTo,0);
-        moveMouse(merge(LMotorCounter,RMotorCounter));
     }
     else
     {
         correctTo = RIGHT;
         motorCounterUpdate(correctTo,0);
-        moveMouse(merge(LMotorCounter,RMotorCounter));
     }
     
     if(diff > KCONTROLLERMAX)    
-        controllerSteps = KCONTROLLERSTEPMAX;
+        ignoreControll = KCONTROLLERSTEPMAX;
     else if(diff <= KCONTROLLERMAX && diff > KCONTROLLERMID)
-        controllerSteps = KCONTROLLERSTEPMID;
+        ignoreControll = KCONTROLLERSTEPMID;
     else
-        controllerSteps = KCONTROLLERSTEP;
-    }
-    else {
-        motorCounterUpdate(RIGHT,0);
-        motorCounterUpdate(LEFT,0);
-    }
+        ignoreControll = KCONTROLLERSTEP;
 }
+
 
 void FrontController() {
      int diff2 = ABS(sensorValue[RIGHTFRONTSENSOR] - sensorValue[LEFTFRONTSENSOR]);
      Side correctTo;
        // errorD = errorP - oldErrorP;
-    if(controllerSteps > 0)
+    if(ignoreControll > 0)
     {   
         if (sensorValue[RIGHTFRONTSENSOR] > IDEALFRONT){
         motorCounterUpdate(RIGHT,1);
@@ -388,31 +379,31 @@ void FrontController() {
         } else {
             motorCounterUpdate(LEFT,0);
         }
-        controllerSteps--;
+        ignoreControll--;
         return;
     }
 
     if(sensorValue[LEFTFRONTSENSOR] > sensorValue[RIGHTFRONTSENSOR])
     {
-        //controllerSteps=diff/4;
+        //ignoreControll=diff/4;
         correctTo = LEFT;
         motorCounterUpdate(correctTo,0);
         moveMouse(merge(LMotorCounter,RMotorCounter));
     }
     else
     {
-       // controllerSteps=diff/4;
+       // ignoreControll=diff/4;
         correctTo = RIGHT;
         motorCounterUpdate(correctTo,0);
         moveMouse(merge(LMotorCounter,RMotorCounter));
     }
     
     if(diff2 > KCONTROLLERMAX)    
-        controllerSteps = KCONTROLLERSTEPMAX;
+        ignoreControll = KCONTROLLERSTEPMAX;
     else if(diff2 <= KCONTROLLERMAX && diff2 > KCONTROLLERMID)
-        controllerSteps = KCONTROLLERSTEPMID;
+        ignoreControll = KCONTROLLERSTEPMID;
     else
-        controllerSteps = KCONTROLLERSTEP;
+        ignoreControll = KCONTROLLERSTEP;
     }
 
 

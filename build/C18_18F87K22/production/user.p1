@@ -1,9 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-<<<<<<< HEAD
 "18 user.h
-=======
-"17 user.h
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [c E4057 0 1 .. ]
 [n E4057 . LEFTWALL RIGHTWALL  ]
 [v F4020 `(v ~T0 @X0 1 tf1`ul ]
@@ -46,11 +42,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _INTCON2 `Vuc ~T0 @X0 0 e@4081 ]
 "6630
 [v _INTCON `Vuc ~T0 @X0 0 e@4082 ]
-<<<<<<< HEAD
 "36 user.h
-=======
-"35 user.h
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [v _AlgorithmSelection `(v ~T0 @X0 0 ef ]
 "4811 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [s S251 :1 `uc 1 :1 `uc 1 ]
@@ -87,15 +79,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "4933
 [v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
 [v F4072 `i ~T0 @X0 -> 10 `i t ]
-<<<<<<< HEAD
 "34 user.h
 [v _MIN `(i ~T0 @X0 0 ef2`i`i ]
 "35
-=======
-"33 user.h
-[v _MIN `(i ~T0 @X0 0 ef2`i`i ]
-"34
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [v _MAX `(i ~T0 @X0 0 ef2`i`i ]
 "4939 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
@@ -3785,11 +3771,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-<<<<<<< HEAD
 "15 user.h
-=======
-"14 user.h
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [v _sensorLocation `Cuc ~T0 @X0 -> 4 `i e ]
 [i _sensorLocation
 :U ..
@@ -3799,26 +3781,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 51 `i `uc
 ..
 ]
-<<<<<<< HEAD
 [; ;user.h: 15: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
 [; ;user.h: 17: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
 "18
 [v _algorithm `E4057 ~T0 @X0 1 e ]
 [; ;user.h: 18: Algorithm algorithm;
 "20
-=======
-[; ;user.h: 14: const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
-[; ;user.h: 16: typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
-"17
-[v _algorithm `E4057 ~T0 @X0 1 e ]
-[; ;user.h: 17: Algorithm algorithm;
-"19
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [v _delay_time `i ~T0 @X0 1 e ]
 [i _delay_time
 -> 0 `i
 ]
-<<<<<<< HEAD
 [; ;user.h: 20: int delay_time = 0;
 "21
 [v _sensorCorrection `i ~T0 @X0 -> 4 `i e ]
@@ -3834,23 +3806,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.h: 35: int MAX(int,int);
 [; ;user.h: 36: void AlgorithmSelection();
 [; ;user.h: 37: void setCorrection();
-=======
-[; ;user.h: 19: int delay_time = 0;
-"20
-[v _sensorCorrection `i ~T0 @X0 -> 4 `i e ]
-[; ;user.h: 20: int sensorCorrection[4];
-"21
-[v _sensorValue `i ~T0 @X0 -> 4 `i e ]
-[; ;user.h: 21: int sensorValue[4];
-[; ;user.h: 29: void delay(unsigned int);
-[; ;user.h: 30: void InitApp(void);
-[; ;user.h: 31: void sensorUpdate(unsigned char);
-[; ;user.h: 32: void sensorComputation(int[][10],unsigned char);
-[; ;user.h: 33: int MIN(int,int);
-[; ;user.h: 34: int MAX(int,int);
-[; ;user.h: 35: void AlgorithmSelection();
-[; ;user.h: 36: void setCorrection();
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [; ;system.h: 20: void ConfigureOscillator(void);
 "29 user.c
 [v _delay `(v ~T0 @X0 1 ef1`ui ]
@@ -3936,63 +3891,47 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 108: delay(1000);
 "108
 [e ( _delay (1 -> -> 1000 `i `ui ]
-<<<<<<< HEAD
 [; ;user.c: 110: }
 "110
-=======
-[; ;user.c: 109: }
-"109
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [e :UE 396 ]
 }
-"111
-[v _AlgorithmSelection `(v ~T0 @X0 1 ef ]
 "112
+[v _AlgorithmSelection `(v ~T0 @X0 1 ef ]
+"113
 {
-[; ;user.c: 111: void AlgorithmSelection()
-[; ;user.c: 112: {
+[; ;user.c: 112: void AlgorithmSelection()
+[; ;user.c: 113: {
 [e :U _AlgorithmSelection ]
 [f ]
-[; ;user.c: 113: ADCON0 = 0b00100111;
-"113
+[; ;user.c: 114: ADCON0 = 0b00100111;
+"114
 [e = _ADCON0 -> -> 39 `i `uc ]
-[; ;user.c: 115: ADCON0bits.GO_DONE = 1;
-"115
-[e = . . _ADCON0bits 7 1 -> -> 1 `i `uc ]
-[; ;user.c: 116: while(ADCON0bits.GO_DONE != 0);
+[; ;user.c: 116: ADCON0bits.GO_DONE = 1;
 "116
+[e = . . _ADCON0bits 7 1 -> -> 1 `i `uc ]
+[; ;user.c: 117: while(ADCON0bits.GO_DONE != 0);
+"117
 [e $U 398  ]
 [e :U 399 ]
 [e :U 398 ]
 [e $ != -> . . _ADCON0bits 7 1 `i -> 0 `i 399  ]
 [e :U 400 ]
-[; ;user.c: 118: if(ADRESL > 0b10000000)
-"118
+[; ;user.c: 119: if(ADRESL > 0b10000000)
+"119
 [e $ ! > -> _ADRESL `i -> 128 `i 401  ]
-<<<<<<< HEAD
 [; ;user.c: 120: algorithm = LEFTWALL;
 "120
-=======
-[; ;user.c: 119: algorithm = LEFTWALL;
-"119
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [e = _algorithm . `E4057 0 ]
 [e $U 402  ]
-"120
+"121
 [e :U 401 ]
-<<<<<<< HEAD
 [; ;user.c: 121: else
 [; ;user.c: 122: algorithm = RIGHTWALL;
 "122
-=======
-[; ;user.c: 120: else
-[; ;user.c: 121: algorithm = RIGHTWALL;
-"121
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [e = _algorithm . `E4057 1 ]
 [e :U 402 ]
-[; ;user.c: 123: }
-"123
+[; ;user.c: 124: }
+"124
 [e :UE 397 ]
 }
 "125
@@ -4013,18 +3952,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 129: frontAvg = (sensorValue[2]+sensorValue[3])/2;
 "129
 [e = _frontAvg / + *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 2 `i ]
-[; ;user.c: 131: sensorCorrection[0] = sensorValue[0] - sideAvg;
+[; ;user.c: 131: sensorCorrection[0] = sideAvg - sensorValue[0];
 "131
-[e = *U + &U _sensorCorrection * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux _sideAvg ]
-[; ;user.c: 132: sensorCorrection[1] = sensorValue[1] - sideAvg;
+[e = *U + &U _sensorCorrection * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _sideAvg *U + &U _sensorValue * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[; ;user.c: 132: sensorCorrection[1] = sideAvg - sensorValue[1];
 "132
-[e = *U + &U _sensorCorrection * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux _sideAvg ]
-[; ;user.c: 133: sensorCorrection[2] = sensorValue[2] - frontAvg;
+[e = *U + &U _sensorCorrection * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _sideAvg *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[; ;user.c: 133: sensorCorrection[2] = frontAvg - sensorValue[2];
 "133
-[e = *U + &U _sensorCorrection * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux _frontAvg ]
-[; ;user.c: 134: sensorCorrection[3] = sensorValue[3] - frontAvg;
+[e = *U + &U _sensorCorrection * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _frontAvg *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[; ;user.c: 134: sensorCorrection[3] = frontAvg - sensorValue[3];
 "134
-[e = *U + &U _sensorCorrection * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux _frontAvg ]
+[e = *U + &U _sensorCorrection * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _frontAvg *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
 [; ;user.c: 135: }
 "135
 [e :UE 403 ]
@@ -4107,9 +4046,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 153: sum = sum - min - max;
 "153
 [e = _sum - - _sum _min _max ]
-[; ;user.c: 154: if(getCorrection != 1)
+[; ;user.c: 154: if(getCorrection == 1)
 "154
-[e $ ! != -> _getCorrection `i -> 1 `i 412  ]
+[e $ ! == -> _getCorrection `i -> 1 `i 412  ]
 [; ;user.c: 155: sensorValue[i] = sum/(10-2);
 "155
 [e = *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux / _sum - -> 10 `i -> 2 `i ]
@@ -4189,31 +4128,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 175: sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
 "175
 [e = *U + &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux * -> -> _i `ui `ux -> -> # *U &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux `ui `ux + << -> _ADRESH `i -> 2 `i >> -> _ADRESL `i -> 6 `i ]
-<<<<<<< HEAD
 "176
-=======
-"177
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 }
 "169
 [e ++ _j -> 1 `i ]
 [e $ < _j -> 4 `i 418  ]
 [e :U 419 ]
-<<<<<<< HEAD
 "176
 }
 "177
-=======
-"177
-}
-"178
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 }
 "167
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 10 `i 415  ]
 [e :U 416 ]
-<<<<<<< HEAD
 "177
 }
 [; ;user.c: 176: }
@@ -4239,38 +4167,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;user.c: 186: if(a>b) return b;
 "186
-=======
-"178
-}
-[; ;user.c: 177: }
-[; ;user.c: 178: }
-[; ;user.c: 181: sensorComputation(sensorTemp,getCorrection);
-"181
-[e ( _sensorComputation (2 , &U _sensorTemp _getCorrection ]
-[; ;user.c: 183: }
-"183
-[e :UE 414 ]
-}
-"185
-[v _MIN `(i ~T0 @X0 1 ef2`i`i ]
-"186
-{
-[; ;user.c: 185: int MIN(int a,int b)
-[; ;user.c: 186: {
-[e :U _MIN ]
-"185
-[v _a `i ~T0 @X0 1 r1 ]
-[v _b `i ~T0 @X0 1 r2 ]
-"186
-[f ]
-[; ;user.c: 187: if(a>b) return b;
-"187
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [e $ ! > _a _b 425  ]
 [e ) _b ]
 [e $UE 424  ]
 [e :U 425 ]
-<<<<<<< HEAD
 [; ;user.c: 187: return a;
 "187
 [e ) _a ]
@@ -4293,48 +4193,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;user.c: 192: if(a>b) return a;
 "192
-=======
-[; ;user.c: 188: return a;
-"188
-[e ) _a ]
-[e $UE 424  ]
-[; ;user.c: 189: }
-"189
-[e :UE 424 ]
-}
-"191
-[v _MAX `(i ~T0 @X0 1 ef2`i`i ]
-"192
-{
-[; ;user.c: 191: int MAX(int a, int b)
-[; ;user.c: 192: {
-[e :U _MAX ]
-"191
-[v _a `i ~T0 @X0 1 r1 ]
-[v _b `i ~T0 @X0 1 r2 ]
-"192
-[f ]
-[; ;user.c: 193: if(a>b) return a;
-"193
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [e $ ! > _a _b 427  ]
 [e ) _a ]
 [e $UE 426  ]
 [e :U 427 ]
-<<<<<<< HEAD
 [; ;user.c: 193: return b;
 "193
 [e ) _b ]
 [e $UE 426  ]
 [; ;user.c: 194: }
 "194
-=======
-[; ;user.c: 194: return b;
-"194
-[e ) _b ]
-[e $UE 426  ]
-[; ;user.c: 195: }
-"195
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 [e :UE 426 ]
 }

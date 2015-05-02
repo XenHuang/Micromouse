@@ -128,10 +128,10 @@ void setCorrection()
     sideAvg = (sensorValue[0]+sensorValue[1])/2;
     frontAvg = (sensorValue[2]+sensorValue[3])/2;
 
-    sensorCorrection[0] = sensorValue[0] - sideAvg;
-    sensorCorrection[1] = sensorValue[1] - sideAvg;
-    sensorCorrection[2] = sensorValue[2] - frontAvg;
-    sensorCorrection[3] = sensorValue[3] - frontAvg;
+    sensorCorrection[0] = sideAvg - sensorValue[0];
+    sensorCorrection[1] = sideAvg - sensorValue[1];
+    sensorCorrection[2] = frontAvg - sensorValue[2];
+    sensorCorrection[3] = frontAvg - sensorValue[3];
 }
 
 void sensorComputation(int sensorTemp[][SENSORCOMPUTATION],unsigned char getCorrection)
@@ -151,7 +151,7 @@ void sensorComputation(int sensorTemp[][SENSORCOMPUTATION],unsigned char getCorr
             sum += sensorTemp[i][j];
         }
         sum = sum - min - max;
-        if(getCorrection != 1)
+        if(getCorrection == 1)
             sensorValue[i] = sum/(SENSORCOMPUTATION-2);   
         else
             sensorValue[i] = sum/(SENSORCOMPUTATION-2) + sensorCorrection[i];

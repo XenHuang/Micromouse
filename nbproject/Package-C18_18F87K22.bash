@@ -10,9 +10,9 @@ CND_CONF=C18_18F87K22
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/Micromouse.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=Micromouse.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=micromouse/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/pic18_c_template_1.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=pic18_c_template_1.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=pic18ctemplate1.x/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/micromouse/bin
+makeDirectory ${TMPDIR}/pic18ctemplate1.x/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/micromouse.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/pic18ctemplate1.x.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/micromouse.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/pic18ctemplate1.x.tar *
 checkReturnCode
 
 # Cleanup

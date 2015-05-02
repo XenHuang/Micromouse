@@ -50,23 +50,23 @@ RIGHTWALL 1
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "99 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _high_isr high_isr `II(v  1 e 0 0 ]
-"232
+"230
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
-"269
+"267
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
-"314
+"312
 [v _merge merge `(uc  1 e 1 0 ]
-"321
+"319
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
-"327
+"325
 [v _ABS ABS `(i  1 e 2 0 ]
-"334
+"332
 [v _KController KController `(v  1 e 0 0 ]
-"421
+"412
 [v _rotate rotate `(v  1 e 0 0 ]
-"445
+"436
 [v _Reversing Reversing `(v  1 e 0 0 ]
-"466
+"457
 [v _forward forward `(v  1 e 0 0 ]
 "41 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
 [v _main main `(v  1 e 0 0 ]
@@ -230,7 +230,7 @@ RIGHTWALL 1
 "62
 [v _RMotorCounter RMotorCounter `uc  1 e 1 0 ]
 "63
-[v _controllerSteps controllerSteps `uc  1 e 1 0 ]
+[v _ignoreControll ignoreControll `uc  1 e 1 0 ]
 "64
 [v _MotorDelayCounter MotorDelayCounter `i  1 e 2 0 ]
 "65
@@ -364,79 +364,79 @@ RIGHTWALL 1
 {
 "36
 } 0
-"232 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
+"230 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\interrupts.c
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
 {
-"267
+"265
 } 0
 "99
 [v _high_isr high_isr `II(v  1 e 0 0 ]
 {
-"228
+"226
 } 0
-"421
+"412
 [v _rotate rotate `(v  1 e 0 0 ]
 {
 [v rotate@side side `E4145  1 a 1 wreg ]
 [v rotate@side side `E4145  1 a 1 wreg ]
-"423
+"414
 [v rotate@side side `E4145  1 a 1 19 ]
-"431
+"422
 } 0
-"466
-[v _forward forward `(v  1 e 0 0 ]
-{
-"471
-} 0
-"445
-[v _Reversing Reversing `(v  1 e 0 0 ]
-{
-"450
-} 0
-"334
-[v _KController KController `(v  1 e 0 0 ]
-{
-"337
-[v KController@diff diff `i  1 a 2 23 ]
-"336
-[v KController@correctTo correctTo `E4145  1 a 1 22 ]
-"373
-} 0
-"321
+"319
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
 {
 [v moveMouse@action action `uc  1 a 1 wreg ]
 [v moveMouse@action action `uc  1 a 1 wreg ]
-"323
+"321
 [v moveMouse@action action `uc  1 a 1 17 ]
-"324
+"322
 } 0
-"269
+"312
+[v _merge merge `(uc  1 e 1 0 ]
+{
+[v merge@left left `uc  1 a 1 wreg ]
+"314
+[v merge@merged merged `uc  1 a 1 19 ]
+"312
+[v merge@left left `uc  1 a 1 wreg ]
+[v merge@right right `uc  1 p 1 17 ]
+"315
+[v merge@left left `uc  1 a 1 18 ]
+"317
+} 0
+"457
+[v _forward forward `(v  1 e 0 0 ]
+{
+"462
+} 0
+"436
+[v _Reversing Reversing `(v  1 e 0 0 ]
+{
+"441
+} 0
+"332
+[v _KController KController `(v  1 e 0 0 ]
+{
+"335
+[v KController@diff diff `i  1 a 2 22 ]
+"334
+[v KController@correctTo correctTo `E4145  1 a 1 21 ]
+"363
+} 0
+"267
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
 {
 [v motorCounterUpdate@side side `E4145  1 a 1 wreg ]
 [v motorCounterUpdate@side side `E4145  1 a 1 wreg ]
 [v motorCounterUpdate@reverse reverse `uc  1 p 1 17 ]
-"271
+"269
 [v motorCounterUpdate@side side `E4145  1 a 1 18 ]
-"312
+"310
 } 0
-"314
-[v _merge merge `(uc  1 e 1 0 ]
-{
-[v merge@left left `uc  1 a 1 wreg ]
-"316
-[v merge@merged merged `uc  1 a 1 19 ]
-"314
-[v merge@left left `uc  1 a 1 wreg ]
-[v merge@right right `uc  1 p 1 17 ]
-"317
-[v merge@left left `uc  1 a 1 18 ]
-"319
-} 0
-"327
+"325
 [v _ABS ABS `(i  1 e 2 0 ]
 {
 [v ABS@x x `i  1 p 2 17 ]
-"331
+"329
 } 0

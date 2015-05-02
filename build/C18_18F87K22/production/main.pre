@@ -4972,11 +4972,7 @@ typedef unsigned char bool;
 # 20 "system.h"
 void ConfigureOscillator(void);
 
-<<<<<<< HEAD
 # 15 "user.h"
-=======
-# 14 "user.h"
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
@@ -4986,11 +4982,7 @@ int delay_time = 0;
 int sensorCorrection[4];
 int sensorValue[4];
 
-<<<<<<< HEAD
 # 30
-=======
-# 29
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 void delay(unsigned int);
 void InitApp(void);
 void sensorUpdate(unsigned char);
@@ -5170,10 +5162,6 @@ InitApp();
 sensorUpdate(1);
 setCorrection();
 INTCONbits.GIE = 1;
-<<<<<<< HEAD
-=======
-
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 while(1)
 {
 sensorUpdate(0);

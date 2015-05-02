@@ -4969,11 +4969,7 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.34\include\stdbool.h"
 typedef unsigned char bool;
 
-<<<<<<< HEAD
 # 15 "user.h"
-=======
-# 14 "user.h"
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 const unsigned char sensorLocation[4] = {0b00011011,0b00101011,0b00011111,0b00110011};
 
 typedef enum {LEFTWALL,RIGHTWALL} Algorithm;
@@ -4983,11 +4979,7 @@ int delay_time = 0;
 int sensorCorrection[4];
 int sensorValue[4];
 
-<<<<<<< HEAD
 # 30
-=======
-# 29
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 void delay(unsigned int);
 void InitApp(void);
 void sensorUpdate(unsigned char);
@@ -5052,10 +5044,7 @@ AlgorithmSelection();
 
 
 delay(1000);
-<<<<<<< HEAD
 
-=======
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 }
 
 void AlgorithmSelection()
@@ -5071,20 +5060,16 @@ else
 algorithm = RIGHTWALL;
 
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 void setCorrection()
 {
 int sideAvg,frontAvg;
 sideAvg = (sensorValue[0]+sensorValue[1])/2;
 frontAvg = (sensorValue[2]+sensorValue[3])/2;
 
-sensorCorrection[0] = sensorValue[0] - sideAvg;
-sensorCorrection[1] = sensorValue[1] - sideAvg;
-sensorCorrection[2] = sensorValue[2] - frontAvg;
-sensorCorrection[3] = sensorValue[3] - frontAvg;
+sensorCorrection[0] = sideAvg - sensorValue[0];
+sensorCorrection[1] = sideAvg - sensorValue[1];
+sensorCorrection[2] = frontAvg - sensorValue[2];
+sensorCorrection[3] = frontAvg - sensorValue[3];
 }
 
 void sensorComputation(int sensorTemp[][10],unsigned char getCorrection)
@@ -5104,7 +5089,7 @@ max = MAX(sensorTemp[i][j],max);
 sum += sensorTemp[i][j];
 }
 sum = sum - min - max;
-if(getCorrection != 1)
+if(getCorrection == 1)
 sensorValue[i] = sum/(10-2);
 else
 sensorValue[i] = sum/(10-2) + sensorCorrection[i];
@@ -5126,10 +5111,6 @@ ADCON0 = sensorLocation[j];
 ADCON0bits.GO_DONE = 1;
 while(ADCON0bits.GO_DONE != 0);
 sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
-<<<<<<< HEAD
-=======
-
->>>>>>> e9f43af0faced9f58334cfb794af280dce6fc8d5
 }
 }
 
