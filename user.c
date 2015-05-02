@@ -106,7 +106,6 @@ void InitApp(void)
     
     /* Enable interrupts */
     delay(1000);    //wait for settlement
-    INTCONbits.GIE = 1;
 }
 
 void AlgorithmSelection()
@@ -122,7 +121,20 @@ void AlgorithmSelection()
          algorithm = RIGHTWALL;
      
 }
-void sensorComputation(int sensorTemp[][SENSORCOMPUTATION])
+
+void setCorrection()
+{
+    int sideAvg,frontAvg;
+    sideAvg = (sensorValue[0]+sensorValue[1])/2;
+    frontAvg = (sensorValue[2]+sensorValue[3])/2;
+
+    sensorCorrection[0] = sensorValue[0] - sideAvg;
+    sensorCorrection[1] = sensorValue[1] - sideAvg;
+    sensorCorrection[2] = sensorValue[2] - frontAvg;
+    sensorCorrection[3] = sensorValue[3] - frontAvg;
+}
+
+void sensorComputation(int sensorTemp[][SENSORCOMPUTATION],unsigned char getCorrection)
 {
     int max,min,i,j,sum;
     for(i = 0; i < NUMSENSORS ; i++)
@@ -139,11 +151,14 @@ void sensorComputation(int sensorTemp[][SENSORCOMPUTATION])
             sum += sensorTemp[i][j];
         }
         sum = sum - min - max;
-        sensorValue[i] = sum/(SENSORCOMPUTATION-2);   //131 133 80 81
+        if(getCorrection != 1)
+            sensorValue[i] = sum/(SENSORCOMPUTATION-2);   //131 133 80 81
+        else
+            sensorValue[i] = sum/(SENSORCOMPUTATION-2) + sensorCorrection[i];
     }
 }
 
-void sensorUpdate()
+void sensorUpdate(unsigned char getCorrection)
 {
     int i,j;
     int sensorTemp[NUMSENSORS][SENSORCOMPUTATION];
@@ -159,16 +174,11 @@ void sensorUpdate()
             while(ADCON0bits.GO_DONE != 0);
             sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
             
-            //Sensor correction, vary device from device
-            if(j == 0 || j == 3)
-                sensorTemp[j][i] -= sensorCorrection[j];
-            else
-                sensorTemp[j][i] += sensorCorrection[j];
         }
     }
 
     //Compute and write to variables
-    sensorComputation(sensorTemp);
+    sensorComputation(sensorTemp,getCorrection);
 
 }
 

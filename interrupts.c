@@ -123,7 +123,7 @@ void high_isr(void)
                     forward();
                 }
                 else if (ReverseCounter > 0)   //keep reversing until counter goes to 0
-					Reversing();
+                    Reversing();
                 else if(RotateCounter > 0)      //keep rotating until counter goes to 0
                 {
                     // If front left or front right has a wall closer than 800, reverse 15 steps
@@ -134,56 +134,30 @@ void high_isr(void)
                     rotate(rotatingSide);
                       }
                 }
-//				else if (LTurnCounter > 0 || RTurnCounter > 0) {
-//					//smoothTurn();
-//                }
-            //   else if (sensorValue[LEFTSENSOR] > 90 && sensorValue[RIGHTSENSOR] > 90 && (sensorValue[LEFTFRONTSENSOR] < 250 && sensorValue[RIGHTFRONTSENSOR] < 250) )
-                           
-              //  {	// 2 walls
-               //    KController();
-             //      justTurned = 0;  //disable just turned
-             //  }
-				else if (sensorValue[LEFTSENSOR] < LEFTHASWALL && TurnLeft > LEFTHASWALL && algorithm == LEFTWALL)    // Always left turn if left sensor senses less than 70 in upper left direction.
-				{
+		else if (sensorValue[LEFTSENSOR] < LEFTHASWALL && TurnLeft > LEFTHASWALL && algorithm == LEFTWALL)    // Always left turn if left sensor senses less than 70 in upper left direction.
+		{
                     TurnLeft = sensorValue[LEFTSENSOR];
-//                   if ((sensorValue[LEFTFRONTSENSOR] < 100 && sensorValue[RIGHTFRONTSENSOR] < 65)) {
-//                    KController();
-//                    }
-//                    else {
                     if(justTurned == 0) { //if just rotate, forward lower step of 380.
                     ForwardCounter = LEFTFORWARDFACTOR;
                     }else {  //if not just rotate, forward step of 420.
                     ForwardCounter = LEFTFORWARDFACTOR2;
                     }
                     forward();   //forward with given forward factor
-                    }
-                
-                else if (TurnLeft < LEFTHASWALL) {
+                }
+                else if (TurnLeft < LEFTHASWALL) 
+                {
                     RotateCounter = ROTATE90;
                     rotatingSide = LEFT;
                     justTurned = 1;   //enable just turned.
                     TurnRight= 200;
                     TurnLeft = 300;
                     TurnedLeft = 1;
-					//RTurnCounter = SMOOTHROTATEFACTOR;
-					//smoothTurn();
-                    
-				}
+		}
                 //Right turn if upper left has wall && front has wall in 1.5 cells && upper right has no wall.
                 //if (right sensor senses less than 70) && (both front sensor senses greater than 100) && (left sensor senses higher than 70) 
-				else if (sensorValue[RIGHTSENSOR] < RIGHTHASWALL && algorithm == LEFTWALL)   
-				{
+		else if (sensorValue[RIGHTSENSOR] < RIGHTHASWALL && algorithm == LEFTWALL)   
+		{
                     TurnRight = sensorValue[RIGHTSENSOR];
-//                    if(justTurned == 0) { //if just rotate, forward lower step of 380.
-//                    ForwardCounter = RIGHTFORWARDFACTOR;
-//                    } else  {  //if not just rotate, forward step of 420.
-//                    ForwardCounter = RIGHTFORWARDFACTOR2;
-//                    }
-//                    forward();   //forward with given forward factor
-//                    if ((sensorValue[LEFTFRONTSENSOR] < 100 && sensorValue[RIGHTFRONTSENSOR] < 65)) {
-//                    KController();
-//                    }
-//                    else {
                       if(justTurned == 0) { //if just rotate, forward lower step of 380.
                     ForwardCounter = RIGHTFORWARDFACTOR;
                     } else  {  //if not just rotate, forward step of 420.
@@ -194,7 +168,8 @@ void high_isr(void)
 					//RTurnCounter = SMOOTHROTATEFACTOR;
 					//smoothTurn();
 				
-                else if (TurnRight < RIGHTHASWALL && sensorValue[RIGHTFRONTSENSOR] > 380) {
+                else if (TurnRight < RIGHTHASWALL && sensorValue[RIGHTFRONTSENSOR] > 380)
+                {
                     RotateCounter = ROTATE90;          
                     rotatingSide = RIGHT;
                      justTurned = 1;
@@ -205,24 +180,9 @@ void high_isr(void)
                 else if (TurnRight < RIGHTHASWALL && sensorValue[RIGHTFRONTSENSOR] < 380) {
                     KController();
                 }
-                // Go forward and self correct if upper left and upper right have walls and no wall in the front
-                //if (right sensor and left sensor senses greater than 70) && (either front sensors senses less than 420)
-     
-//                else if ((sensorValue[LEFTFRONTSENSOR] > 110 && sensorValue[RIGHTFRONTSENSOR] > 45) && TurnedLeft == 1) {
-//                        RotateCounter = ROTATE90;
-//                        rotatingSide = RIGHT;
-//                        justTurned = 1;
-//                        TurnedRight = 1;
-//                    }
-//                else if ((sensorValue[LEFTFRONTSENSOR] > 110 && sensorValue[RIGHTFRONTSENSOR] > 45) && TurnedRight == 1) {
-//                            RotateCounter = ROTATE90;
-//                        rotatingSide = LEFT;
-//                        justTurned = 1;
-//                        TurnedLeft = 1;
-//                        }
                 else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL )
                         && (sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL) && RotateCounter <= 0) 
-				{	// 3 walls
+		{	// 3 walls
                     Deadend = 1;
                     RotateCounter = ROTATE90*2;
                     rotate(rotatingSide);
@@ -238,37 +198,10 @@ void high_isr(void)
                     KController();
                     }
                     else {
-                                motorCounterUpdate(RIGHT,0);
-        motorCounterUpdate(LEFT,0);
+                        motorCounterUpdate(RIGHT,0);
+                        motorCounterUpdate(LEFT,0);
                     }
-                        
                 }
-                    
-//				else if (sensorValue[RIGHTSENSOR] < SIDEWALLMIN && algorithm == RIGHTWALL)
-//				{
-//                    if(justTurned == FALSE)
-//                    ForwardCounter = FORWARDFACTOR;
-//                    else
-//                    ForwardCounter = FORWARDFACTOR2;
-//                    
-//                    rotatingSide = RIGHT;
-//                    justTurned = TRUE;
-//					//LTurnCounter = SMOOTHROTATEFACTOR;
-//					//smoothTurn();
-//				}                
-//				else if (sensorValue[LEFTSENSOR] < SIDEWALLMIN && (sensorValue[LEFTFRONTSENSOR] > FRONTWALLMIN || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMIN)
-//                        && sensorValue[RIGHTSENSOR] > SIDEWALLMIN && algorithm == RIGHTWALL)
-//				{
-//                    if(justTurned == FALSE)
-//                    ForwardCounter = FORWARDFACTOR;
-//                    else
-//                    ForwardCounter = FORWARDFACTOR2;
-//                    
-//                    rotatingSide = LEFT;
-//                    justTurned = TRUE;
-					//LTurnCounter = SMOOTHROTATEFACTOR;
-					//smoothTurn();
-				//}
                else {
                     motorCounterUpdate(RIGHT,0);
                     motorCounterUpdate(LEFT,0);
@@ -439,40 +372,6 @@ void KController()
        // diff = ABS(2 * (131 - sensorValue[LEFTSENSOR]));
 
     }
-//    else if((sensorValue[RIGHTSENSOR] > RIGHTHASWALL))//only has right wall
-//    {
-//        diff = 2 * (sensorValue[RIGHTSENSOR] - 141);
-//            if(controllerSteps > 0)
-//    {   
-//        motorCounterUpdate(RIGHT,0);
-//        motorCounterUpdate(LEFT,0);
-//        controllerSteps--;
-//        return;
-//    }
-//
-//    if(sensorValue[LEFTSENSOR] > sensorValue[RIGHTSENSOR])
-//    {
-//        //controllerSteps=diff/4;
-//        correctTo = LEFT;
-//        motorCounterUpdate(correctTo,0);
-//        moveMouse(merge(LMotorCounter,RMotorCounter));
-//    }
-//    else
-//    {
-//       // controllerSteps=diff/4;
-//        correctTo = RIGHT;
-//        motorCounterUpdate(correctTo,0);
-//        moveMouse(merge(LMotorCounter,RMotorCounter));
-//    }
-//    
-//    if(diff > KCONTROLLERMAX)    
-//        controllerSteps = KCONTROLLERSTEPMAX;
-//    else if(diff <= KCONTROLLERMAX && diff > KCONTROLLERMID)
-//        controllerSteps = KCONTROLLERSTEPMID;
-//    else
-//        controllerSteps = KCONTROLLERSTEP;
-//
-//    }
     else if(((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL) && sensorValue[RIGHTFRONTSENSOR] > 80))//no wall, use encoder or gyro
     {
          diff = ABS(sensorValue[RIGHTFRONTSENSOR] - sensorValue[LEFTFRONTSENSOR]);
