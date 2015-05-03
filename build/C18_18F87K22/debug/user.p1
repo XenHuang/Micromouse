@@ -3958,12 +3958,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 132: sensorCorrection[1] = sideAvg - sensorValue[1];
 "132
 [e = *U + &U _sensorCorrection * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _sideAvg *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
-[; ;user.c: 133: sensorCorrection[2] = frontAvg - sensorValue[2];
+[; ;user.c: 133: sensorCorrection[2] = sideAvg - sensorValue[2];
 "133
-[e = *U + &U _sensorCorrection * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _frontAvg *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
-[; ;user.c: 134: sensorCorrection[3] = frontAvg - sensorValue[3];
+[e = *U + &U _sensorCorrection * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _sideAvg *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[; ;user.c: 134: sensorCorrection[3] = sideAvg - sensorValue[3];
 "134
-[e = *U + &U _sensorCorrection * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _frontAvg *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[e = *U + &U _sensorCorrection * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _sideAvg *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
 [; ;user.c: 135: }
 "135
 [e :UE 403 ]

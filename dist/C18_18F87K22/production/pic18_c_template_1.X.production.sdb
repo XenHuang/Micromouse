@@ -62,11 +62,11 @@ RIGHTWALL 1
 [v _ABS ABS `(i  1 e 2 0 ]
 "332
 [v _KController KController `(v  1 e 0 0 ]
-"412
+"366
 [v _rotate rotate `(v  1 e 0 0 ]
-"436
+"390
 [v _Reversing Reversing `(v  1 e 0 0 ]
-"457
+"411
 [v _forward forward `(v  1 e 0 0 ]
 "41 C:\Users\X\MPLABXProjects\pic18_c_template_1.X\main.c
 [v _main main `(v  1 e 0 0 ]
@@ -90,7 +90,7 @@ RIGHTWALL 1
 [v _MAX MAX `(i  1 e 2 0 ]
 "1267 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
-[s S336 . 1 `uc 1 TRISB0 1 0 :1:0 
+[s S333 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -100,7 +100,7 @@ RIGHTWALL 1
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "1886
-[s S345 . 1 `uc 1 RB0 1 0 :1:0 
+[s S342 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -109,11 +109,11 @@ RIGHTWALL 1
 `uc 1 RB6 1 0 :1:6 
 `uc 1 RB7 1 0 :1:7 
 ]
-[u S354 . 1 `S336 1 . 1 0 `S345 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES354  1 e 1 @3987 ]
+[u S351 . 1 `S333 1 . 1 0 `S342 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES351  1 e 1 @3987 ]
 "2075
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-[s S304 . 1 `uc 1 TRISE0 1 0 :1:0 
+[s S301 . 1 `uc 1 TRISE0 1 0 :1:0 
 `uc 1 TRISE1 1 0 :1:1 
 `uc 1 TRISE2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -123,13 +123,13 @@ RIGHTWALL 1
 `uc 1 IBF 1 0 :1:7 
 ]
 "2545
-[s S313 . 1 `uc 1 RE0 1 0 :1:0 
+[s S310 . 1 `uc 1 RE0 1 0 :1:0 
 `uc 1 RE1 1 0 :1:1 
 `uc 1 RE2 1 0 :1:2 
 `uc 1 RE3 1 0 :1:3 
 ]
-[u S318 . 1 `S304 1 . 1 0 `S313 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES318  1 e 1 @3990 ]
+[u S315 . 1 `S301 1 . 1 0 `S310 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES315  1 e 1 @3990 ]
 "2680
 [v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
 "4645
@@ -138,38 +138,38 @@ RIGHTWALL 1
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
 "4805
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
-[s S386 . 1 `uc 1 . 1 0 :1:0 
+[s S383 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "4853
-[s S389 . 1 `uc 1 ADON 1 0 :1:0 
+[s S386 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 ]
-[s S396 . 1 `uc 1 . 1 0 :1:0 
+[s S393 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
 `uc 1 CHS2 1 0 :1:4 
 `uc 1 CHS3 1 0 :1:5 
 ]
-[s S403 . 1 `uc 1 . 1 0 :1:0 
+[s S400 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S406 . 1 `uc 1 . 1 0 :1:0 
+[s S403 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S409 . 1 `uc 1 . 1 0 :1:0 
+[s S406 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S412 . 1 `uc 1 . 1 0 :1:0 
+[s S409 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S415 . 1 `uc 1 . 1 0 :1:0 
+[s S412 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S418 . 1 `S386 1 . 1 0 `S389 1 . 1 0 `S386 1 . 1 0 `S396 1 . 1 0 `S403 1 . 1 0 `S406 1 . 1 0 `S409 1 . 1 0 `S412 1 . 1 0 `S415 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES418  1 e 1 @4034 ]
+[u S415 . 1 `S383 1 . 1 0 `S386 1 . 1 0 `S383 1 . 1 0 `S393 1 . 1 0 `S400 1 . 1 0 `S403 1 . 1 0 `S406 1 . 1 0 `S409 1 . 1 0 `S412 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES415  1 e 1 @4034 ]
 "4933
 [v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
 "4939
@@ -243,8 +243,6 @@ RIGHTWALL 1
 [v _ReverseCounter ReverseCounter `i  1 e 2 0 ]
 "69
 [v _ForwardCounter ForwardCounter `i  1 e 2 0 ]
-"70
-[v _ControllerCounter ControllerCounter `i  1 e 2 0 ]
 "71
 [v _rotatingSide rotatingSide `E4145  1 e 1 0 ]
 "72
@@ -374,14 +372,14 @@ RIGHTWALL 1
 {
 "226
 } 0
-"412
+"366
 [v _rotate rotate `(v  1 e 0 0 ]
 {
 [v rotate@side side `E4145  1 a 1 wreg ]
 [v rotate@side side `E4145  1 a 1 wreg ]
-"414
+"368
 [v rotate@side side `E4145  1 a 1 19 ]
-"422
+"376
 } 0
 "319
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
@@ -405,15 +403,15 @@ RIGHTWALL 1
 [v merge@left left `uc  1 a 1 18 ]
 "317
 } 0
-"457
+"411
 [v _forward forward `(v  1 e 0 0 ]
 {
-"462
+"416
 } 0
-"436
+"390
 [v _Reversing Reversing `(v  1 e 0 0 ]
 {
-"441
+"395
 } 0
 "332
 [v _KController KController `(v  1 e 0 0 ]
@@ -422,7 +420,7 @@ RIGHTWALL 1
 [v KController@diff diff `i  1 a 2 22 ]
 "334
 [v KController@correctTo correctTo `E4145  1 a 1 21 ]
-"363
+"362
 } 0
 "267
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]

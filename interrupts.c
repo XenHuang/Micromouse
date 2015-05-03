@@ -29,7 +29,7 @@
 
 #define MOTORDELAYMIN 0         //the smaller the faster
 #define MOTORDELAYMAX 2       //the bigger the slower
-#define ROTATE90 167            //steps require for doing 90 turn
+#define ROTATE90 170            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 #define REVERSEFACTOR 15         //factor that helps correct the 180 turn
 #define LEFTFORWARDFACTOR 450          //factor that helps forward till 90 degree turn
@@ -44,17 +44,17 @@
 #define RIGHTFRONTSENSOR 3       //Sensor value position
 
 // Higher the value the closer
-#define FRONTHASWALL 510         // 2,3 senses distance further than this makes left/right turn
+#define FRONTHASWALL 480         // 2,3 senses distance further than this makes left/right turn
 #define FRONTWALLMAX2 800         // 2,3 senses distance closer than this then reverse
-#define RIGHTHASWALL 90
-#define LEFTHASWALL 90
+#define RIGHTHASWALL 95
+#define LEFTHASWALL 95
 
 #define IDEALFRONT 475
 
 #define KCONTROLLERMAX 60        // Maximum diff bettween 0,1 sensors value
 #define KCONTROLLERMID 20
 #define KCONTROLLERSTEP 10
-#define KCONTROLLERSTEPMID 5
+#define KCONTROLLERSTEPMID 3
 #define KCONTROLLERSTEPMAX 1
 
 typedef enum {LEFT,RIGHT} Side;
@@ -120,10 +120,10 @@ void high_isr(void)
             if(MotorDelayCounter > MOTORDELAYMAX)
             {
                 //Continue rotation
-               if(ControllerCounter > 0){   
+               if(ignoreControll > 0){   
                      KController();
-                     if (sensorValue[RIGHTFRONTSENSOR] > 200 && sensorValue[LEFTFRONTSENSOR] > 200){
-                         ControllerCounter = 0;
+                     if (sensorValue[RIGHTFRONTSENSOR] > 100 && sensorValue[LEFTFRONTSENSOR] > 100){
+                         ignoreControll = 0;
                      }
      
                 }
@@ -161,7 +161,7 @@ void high_isr(void)
                        TurnLeft = 0;
 				}
                 
-                else if (TurnRight == 1 && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL-20 && sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL-20) {
+                else if (TurnRight == 1 && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL - 40 && sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL - 40) {
                      RotateCounter = ROTATE90;          
                      rotatingSide = RIGHT;
                      justTurned = 1;
@@ -178,7 +178,7 @@ void high_isr(void)
                     forward();   //forward with given forward factor
                 }
                 
-				else if (sensorValue[RIGHTSENSOR] < RIGHTHASWALL && algorithm == LEFTWALL)   {
+				else if (sensorValue[RIGHTSENSOR] < RIGHTHASWALL && sensorValue[LEFTSENSOR] > LEFTHASWALL && algorithm == LEFTWALL)   {
                     TurnRight = 1;
                     if(justTurned == 0) { //if just rotate, forward lower step of 380.
                     ForwardCounter = RIGHTFORWARDFACTOR;
@@ -196,9 +196,9 @@ void high_isr(void)
                     justTurned = 1;                
                 } 
                 
-                else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL) && sensorValue[RIGHTFRONTSENSOR] < 200 && sensorValue[LEFTFRONTSENSOR] < 200 ) {
+                else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL) && sensorValue[RIGHTFRONTSENSOR] < 100 && sensorValue[LEFTFRONTSENSOR] < 100 ) {
                   
-                         ControllerCounter = CONTROLLERFACTOR;
+                    KController();
                          justTurned = 0;
                     
                 }
@@ -337,7 +337,6 @@ void KController()
         motorCounterUpdate(RIGHT,0);
         motorCounterUpdate(LEFT,0);
         ignoreControll--;
-        ControllerCounter--;
         return;
     }
     
@@ -361,51 +360,6 @@ void KController()
     else
         ignoreControll = KCONTROLLERSTEP;
 }
-
-
-void FrontController() {
-     int diff2 = ABS(sensorValue[RIGHTFRONTSENSOR] - sensorValue[LEFTFRONTSENSOR]);
-     Side correctTo;
-       // errorD = errorP - oldErrorP;
-    if(ignoreControll > 0)
-    {   
-        if (sensorValue[RIGHTFRONTSENSOR] > IDEALFRONT){
-        motorCounterUpdate(RIGHT,1);
-        } else {
-            motorCounterUpdate(RIGHT,0);
-        }
-        if (sensorValue[LEFTFRONTSENSOR] > IDEALFRONT) {
-        motorCounterUpdate(LEFT,1);
-        } else {
-            motorCounterUpdate(LEFT,0);
-        }
-        ignoreControll--;
-        return;
-    }
-
-    if(sensorValue[LEFTFRONTSENSOR] > sensorValue[RIGHTFRONTSENSOR])
-    {
-        //ignoreControll=diff/4;
-        correctTo = LEFT;
-        motorCounterUpdate(correctTo,0);
-        moveMouse(merge(LMotorCounter,RMotorCounter));
-    }
-    else
-    {
-       // ignoreControll=diff/4;
-        correctTo = RIGHT;
-        motorCounterUpdate(correctTo,0);
-        moveMouse(merge(LMotorCounter,RMotorCounter));
-    }
-    
-    if(diff2 > KCONTROLLERMAX)    
-        ignoreControll = KCONTROLLERSTEPMAX;
-    else if(diff2 <= KCONTROLLERMAX && diff2 > KCONTROLLERMID)
-        ignoreControll = KCONTROLLERSTEPMID;
-    else
-        ignoreControll = KCONTROLLERSTEP;
-    }
-
 
 
 

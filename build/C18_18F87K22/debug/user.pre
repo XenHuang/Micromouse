@@ -5068,8 +5068,8 @@ frontAvg = (sensorValue[2]+sensorValue[3])/2;
 
 sensorCorrection[0] = sideAvg - sensorValue[0];
 sensorCorrection[1] = sideAvg - sensorValue[1];
-sensorCorrection[2] = frontAvg - sensorValue[2];
-sensorCorrection[3] = frontAvg - sensorValue[3];
+sensorCorrection[2] = sideAvg - sensorValue[2];
+sensorCorrection[3] = sideAvg - sensorValue[3];
 }
 
 void sensorComputation(int sensorTemp[][10],unsigned char getCorrection)

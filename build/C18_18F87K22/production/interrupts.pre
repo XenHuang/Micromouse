@@ -5071,10 +5071,10 @@ if(INTCONbits.TMR0IF == 1)
 if(MotorDelayCounter > 2)
 {
 
-if(ControllerCounter > 0){
+if(ignoreControll > 0){
 KController();
-if (sensorValue[3] > 200 && sensorValue[2] > 200){
-ControllerCounter = 0;
+if (sensorValue[3] > 100 && sensorValue[2] > 100){
+ignoreControll = 0;
 }
 
 }
@@ -5102,20 +5102,20 @@ TurnLeft = 0;
 }
 
 else if (TurnLeft == 1){
-RotateCounter = 167;
+RotateCounter = 170;
 rotatingSide = LEFT;
 justTurned = 1;
 TurnLeft = 0;
 }
 
-else if (TurnRight == 1 && sensorValue[3] > 510-20 && sensorValue[2] > 510-20) {
-RotateCounter = 167;
+else if (TurnRight == 1 && sensorValue[3] > 480 - 40 && sensorValue[2] > 480 - 40) {
+RotateCounter = 170;
 rotatingSide = RIGHT;
 justTurned = 1;
 TurnRight = 0;
 }
 
-else if (sensorValue[0] < 90 && algorithm == LEFTWALL) {
+else if (sensorValue[0] < 95 && algorithm == LEFTWALL) {
 TurnLeft = 1;
 if(justTurned == 0) {
 ForwardCounter = 450;
@@ -5125,7 +5125,7 @@ ForwardCounter = 410;
 forward();
 }
 
-else if (sensorValue[1] < 90 && algorithm == LEFTWALL) {
+else if (sensorValue[1] < 95 && sensorValue[0] > 95 && algorithm == LEFTWALL) {
 TurnRight = 1;
 if(justTurned == 0) {
 ForwardCounter = 430;
@@ -5135,17 +5135,17 @@ ForwardCounter = 390;
 forward();
 }
 
-else if ((sensorValue[0] > 90 && sensorValue[1] > 90 )
-&& (sensorValue[3] > 510 && sensorValue[2] > 510) && RotateCounter <= 0)
+else if ((sensorValue[0] > 95 && sensorValue[1] > 95 )
+&& (sensorValue[3] > 480 && sensorValue[2] > 480) && RotateCounter <= 0)
 {
-RotateCounter = 167*2;
+RotateCounter = 170*2;
 rotatingSide = LEFT;
 justTurned = 1;
 }
 
-else if ((sensorValue[0] > 90 && sensorValue[1] > 90) && sensorValue[3] < 200 && sensorValue[2] < 200 ) {
+else if ((sensorValue[0] > 95 && sensorValue[1] > 95) && sensorValue[3] < 100 && sensorValue[2] < 100 ) {
 
-ControllerCounter = 3;
+KController();
 justTurned = 0;
 
 }
@@ -5252,7 +5252,6 @@ if(ignoreControll > 0){
 motorCounterUpdate(RIGHT,0);
 motorCounterUpdate(LEFT,0);
 ignoreControll--;
-ControllerCounter--;
 return;
 }
 
@@ -5272,55 +5271,10 @@ motorCounterUpdate(correctTo,0);
 if(diff > 60)
 ignoreControll = 1;
 else if(diff <= 60 && diff > 20)
-ignoreControll = 5;
+ignoreControll = 3;
 else
 ignoreControll = 10;
 }
-
-
-void FrontController() {
-int diff2 = ABS(sensorValue[3] - sensorValue[2]);
-Side correctTo;
-
-if(ignoreControll > 0)
-{
-if (sensorValue[3] > 475){
-motorCounterUpdate(RIGHT,1);
-} else {
-motorCounterUpdate(RIGHT,0);
-}
-if (sensorValue[2] > 475) {
-motorCounterUpdate(LEFT,1);
-} else {
-motorCounterUpdate(LEFT,0);
-}
-ignoreControll--;
-return;
-}
-
-if(sensorValue[2] > sensorValue[3])
-{
-
-correctTo = LEFT;
-motorCounterUpdate(correctTo,0);
-moveMouse(merge(LMotorCounter,RMotorCounter));
-}
-else
-{
-
-correctTo = RIGHT;
-motorCounterUpdate(correctTo,0);
-moveMouse(merge(LMotorCounter,RMotorCounter));
-}
-
-if(diff2 > 60)
-ignoreControll = 1;
-else if(diff2 <= 60 && diff2 > 20)
-ignoreControll = 5;
-else
-ignoreControll = 10;
-}
-
 
 
 
@@ -5355,7 +5309,7 @@ motorCounterUpdate(LEFT,1);
 ReverseCounter--;
 }
 
-# 457
+# 411
 void forward()
 {
 motorCounterUpdate(RIGHT,0);

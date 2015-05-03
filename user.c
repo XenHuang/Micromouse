@@ -126,7 +126,7 @@ void setCorrection()
 {
     int sideAvg,frontAvg;
     sideAvg = (sensorValue[0]+sensorValue[1])/2;
-    frontAvg = (sensorValue[2]+sensorValue[3])/2;
+   frontAvg = (sensorValue[2]+sensorValue[3])/2;
 
     sensorCorrection[0] = sideAvg - sensorValue[0];
     sensorCorrection[1] = sideAvg - sensorValue[1];
