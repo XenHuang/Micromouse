@@ -5025,7 +5025,6 @@ typedef enum {LEFT,RIGHT} Side;
 unsigned char LMotorCounter = 0;
 unsigned char RMotorCounter = 0;
 unsigned char ignoreControll = 10;
-int ignoreFControll = 0;
 int MotorDelayCounter = 0;
 int LTurnCounter = 0;
 int RTurnCounter = 0;
@@ -5063,10 +5062,10 @@ int ABS(int);
 
 void interrupt high_isr(void)
 
-# 109
+# 108
 {
 
-# 119
+# 118
 if(INTCONbits.TMR0IF == 1)
 {
 if(MotorDelayCounter > 2)
@@ -5079,16 +5078,11 @@ ignoreControll = 0;
 }
 
 }
-else if (ignoreFControll > 0){
-FrontController();
-if (sensorValue[3] > 480 - 50 && sensorValue[2] > 480 - 50){
-ignoreFControll = 0;
-}
-}
+
 else if (ForwardCounter > 0) {
 forward();
 
-# 145
+# 139
 }
 
 else if (ReverseCounter > 0) {
@@ -5100,7 +5094,10 @@ else if(RotateCounter > 0) {
 if ((sensorValue[2] > 800 || sensorValue[3] > 800)) {
 ReverseCounter = 15;
 Reversing();
-} else {
+}
+else if(sensorValue[2] < 100 && sensorValue[3] < 100)
+RotateCounter = 20;
+else{
 rotate(rotatingSide);
 TurnRight = 0;
 TurnLeft = 0;
@@ -5149,15 +5146,15 @@ rotatingSide = LEFT;
 justTurned = 1;
 }
 
-
-else if ((sensorValue[0] > 95 && sensorValue[1] > 95) && sensorValue[3] < 100 && sensorValue[2] < 100 ) {
+else if ((sensorValue[0] > 95 && sensorValue[1] > 95)
+&& sensorValue[3] < 100 && sensorValue[2] < 100 ) {
 
 KController();
 justTurned = 0;
 
 }
 
-# 218
+# 214
 else {
 motorCounterUpdate(RIGHT,0);
 motorCounterUpdate(LEFT,0);
@@ -5180,10 +5177,10 @@ INTCONbits.TMR0IF = 0;
 
 void low_priority interrupt low_isr(void)
 
-# 246
+# 242
 {
 
-# 273
+# 269
 }
 
 void motorCounterUpdate(Side side, unsigned char reverse)
@@ -5284,40 +5281,6 @@ ignoreControll = 10;
 }
 
 
-void FrontController() {
-int diff2 = ABS(sensorValue[3] - sensorValue[2]);
-Side correctTo;
-
-if(ignoreFControll > 0)
-{
-motorCounterUpdate(RIGHT,0);
-motorCounterUpdate(LEFT,0);
-ignoreFControll--;
-return;
-}
-
-if(sensorValue[2] > sensorValue[3])
-{
-
-correctTo = LEFT;
-motorCounterUpdate(correctTo,0);
-}
-else
-{
-
-correctTo = RIGHT;
-motorCounterUpdate(correctTo,0);
-}
-
-if(diff2 > 60)
-ignoreFControll = 1;
-else if(diff2 <= 60 && diff2 > 20)
-ignoreFControll = 3;
-else
-ignoreFControll = 10;
-}
-
-
 
 void rotate(Side side)
 {
@@ -5350,7 +5313,7 @@ motorCounterUpdate(LEFT,1);
 ReverseCounter--;
 }
 
-# 453
+# 415
 void forward()
 {
 motorCounterUpdate(RIGHT,0);

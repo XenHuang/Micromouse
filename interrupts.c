@@ -46,8 +46,8 @@
 // Higher the value the closer
 #define FRONTHASWALL 480         // 2,3 senses distance further than this makes left/right turn
 #define FRONTWALLMAX2 800         // 2,3 senses distance closer than this then reverse
-#define RIGHTHASWALL 95
-#define LEFTHASWALL 95
+#define RIGHTHASWALL 75
+#define LEFTHASWALL 80
 
 #define IDEALFRONT 475
 
@@ -120,38 +120,27 @@ void high_isr(void)
             if(MotorDelayCounter > MOTORDELAYMAX)
             {
                 //Continue rotation
-               if(ignoreControll > 0){   
-                     KController();
-                     if (sensorValue[RIGHTFRONTSENSOR] > 100 && sensorValue[LEFTFRONTSENSOR] > 100){
-                         ignoreControll = 0;
-                     }
-     
-                }
-
-               else if (ForwardCounter > 0) {   //keep forwarding until counter goes to 0
+                if(ForwardCounter >0)
                     forward();
-//                    while (ForwardCounter == 1 && (sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL)) {
-//                        FrontController();
-//                        if (ABS(sensorValue[LEFTFRONTSENSOR] - sensorValue[RIGHTFRONTSENSOR]) <= 4 ){
-//                            ForwardCounter = 0;
-//                        }
-//                    }
-                }
-                
                 else if (ReverseCounter > 0) {    //keep reversing until counter goes to 0
-					Reversing();
+			Reversing();
                 }
-                
                 else if(RotateCounter > 0) {     //keep rotating until counter goes to 0
                     // If front left or front right has a wall closer than 800, reverse 15 steps
                     if ((sensorValue[LEFTFRONTSENSOR] > FRONTWALLMAX2 || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMAX2)) {
                         ReverseCounter = REVERSEFACTOR;
                         Reversing();
-                    } else {  //else rotate which side?
+                    }
+                    else if(sensorValue[LEFTFRONTSENSOR] < 100 && sensorValue[RIGHTFRONTSENSOR] < 100)  //else rotate which side?
+                    {
+                        RotateCounter = 20;
+                        rotate(rotatingSide);
+                    }
+                    else{
                     rotate(rotatingSide);
                     TurnRight = 0;
                     TurnLeft = 0;
-                      }
+                    }
                 }
                 
                 else if (TurnLeft == 1){
@@ -160,15 +149,21 @@ void high_isr(void)
                        justTurned = 1;   //enable just turned.
                        TurnLeft = 0;
 				}
-                
+
                 else if (TurnRight == 1 && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL - 40 && sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL - 40) {
-                     RotateCounter = ROTATE90;          
+                     RotateCounter = ROTATE90;
                      rotatingSide = RIGHT;
                      justTurned = 1;
                      TurnRight = 0;
                 }
+                else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL)
+                        && sensorValue[RIGHTFRONTSENSOR] < 420 && sensorValue[LEFTFRONTSENSOR] < 420 ) { //use 100 NOT WORKING
 
-				else if (sensorValue[LEFTSENSOR] < LEFTHASWALL && algorithm == LEFTWALL) {   // Always left turn if left sensor senses less than 70 in upper left direc
+                    KController();
+                         justTurned = 0;
+
+                }
+		else if (sensorValue[LEFTSENSOR] < LEFTHASWALL && algorithm == LEFTWALL) {   // Always left turn if left sensor senses less than 70 in upper left direc
                     TurnLeft = 1;
                     if(justTurned == 0) { //if just rotate, forward lower step of 380.
                     ForwardCounter = LEFTFORWARDFACTOR;
@@ -177,8 +172,8 @@ void high_isr(void)
                     }
                     forward();   //forward with given forward factor
                 }
-                
-				else if (sensorValue[RIGHTSENSOR] < RIGHTHASWALL && sensorValue[LEFTSENSOR] > LEFTHASWALL && algorithm == LEFTWALL)   {
+
+		else if (sensorValue[RIGHTSENSOR] < RIGHTHASWALL && sensorValue[LEFTSENSOR] > LEFTHASWALL && algorithm == LEFTWALL)   {
                     TurnRight = 1;
                     if(justTurned == 0) { //if just rotate, forward lower step of 380.
                     ForwardCounter = RIGHTFORWARDFACTOR;
@@ -187,27 +182,16 @@ void high_isr(void)
                     }
                     forward();
                 }
-                
+
                 else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL )
-                        && (sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL && sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL) && RotateCounter <= 0) 
+                        && (sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL && sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL) && RotateCounter <= 0)
 				{	// 3 walls
                     RotateCounter = ROTATE90*2;
                     rotatingSide = LEFT;
-                    justTurned = 1;                
-                } 
-                
-                else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL) && sensorValue[RIGHTFRONTSENSOR] < 100 && sensorValue[LEFTFRONTSENSOR] < 100 ) {
-                  
-                    KController();
-                         justTurned = 0;
-                    
+                    justTurned = 1;
                 }
-//                    else {
-//                         motorCounterUpdate(RIGHT,0);
-//                         motorCounterUpdate(LEFT,0);
-//                    }                        
-//                }
-               else {
+
+                else {
                     motorCounterUpdate(RIGHT,0);
                     motorCounterUpdate(LEFT,0);
                     justTurned = 0;
@@ -346,6 +330,7 @@ void KController()
     {
         correctTo = LEFT;
         motorCounterUpdate(correctTo,0);
+
     }
     else
     {
