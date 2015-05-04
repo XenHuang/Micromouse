@@ -47,12 +47,12 @@
 #define FRONTHASWALL 480         // 2,3 senses distance further than this makes left/right turn
 #define FRONTWALLMAX2 800         // 2,3 senses distance closer than this then reverse
 #define RIGHTHASWALL 95
-#define LEFTHASWALL 95
+#define LEFTHASWALL 110      //the higher, higher chance to turn, more errors tho
 
 #define IDEALFRONT 475
 
-#define KCONTROLLERMAX 60        // Maximum diff bettween 0,1 sensors value
-#define KCONTROLLERMID 20
+#define KCONTROLLERMAX 30        // Maximum diff bettween 0,1 sensors value
+#define KCONTROLLERMID 10
 #define KCONTROLLERSTEP 10
 #define KCONTROLLERSTEPMID 3
 #define KCONTROLLERSTEPMAX 1
@@ -61,6 +61,9 @@ typedef enum {LEFT,RIGHT} Side;
 unsigned char LMotorCounter = 0;
 unsigned char RMotorCounter = 0;
 unsigned char ignoreControll = KCONTROLLERSTEP;
+unsigned char deadEnd = 0;
+int controlToLeft = 0;
+int controlToRight = 0;
 int MotorDelayCounter = 0;
 int LTurnCounter = 0;
 int RTurnCounter = 0;
@@ -120,22 +123,20 @@ void high_isr(void)
             if(MotorDelayCounter > MOTORDELAYMAX)
             {
                 //Continue rotation
-               if(ignoreControll > 0){   
-                     KController();
-                     if (sensorValue[RIGHTFRONTSENSOR] > 100 && sensorValue[LEFTFRONTSENSOR] > 100){
-                         ignoreControll = 0;
-                     }
-     
-                }
-
-               else if (ForwardCounter > 0) {   //keep forwarding until counter goes to 0
-                    forward();
-//                    while (ForwardCounter == 1 && (sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL)) {
-//                        FrontController();
-//                        if (ABS(sensorValue[LEFTFRONTSENSOR] - sensorValue[RIGHTFRONTSENSOR]) <= 4 ){
-//                            ForwardCounter = 0;
-//                        }
-//                    }
+                if(controlToLeft > 0 || controlToRight > 0 || ForwardCounter > 0)
+                {
+                    KController();
+                    
+                    if(controlToLeft > 0 )
+                    {
+                        motorCounterUpdate(RIGHT,0);
+                        controlToLeft--;
+                    } else if(controlToRight > 0){
+                        motorCounterUpdate(LEFT,0);
+                        controlToRight--;
+                    } else {
+                        forward();
+                    }
                 }
                 
                 else if (ReverseCounter > 0) {    //keep reversing until counter goes to 0
@@ -148,6 +149,8 @@ void high_isr(void)
                         ReverseCounter = REVERSEFACTOR;
                         Reversing();
                     } else {  //else rotate which side?
+                        if(sensorValue[LEFTFRONTSENSOR] < 200 && sensorValue[RIGHTFRONTSENSOR] < 200 && deadEnd == 1)
+                            RotateCounter = 1;
                     rotate(rotatingSide);
                     TurnRight = 0;
                     TurnLeft = 0;
@@ -159,16 +162,19 @@ void high_isr(void)
                        rotatingSide = LEFT;
                        justTurned = 1;   //enable just turned.
                        TurnLeft = 0;
+                       deadEnd = 0;
 				}
-                
-                else if (TurnRight == 1 && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL - 40 && sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL - 40) {
-                     RotateCounter = ROTATE90;          
+
+                else if (TurnRight == 1 
+                        && sensorValue[RIGHTFRONTSENSOR] > 400 || sensorValue[LEFTFRONTSENSOR] > 400) {
+                     RotateCounter = ROTATE90;
                      rotatingSide = RIGHT;
                      justTurned = 1;
                      TurnRight = 0;
+                     deadEnd = 0;
                 }
 
-				else if (sensorValue[LEFTSENSOR] < LEFTHASWALL && algorithm == LEFTWALL) {   // Always left turn if left sensor senses less than 70 in upper left direc
+                  else if (sensorValue[LEFTSENSOR] < LEFTHASWALL && algorithm == LEFTWALL) {   // Always left turn if left sensor senses less than 70 in upper left direc
                     TurnLeft = 1;
                     if(justTurned == 0) { //if just rotate, forward lower step of 380.
                     ForwardCounter = LEFTFORWARDFACTOR;
@@ -177,8 +183,8 @@ void high_isr(void)
                     }
                     forward();   //forward with given forward factor
                 }
-                
-				else if (sensorValue[RIGHTSENSOR] < RIGHTHASWALL && sensorValue[LEFTSENSOR] > LEFTHASWALL && algorithm == LEFTWALL)   {
+
+		else if (sensorValue[RIGHTSENSOR] < RIGHTHASWALL && sensorValue[LEFTSENSOR] > LEFTHASWALL)   {
                     TurnRight = 1;
                     if(justTurned == 0) { //if just rotate, forward lower step of 380.
                     ForwardCounter = RIGHTFORWARDFACTOR;
@@ -189,24 +195,22 @@ void high_isr(void)
                 }
                 
                 else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL )
-                        && (sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL && sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL) && RotateCounter <= 0) 
-				{	// 3 walls
+                        && (sensorValue[RIGHTFRONTSENSOR] > 480 && sensorValue[LEFTFRONTSENSOR] > 480) && RotateCounter <= 0)
+		{	// 3 walls
                     RotateCounter = ROTATE90*2;
                     rotatingSide = LEFT;
-                    justTurned = 1;                
-                } 
+                    justTurned = 1;
+                    deadEnd = 1;
+                }
                 
-                else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL) && sensorValue[RIGHTFRONTSENSOR] < 100 && sensorValue[LEFTFRONTSENSOR] < 100 ) {
+                else if ((sensorValue[LEFTSENSOR] > 250 || sensorValue[RIGHTSENSOR] > 250)
+                        && (sensorValue[RIGHTFRONTSENSOR] < 251 && sensorValue[LEFTFRONTSENSOR] < 251))
+                {
                   
                     KController();
                          justTurned = 0;
                     
                 }
-//                    else {
-//                         motorCounterUpdate(RIGHT,0);
-//                         motorCounterUpdate(LEFT,0);
-//                    }                        
-//                }
                else {
                     motorCounterUpdate(RIGHT,0);
                     motorCounterUpdate(LEFT,0);
@@ -330,35 +334,26 @@ int ABS(int x)
 
 
 void KController()
-{  
-    Side correctTo;
-    int diff = 0;
-    if(ignoreControll > 0){   
-        motorCounterUpdate(RIGHT,0);
-        motorCounterUpdate(LEFT,0);
-        ignoreControll--;
-        return;
-    }
-    
-    diff = ABS(sensorValue[RIGHTSENSOR] - sensorValue[LEFTSENSOR]);
-       // errorD = errorP - oldErrorP;
-    if(sensorValue[LEFTSENSOR] > sensorValue[RIGHTSENSOR])
+{
+    if(sensorValue[LEFTFRONTSENSOR] > 251 && sensorValue[RIGHTFRONTSENSOR] > 251 &&
+        sensorValue[LEFTFRONTSENSOR] < 550 && sensorValue[RIGHTFRONTSENSOR] > 550    )
     {
-        correctTo = LEFT;
-        motorCounterUpdate(correctTo,0);
-    }
-    else
+        if(sensorValue[LEFTFRONTSENSOR]>sensorValue[RIGHTFRONTSENSOR])
+            controlToLeft = 1;
+        else
+            controlToRight = 1;
+
+    } else if(sensorValue[LEFTFRONTSENSOR] < 251 && sensorValue[RIGHTFRONTSENSOR] < 251 )
     {
-        correctTo = RIGHT;
-        motorCounterUpdate(correctTo,0);
+
+        if(sensorValue[LEFTSENSOR] > 250)
+        {
+            controlToRight = 30;
+        } else if(sensorValue[RIGHTSENSOR] > 250)
+        {
+            controlToLeft = 30;
+        }
     }
-    
-    if(diff > KCONTROLLERMAX)    
-        ignoreControll = KCONTROLLERSTEPMAX;
-    else if(diff <= KCONTROLLERMAX && diff > KCONTROLLERMID)
-        ignoreControll = KCONTROLLERSTEPMID;
-    else
-        ignoreControll = KCONTROLLERSTEP;
 }
 
 

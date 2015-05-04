@@ -46,6 +46,8 @@ void main(void)
     /* Initialize I/O and Peripherals for application */
     InitApp();
     sensorUpdate(1);
+    sensorUpdate(1);
+    sensorUpdate(1);
     setCorrection();
     INTCONbits.GIE = 1;
     while(1)
