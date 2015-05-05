@@ -34,6 +34,7 @@
 #define REVERSEFACTOR 15         //factor that helps correct the 180 turn
 #define FORWARDFACTOR 320          //factor that helps forward till 90 degree turn
 #define FORWARDFACTORAFTERTURN 50         //factor that helps forward till 90 degree turn
+#define FORWARDFACTOR2 440
 
 #define CONTROLLERFACTOR 3
 
@@ -83,6 +84,8 @@ int totalError = 0;
 int TurnedRight = 0;
 int TurnedLeft = 0;
 int Deadend = 0;
+int TurnLeftAgain = 0;
+int Forwarded = 0;
 
 
 
@@ -152,33 +155,80 @@ void high_isr(void)
 //                     //   ReverseCounter = REVERSEFACTOR;
 ////                        Reversing();
 //                    } else {  //else rotate which side?
-                        if(sensorValue[LEFTFRONTSENSOR] < 100 && sensorValue[RIGHTFRONTSENSOR] < 100 && deadEnd == 1)
-                            RotateCounter = 5;
+                    if(sensorValue[LEFTFRONTSENSOR] < 100 && sensorValue[RIGHTFRONTSENSOR] < 100 && deadEnd == 1)
+                            RotateCounter = 3;
                     rotate(rotatingSide);
                     if(RotateCounter == 0)
-                        ForwardCounter = FORWARDFACTORAFTERTURN;
+                    ForwardCounter = FORWARDFACTORAFTERTURN;
                     TurnRight = 0;
                     TurnLeft = 0;
                       
                 }
-                
-                else if (TurnLeft == 1) {
+                else if (TurnLeft == 1 && sensorValue[LEFTSENSOR] < LEFTHASWALL) {
                        RotateCounter = ROTATE90;
                        rotatingSide = LEFT;
                        justTurned = 1;   //enable just turned.
                        TurnLeft = 0;
                        deadEnd = 0;
 				}
+                
+                else if (TurnLeftAgain == 1 && sensorValue[LEFTSENSOR] < LEFTHASWALL && (TurnRight == 0 || TurnRight != 0) ) {
+                       RotateCounter = ROTATE90;
+                       rotatingSide = LEFT;
+                       justTurned = 1;   //enable just turned.
+                       TurnLeft = 0;
+                       deadEnd = 0;
+                       TurnLeftAgain = 0;
+				}
+                 else if (sensorValue[LEFTSENSOR] < LEFTHASWALL && TurnRight == 1)  {
+                       RotateCounter = ROTATE90;
+                       rotatingSide = LEFT;
+                       justTurned = 1;   //enable just turned.
+                       TurnLeft = 0;
+                       deadEnd = 0;
+                       TurnLeftAgain = 0;
+				}
+                else if (TurnRight == 1 && sensorValue[LEFTSENSOR] < LEFTHASWALL && TurnLeftAgain != 1){
+                    TurnLeftAgain = 1;
+                    if(justTurned == 0) { //if just rotate, forward lower step of 380.
+                    ForwardCounter = FORWARDFACTORAFTERTURN + 40;
+                    }else {  //if not just rotate, forward step of 420.
+                    ForwardCounter = FORWARDFACTORAFTERTURN;
+                    }
+                    forward();   //forward with given forward factor
+                }
+
 
                 else if (TurnRight == 1
-                        && (sensorValue[RIGHTFRONTSENSOR] > 400 && sensorValue[LEFTFRONTSENSOR] > 400) && sensorValue[LEFTSENSOR] > LEFTHASWALL) {
+                        && (sensorValue[RIGHTFRONTSENSOR] > 250 && sensorValue[LEFTFRONTSENSOR] > 250) && sensorValue[LEFTSENSOR] > LEFTHASWALL) {
                      RotateCounter = ROTATE90;
                      rotatingSide = RIGHT;
                      justTurned = 1;
                      TurnRight = 0;
                      deadEnd = 0;
                 }
-                else if (TurnRight == 1 && sensorValue[LEFTSENSOR] < LEFTHASWALL){
+//                else if (TurnRight == 1 && sensorValue[LEFTSENSOR] > LEFTHASWALL  && (sensorValue[RIGHTFRONTSENSOR] < 250 && sensorValue[LEFTFRONTSENSOR] < 250)) {
+//                    justTurned = 0;
+//                    TurnRight = 0;
+//                    if(justTurned == 0) { 
+//                     ForwardCounter = FORWARDFACTOR2;
+//                    }else {  //if not just rotate, forward step of 420.
+//                    ForwardCounter = FORWARDFACTORAFTERTURN;
+//                    }
+//                    forward();   //forward with given forward factor
+//                }
+//                else if (TurnRight == 1 && sensorValue[LEFTSENSOR] < LEFTHASWALL){
+//                    TurnLeftAgain = 1;
+//                    TurnRight = 0;
+//                    if(justTurned == 0) { //if just rotate, forward lower step of 380.
+//                    ForwardCounter = FORWARDFACTOR;
+//                    }else {  //if not just rotate, forward step of 420.
+//                    ForwardCounter = FORWARDFACTORAFTERTURN;
+//                    }
+//                    forward();   //forward with given forward factor
+//                }
+
+                else if (sensorValue[LEFTSENSOR] < LEFTHASWALL && TurnRight != 1) {   // Always left turn if left sensor senses less than 70 in upper left direc
                     TurnLeft = 1;
                     if(justTurned == 0) { //if just rotate, forward lower step of 380.
                     ForwardCounter = FORWARDFACTOR;
@@ -188,33 +238,28 @@ void high_isr(void)
                     forward();   //forward with given forward factor
                 }
 
-                else if (sensorValue[LEFTSENSOR] < LEFTHASWALL) {   // Always left turn if left sensor senses less than 70 in upper left direc
-                    TurnLeft = 1;
-                    if(justTurned == 0) { //if just rotate, forward lower step of 380.
+		else if (sensorValue[RIGHTSENSOR] < RIGHTHASWALL && sensorValue[LEFTSENSOR] > LEFTHASWALL && TurnRight == 0)   {
+                    TurnRight = 1;;
+                    if(justTurned == 0 && Forwarded != 1) { //if just rotate, forward lower step of 380.
                     ForwardCounter = FORWARDFACTOR;
-                    }else {  //if not just rotate, forward step of 420.
-                    ForwardCounter = FORWARDFACTORAFTERTURN;
+                    Forwarded = 1;
+                    } else if (Forwarded = 1){
+                        ForwardCounter = FORWARDFACTOR + 90;
                     }
-                    forward();   //forward with given forward factor
-                }
-
-		else if (sensorValue[RIGHTSENSOR] < RIGHTHASWALL && sensorValue[LEFTSENSOR] > LEFTHASWALL)   {
-                    TurnRight = 1;
-                    if(justTurned == 0) { //if just rotate, forward lower step of 380.
-                    ForwardCounter = FORWARDFACTOR;
-                    } else  {  //if not just rotate, forward step of 420.
+                    else  {  //if not just rotate, forward step of 420.
                     ForwardCounter = FORWARDFACTORAFTERTURN;
                     }
                     forward();
                 }
                 
                 else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL )
-                        && (sensorValue[RIGHTFRONTSENSOR] > 450 && sensorValue[LEFTFRONTSENSOR] > 450) && RotateCounter <= 0)
+                        && (sensorValue[RIGHTFRONTSENSOR] > 450 || sensorValue[LEFTFRONTSENSOR] > 450) && RotateCounter <= 0)
 		{	// 3 walls
                     RotateCounter = ROTATE90*2;
                     rotatingSide = LEFT;
                     justTurned = 1;
                     deadEnd = 1;
+                    TurnLeftAgain=0;
                 }
                 
                 else if ((sensorValue[LEFTSENSOR] > SIDENEEDCORRECTION || sensorValue[RIGHTSENSOR] > SIDENEEDCORRECTION)
@@ -231,6 +276,7 @@ void high_isr(void)
                     justTurned = 0;
                     TurnLeft = 0;
                     TurnRight = 0;
+                    TurnLeftAgain = 0;
                }
                 moveMouse(merge(LMotorCounter,RMotorCounter));
                 MotorDelayCounter = 0;       
@@ -349,15 +395,16 @@ int ABS(int x)
 
 void KController()
 {
-    if(sensorValue[LEFTFRONTSENSOR] > 150 && sensorValue[RIGHTFRONTSENSOR] > 150 &&
-        sensorValue[LEFTFRONTSENSOR] < FRONTNEEDCORRECTION && sensorValue[RIGHTFRONTSENSOR] < FRONTNEEDCORRECTION )
-    {
-        if(sensorValue[LEFTFRONTSENSOR] - sensorValue[RIGHTFRONTSENSOR])
-            controlToLeft = 1;
-        else
-            controlToRight = 1;
-
-    } else if(sensorValue[LEFTFRONTSENSOR] < 150 || sensorValue[RIGHTFRONTSENSOR] < 150 )
+//    if(sensorValue[LEFTFRONTSENSOR] > 150 && sensorValue[RIGHTFRONTSENSOR] > 150 &&
+//        sensorValue[LEFTFRONTSENSOR] < 300 && sensorValue[RIGHTFRONTSENSOR] < 300 )
+//    {
+//        if(sensorValue[LEFTFRONTSENSOR] < sensorValue[RIGHTFRONTSENSOR])
+//            controlToLeft = 1;
+//        else
+//            controlToRight = 1;
+//          
+//} else 
+    if(sensorValue[LEFTFRONTSENSOR] < 150 || sensorValue[RIGHTFRONTSENSOR] < 150 )
     {
 
         if(sensorValue[LEFTSENSOR] > SIDENEEDCORRECTION)

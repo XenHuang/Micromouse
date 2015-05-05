@@ -5020,11 +5020,14 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 60 "interrupts.c"
+# 62 "interrupts.c"
 typedef enum {LEFT,RIGHT} Side;
 unsigned char LMotorCounter = 0;
 unsigned char RMotorCounter = 0;
 unsigned char ignoreControll = 10;
+unsigned char deadEnd = 0;
+int controlToLeft = 0;
+int controlToRight = 0;
 int MotorDelayCounter = 0;
 int LTurnCounter = 0;
 int RTurnCounter = 0;
@@ -5043,6 +5046,8 @@ int totalError = 0;
 int TurnedRight = 0;
 int TurnedLeft = 0;
 int Deadend = 0;
+int TurnLeftAgain = 0;
+int Forwarded = 0;
 
 
 
@@ -5062,27 +5067,31 @@ int ABS(int);
 
 void interrupt high_isr(void)
 
-# 108
+# 115
 {
 
-# 118
+# 125
 if(INTCONbits.TMR0IF == 1)
 {
 if(MotorDelayCounter > 2)
 {
 
-if(ignoreControll > 0){
+
+
+if(controlToLeft > 0 || controlToRight > 0 || ForwardCounter > 0)
+{
 KController();
-if (sensorValue[3] > 100 && sensorValue[2] > 100){
-ignoreControll = 0;
-}
 
-}
-
-else if (ForwardCounter > 0) {
+if(controlToLeft > 0 )
+{
+motorCounterUpdate(RIGHT,0);
+controlToLeft--;
+} else if(controlToRight > 0){
+motorCounterUpdate(LEFT,0);
+controlToRight--;
+} else {
 forward();
-
-# 139
+}
 }
 
 else if (ReverseCounter > 0) {
@@ -5091,72 +5100,110 @@ Reversing();
 
 else if(RotateCounter > 0) {
 
-if ((sensorValue[2] > 800 || sensorValue[3] > 800)) {
-ReverseCounter = 15;
-Reversing();
-} else {
+# 158
+if(sensorValue[2] < 100 && sensorValue[3] < 100 && deadEnd == 1)
+RotateCounter = 3;
 rotate(rotatingSide);
+if(RotateCounter == 0)
+ForwardCounter = 50;
 TurnRight = 0;
 TurnLeft = 0;
-}
-}
 
-else if (TurnLeft == 1){
+}
+else if (TurnLeft == 1 && sensorValue[0] < 100) {
 RotateCounter = 170;
 rotatingSide = LEFT;
 justTurned = 1;
 TurnLeft = 0;
+deadEnd = 0;
 }
 
-else if (TurnRight == 1 && sensorValue[3] > 480 - 40 && sensorValue[2] > 480 - 40) {
+else if (TurnLeftAgain == 1 && sensorValue[0] < 100 && (TurnRight == 0 || TurnRight != 0) ) {
+RotateCounter = 170;
+rotatingSide = LEFT;
+justTurned = 1;
+TurnLeft = 0;
+deadEnd = 0;
+TurnLeftAgain = 0;
+}
+else if (sensorValue[0] < 100 && TurnRight == 1) {
+RotateCounter = 170;
+rotatingSide = LEFT;
+justTurned = 1;
+TurnLeft = 0;
+deadEnd = 0;
+TurnLeftAgain = 0;
+}
+else if (TurnRight == 1 && sensorValue[0] < 100 && TurnLeftAgain != 1){
+TurnLeftAgain = 1;
+if(justTurned == 0) {
+ForwardCounter = 50 + 40;
+}else {
+ForwardCounter = 50;
+}
+forward();
+}
+
+
+else if (TurnRight == 1
+&& (sensorValue[3] > 250 && sensorValue[2] > 250) && sensorValue[0] > 100) {
 RotateCounter = 170;
 rotatingSide = RIGHT;
 justTurned = 1;
 TurnRight = 0;
+deadEnd = 0;
 }
 
-else if (sensorValue[0] < 95 && algorithm == LEFTWALL) {
+# 231
+else if (sensorValue[0] < 100 && TurnRight != 1) {
 TurnLeft = 1;
 if(justTurned == 0) {
-ForwardCounter = 450;
+ForwardCounter = 320;
 }else {
-ForwardCounter = 410;
+ForwardCounter = 50;
 }
 forward();
 }
 
-else if (sensorValue[1] < 95 && sensorValue[0] > 95 && algorithm == LEFTWALL) {
-TurnRight = 1;
-if(justTurned == 0) {
-ForwardCounter = 430;
-} else {
-ForwardCounter = 390;
+else if (sensorValue[1] < 100 && sensorValue[0] > 100 && TurnRight == 0) {
+TurnRight = 1;;
+if(justTurned == 0 && Forwarded != 1) {
+ForwardCounter = 320;
+Forwarded = 1;
+} else if (Forwarded = 1){
+ForwardCounter = 320 + 90;
+}
+else {
+ForwardCounter = 50;
 }
 forward();
 }
 
-else if ((sensorValue[0] > 95 && sensorValue[1] > 95 )
-&& (sensorValue[3] > 480 && sensorValue[2] > 480) && RotateCounter <= 0)
+else if ((sensorValue[0] > 100 && sensorValue[1] > 100 )
+&& (sensorValue[3] > 450 || sensorValue[2] > 450) && RotateCounter <= 0)
 {
 RotateCounter = 170*2;
 rotatingSide = LEFT;
 justTurned = 1;
+deadEnd = 1;
+TurnLeftAgain=0;
 }
 
-else if ((sensorValue[0] > 95 && sensorValue[1] > 95) && sensorValue[3] < 100 && sensorValue[2] < 100 ) {
+else if ((sensorValue[0] > 400 || sensorValue[1] > 400)
+&& (sensorValue[3] < 200 && sensorValue[2] < 200))
+{
 
 KController();
 justTurned = 0;
 
 }
-
-# 210
 else {
 motorCounterUpdate(RIGHT,0);
 motorCounterUpdate(LEFT,0);
 justTurned = 0;
 TurnLeft = 0;
 TurnRight = 0;
+TurnLeftAgain = 0;
 }
 moveMouse(merge(LMotorCounter,RMotorCounter));
 MotorDelayCounter = 0;
@@ -5173,10 +5220,10 @@ INTCONbits.TMR0IF = 0;
 
 void low_priority interrupt low_isr(void)
 
-# 238
+# 302
 {
 
-# 265
+# 329
 }
 
 void motorCounterUpdate(Side side, unsigned char reverse)
@@ -5246,34 +5293,19 @@ return x;
 
 void KController()
 {
-Side correctTo;
-int diff = 0;
-if(ignoreControll > 0){
-motorCounterUpdate(RIGHT,0);
-motorCounterUpdate(LEFT,0);
-ignoreControll--;
-return;
-}
 
-diff = ABS(sensorValue[1] - sensorValue[0]);
-
-if(sensorValue[0] > sensorValue[1])
+# 407
+if(sensorValue[2] < 150 || sensorValue[3] < 150 )
 {
-correctTo = LEFT;
-motorCounterUpdate(correctTo,0);
-}
-else
-{
-correctTo = RIGHT;
-motorCounterUpdate(correctTo,0);
-}
 
-if(diff > 60)
-ignoreControll = 1;
-else if(diff <= 60 && diff > 20)
-ignoreControll = 3;
-else
-ignoreControll = 10;
+if(sensorValue[0] > 400)
+{
+controlToRight = 30;
+} else if(sensorValue[1] > 400)
+{
+controlToLeft = 30;
+}
+}
 }
 
 
@@ -5309,10 +5341,12 @@ motorCounterUpdate(LEFT,1);
 ReverseCounter--;
 }
 
-# 411
+# 467
 void forward()
 {
 motorCounterUpdate(RIGHT,0);
 motorCounterUpdate(LEFT,0);
 ForwardCounter--;
+if(ForwardCounter == 0)
+justTurned = 0;
 }

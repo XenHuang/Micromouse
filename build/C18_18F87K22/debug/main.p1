@@ -3870,29 +3870,35 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 48: sensorUpdate(1);
 "48
 [e ( _sensorUpdate (1 -> -> 1 `i `uc ]
-[; ;main.c: 49: setCorrection();
+[; ;main.c: 49: sensorUpdate(1);
 "49
-[e ( _setCorrection ..  ]
-[; ;main.c: 50: INTCONbits.GIE = 1;
+[e ( _sensorUpdate (1 -> -> 1 `i `uc ]
+[; ;main.c: 50: sensorUpdate(1);
 "50
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;main.c: 51: while(1)
+[e ( _sensorUpdate (1 -> -> 1 `i `uc ]
+[; ;main.c: 51: setCorrection();
 "51
-[e :U 399 ]
-[; ;main.c: 52: {
+[e ( _setCorrection ..  ]
+[; ;main.c: 52: INTCONbits.GIE = 1;
 "52
-{
-[; ;main.c: 53: sensorUpdate(0);
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;main.c: 53: while(1)
 "53
-[e ( _sensorUpdate (1 -> -> 0 `i `uc ]
+[e :U 399 ]
+[; ;main.c: 54: {
 "54
+{
+[; ;main.c: 55: sensorUpdate(0);
+"55
+[e ( _sensorUpdate (1 -> -> 0 `i `uc ]
+"56
 }
 [e :U 398 ]
-"51
+"53
 [e $U 399  ]
 [e :U 400 ]
-[; ;main.c: 54: }
 [; ;main.c: 56: }
-"56
+[; ;main.c: 58: }
+"58
 [e :UE 397 ]
 }
