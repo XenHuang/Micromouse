@@ -154,7 +154,14 @@ void sensorComputation(int sensorTemp[][SENSORCOMPUTATION],unsigned char getCorr
         if(getCorrection == 1)
             sensorValue[i] = sum/(SENSORCOMPUTATION-2);   
         else
+        {
             sensorValue[i] = sum/(SENSORCOMPUTATION-2) + sensorCorrection[i];
+            if( i == 3)
+            {
+                if(sensorValue[i] > 350 && sensorValue[i] <= 450) sensorValue[i] = sensorValue[i] - 40;
+                else if(sensorValue[i] > 450) sensorValue[i] = sensorValue[i] - 60;
+            }
+        }
     }
 }
 

@@ -3958,12 +3958,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.c: 132: sensorCorrection[1] = sideAvg - sensorValue[1];
 "132
 [e = *U + &U _sensorCorrection * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _sideAvg *U + &U _sensorValue * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
-[; ;user.c: 133: sensorCorrection[2] = sideAvg - sensorValue[2];
+[; ;user.c: 133: sensorCorrection[2] = frontAvg - sensorValue[2];
 "133
-[e = *U + &U _sensorCorrection * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _sideAvg *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
-[; ;user.c: 134: sensorCorrection[3] = sideAvg - sensorValue[3];
+[e = *U + &U _sensorCorrection * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _frontAvg *U + &U _sensorValue * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[; ;user.c: 134: sensorCorrection[3] = frontAvg - sensorValue[3];
 "134
-[e = *U + &U _sensorCorrection * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _sideAvg *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
+[e = *U + &U _sensorCorrection * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux - _frontAvg *U + &U _sensorValue * -> -> -> 3 `i `ui `ux -> -> # *U &U _sensorValue `ui `ux ]
 [; ;user.c: 135: }
 "135
 [e :UE 403 ]
@@ -4056,152 +4056,180 @@ Version 3.2 HI-TECH Software Intermediate Code
 "156
 [e :U 412 ]
 [; ;user.c: 156: else
-[; ;user.c: 157: sensorValue[i] = sum/(10-2) + sensorCorrection[i];
+[; ;user.c: 157: {
 "157
-[e = *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux + / _sum - -> 10 `i -> 2 `i *U + &U _sensorCorrection * -> -> _i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux ]
-[e :U 413 ]
+{
+[; ;user.c: 158: sensorValue[i] = sum/(10-2) + sensorCorrection[i];
 "158
+[e = *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux + / _sum - -> 10 `i -> 2 `i *U + &U _sensorCorrection * -> -> _i `ui `ux -> -> # *U &U _sensorCorrection `ui `ux ]
+[; ;user.c: 159: if( i == 3)
+"159
+[e $ ! == _i -> 3 `i 414  ]
+[; ;user.c: 160: {
+"160
+{
+[; ;user.c: 161: if(sensorValue[i] > 350 && sensorValue[i] <= 450) sensorValue[i] = sensorValue[i] - 40;
+"161
+[e $ ! && > *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 350 `i <= *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 450 `i 415  ]
+[e = *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux - *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 40 `i ]
+[e $U 416  ]
+"162
+[e :U 415 ]
+[; ;user.c: 162: else if(sensorValue[i] > 450) sensorValue[i] = sensorValue[i] - 60;
+[e $ ! > *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 450 `i 417  ]
+[e = *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux - *U + &U _sensorValue * -> -> _i `ui `ux -> -> # *U &U _sensorValue `ui `ux -> 60 `i ]
+[e :U 417 ]
+"163
+[e :U 416 ]
+}
+[e :U 414 ]
+"164
+}
+[e :U 413 ]
+"165
 }
 "140
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 4 `i 405  ]
 [e :U 406 ]
-"158
+"165
 }
-[; ;user.c: 158: }
-[; ;user.c: 159: }
-"159
+[; ;user.c: 163: }
+[; ;user.c: 164: }
+[; ;user.c: 165: }
+[; ;user.c: 166: }
+"166
 [e :UE 404 ]
 }
-"161
+"168
 [v _sensorUpdate `(v ~T0 @X0 1 ef1`uc ]
-"162
+"169
 {
-[; ;user.c: 161: void sensorUpdate(unsigned char getCorrection)
-[; ;user.c: 162: {
+[; ;user.c: 168: void sensorUpdate(unsigned char getCorrection)
+[; ;user.c: 169: {
 [e :U _sensorUpdate ]
-"161
+"168
 [v _getCorrection `uc ~T0 @X0 1 r1 ]
-"162
+"169
 [f ]
-"163
+"170
 [v _i `i ~T0 @X0 1 a ]
 [v _j `i ~T0 @X0 1 a ]
 [v F4103 `i ~T0 @X0 -> 10 `i t ]
-"164
+"171
 [v _sensorTemp `F4103 ~T0 @X0 -> 4 `i a ]
-[; ;user.c: 163: int i,j;
-[; ;user.c: 164: int sensorTemp[4][10];
-[; ;user.c: 167: for(i = 0; i < 10; i++)
-"167
+[; ;user.c: 170: int i,j;
+[; ;user.c: 171: int sensorTemp[4][10];
+[; ;user.c: 174: for(i = 0; i < 10; i++)
+"174
 {
 [e = _i -> 0 `i ]
-[e $ < _i -> 10 `i 415  ]
-[e $U 416  ]
-"168
-[e :U 415 ]
-[; ;user.c: 168: {
+[e $ < _i -> 10 `i 419  ]
+[e $U 420  ]
+"175
+[e :U 419 ]
+[; ;user.c: 175: {
 {
-[; ;user.c: 169: for(j = 0 ; j < 4 ; j++)
-"169
+[; ;user.c: 176: for(j = 0 ; j < 4 ; j++)
+"176
 {
 [e = _j -> 0 `i ]
-[e $ < _j -> 4 `i 418  ]
-[e $U 419  ]
-"170
-[e :U 418 ]
-[; ;user.c: 170: {
-{
-[; ;user.c: 171: ADCON0 = sensorLocation[j];
-"171
-[e = _ADCON0 *U + &U _sensorLocation * -> -> _j `ui `ux -> -> # *U &U _sensorLocation `ui `ux ]
-[; ;user.c: 173: ADCON0bits.GO_DONE = 1;
-"173
-[e = . . _ADCON0bits 7 1 -> -> 1 `i `uc ]
-[; ;user.c: 174: while(ADCON0bits.GO_DONE != 0);
-"174
-[e $U 421  ]
+[e $ < _j -> 4 `i 422  ]
+[e $U 423  ]
+"177
 [e :U 422 ]
-[e :U 421 ]
-[e $ != -> . . _ADCON0bits 7 1 `i -> 0 `i 422  ]
-[e :U 423 ]
-[; ;user.c: 175: sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
-"175
-[e = *U + &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux * -> -> _i `ui `ux -> -> # *U &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux `ui `ux + << -> _ADRESH `i -> 2 `i >> -> _ADRESL `i -> 6 `i ]
-"176
-}
-"169
-[e ++ _j -> 1 `i ]
-[e $ < _j -> 4 `i 418  ]
-[e :U 419 ]
-"176
-}
-"177
-}
-"167
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10 `i 415  ]
-[e :U 416 ]
-"177
-}
-[; ;user.c: 176: }
-[; ;user.c: 177: }
-[; ;user.c: 180: sensorComputation(sensorTemp,getCorrection);
+[; ;user.c: 177: {
+{
+[; ;user.c: 178: ADCON0 = sensorLocation[j];
+"178
+[e = _ADCON0 *U + &U _sensorLocation * -> -> _j `ui `ux -> -> # *U &U _sensorLocation `ui `ux ]
+[; ;user.c: 180: ADCON0bits.GO_DONE = 1;
 "180
-[e ( _sensorComputation (2 , &U _sensorTemp _getCorrection ]
-[; ;user.c: 182: }
-"182
-[e :UE 414 ]
-}
-"184
-[v _MIN `(i ~T0 @X0 1 ef2`i`i ]
-"185
-{
-[; ;user.c: 184: int MIN(int a,int b)
-[; ;user.c: 185: {
-[e :U _MIN ]
-"184
-[v _a `i ~T0 @X0 1 r1 ]
-[v _b `i ~T0 @X0 1 r2 ]
-"185
-[f ]
-[; ;user.c: 186: if(a>b) return b;
-"186
-[e $ ! > _a _b 425  ]
-[e ) _b ]
-[e $UE 424  ]
+[e = . . _ADCON0bits 7 1 -> -> 1 `i `uc ]
+[; ;user.c: 181: while(ADCON0bits.GO_DONE != 0);
+"181
+[e $U 425  ]
+[e :U 426 ]
 [e :U 425 ]
-[; ;user.c: 187: return a;
-"187
-[e ) _a ]
-[e $UE 424  ]
-[; ;user.c: 188: }
-"188
-[e :UE 424 ]
+[e $ != -> . . _ADCON0bits 7 1 `i -> 0 `i 426  ]
+[e :U 427 ]
+[; ;user.c: 182: sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
+"182
+[e = *U + &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux * -> -> _i `ui `ux -> -> # *U &U *U + &U _sensorTemp * -> -> _j `ui `ux -> * -> # *U &U *U &U _sensorTemp `ui -> -> 10 `i `ui `ux `ui `ux + << -> _ADRESH `i -> 2 `i >> -> _ADRESL `i -> 6 `i ]
+"183
 }
-"190
-[v _MAX `(i ~T0 @X0 1 ef2`i`i ]
+"176
+[e ++ _j -> 1 `i ]
+[e $ < _j -> 4 `i 422  ]
+[e :U 423 ]
+"183
+}
+"184
+}
+"174
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 10 `i 419  ]
+[e :U 420 ]
+"184
+}
+[; ;user.c: 183: }
+[; ;user.c: 184: }
+[; ;user.c: 187: sensorComputation(sensorTemp,getCorrection);
+"187
+[e ( _sensorComputation (2 , &U _sensorTemp _getCorrection ]
+[; ;user.c: 189: }
+"189
+[e :UE 418 ]
+}
 "191
+[v _MIN `(i ~T0 @X0 1 ef2`i`i ]
+"192
 {
-[; ;user.c: 190: int MAX(int a, int b)
-[; ;user.c: 191: {
-[e :U _MAX ]
-"190
+[; ;user.c: 191: int MIN(int a,int b)
+[; ;user.c: 192: {
+[e :U _MIN ]
+"191
 [v _a `i ~T0 @X0 1 r1 ]
 [v _b `i ~T0 @X0 1 r2 ]
-"191
-[f ]
-[; ;user.c: 192: if(a>b) return a;
 "192
-[e $ ! > _a _b 427  ]
-[e ) _a ]
-[e $UE 426  ]
-[e :U 427 ]
-[; ;user.c: 193: return b;
+[f ]
+[; ;user.c: 193: if(a>b) return b;
 "193
+[e $ ! > _a _b 429  ]
 [e ) _b ]
-[e $UE 426  ]
-[; ;user.c: 194: }
+[e $UE 428  ]
+[e :U 429 ]
+[; ;user.c: 194: return a;
 "194
-[e :UE 426 ]
+[e ) _a ]
+[e $UE 428  ]
+[; ;user.c: 195: }
+"195
+[e :UE 428 ]
+}
+"197
+[v _MAX `(i ~T0 @X0 1 ef2`i`i ]
+"198
+{
+[; ;user.c: 197: int MAX(int a, int b)
+[; ;user.c: 198: {
+[e :U _MAX ]
+"197
+[v _a `i ~T0 @X0 1 r1 ]
+[v _b `i ~T0 @X0 1 r2 ]
+"198
+[f ]
+[; ;user.c: 199: if(a>b) return a;
+"199
+[e $ ! > _a _b 431  ]
+[e ) _a ]
+[e $UE 430  ]
+[e :U 431 ]
+[; ;user.c: 200: return b;
+"200
+[e ) _b ]
+[e $UE 430  ]
+[; ;user.c: 201: }
+"201
+[e :UE 430 ]
 }

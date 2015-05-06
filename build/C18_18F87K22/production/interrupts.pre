@@ -5020,12 +5020,23 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
+<<<<<<< HEAD
 # 62 "interrupts.c"
+=======
+# 61 "interrupts.c"
+>>>>>>> 6e84ce29399cc215944b2c4145dd86812139ce4b
 typedef enum {LEFT,RIGHT} Side;
 unsigned char LMotorCounter = 0;
 unsigned char RMotorCounter = 0;
 unsigned char ignoreControll = 10;
 unsigned char deadEnd = 0;
+<<<<<<< HEAD
+=======
+typedef enum {empty,front,twoside,threeside,leftside,rightside,frontleft,frontright} State;
+unsigned char ChangeRequired = 0;
+State cState = twoside;
+State pState = twoside;
+>>>>>>> 6e84ce29399cc215944b2c4145dd86812139ce4b
 int controlToLeft = 0;
 int controlToRight = 0;
 int MotorDelayCounter = 0;
@@ -5034,15 +5045,11 @@ int RTurnCounter = 0;
 int RotateCounter = 0;
 int ReverseCounter = 0;
 int ForwardCounter = 0;
-int ControllerCounter = 0;
 Side rotatingSide = LEFT;
 unsigned char justTurned= 0;
 int TurnRight = 0;
 int TurnLeft = 0;
-int errorP = 0;
-int errorD = 0;
 int oldErrorP = 0;
-int totalError = 0;
 int TurnedRight = 0;
 int TurnedLeft = 0;
 int Deadend = 0;
@@ -5059,7 +5066,10 @@ void rotate(Side);
 void smoothTurn();
 void Reversing();
 void forward();
+void singleForward();
+void initialRotation(Side side,int isDeadEnd);
 void FrontController();
+void stateUpdate();
 
 int ABS(int);
 
@@ -5075,7 +5085,9 @@ if(INTCONbits.TMR0IF == 1)
 {
 if(MotorDelayCounter > 2)
 {
+stateUpdate();
 
+<<<<<<< HEAD
 
 
 if(controlToLeft > 0 || controlToRight > 0 || ForwardCounter > 0)
@@ -5092,17 +5104,37 @@ controlToRight--;
 } else {
 forward();
 }
-}
+=======
+if(cState != pState)
+ChangeRequired = 1;
+else
+ChangeRequired = 0;
 
-else if (ReverseCounter > 0) {
-Reversing();
+if(ChangeRequired == 1 && RotateCounter == 0)
+{
+if(sensorValue[2] < 300-50 && sensorValue[3] < 300-50)
+{
+if(justTurned == 1)
+ForwardCounter = 350;
+else
+ForwardCounter = 350;
+} else
+ForwardCounter = 1;
+forward();
+pState = cState;
+ChangeRequired = 0;
+>>>>>>> 6e84ce29399cc215944b2c4145dd86812139ce4b
 }
-
 else if(RotateCounter > 0) {
+<<<<<<< HEAD
 
 # 158
 if(sensorValue[2] < 100 && sensorValue[3] < 100 && deadEnd == 1)
 RotateCounter = 3;
+=======
+if(sensorValue[2] < 100 && sensorValue[3] < 100 && deadEnd == 1)
+RotateCounter = 5;
+>>>>>>> 6e84ce29399cc215944b2c4145dd86812139ce4b
 rotate(rotatingSide);
 if(RotateCounter == 0)
 ForwardCounter = 50;
@@ -5110,6 +5142,7 @@ TurnRight = 0;
 TurnLeft = 0;
 
 }
+<<<<<<< HEAD
 else if (TurnLeft == 1 && sensorValue[0] < 100) {
 RotateCounter = 170;
 rotatingSide = LEFT;
@@ -5205,6 +5238,47 @@ TurnLeft = 0;
 TurnRight = 0;
 TurnLeftAgain = 0;
 }
+=======
+else if(controlToLeft > 0 || controlToRight > 0 || ForwardCounter > 0)
+{
+KController();
+
+if(controlToLeft > 0 )
+{
+motorCounterUpdate(RIGHT,0);
+controlToLeft--;
+} else if(controlToRight > 0){
+motorCounterUpdate(LEFT,0);
+controlToRight--;
+} else {
+forward();
+}
+
+} else if(ForwardCounter == 0)
+{
+if(algorithm == LEFTWALL)
+{
+if(cState == empty) initialRotation(LEFT,0);
+else if(cState == twoside) singleForward();
+else if(cState == threeside) initialRotation(LEFT,1);
+else if(cState == leftside) singleForward();
+else if(cState == rightside) initialRotation(LEFT,0);
+else if(cState == frontleft) initialRotation(RIGHT,0);
+else if(cState == frontright) initialRotation(LEFT,0);
+else if(cState == front) initialRotation(LEFT,0);
+} else {
+if(cState == empty) initialRotation(RIGHT,0);
+else if(cState == twoside) singleForward();
+else if(cState == threeside) initialRotation(RIGHT,1);
+else if(cState == leftside) initialRotation(RIGHT,0);
+else if(cState == rightside) singleForward();
+else if(cState == frontleft) initialRotation(RIGHT,0);
+else if(cState == frontright) initialRotation(LEFT,0);
+else if(cState == front) initialRotation(RIGHT,0);
+}
+}
+
+>>>>>>> 6e84ce29399cc215944b2c4145dd86812139ce4b
 moveMouse(merge(LMotorCounter,RMotorCounter));
 MotorDelayCounter = 0;
 }
@@ -5220,10 +5294,17 @@ INTCONbits.TMR0IF = 0;
 
 void low_priority interrupt low_isr(void)
 
+<<<<<<< HEAD
 # 302
 {
 
 # 329
+=======
+# 217
+{
+
+# 244
+>>>>>>> 6e84ce29399cc215944b2c4145dd86812139ce4b
 }
 
 void motorCounterUpdate(Side side, unsigned char reverse)
@@ -5294,7 +5375,11 @@ return x;
 void KController()
 {
 
+<<<<<<< HEAD
 # 407
+=======
+# 322
+>>>>>>> 6e84ce29399cc215944b2c4145dd86812139ce4b
 if(sensorValue[2] < 150 || sensorValue[3] < 150 )
 {
 
@@ -5341,7 +5426,11 @@ motorCounterUpdate(LEFT,1);
 ReverseCounter--;
 }
 
+<<<<<<< HEAD
 # 467
+=======
+# 382
+>>>>>>> 6e84ce29399cc215944b2c4145dd86812139ce4b
 void forward()
 {
 motorCounterUpdate(RIGHT,0);
@@ -5349,4 +5438,66 @@ motorCounterUpdate(LEFT,0);
 ForwardCounter--;
 if(ForwardCounter == 0)
 justTurned = 0;
+<<<<<<< HEAD
+=======
+}
+
+
+void singleForward()
+{
+if(ForwardCounter == 0 || ForwardCounter == 1)
+{
+ForwardCounter = 1;
+forward();
+}
+}
+
+
+void initialRotation(Side side,int isDeadEnd)
+{
+if(isDeadEnd == 1)
+{
+RotateCounter = 170*2;
+deadEnd = 1;
+}
+else
+{
+RotateCounter = 170;
+deadEnd = 0;
+}
+
+rotatingSide = side;
+justTurned = 1;
+rotate(rotatingSide);
+
+}
+
+
+void stateUpdate()
+{
+if(sensorValue[0] < 200 && sensorValue[1] < 200 &&
+(sensorValue[2] < 300 && sensorValue[3] < 300))
+cState = empty;
+else if(sensorValue[0] > 200 && sensorValue[1] > 200 &&
+(sensorValue[2] < 300 && sensorValue[3] < 300))
+cState = twoside;
+else if(sensorValue[0] > 200 && sensorValue[1] > 200 &&
+(sensorValue[2] > 300 && sensorValue[3] > 300))
+cState = threeside;
+else if(sensorValue[0] > 200 && sensorValue[1] < 200 &&
+(sensorValue[2] < 300 && sensorValue[3] < 300))
+cState = leftside;
+else if(sensorValue[0] < 200 && sensorValue[1] > 200 &&
+(sensorValue[2] < 300 && sensorValue[3] < 300))
+cState = rightside;
+else if(sensorValue[0] > 200 && sensorValue[1] < 200 &&
+(sensorValue[2] > 300 && sensorValue[3] > 300))
+cState = frontleft;
+else if(sensorValue[0] < 200 && sensorValue[1] > 200 &&
+(sensorValue[2] > 300 && sensorValue[3] > 300))
+cState = frontright;
+else if(sensorValue[0] < 200 && sensorValue[1] < 200 &&
+(sensorValue[2] > 300 && sensorValue[3] > 300))
+cState = front;
+>>>>>>> 6e84ce29399cc215944b2c4145dd86812139ce4b
 }

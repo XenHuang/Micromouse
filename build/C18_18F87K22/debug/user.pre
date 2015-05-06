@@ -5068,8 +5068,8 @@ frontAvg = (sensorValue[2]+sensorValue[3])/2;
 
 sensorCorrection[0] = sideAvg - sensorValue[0];
 sensorCorrection[1] = sideAvg - sensorValue[1];
-sensorCorrection[2] = sideAvg - sensorValue[2];
-sensorCorrection[3] = sideAvg - sensorValue[3];
+sensorCorrection[2] = frontAvg - sensorValue[2];
+sensorCorrection[3] = frontAvg - sensorValue[3];
 }
 
 void sensorComputation(int sensorTemp[][10],unsigned char getCorrection)
@@ -5092,7 +5092,14 @@ sum = sum - min - max;
 if(getCorrection == 1)
 sensorValue[i] = sum/(10-2);
 else
+{
 sensorValue[i] = sum/(10-2) + sensorCorrection[i];
+if( i == 3)
+{
+if(sensorValue[i] > 350 && sensorValue[i] <= 450) sensorValue[i] = sensorValue[i] - 40;
+else if(sensorValue[i] > 450) sensorValue[i] = sensorValue[i] - 60;
+}
+}
 }
 }
 

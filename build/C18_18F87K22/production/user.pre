@@ -5092,7 +5092,14 @@ sum = sum - min - max;
 if(getCorrection == 1)
 sensorValue[i] = sum/(10-2);
 else
+{
 sensorValue[i] = sum/(10-2) + sensorCorrection[i];
+if( i == 3)
+{
+if(sensorValue[i] > 350 && sensorValue[i] <= 450) sensorValue[i] = sensorValue[i] - 40;
+else if(sensorValue[i] > 450) sensorValue[i] = sensorValue[i] - 60;
+}
+}
 }
 }
 
