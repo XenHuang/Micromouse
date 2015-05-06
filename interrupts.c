@@ -45,8 +45,8 @@
 // Higher the value the closer
 #define FRONTHASWALL 300         // 2,3 senses distance further than this makes left/right turn
 #define FRONTWALLMAX2 800         // 2,3 senses distance closer than this then reverse
-#define RIGHTHASWALL 120
-#define LEFTHASWALL 120      //the higher, higher chance to turn, more errors tho
+#define RIGHTHASWALL 200
+#define LEFTHASWALL 200      //the higher, higher chance to turn, more errors tho
 #define SIDENEEDCORRECTION 400
 #define FRONTNEEDCORRECTION 200
 
@@ -181,7 +181,16 @@ void high_isr(void)
                         else if(cState == frontleft)    initialRotation(RIGHT,0);
                         else if(cState == frontright)   initialRotation(LEFT,0);
                         else if(cState == front)        initialRotation(LEFT,0);
-                    } 
+                    } else {
+                        if(cState == empty)             initialRotation(RIGHT,0);
+                        else if(cState == twoside)      singleForward();
+                        else if(cState == threeside)    initialRotation(RIGHT,1);
+                        else if(cState == leftside)     initialRotation(RIGHT,0);
+                        else if(cState == rightside)    singleForward();
+                        else if(cState == frontleft)    initialRotation(RIGHT,0);
+                        else if(cState == frontright)   initialRotation(LEFT,0);
+                        else if(cState == front)        initialRotation(RIGHT,0);
+                    }
                 }
 
                 moveMouse(merge(LMotorCounter,RMotorCounter));
@@ -304,7 +313,7 @@ void KController()
 //    if(sensorValue[LEFTFRONTSENSOR] > 150 && sensorValue[RIGHTFRONTSENSOR] > 150 &&
 //        sensorValue[LEFTFRONTSENSOR] < FRONTNEEDCORRECTION && sensorValue[RIGHTFRONTSENSOR] < FRONTNEEDCORRECTION )
 //    {
-//        if(sensorValue[LEFTFRONTSENSOR] - sensorValue[RIGHTFRONTSENSOR])
+//        if(ABS(sensorValue[LEFTFRONTSENSOR] - sensorValue[RIGHTFRONTSENSOR]) > 50)
 //            controlToLeft = 1;
 //        else
 //            controlToRight = 1;

@@ -61,25 +61,25 @@ RIGHTWALL 1
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "106 C:\Users\winds\Documents\GitHub\Micromouse\interrupts.c
 [v _high_isr high_isr `II(v  1 e 0 0 ]
-"200
+"209
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
-"237
+"246
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
-"282
+"291
 [v _merge merge `(uc  1 e 1 0 ]
-"289
+"298
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
-"302
+"311
 [v _KController KController `(v  1 e 0 0 ]
-"328
+"337
 [v _rotate rotate `(v  1 e 0 0 ]
-"373
+"382
 [v _forward forward `(v  1 e 0 0 ]
-"383
+"392
 [v _singleForward singleForward `(v  1 e 0 0 ]
-"393
+"402
 [v _initialRotation initialRotation `(v  1 e 0 0 ]
-"413
+"422
 [v _stateUpdate stateUpdate `(v  1 e 0 0 ]
 "41 C:\Users\winds\Documents\GitHub\Micromouse\main.c
 [v _main main `(v  1 e 0 0 ]
@@ -95,11 +95,11 @@ RIGHTWALL 1
 [v _setCorrection setCorrection `(v  1 e 0 0 ]
 "137
 [v _sensorComputation sensorComputation `(v  1 e 0 0 ]
-"161
+"168
 [v _sensorUpdate sensorUpdate `(v  1 e 0 0 ]
-"184
+"191
 [v _MIN MIN `(i  1 e 2 0 ]
-"190
+"197
 [v _MAX MAX `(i  1 e 2 0 ]
 "1267 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
@@ -295,34 +295,34 @@ RIGHTWALL 1
 [v setCorrection@sideAvg sideAvg `i  1 a 2 10 ]
 "135
 } 0
-"161
+"168
 [v _sensorUpdate sensorUpdate `(v  1 e 0 0 ]
 {
 [v sensorUpdate@getCorrection getCorrection `uc  1 a 1 wreg ]
-"164
-[v sensorUpdate@sensorTemp sensorTemp `[4][10]i  1 a 80 32 ]
-"163
-[v sensorUpdate@j j `i  1 a 2 115 ]
-[v sensorUpdate@i i `i  1 a 2 113 ]
-"161
+"171
+[v sensorUpdate@sensorTemp sensorTemp `[4][10]i  1 a 80 34 ]
+"170
+[v sensorUpdate@j j `i  1 a 2 117 ]
+[v sensorUpdate@i i `i  1 a 2 115 ]
+"168
 [v sensorUpdate@getCorrection getCorrection `uc  1 a 1 wreg ]
-"167
-[v sensorUpdate@getCorrection getCorrection `uc  1 a 1 112 ]
-"182
+"174
+[v sensorUpdate@getCorrection getCorrection `uc  1 a 1 114 ]
+"189
 } 0
 "137
 [v _sensorComputation sensorComputation `(v  1 e 0 0 ]
 {
 "139
-[v sensorComputation@i i `i  1 a 2 24 ]
-[v sensorComputation@j j `i  1 a 2 22 ]
-[v sensorComputation@sum sum `i  1 a 2 20 ]
-[v sensorComputation@min min `i  1 a 2 18 ]
-[v sensorComputation@max max `i  1 a 2 16 ]
+[v sensorComputation@i i `i  1 a 2 26 ]
+[v sensorComputation@j j `i  1 a 2 24 ]
+[v sensorComputation@sum sum `i  1 a 2 22 ]
+[v sensorComputation@min min `i  1 a 2 20 ]
+[v sensorComputation@max max `i  1 a 2 18 ]
 "137
 [v sensorComputation@sensorTemp sensorTemp `*.39[10]i  1 p 2 11 ]
 [v sensorComputation@getCorrection getCorrection `uc  1 p 1 13 ]
-"159
+"166
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -347,19 +347,19 @@ RIGHTWALL 1
 [v ___awdiv@divisor divisor `i  1 p 2 2 ]
 "42
 } 0
-"184 C:\Users\winds\Documents\GitHub\Micromouse\user.c
+"191 C:\Users\winds\Documents\GitHub\Micromouse\user.c
 [v _MIN MIN `(i  1 e 2 0 ]
 {
 [v MIN@a a `i  1 p 2 6 ]
 [v MIN@b b `i  1 p 2 8 ]
-"188
+"195
 } 0
-"190
+"197
 [v _MAX MAX `(i  1 e 2 0 ]
 {
 [v MAX@a a `i  1 p 2 6 ]
 [v MAX@b b `i  1 p 2 8 ]
-"194
+"201
 } 0
 "35
 [v _InitApp InitApp `(v  1 e 0 0 ]
@@ -385,84 +385,84 @@ RIGHTWALL 1
 {
 "36
 } 0
-"200 C:\Users\winds\Documents\GitHub\Micromouse\interrupts.c
+"209 C:\Users\winds\Documents\GitHub\Micromouse\interrupts.c
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
 {
-"235
+"244
 } 0
 "106
 [v _high_isr high_isr `II(v  1 e 0 0 ]
 {
-"196
+"205
 } 0
-"413
+"422
 [v _stateUpdate stateUpdate `(v  1 e 0 0 ]
 {
-"439
+"448
 } 0
-"383
+"392
 [v _singleForward singleForward `(v  1 e 0 0 ]
 {
-"390
+"399
 } 0
-"373
+"382
 [v _forward forward `(v  1 e 0 0 ]
 {
-"380
+"389
 } 0
-"289
+"298
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
 {
 [v moveMouse@action action `uc  1 a 1 wreg ]
 [v moveMouse@action action `uc  1 a 1 wreg ]
-"291
+"300
 [v moveMouse@action action `uc  1 a 1 17 ]
-"292
+"301
 } 0
-"282
+"291
 [v _merge merge `(uc  1 e 1 0 ]
 {
 [v merge@left left `uc  1 a 1 wreg ]
-"284
+"293
 [v merge@merged merged `uc  1 a 1 19 ]
-"282
+"291
 [v merge@left left `uc  1 a 1 wreg ]
 [v merge@right right `uc  1 p 1 17 ]
-"285
+"294
 [v merge@left left `uc  1 a 1 18 ]
-"287
+"296
 } 0
-"393
+"402
 [v _initialRotation initialRotation `(v  1 e 0 0 ]
 {
 [v initialRotation@side side `E4145  1 a 1 wreg ]
 [v initialRotation@side side `E4145  1 a 1 wreg ]
 [v initialRotation@isDeadEnd isDeadEnd `i  1 p 2 20 ]
-"395
+"404
 [v initialRotation@side side `E4145  1 a 1 22 ]
-"410
+"419
 } 0
-"328
+"337
 [v _rotate rotate `(v  1 e 0 0 ]
 {
 [v rotate@side side `E4145  1 a 1 wreg ]
 [v rotate@side side `E4145  1 a 1 wreg ]
-"330
+"339
 [v rotate@side side `E4145  1 a 1 19 ]
-"338
+"347
 } 0
-"237
+"246
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
 {
 [v motorCounterUpdate@side side `E4145  1 a 1 wreg ]
 [v motorCounterUpdate@side side `E4145  1 a 1 wreg ]
 [v motorCounterUpdate@reverse reverse `uc  1 p 1 17 ]
-"239
+"248
 [v motorCounterUpdate@side side `E4145  1 a 1 18 ]
-"280
+"289
 } 0
-"302
+"311
 [v _KController KController `(v  1 e 0 0 ]
 {
-"324
+"333
 } 0
