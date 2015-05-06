@@ -32,8 +32,8 @@
 #define ROTATE90 170            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 #define REVERSEFACTOR 15         //factor that helps correct the 180 turn
-#define FORWARDFACTOR 320          //factor that helps forward till 90 degree turn
-#define FORWARDFACTORAFTERTURN 50         //factor that helps forward till 90 degree turn
+#define FORWARDFACTOR 350         //factor that helps forward till 90 degree turn
+#define FORWARDFACTORAFTERTURN 350         //factor that helps forward till 90 degree turn
 
 #define CONTROLLERFACTOR 3
 
@@ -43,10 +43,10 @@
 #define RIGHTFRONTSENSOR 3       //Sensor value position
 
 // Higher the value the closer
-#define FRONTHASWALL 480         // 2,3 senses distance further than this makes left/right turn
+#define FRONTHASWALL 300         // 2,3 senses distance further than this makes left/right turn
 #define FRONTWALLMAX2 800         // 2,3 senses distance closer than this then reverse
-#define RIGHTHASWALL 100
-#define LEFTHASWALL 100      //the higher, higher chance to turn, more errors tho
+#define RIGHTHASWALL 120
+#define LEFTHASWALL 120      //the higher, higher chance to turn, more errors tho
 #define SIDENEEDCORRECTION 400
 #define FRONTNEEDCORRECTION 200
 
@@ -63,6 +63,10 @@ unsigned char LMotorCounter = 0;
 unsigned char RMotorCounter = 0;
 unsigned char ignoreControll = KCONTROLLERSTEP;
 unsigned char deadEnd = 0;
+typedef enum {empty,front,twoside,threeside,leftside,rightside,frontleft,frontright} State;
+unsigned char ChangeRequired = 0;
+State cState = twoside;
+State pState = twoside;
 int controlToLeft = 0;
 int controlToRight = 0;
 int MotorDelayCounter = 0;
@@ -71,15 +75,11 @@ int RTurnCounter = 0;
 int RotateCounter = 0;
 int ReverseCounter = 0;
 int ForwardCounter = 0;
-int ControllerCounter = 0;
 Side rotatingSide = LEFT;
 unsigned char justTurned= 0;  
 int TurnRight = 0;
 int TurnLeft = 0;
-int errorP = 0;
-int errorD = 0;
 int oldErrorP = 0;
-int totalError = 0;
 int TurnedRight = 0;
 int TurnedLeft = 0;
 int Deadend = 0;
@@ -94,7 +94,10 @@ void rotate(Side);
 void smoothTurn();
 void Reversing();
 void forward();
+void singleForward();
+void initialRotation(Side side,int isDeadEnd);
 void FrontController();
+void stateUpdate();
 
 int ABS(int);
 
@@ -123,10 +126,35 @@ void high_isr(void)
 	{
             if(MotorDelayCounter > MOTORDELAYMAX)
             {
-                //Continue
+                stateUpdate();
 
+                if(cState != pState)
+                    ChangeRequired = 1;
+                else
+                    ChangeRequired = 0;
 
-                if(controlToLeft > 0 || controlToRight > 0 || ForwardCounter > 0)
+                if(ChangeRequired == 1 && RotateCounter == 0)
+                {
+                    if(sensorValue[LEFTFRONTSENSOR] < FRONTHASWALL-50 && sensorValue[RIGHTFRONTSENSOR] < FRONTHASWALL-50)
+                    {
+                        if(justTurned == 1)
+                            ForwardCounter = FORWARDFACTORAFTERTURN;
+                        else
+                            ForwardCounter = FORWARDFACTOR;
+                    } else
+                        ForwardCounter = 1;
+                    forward();
+                    pState = cState;
+                    ChangeRequired = 0;
+                }
+                else if(RotateCounter > 0) {
+                    if(sensorValue[LEFTFRONTSENSOR] < 100 && sensorValue[RIGHTFRONTSENSOR] < 100 && deadEnd == 1)
+                         RotateCounter = 5;
+                    rotate(rotatingSide);
+                    TurnRight = 0;
+                    TurnLeft = 0;
+                }
+                else if(controlToLeft > 0 || controlToRight > 0 || ForwardCounter > 0)
                 {
                     KController();
                     
@@ -140,98 +168,22 @@ void high_isr(void)
                     } else {
                         forward();
                     }
-                }
-                
-                else if (ReverseCounter > 0) {    //keep reversing until counter goes to 0
-                    Reversing();
-                }
-                
-                else if(RotateCounter > 0) {     //keep rotating until counter goes to 0
-//                    // If front left or front right has a wall closer than 800, reverse 15 steps
-//                    if ((sensorValue[LEFTFRONTSENSOR] > FRONTWALLMAX2 || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMAX2)) {
-//                     //   ReverseCounter = REVERSEFACTOR;
-////                        Reversing();
-//                    } else {  //else rotate which side?
-                        if(sensorValue[LEFTFRONTSENSOR] < 100 && sensorValue[RIGHTFRONTSENSOR] < 100 && deadEnd == 1)
-                            RotateCounter = 5;
-                    rotate(rotatingSide);
-                    if(RotateCounter == 0)
-                        ForwardCounter = FORWARDFACTORAFTERTURN;
-                    TurnRight = 0;
-                    TurnLeft = 0;
-                      
-                }
-                
-                else if (TurnLeft == 1) {
-                       RotateCounter = ROTATE90;
-                       rotatingSide = LEFT;
-                       justTurned = 1;   //enable just turned.
-                       TurnLeft = 0;
-                       deadEnd = 0;
-				}
 
-                else if (TurnRight == 1
-                        && (sensorValue[RIGHTFRONTSENSOR] > 400 && sensorValue[LEFTFRONTSENSOR] > 400) && sensorValue[LEFTSENSOR] > LEFTHASWALL) {
-                     RotateCounter = ROTATE90;
-                     rotatingSide = RIGHT;
-                     justTurned = 1;
-                     TurnRight = 0;
-                     deadEnd = 0;
-                }
-                else if (TurnRight == 1 && sensorValue[LEFTSENSOR] < LEFTHASWALL){
-                    TurnLeft = 1;
-                    if(justTurned == 0) { //if just rotate, forward lower step of 380.
-                    ForwardCounter = FORWARDFACTOR;
-                    }else {  //if not just rotate, forward step of 420.
-                    ForwardCounter = FORWARDFACTORAFTERTURN;
-                    }
-                    forward();   //forward with given forward factor
-                }
-
-                else if (sensorValue[LEFTSENSOR] < LEFTHASWALL) {   // Always left turn if left sensor senses less than 70 in upper left direc
-                    TurnLeft = 1;
-                    if(justTurned == 0) { //if just rotate, forward lower step of 380.
-                    ForwardCounter = FORWARDFACTOR;
-                    }else {  //if not just rotate, forward step of 420.
-                    ForwardCounter = FORWARDFACTORAFTERTURN;
-                    }
-                    forward();   //forward with given forward factor
-                }
-
-		else if (sensorValue[RIGHTSENSOR] < RIGHTHASWALL && sensorValue[LEFTSENSOR] > LEFTHASWALL)   {
-                    TurnRight = 1;
-                    if(justTurned == 0) { //if just rotate, forward lower step of 380.
-                    ForwardCounter = FORWARDFACTOR;
-                    } else  {  //if not just rotate, forward step of 420.
-                    ForwardCounter = FORWARDFACTORAFTERTURN;
-                    }
-                    forward();
-                }
-                
-                else if ((sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL )
-                        && (sensorValue[RIGHTFRONTSENSOR] > 450 && sensorValue[LEFTFRONTSENSOR] > 450) && RotateCounter <= 0)
-		{	// 3 walls
-                    RotateCounter = ROTATE90*2;
-                    rotatingSide = LEFT;
-                    justTurned = 1;
-                    deadEnd = 1;
-                }
-                
-                else if ((sensorValue[LEFTSENSOR] > SIDENEEDCORRECTION || sensorValue[RIGHTSENSOR] > SIDENEEDCORRECTION)
-                        && (sensorValue[RIGHTFRONTSENSOR] < FRONTNEEDCORRECTION && sensorValue[LEFTFRONTSENSOR] < FRONTNEEDCORRECTION))
+                } else if(ForwardCounter == 0)
                 {
-                  
-                    KController();
-                         justTurned = 0;
-                    
+                    if(algorithm == LEFTWALL)
+                    {
+                        if(cState == empty)             initialRotation(LEFT,0);
+                        else if(cState == twoside)      singleForward();
+                        else if(cState == threeside)    initialRotation(LEFT,1);
+                        else if(cState == leftside)     singleForward();
+                        else if(cState == rightside)    initialRotation(LEFT,0);
+                        else if(cState == frontleft)    initialRotation(RIGHT,0);
+                        else if(cState == frontright)   initialRotation(LEFT,0);
+                        else if(cState == front)        initialRotation(LEFT,0);
+                    } 
                 }
-               else {
-                    motorCounterUpdate(RIGHT,0);
-                    motorCounterUpdate(LEFT,0);
-                    justTurned = 0;
-                    TurnLeft = 0;
-                    TurnRight = 0;
-               }
+
                 moveMouse(merge(LMotorCounter,RMotorCounter));
                 MotorDelayCounter = 0;       
             }
@@ -349,15 +301,16 @@ int ABS(int x)
 
 void KController()
 {
-    if(sensorValue[LEFTFRONTSENSOR] > 150 && sensorValue[RIGHTFRONTSENSOR] > 150 &&
-        sensorValue[LEFTFRONTSENSOR] < FRONTNEEDCORRECTION && sensorValue[RIGHTFRONTSENSOR] < FRONTNEEDCORRECTION )
-    {
-        if(sensorValue[LEFTFRONTSENSOR] - sensorValue[RIGHTFRONTSENSOR])
-            controlToLeft = 1;
-        else
-            controlToRight = 1;
-
-    } else if(sensorValue[LEFTFRONTSENSOR] < 150 || sensorValue[RIGHTFRONTSENSOR] < 150 )
+//    if(sensorValue[LEFTFRONTSENSOR] > 150 && sensorValue[RIGHTFRONTSENSOR] > 150 &&
+//        sensorValue[LEFTFRONTSENSOR] < FRONTNEEDCORRECTION && sensorValue[RIGHTFRONTSENSOR] < FRONTNEEDCORRECTION )
+//    {
+//        if(sensorValue[LEFTFRONTSENSOR] - sensorValue[RIGHTFRONTSENSOR])
+//            controlToLeft = 1;
+//        else
+//            controlToRight = 1;
+//
+//    } else
+        if(sensorValue[LEFTFRONTSENSOR] < 150 || sensorValue[RIGHTFRONTSENSOR] < 150 )
     {
 
         if(sensorValue[LEFTSENSOR] > SIDENEEDCORRECTION)
@@ -424,4 +377,63 @@ void forward()
         ForwardCounter--;
         if(ForwardCounter == 0)
         justTurned = 0;
+}
+
+
+void singleForward()
+{
+    if(ForwardCounter == 0 || ForwardCounter == 1)
+    {
+        ForwardCounter = 1;
+        forward();
+    }
+}
+
+
+void initialRotation(Side side,int isDeadEnd)
+{
+    if(isDeadEnd == 1)
+    {
+        RotateCounter = ROTATE90*2;
+        deadEnd = 1;
+    }
+    else
+    {
+        RotateCounter = ROTATE90;
+        deadEnd = 0;
+    }
+
+    rotatingSide = side;
+    justTurned = 1;
+    rotate(rotatingSide);
+
+}
+
+
+void stateUpdate()
+{
+    if(sensorValue[LEFTSENSOR] < LEFTHASWALL && sensorValue[RIGHTSENSOR] < RIGHTHASWALL &&
+            (sensorValue[LEFTFRONTSENSOR] < FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] < FRONTHASWALL))
+        cState = empty;
+    else if(sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL &&
+            (sensorValue[LEFTFRONTSENSOR] < FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] < FRONTHASWALL))
+        cState = twoside;
+    else if(sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL &&
+            (sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL))
+        cState = threeside;
+    else if(sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] < RIGHTHASWALL &&
+            (sensorValue[LEFTFRONTSENSOR] < FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] < FRONTHASWALL))
+        cState = leftside;
+    else if(sensorValue[LEFTSENSOR] < LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL &&
+            (sensorValue[LEFTFRONTSENSOR] < FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] < FRONTHASWALL))
+        cState = rightside;
+    else if(sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] < RIGHTHASWALL &&
+            (sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL))
+        cState = frontleft;
+    else if(sensorValue[LEFTSENSOR] < LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL &&
+            (sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL))
+        cState = frontright;
+    else if(sensorValue[LEFTSENSOR] < LEFTHASWALL && sensorValue[RIGHTSENSOR] < RIGHTHASWALL &&
+            (sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL))
+        cState = front;
 }

@@ -5160,6 +5160,8 @@ ConfigureOscillator();
 
 InitApp();
 sensorUpdate(1);
+sensorUpdate(1);
+sensorUpdate(1);
 setCorrection();
 INTCONbits.GIE = 1;
 while(1)

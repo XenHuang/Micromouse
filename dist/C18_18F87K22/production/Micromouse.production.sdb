@@ -3,17 +3,28 @@
 [d edition pro ]
 [d chip 18F4620 ]
 [d frameptr 4065 ]
-"17 C:\Users\winds\Documents\GitHub\Micromouse\user.h
+"18 C:\Users\winds\Documents\GitHub\Micromouse\user.h
 [e E4059 . `uc
 LEFTWALL 0
 RIGHTWALL 1
 ]
-"71 C:\Users\winds\Documents\GitHub\Micromouse\interrupts.c
+"68 C:\Users\winds\Documents\GitHub\Micromouse\interrupts.c
+[e E4153 . `uc
+empty 0
+front 1
+twoside 2
+threeside 3
+leftside 4
+rightside 5
+frontleft 6
+frontright 7
+]
+"78
 [e E4145 . `uc
 LEFT 0
 RIGHT 1
 ]
-"17 C:\Users\winds\Documents\GitHub\Micromouse\user.h
+"18 C:\Users\winds\Documents\GitHub\Micromouse\user.h
 [e E4059 . `uc
 LEFTWALL 0
 RIGHTWALL 1
@@ -48,26 +59,28 @@ RIGHTWALL 1
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"98 C:\Users\winds\Documents\GitHub\Micromouse\interrupts.c
+"106 C:\Users\winds\Documents\GitHub\Micromouse\interrupts.c
 [v _high_isr high_isr `II(v  1 e 0 0 ]
-"229
+"200
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
-"266
+"237
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
-"311
+"282
 [v _merge merge `(uc  1 e 1 0 ]
-"318
+"289
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
-"324
-[v _ABS ABS `(i  1 e 2 0 ]
-"331
+"302
 [v _KController KController `(v  1 e 0 0 ]
-"418
+"328
 [v _rotate rotate `(v  1 e 0 0 ]
-"442
-[v _Reversing Reversing `(v  1 e 0 0 ]
-"449
+"373
 [v _forward forward `(v  1 e 0 0 ]
+"383
+[v _singleForward singleForward `(v  1 e 0 0 ]
+"393
+[v _initialRotation initialRotation `(v  1 e 0 0 ]
+"413
+[v _stateUpdate stateUpdate `(v  1 e 0 0 ]
 "41 C:\Users\winds\Documents\GitHub\Micromouse\main.c
 [v _main main `(v  1 e 0 0 ]
 "24 C:\Users\winds\Documents\GitHub\Micromouse\system.c
@@ -76,7 +89,7 @@ RIGHTWALL 1
 [v _delay delay `(v  1 e 0 0 ]
 "35
 [v _InitApp InitApp `(v  1 e 0 0 ]
-"111
+"112
 [v _AlgorithmSelection AlgorithmSelection `(v  1 e 0 0 ]
 "125
 [v _setCorrection setCorrection `(v  1 e 0 0 ]
@@ -84,13 +97,13 @@ RIGHTWALL 1
 [v _sensorComputation sensorComputation `(v  1 e 0 0 ]
 "161
 [v _sensorUpdate sensorUpdate `(v  1 e 0 0 ]
-"185
+"184
 [v _MIN MIN `(i  1 e 2 0 ]
-"191
+"190
 [v _MAX MAX `(i  1 e 2 0 ]
 "1267 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4620.h
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
-[s S332 . 1 `uc 1 TRISB0 1 0 :1:0 
+[s S356 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -100,7 +113,7 @@ RIGHTWALL 1
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "1886
-[s S341 . 1 `uc 1 RB0 1 0 :1:0 
+[s S365 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -109,11 +122,11 @@ RIGHTWALL 1
 `uc 1 RB6 1 0 :1:6 
 `uc 1 RB7 1 0 :1:7 
 ]
-[u S350 . 1 `S332 1 . 1 0 `S341 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES350  1 e 1 @3987 ]
+[u S374 . 1 `S356 1 . 1 0 `S365 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES374  1 e 1 @3987 ]
 "2075
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-[s S300 . 1 `uc 1 TRISE0 1 0 :1:0 
+[s S324 . 1 `uc 1 TRISE0 1 0 :1:0 
 `uc 1 TRISE1 1 0 :1:1 
 `uc 1 TRISE2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -123,13 +136,13 @@ RIGHTWALL 1
 `uc 1 IBF 1 0 :1:7 
 ]
 "2545
-[s S309 . 1 `uc 1 RE0 1 0 :1:0 
+[s S333 . 1 `uc 1 RE0 1 0 :1:0 
 `uc 1 RE1 1 0 :1:1 
 `uc 1 RE2 1 0 :1:2 
 `uc 1 RE3 1 0 :1:3 
 ]
-[u S314 . 1 `S300 1 . 1 0 `S309 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES314  1 e 1 @3990 ]
+[u S338 . 1 `S324 1 . 1 0 `S333 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES338  1 e 1 @3990 ]
 "2680
 [v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
 "4645
@@ -138,38 +151,38 @@ RIGHTWALL 1
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
 "4805
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
-[s S382 . 1 `uc 1 . 1 0 :1:0 
+[s S406 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "4853
-[s S385 . 1 `uc 1 ADON 1 0 :1:0 
+[s S409 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 ]
-[s S392 . 1 `uc 1 . 1 0 :1:0 
+[s S416 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
 `uc 1 CHS2 1 0 :1:4 
 `uc 1 CHS3 1 0 :1:5 
 ]
-[s S399 . 1 `uc 1 . 1 0 :1:0 
+[s S423 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S402 . 1 `uc 1 . 1 0 :1:0 
+[s S426 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S405 . 1 `uc 1 . 1 0 :1:0 
+[s S429 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S408 . 1 `uc 1 . 1 0 :1:0 
+[s S432 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S411 . 1 `uc 1 . 1 0 :1:0 
+[s S435 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S414 . 1 `S382 1 . 1 0 `S385 1 . 1 0 `S382 1 . 1 0 `S392 1 . 1 0 `S399 1 . 1 0 `S402 1 . 1 0 `S405 1 . 1 0 `S408 1 . 1 0 `S411 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES414  1 e 1 @4034 ]
+[u S438 . 1 `S406 1 . 1 0 `S409 1 . 1 0 `S406 1 . 1 0 `S416 1 . 1 0 `S423 1 . 1 0 `S426 1 . 1 0 `S429 1 . 1 0 `S432 1 . 1 0 `S435 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES438  1 e 1 @4034 ]
 "4933
 [v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
 "4939
@@ -182,7 +195,7 @@ RIGHTWALL 1
 [v _INTCON2 INTCON2 `VEuc  1 e 1 @4081 ]
 "6630
 [v _INTCON INTCON `VEuc  1 e 1 @4082 ]
-[s S27 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S36 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -192,7 +205,7 @@ RIGHTWALL 1
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "6682
-[s S36 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S45 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -201,7 +214,7 @@ RIGHTWALL 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S45 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S54 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -210,7 +223,7 @@ RIGHTWALL 1
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[s S54 . 1 `uc 1 . 1 0 :1:0 
+[s S63 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -219,56 +232,60 @@ RIGHTWALL 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S63 . 1 `uc 1 . 1 0 :6:0 
+[s S72 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S67 . 1 `S27 1 . 1 0 `S36 1 . 1 0 `S45 1 . 1 0 `S54 1 . 1 0 `S63 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES67  1 e 1 @4082 ]
+[u S76 . 1 `S36 1 . 1 0 `S45 1 . 1 0 `S54 1 . 1 0 `S63 1 . 1 0 `S72 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES76  1 e 1 @4082 ]
 "62 C:\Users\winds\Documents\GitHub\Micromouse\interrupts.c
 [v _LMotorCounter LMotorCounter `uc  1 e 1 0 ]
 "63
 [v _RMotorCounter RMotorCounter `uc  1 e 1 0 ]
-"64
-[v _controllerSteps controllerSteps `uc  1 e 1 0 ]
 "65
-[v _MotorDelayCounter MotorDelayCounter `i  1 e 2 0 ]
-"66
-[v _LTurnCounter LTurnCounter `i  1 e 2 0 ]
+[v _deadEnd deadEnd `uc  1 e 1 0 ]
 "67
-[v _RTurnCounter RTurnCounter `i  1 e 2 0 ]
+[v _ChangeRequired ChangeRequired `uc  1 e 1 0 ]
 "68
-[v _RotateCounter RotateCounter `i  1 e 2 0 ]
+[v _cState cState `E4153  1 e 1 0 ]
 "69
-[v _ReverseCounter ReverseCounter `i  1 e 2 0 ]
+[v _pState pState `E4153  1 e 1 0 ]
 "70
-[v _ForwardCounter ForwardCounter `i  1 e 2 0 ]
+[v _controlToLeft controlToLeft `i  1 e 2 0 ]
 "71
-[v _rotatingSide rotatingSide `E4145  1 e 1 0 ]
+[v _controlToRight controlToRight `i  1 e 2 0 ]
 "72
-[v _justTurned justTurned `uc  1 e 1 0 ]
+[v _MotorDelayCounter MotorDelayCounter `i  1 e 2 0 ]
 "73
-[v _TurnRight TurnRight `i  1 e 2 0 ]
+[v _LTurnCounter LTurnCounter `i  1 e 2 0 ]
 "74
-[v _TurnLeft TurnLeft `i  1 e 2 0 ]
+[v _RTurnCounter RTurnCounter `i  1 e 2 0 ]
+"75
+[v _RotateCounter RotateCounter `i  1 e 2 0 ]
+"76
+[v _ReverseCounter ReverseCounter `i  1 e 2 0 ]
+"77
+[v _ForwardCounter ForwardCounter `i  1 e 2 0 ]
+"78
+[v _rotatingSide rotatingSide `E4145  1 e 1 0 ]
 "79
-[v _TurnedRight TurnedRight `i  1 e 2 0 ]
+[v _justTurned justTurned `uc  1 e 1 0 ]
 "80
-[v _TurnedLeft TurnedLeft `i  1 e 2 0 ]
+[v _TurnRight TurnRight `i  1 e 2 0 ]
 "81
-[v _Deadend Deadend `i  1 e 2 0 ]
-"14 C:\Users\winds\Documents\GitHub\Micromouse\user.h
+[v _TurnLeft TurnLeft `i  1 e 2 0 ]
+"15 C:\Users\winds\Documents\GitHub\Micromouse\user.h
 [v _sensorLocation sensorLocation `C[4]uc  1 e 4 0 ]
-"17
+"18
 [v _algorithm algorithm `E4059  1 e 1 0 ]
-"20
-[v _sensorCorrection sensorCorrection `[4]i  1 e 8 0 ]
 "21
+[v _sensorCorrection sensorCorrection `[4]i  1 e 8 0 ]
+"22
 [v _sensorValue sensorValue `[4]i  1 e 8 0 ]
 "41 C:\Users\winds\Documents\GitHub\Micromouse\main.c
 [v _main main `(v  1 e 0 0 ]
 {
-"57
+"58
 } 0
 "125 C:\Users\winds\Documents\GitHub\Micromouse\user.c
 [v _setCorrection setCorrection `(v  1 e 0 0 ]
@@ -291,7 +308,7 @@ RIGHTWALL 1
 [v sensorUpdate@getCorrection getCorrection `uc  1 a 1 wreg ]
 "167
 [v sensorUpdate@getCorrection getCorrection `uc  1 a 1 112 ]
-"183
+"182
 } 0
 "137
 [v _sensorComputation sensorComputation `(v  1 e 0 0 ]
@@ -330,24 +347,24 @@ RIGHTWALL 1
 [v ___awdiv@divisor divisor `i  1 p 2 2 ]
 "42
 } 0
-"185 C:\Users\winds\Documents\GitHub\Micromouse\user.c
+"184 C:\Users\winds\Documents\GitHub\Micromouse\user.c
 [v _MIN MIN `(i  1 e 2 0 ]
 {
 [v MIN@a a `i  1 p 2 6 ]
 [v MIN@b b `i  1 p 2 8 ]
-"189
+"188
 } 0
-"191
+"190
 [v _MAX MAX `(i  1 e 2 0 ]
 {
 [v MAX@a a `i  1 p 2 6 ]
 [v MAX@b b `i  1 p 2 8 ]
-"195
+"194
 } 0
 "35
 [v _InitApp InitApp `(v  1 e 0 0 ]
 {
-"109
+"110
 } 0
 "29
 [v _delay delay `(v  1 e 0 0 ]
@@ -358,89 +375,94 @@ RIGHTWALL 1
 [v delay@ms ms `ui  1 p 2 0 ]
 "33
 } 0
-"111
+"112
 [v _AlgorithmSelection AlgorithmSelection `(v  1 e 0 0 ]
 {
-"123
+"124
 } 0
 "24 C:\Users\winds\Documents\GitHub\Micromouse\system.c
 [v _ConfigureOscillator ConfigureOscillator `(v  1 e 0 0 ]
 {
 "36
 } 0
-"229 C:\Users\winds\Documents\GitHub\Micromouse\interrupts.c
+"200 C:\Users\winds\Documents\GitHub\Micromouse\interrupts.c
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
 {
-"264
+"235
 } 0
-"98
+"106
 [v _high_isr high_isr `II(v  1 e 0 0 ]
 {
-"225
+"196
 } 0
-"418
-[v _rotate rotate `(v  1 e 0 0 ]
+"413
+[v _stateUpdate stateUpdate `(v  1 e 0 0 ]
 {
-[v rotate@side side `E4145  1 a 1 wreg ]
-[v rotate@side side `E4145  1 a 1 wreg ]
-"420
-[v rotate@side side `E4145  1 a 1 19 ]
-"428
+"439
 } 0
-"449
+"383
+[v _singleForward singleForward `(v  1 e 0 0 ]
+{
+"390
+} 0
+"373
 [v _forward forward `(v  1 e 0 0 ]
 {
-"454
+"380
 } 0
-"442
-[v _Reversing Reversing `(v  1 e 0 0 ]
-{
-"447
-} 0
-"331
-[v _KController KController `(v  1 e 0 0 ]
-{
-"334
-[v KController@diff diff `i  1 a 2 23 ]
-"333
-[v KController@correctTo correctTo `E4145  1 a 1 22 ]
-"415
-} 0
-"318
+"289
 [v _moveMouse moveMouse `(v  1 e 0 0 ]
 {
 [v moveMouse@action action `uc  1 a 1 wreg ]
 [v moveMouse@action action `uc  1 a 1 wreg ]
-"320
+"291
 [v moveMouse@action action `uc  1 a 1 17 ]
-"321
+"292
 } 0
-"266
+"282
+[v _merge merge `(uc  1 e 1 0 ]
+{
+[v merge@left left `uc  1 a 1 wreg ]
+"284
+[v merge@merged merged `uc  1 a 1 19 ]
+"282
+[v merge@left left `uc  1 a 1 wreg ]
+[v merge@right right `uc  1 p 1 17 ]
+"285
+[v merge@left left `uc  1 a 1 18 ]
+"287
+} 0
+"393
+[v _initialRotation initialRotation `(v  1 e 0 0 ]
+{
+[v initialRotation@side side `E4145  1 a 1 wreg ]
+[v initialRotation@side side `E4145  1 a 1 wreg ]
+[v initialRotation@isDeadEnd isDeadEnd `i  1 p 2 20 ]
+"395
+[v initialRotation@side side `E4145  1 a 1 22 ]
+"410
+} 0
+"328
+[v _rotate rotate `(v  1 e 0 0 ]
+{
+[v rotate@side side `E4145  1 a 1 wreg ]
+[v rotate@side side `E4145  1 a 1 wreg ]
+"330
+[v rotate@side side `E4145  1 a 1 19 ]
+"338
+} 0
+"237
 [v _motorCounterUpdate motorCounterUpdate `(v  1 e 0 0 ]
 {
 [v motorCounterUpdate@side side `E4145  1 a 1 wreg ]
 [v motorCounterUpdate@side side `E4145  1 a 1 wreg ]
 [v motorCounterUpdate@reverse reverse `uc  1 p 1 17 ]
-"268
+"239
 [v motorCounterUpdate@side side `E4145  1 a 1 18 ]
-"309
+"280
 } 0
-"311
-[v _merge merge `(uc  1 e 1 0 ]
+"302
+[v _KController KController `(v  1 e 0 0 ]
 {
-[v merge@left left `uc  1 a 1 wreg ]
-"313
-[v merge@merged merged `uc  1 a 1 19 ]
-"311
-[v merge@left left `uc  1 a 1 wreg ]
-[v merge@right right `uc  1 p 1 17 ]
-"314
-[v merge@left left `uc  1 a 1 18 ]
-"316
-} 0
 "324
-[v _ABS ABS `(i  1 e 2 0 ]
-{
-[v ABS@x x `i  1 p 2 17 ]
-"328
 } 0
