@@ -28,10 +28,10 @@
 /******************************************************************************/
 
 #define MOTORDELAYMIN 0         //the smaller the faster
-#define MOTORDELAYMAX 2       //the bigger the slower
+unsigned char MOTORDELAYMAX  = 2;       //the bigger the slower
 #define ROTATE90 170            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
-#define REVERSEFACTOR 15         //factor that helps correct the 180 turn
+#define REVERSEFACTOR 5         //factor that helps correct the 180 turn
 #define FORWARDFACTOR 350         //factor that helps forward till 90 degree turn
 #define FORWARDFACTORAFTERTURN 350         //factor that helps forward till 90 degree turn
 
@@ -133,7 +133,16 @@ void high_isr(void)
                 else
                     ChangeRequired = 0;
 
-                if(ChangeRequired == 1 && RotateCounter == 0)
+                //for debug
+                if(RotateCounter == ROTATE90*2-1 || RotateCounter == ROTATE90-1)
+                {
+                    int a = 0;
+                }
+
+                if (ReverseCounter > 0) {
+                    Reversing();
+                }
+                else if(ChangeRequired == 1 && RotateCounter == 0)
                 {
                     if(sensorValue[LEFTFRONTSENSOR] < FRONTHASWALL-50 && sensorValue[RIGHTFRONTSENSOR] < FRONTHASWALL-50)
                     {
@@ -148,11 +157,25 @@ void high_isr(void)
                     ChangeRequired = 0;
                 }
                 else if(RotateCounter > 0) {
-                    if(sensorValue[LEFTFRONTSENSOR] < 100 && sensorValue[RIGHTFRONTSENSOR] < 100 && deadEnd == 1)
-                         RotateCounter = 5;
-                    rotate(rotatingSide);
-                    TurnRight = 0;
-                    TurnLeft = 0;
+                    if ((sensorValue[LEFTFRONTSENSOR] > FRONTWALLMAX2 || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMAX2))
+                    {
+                        ReverseCounter = REVERSEFACTOR;
+                        Reversing();
+                    } else {
+                        if(sensorValue[LEFTFRONTSENSOR] < 100 && sensorValue[RIGHTFRONTSENSOR] < 100 && deadEnd == 1)
+                             RotateCounter = 5;
+                        rotate(rotatingSide);
+                        TurnRight = 0;
+                        TurnLeft = 0;
+                        if(RotateCounter == 0)
+                        {
+                            justTurned = 1;
+                            if(deadEnd == 1)
+                            {
+                                ReverseCounter = REVERSEFACTOR*5;
+                            }
+                        }
+                    }
                 }
                 else if(controlToLeft > 0 || controlToRight > 0 || ForwardCounter > 0)
                 {
@@ -173,7 +196,11 @@ void high_isr(void)
                 {
                     if(algorithm == LEFTWALL)
                     {
-                        if(cState == empty)             initialRotation(LEFT,0);
+                        if(cState == empty)             
+                            if(justTurned == 0)
+                                initialRotation(LEFT,0);
+                            else
+                                ForwardCounter = FORWARDFACTOR;
                         else if(cState == twoside)      singleForward();
                         else if(cState == threeside)    initialRotation(LEFT,1);
                         else if(cState == leftside)     singleForward();
@@ -182,7 +209,11 @@ void high_isr(void)
                         else if(cState == frontright)   initialRotation(LEFT,0);
                         else if(cState == front)        initialRotation(LEFT,0);
                     } else {
-                        if(cState == empty)             initialRotation(RIGHT,0);
+                        if(cState == empty)
+                            if(justTurned == 0)
+                                initialRotation(RIGHT,0);
+                            else
+                                ForwardCounter = FORWARDFACTOR;
                         else if(cState == twoside)      singleForward();
                         else if(cState == threeside)    initialRotation(RIGHT,1);
                         else if(cState == leftside)     initialRotation(RIGHT,0);
@@ -313,7 +344,7 @@ void KController()
 //    if(sensorValue[LEFTFRONTSENSOR] > 150 && sensorValue[RIGHTFRONTSENSOR] > 150 &&
 //        sensorValue[LEFTFRONTSENSOR] < FRONTNEEDCORRECTION && sensorValue[RIGHTFRONTSENSOR] < FRONTNEEDCORRECTION )
 //    {
-//        if(ABS(sensorValue[LEFTFRONTSENSOR] - sensorValue[RIGHTFRONTSENSOR]) > 50)
+//        if(ABS(sensorValue[LEFTFRONTSENSOR] - sensorValue[RIGHTFRONTSENSOR]) > 30)
 //            controlToLeft = 1;
 //        else
 //            controlToRight = 1;
@@ -391,6 +422,7 @@ void forward()
 
 void singleForward()
 {
+    MOTORDELAYMAX = 2;
     if(ForwardCounter == 0 || ForwardCounter == 1)
     {
         ForwardCounter = 1;
@@ -401,6 +433,7 @@ void singleForward()
 
 void initialRotation(Side side,int isDeadEnd)
 {
+    MOTORDELAYMAX=2;
     if(isDeadEnd == 1)
     {
         RotateCounter = ROTATE90*2;
@@ -413,7 +446,6 @@ void initialRotation(Side side,int isDeadEnd)
     }
 
     rotatingSide = side;
-    justTurned = 1;
     rotate(rotatingSide);
 
 }
