@@ -43,14 +43,28 @@ unsigned char MOTORDELAYMAX  = 2;       //the bigger the slower
 #define RIGHTFRONTSENSOR 3       //Sensor value position
 
 // Higher the value the closer
-#define FRONTHASWALL 300         // 2,3 senses distance further than this makes left/right turn
-#define FRONTWALLMAX2 800         // 2,3 senses distance closer than this then reverse
-#define RIGHTHASWALL 200
-#define LEFTHASWALL 200      //the higher, higher chance to turn, more errors tho
-#define SIDENEEDCORRECTION 400
-#define FRONTNEEDCORRECTION 200
-
-#define IDEALFRONT 475
+#define LFRONTMIN 72
+#define RFRONTMIN 178
+#define LFRONT20WALL 913
+#define RFRONT20WALL 912
+#define LFRONT55WALL 282         
+#define RFRONT55WALL 424
+#define LFRONT65WALL 204
+#define RFRONT65WALL 338
+#define LFRONT75WALL 159
+#define RFRONT75WALL 274
+#define LFRONT85WALL 128
+#define RFRONT85WALL 239
+#define L50WALL 398
+#define R50WALL 387
+#define L55WALL 356
+#define R55WALL 340
+#define L85WALL 230
+#define R85WALL 193
+#define L95WALL 209
+#define R95WALL 172
+#define L100WALL 199
+#define R100WALL 162
 
 #define KCONTROLLERMAX 30        // Maximum diff bettween 0,1 sensors value
 #define KCONTROLLERMID 10
@@ -144,7 +158,7 @@ void high_isr(void)
                 }
                 else if(ChangeRequired == 1 && RotateCounter == 0)
                 {
-                    if(sensorValue[LEFTFRONTSENSOR] < FRONTHASWALL-50 && sensorValue[RIGHTFRONTSENSOR] < FRONTHASWALL-50)
+                    if(sensorValue[LEFTFRONTSENSOR] < LFRONT65WALL && sensorValue[RIGHTFRONTSENSOR] < RFRONT65WALL && cState != threeside)
                     {
                         if(justTurned == 1)
                             ForwardCounter = FORWARDFACTORAFTERTURN;
@@ -157,13 +171,13 @@ void high_isr(void)
                     ChangeRequired = 0;
                 }
                 else if(RotateCounter > 0) {
-                    if ((sensorValue[LEFTFRONTSENSOR] > FRONTWALLMAX2 || sensorValue[RIGHTFRONTSENSOR] > FRONTWALLMAX2))
+                    if ((sensorValue[LEFTFRONTSENSOR] > LFRONT20WALL || sensorValue[RIGHTFRONTSENSOR] > RFRONT20WALL))
                     {
                         ReverseCounter = REVERSEFACTOR;
                         Reversing();
                     } else {
-                        if(sensorValue[LEFTFRONTSENSOR] < 100 && sensorValue[RIGHTFRONTSENSOR] < 100 && deadEnd == 1)
-                             RotateCounter = 5;
+//                        if(sensorValue[LEFTFRONTSENSOR] < LFRONTMIN && sensorValue[RIGHTFRONTSENSOR] < RFRONTMIN && deadEnd == 1)
+//                             RotateCounter = 5;
                         rotate(rotatingSide);
                         TurnRight = 0;
                         TurnLeft = 0;
@@ -172,7 +186,7 @@ void high_isr(void)
                             justTurned = 1;
                             if(deadEnd == 1)
                             {
-                                ReverseCounter = REVERSEFACTOR*5;
+                                ReverseCounter = REVERSEFACTOR*3;
                             }
                         }
                     }
@@ -350,15 +364,15 @@ void KController()
 //            controlToRight = 1;
 //
 //    } else
-        if(sensorValue[LEFTFRONTSENSOR] < 150 || sensorValue[RIGHTFRONTSENSOR] < 150 )
+        if(sensorValue[LEFTFRONTSENSOR] < LFRONT75WALL || sensorValue[RIGHTFRONTSENSOR] < RFRONT75WALL )
     {
 
-        if(sensorValue[LEFTSENSOR] > SIDENEEDCORRECTION)
+        if(sensorValue[LEFTSENSOR] > L55WALL)
         {
-            controlToRight = 30;
-        } else if(sensorValue[RIGHTSENSOR] > SIDENEEDCORRECTION)
+            controlToRight = 5;
+        } else if(sensorValue[RIGHTSENSOR] > R55WALL)
         {
-            controlToLeft = 30;
+            controlToLeft = 5;
         }
     }
 }
@@ -453,28 +467,28 @@ void initialRotation(Side side,int isDeadEnd)
 
 void stateUpdate()
 {
-    if(sensorValue[LEFTSENSOR] < LEFTHASWALL && sensorValue[RIGHTSENSOR] < RIGHTHASWALL &&
-            (sensorValue[LEFTFRONTSENSOR] < FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] < FRONTHASWALL))
+    if(sensorValue[LEFTSENSOR] < L100WALL && sensorValue[RIGHTSENSOR] < R100WALL &&
+            (sensorValue[LEFTFRONTSENSOR] < LFRONT55WALL && sensorValue[RIGHTFRONTSENSOR] < RFRONT55WALL))
         cState = empty;
-    else if(sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL &&
-            (sensorValue[LEFTFRONTSENSOR] < FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] < FRONTHASWALL))
+    else if(sensorValue[LEFTSENSOR] > L100WALL && sensorValue[RIGHTSENSOR] > R100WALL &&
+            (sensorValue[LEFTFRONTSENSOR] < LFRONT55WALL && sensorValue[RIGHTFRONTSENSOR] < RFRONT55WALL))
         cState = twoside;
-    else if(sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL &&
-            (sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL))
+    else if(sensorValue[LEFTSENSOR] > L100WALL && sensorValue[RIGHTSENSOR] > R100WALL &&
+            (sensorValue[LEFTFRONTSENSOR] > LFRONT55WALL && sensorValue[RIGHTFRONTSENSOR] > RFRONT55WALL))
         cState = threeside;
-    else if(sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] < RIGHTHASWALL &&
-            (sensorValue[LEFTFRONTSENSOR] < FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] < FRONTHASWALL))
+    else if(sensorValue[LEFTSENSOR] > L100WALL && sensorValue[RIGHTSENSOR] < R100WALL &&
+            (sensorValue[LEFTFRONTSENSOR] < LFRONT55WALL && sensorValue[RIGHTFRONTSENSOR] < RFRONT55WALL))
         cState = leftside;
-    else if(sensorValue[LEFTSENSOR] < LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL &&
-            (sensorValue[LEFTFRONTSENSOR] < FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] < FRONTHASWALL))
+    else if(sensorValue[LEFTSENSOR] < L100WALL && sensorValue[RIGHTSENSOR] > R100WALL &&
+            (sensorValue[LEFTFRONTSENSOR] < LFRONT55WALL && sensorValue[RIGHTFRONTSENSOR] < RFRONT55WALL))
         cState = rightside;
-    else if(sensorValue[LEFTSENSOR] > LEFTHASWALL && sensorValue[RIGHTSENSOR] < RIGHTHASWALL &&
-            (sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL))
+    else if(sensorValue[LEFTSENSOR] > L100WALL && sensorValue[RIGHTSENSOR] < R100WALL &&
+            (sensorValue[LEFTFRONTSENSOR] > LFRONT55WALL && sensorValue[RIGHTFRONTSENSOR] > RFRONT55WALL))
         cState = frontleft;
-    else if(sensorValue[LEFTSENSOR] < LEFTHASWALL && sensorValue[RIGHTSENSOR] > RIGHTHASWALL &&
-            (sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL))
+    else if(sensorValue[LEFTSENSOR] < L100WALL && sensorValue[RIGHTSENSOR] > R100WALL &&
+            (sensorValue[LEFTFRONTSENSOR] > LFRONT55WALL && sensorValue[RIGHTFRONTSENSOR] > RFRONT55WALL))
         cState = frontright;
-    else if(sensorValue[LEFTSENSOR] < LEFTHASWALL && sensorValue[RIGHTSENSOR] < RIGHTHASWALL &&
-            (sensorValue[LEFTFRONTSENSOR] > FRONTHASWALL && sensorValue[RIGHTFRONTSENSOR] > FRONTHASWALL))
+    else if(sensorValue[LEFTSENSOR] < L100WALL && sensorValue[RIGHTSENSOR] < R100WALL &&
+            (sensorValue[LEFTFRONTSENSOR] > LFRONT55WALL && sensorValue[RIGHTFRONTSENSOR] > RFRONT55WALL))
         cState = front;
 }

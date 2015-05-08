@@ -52,7 +52,7 @@ void main(void)
     INTCONbits.GIE = 1;
     while(1)
     {
-        sensorUpdate(0);
+        sensorUpdate(1);
     }
 
 }
