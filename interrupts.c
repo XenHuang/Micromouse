@@ -32,8 +32,9 @@ unsigned char MOTORDELAYMAX  = 2;       //the bigger the slower
 #define ROTATE90 170            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 #define REVERSEFACTOR 5         //factor that helps correct the 180 turn
-#define FORWARDFACTOR 350         //factor that helps forward till 90 degree turn
-#define FORWARDFACTORAFTERTURN 350         //factor that helps forward till 90 degree turn
+#define FORWARDFACTOR 320         //factor that helps forward till 90 degree turn
+#define FORWARDFACTORAFTERTURN 355         //factor that helps forward till 90 degree turn
+#define FORWARDUPDATESTATE 240
 
 #define CONTROLLERFACTOR 3
 
@@ -49,18 +50,36 @@ unsigned char MOTORDELAYMAX  = 2;       //the bigger the slower
 #define RFRONT20WALL 912
 #define LFRONT55WALL 282         
 #define RFRONT55WALL 424
+#define LFRONT60WALL 238
+#define RFRONT60WALL 378
 #define LFRONT65WALL 204
 #define RFRONT65WALL 338
+#define LFRONT70WALL 177
+#define RFRONT70WALL 304
 #define LFRONT75WALL 159
 #define RFRONT75WALL 274
+#define LFRONT80WALL 141
+#define RFRONT80WALL 260
 #define LFRONT85WALL 128
 #define RFRONT85WALL 239
 #define L50WALL 398
 #define R50WALL 387
 #define L55WALL 356
 #define R55WALL 340
+#define L60WALL 321
+#define R60WALL 302
+#define L65WALL 295
+#define R65WALL 273
+#define L70WALL 274
+#define R70WALL 245
+#define L75WALL 256
+#define R75WALL 224
+#define L80WALL 242
+#define R80WALL 207
 #define L85WALL 230
 #define R85WALL 193
+#define L90WALL 217
+#define R90WALL 181
 #define L95WALL 209
 #define R95WALL 172
 #define L100WALL 199
@@ -80,6 +99,7 @@ unsigned char deadEnd = 0;
 typedef enum {empty,front,twoside,threeside,leftside,rightside,frontleft,frontright} State;
 unsigned char ChangeRequired = 0;
 State cState = twoside;
+State doState = twoside;
 State pState = twoside;
 int controlToLeft = 0;
 int controlToRight = 0;
@@ -156,16 +176,19 @@ void high_isr(void)
                 if (ReverseCounter > 0) {
                     Reversing();
                 }
-                else if(ChangeRequired == 1 && RotateCounter == 0)
+                else if((ChangeRequired == 1 && RotateCounter == 0) && ForwardCounter != FORWARDUPDATESTATE)
                 {
-                    if(sensorValue[LEFTFRONTSENSOR] < LFRONT65WALL && sensorValue[RIGHTFRONTSENSOR] < RFRONT65WALL && cState != threeside)
+                    if(sensorValue[LEFTFRONTSENSOR] < LFRONT75WALL && sensorValue[RIGHTFRONTSENSOR] < RFRONT75WALL && cState != threeside)
                     {
                         if(justTurned == 1)
                             ForwardCounter = FORWARDFACTORAFTERTURN;
                         else
                             ForwardCounter = FORWARDFACTOR;
                     } else
+                    {
                         ForwardCounter = 1;
+                        doState = cState;
+                    }
                     forward();
                     pState = cState;
                     ChangeRequired = 0;
@@ -194,49 +217,56 @@ void high_isr(void)
                 else if(controlToLeft > 0 || controlToRight > 0 || ForwardCounter > 0)
                 {
                     KController();
+                    if(ForwardCounter == FORWARDUPDATESTATE)
+                        doState = cState;
+
                     
                     if(controlToLeft > 0 )
                     {
                         motorCounterUpdate(RIGHT,0);
                         controlToLeft--;
+                        ForwardCounter--;
                     } else if(controlToRight > 0){
                         motorCounterUpdate(LEFT,0);
+                        ForwardCounter--;
                         controlToRight--;
                     } else {
                         forward();
                     }
 
-                } else if(ForwardCounter == 0)
+                }
+                else if(ForwardCounter == 0)
                 {
                     if(algorithm == LEFTWALL)
                     {
-                        if(cState == empty)             
-                            if(justTurned == 0)
-                                initialRotation(LEFT,0);
-                            else
+                        if(justTurned == 1 && doState != twoside && doState != leftside)
                                 ForwardCounter = FORWARDFACTOR;
-                        else if(cState == twoside)      singleForward();
-                        else if(cState == threeside)    initialRotation(LEFT,1);
-                        else if(cState == leftside)     singleForward();
-                        else if(cState == rightside)    initialRotation(LEFT,0);
-                        else if(cState == frontleft)    initialRotation(RIGHT,0);
-                        else if(cState == frontright)   initialRotation(LEFT,0);
-                        else if(cState == front)        initialRotation(LEFT,0);
+                        else{
+                            if(doState == empty)             initialRotation(LEFT,0);
+                            else if(doState == twoside)      singleForward();
+                            else if(doState == threeside)    initialRotation(LEFT,1);
+                            else if(doState == leftside)     singleForward();
+                            else if(doState == rightside)    initialRotation(LEFT,0);
+                            else if(doState == frontleft)    initialRotation(RIGHT,0);
+                            else if(doState == frontright)   initialRotation(LEFT,0);
+                            else if(doState == front)        initialRotation(LEFT,0);
+                        }
                     } else {
-                        if(cState == empty)
-                            if(justTurned == 0)
-                                initialRotation(RIGHT,0);
-                            else
-                                ForwardCounter = FORWARDFACTOR;
-                        else if(cState == twoside)      singleForward();
-                        else if(cState == threeside)    initialRotation(RIGHT,1);
-                        else if(cState == leftside)     initialRotation(RIGHT,0);
-                        else if(cState == rightside)    singleForward();
-                        else if(cState == frontleft)    initialRotation(RIGHT,0);
-                        else if(cState == frontright)   initialRotation(LEFT,0);
-                        else if(cState == front)        initialRotation(RIGHT,0);
+                        if(justTurned == 1 && doState != twoside && doState != rightside)
+                            ForwardCounter = FORWARDFACTOR;
+                        else{
+                            if(doState == empty)             initialRotation(RIGHT,0);
+                            else if(doState == twoside)      singleForward();
+                            else if(doState == threeside)    initialRotation(RIGHT,1);
+                            else if(doState == leftside)     initialRotation(RIGHT,0);
+                            else if(doState == rightside)    singleForward();
+                            else if(doState == frontleft)    initialRotation(RIGHT,0);
+                            else if(doState == frontright)   initialRotation(LEFT,0);
+                            else if(doState == front)        initialRotation(RIGHT,0);
+                        }
                     }
-                }
+                } else
+                    forward();
 
                 moveMouse(merge(LMotorCounter,RMotorCounter));
                 MotorDelayCounter = 0;       
@@ -355,26 +385,27 @@ int ABS(int x)
 
 void KController()
 {
-//    if(sensorValue[LEFTFRONTSENSOR] > 150 && sensorValue[RIGHTFRONTSENSOR] > 150 &&
-//        sensorValue[LEFTFRONTSENSOR] < FRONTNEEDCORRECTION && sensorValue[RIGHTFRONTSENSOR] < FRONTNEEDCORRECTION )
-//    {
-//        if(ABS(sensorValue[LEFTFRONTSENSOR] - sensorValue[RIGHTFRONTSENSOR]) > 30)
-//            controlToLeft = 1;
-//        else
-//            controlToRight = 1;
-//
-//    } else
         if(sensorValue[LEFTFRONTSENSOR] < LFRONT75WALL || sensorValue[RIGHTFRONTSENSOR] < RFRONT75WALL )
     {
 
-        if(sensorValue[LEFTSENSOR] > L55WALL)
+        if(sensorValue[LEFTSENSOR] > L60WALL)
         {
             controlToRight = 5;
-        } else if(sensorValue[RIGHTSENSOR] > R55WALL)
+        } else if(sensorValue[RIGHTSENSOR] > R60WALL)
         {
             controlToLeft = 5;
         }
-    }
+//        else if(cState == leftside && sensorValue[LEFTSENSOR] > L70WALL && sensorValue[LEFTSENSOR] < L65WALL )
+//        {
+//                controlToLeft = 2;
+//        }
+//        else if(cState == rightside && sensorValue[RIGHTSENSOR] > R70WALL && sensorValue[RIGHTSENSOR] < R65WALL )
+//        {
+//                controlToRight = 2;
+//        }
+
+
+    } 
 }
 
 
