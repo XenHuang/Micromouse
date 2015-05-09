@@ -193,7 +193,10 @@ void high_isr(void)
                     forward();
                     pState = cState;
                     ChangeRequired = 0;
-                    MOTORDELAY = MOTORDELAYMAX;
+                    if((algorithm == LEFTWALL && cState == leftside) || (algorithm == RIGHTWALL && cState == rightside))
+                        MOTORDELAY = MOTORDELAYMIN;
+                    else
+                        MOTORDELAY = MOTORDELAYMAX;
                 }
                 else if(RotateCounter > 0) {
                     if ((sensorValue[LEFTFRONTSENSOR] > LFRONT20WALL || sensorValue[RIGHTFRONTSENSOR] > RFRONT20WALL))
@@ -215,9 +218,6 @@ void high_isr(void)
                 }
                 else if(controlToLeft > 0 || controlToRight > 0 || ForwardCounter > 0)
                 {
-
-                    if(sensorValue[LEFTFRONTSENSOR] > LFRONT85WALL || sensorValue[RIGHTFRONTSENSOR] > RFRONT85WALL)
-                        MOTORDELAY = MOTORDELAYMAX;
                     
                     KController();
                     if(ForwardCounter == FORWARDUPDATESTATE)
