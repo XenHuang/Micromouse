@@ -5,7 +5,7 @@
 /* TODO Application specific user parameters used in user.c may go here */
 #define _XTAL_FREQ 32000000
 
-#define SENSORCOMPUTATION 10    //the number of times averaging sensor value, min = 3
+#define SENSORCOMPUTATION 1    //the number of times averaging sensor value, min = 3
 #define NUMSENSORS 4
 #define LEFTSENSORL 0b00011011         //ADCON0 value
 #define RIGHTSENSORL 0b00101011        //ADCON0 value

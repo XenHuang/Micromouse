@@ -27,8 +27,9 @@
 
 /******************************************************************************/
 
-#define MOTORDELAYMIN 0         //the smaller the faster
-unsigned char MOTORDELAYMAX  = 2;       //the bigger the slower
+#define MOTORDELAYMIN 11         //the smaller the faster
+#define MOTORDELAYMAX 18         //the smaller the faster
+unsigned char MOTORDELAY  = 18;       //the bigger the slower   13,115,275 18,100,275
 #define ROTATE90 170            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 #define REVERSEFACTOR 5         //factor that helps correct the 180 turn
@@ -84,6 +85,10 @@ unsigned char MOTORDELAYMAX  = 2;       //the bigger the slower
 #define R95WALL 172
 #define L100WALL 199
 #define R100WALL 162
+#define L110WALL 188
+#define R110WALL 149
+#define L115WALL 183 //115 works
+#define R115WALL 143
 
 #define KCONTROLLERMAX 30        // Maximum diff bettween 0,1 sensors value
 #define KCONTROLLERMID 10
@@ -127,6 +132,7 @@ void singleForward();
 void initialRotation(Side side,int isDeadEnd);
 void FrontController();
 void stateUpdate();
+void speedChnage(unsigned char);
 
 int ABS(int);
 
@@ -153,7 +159,7 @@ void high_isr(void)
       /* TODO Add High Priority interrupt routine code here. */
 	if(INTCONbits.TMR0IF == 1)
 	{
-            if(MotorDelayCounter > MOTORDELAYMAX)
+            if(MotorDelayCounter > MOTORDELAY)
             {
                 stateUpdate();
 
@@ -187,6 +193,7 @@ void high_isr(void)
                     forward();
                     pState = cState;
                     ChangeRequired = 0;
+                    MOTORDELAY = MOTORDELAYMAX;
                 }
                 else if(RotateCounter > 0) {
                     if ((sensorValue[LEFTFRONTSENSOR] > LFRONT20WALL || sensorValue[RIGHTFRONTSENSOR] > RFRONT20WALL))
@@ -204,9 +211,11 @@ void high_isr(void)
                             }
                         }
                     }
+                    
                 }
                 else if(controlToLeft > 0 || controlToRight > 0 || ForwardCounter > 0)
                 {
+                    
                     KController();
                     if(ForwardCounter == FORWARDUPDATESTATE)
                         doState = cState;
@@ -243,6 +252,11 @@ void high_isr(void)
                             else if(doState == frontright)   initialRotation(LEFT,0);
                             else if(doState == front)        initialRotation(LEFT,0);
                         }
+                        if(doState == twoside || doState == leftside)
+                            MOTORDELAY = MOTORDELAYMIN;
+                        else
+                            MOTORDELAY = MOTORDELAYMAX;
+                        
                     } else {
                         if(justTurned == 1 && doState != twoside && doState != rightside)
                             ForwardCounter = FORWARDFACTOR;
@@ -256,8 +270,15 @@ void high_isr(void)
                             else if(doState == frontright)   initialRotation(LEFT,0);
                             else if(doState == front)        initialRotation(RIGHT,0);
                         }
+                        if(doState == twoside || doState == rightside)
+                            MOTORDELAY = MOTORDELAYMIN;
+                        else
+                            MOTORDELAY = MOTORDELAYMAX;
                     }
+                    
+                    
                 } else {
+                    
                     KController();
                     forward();
                 }
@@ -461,7 +482,7 @@ void forward()
 
 void singleForward()
 {
-    MOTORDELAYMAX = 2;
+//    MOTORDELAYMAX = 2;
     if(ForwardCounter == 0 || ForwardCounter == 1)
     {
         ForwardCounter = 1;
@@ -472,7 +493,7 @@ void singleForward()
 
 void initialRotation(Side side,int isDeadEnd)
 {
-    MOTORDELAYMAX=2;
+//    MOTORDELAYMAX=2;
     if(isDeadEnd == 1)
     {
         RotateCounter = ROTATE90*2;
@@ -492,28 +513,53 @@ void initialRotation(Side side,int isDeadEnd)
 
 void stateUpdate()
 {
-    if(sensorValue[LEFTSENSOR] < L100WALL && sensorValue[RIGHTSENSOR] < R100WALL &&
+    if(sensorValue[LEFTSENSOR] < L110WALL && sensorValue[RIGHTSENSOR] < R110WALL &&
             (sensorValue[LEFTFRONTSENSOR] < LFRONT70WALL && sensorValue[RIGHTFRONTSENSOR] < RFRONT70WALL))
         cState = empty;
-    else if(sensorValue[LEFTSENSOR] > L100WALL && sensorValue[RIGHTSENSOR] > R100WALL &&
+    else if(sensorValue[LEFTSENSOR] > L110WALL && sensorValue[RIGHTSENSOR] > R110WALL &&
             (sensorValue[LEFTFRONTSENSOR] < LFRONT70WALL && sensorValue[RIGHTFRONTSENSOR] < RFRONT70WALL))
         cState = twoside;
-    else if(sensorValue[LEFTSENSOR] > L100WALL && sensorValue[RIGHTSENSOR] > R100WALL &&
+    else if(sensorValue[LEFTSENSOR] > L110WALL && sensorValue[RIGHTSENSOR] > R110WALL &&
             (sensorValue[LEFTFRONTSENSOR] > LFRONT55WALL && sensorValue[RIGHTFRONTSENSOR] > RFRONT55WALL))
         cState = threeside;
-    else if(sensorValue[LEFTSENSOR] > L100WALL && sensorValue[RIGHTSENSOR] < R100WALL &&
+    else if(sensorValue[LEFTSENSOR] > L110WALL && sensorValue[RIGHTSENSOR] < R110WALL &&
             (sensorValue[LEFTFRONTSENSOR] < LFRONT70WALL && sensorValue[RIGHTFRONTSENSOR] < RFRONT70WALL))
         cState = leftside;
-    else if(sensorValue[LEFTSENSOR] < L100WALL && sensorValue[RIGHTSENSOR] > R100WALL &&
+    else if(sensorValue[LEFTSENSOR] < L110WALL && sensorValue[RIGHTSENSOR] > R110WALL &&
             (sensorValue[LEFTFRONTSENSOR] < LFRONT70WALL && sensorValue[RIGHTFRONTSENSOR] < RFRONT70WALL))
         cState = rightside;
-    else if(sensorValue[LEFTSENSOR] > L100WALL && sensorValue[RIGHTSENSOR] < R100WALL &&
+    else if(sensorValue[LEFTSENSOR] > L110WALL && sensorValue[RIGHTSENSOR] < R110WALL &&
             (sensorValue[LEFTFRONTSENSOR] > LFRONT70WALL && sensorValue[RIGHTFRONTSENSOR] > RFRONT70WALL))
         cState = frontleft;
-    else if(sensorValue[LEFTSENSOR] < L100WALL && sensorValue[RIGHTSENSOR] > R100WALL &&
+    else if(sensorValue[LEFTSENSOR] < L110WALL && sensorValue[RIGHTSENSOR] > R110WALL &&
             (sensorValue[LEFTFRONTSENSOR] > LFRONT70WALL && sensorValue[RIGHTFRONTSENSOR] > RFRONT70WALL))
         cState = frontright;
-    else if(sensorValue[LEFTSENSOR] < L100WALL && sensorValue[RIGHTSENSOR] < R100WALL &&
+    else if(sensorValue[LEFTSENSOR] < L110WALL && sensorValue[RIGHTSENSOR] < R110WALL &&
             (sensorValue[LEFTFRONTSENSOR] > LFRONT70WALL && sensorValue[RIGHTFRONTSENSOR] > RFRONT70WALL))
         cState = front;
 }
+
+
+//void speedChnage(unsigned char accelerating)
+//{
+//    float speed = ForwardCounter / FORWARDFACTOR;
+//    if(accelerating == 1)
+//    {
+//        if(speed > 6/7)
+//            MOTORDELAY = 17;
+//        else if(speed > 5/7)
+//            MOTORDELAY = 16;
+//        else if(speed > 4/7)
+//            MOTORDELAY = 15;
+//        else if(speed > 3/7)
+//            MOTORDELAY = 14;
+//        else if(speed > 2/7)
+//            MOTORDELAY = 13;
+//        else if(speed > 1/7)
+//            MOTORDELAY = 12;
+//        else
+//            MOTORDELAY = 11;
+//    } else {
+//        
+//    }
+//}

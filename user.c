@@ -74,7 +74,7 @@ void InitApp(void)
     /* Initialize peripherals */
 
     /* Configure the IPEN bit (1=on) in RCON to turn on/off int priorities */
-    T0CON = 0b11000100;
+    T0CON = 0b11000001;
             //7.TMR0ON: 1 = Enables Timer()
             //6.T08BIT: 1 = 8-bit timer, 0 = 16-bit
             //5.T0CS: 0 = Internal instruction cycle clock(CLKO, not T0CKI)
@@ -167,24 +167,33 @@ void sensorComputation(int sensorTemp[][SENSORCOMPUTATION],unsigned char getCorr
 
 void sensorUpdate(unsigned char getCorrection)
 {
-    int i,j;
-    int sensorTemp[NUMSENSORS][SENSORCOMPUTATION];
-
-    //Read from sensor
-    for(i = 0; i < SENSORCOMPUTATION; i++)
+//    int i,j;
+//    int sensorTemp[NUMSENSORS][SENSORCOMPUTATION];
+//
+//    //Read from sensor
+//    for(i = 0; i < SENSORCOMPUTATION; i++)
+//    {
+//        for(j = 0 ; j < NUMSENSORS ; j++)
+//        {
+//            ADCON0 = sensorLocation[j];
+//
+//            ADCON0bits.GO_DONE = 1;
+//            while(ADCON0bits.GO_DONE != 0);
+//            sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
+//        }
+//    }
+//
+//    //Compute and write to variables
+//    sensorComputation(sensorTemp,getCorrection);
+    
+    int i;
+    for(i=0;i<NUMSENSORS;i++)
     {
-        for(j = 0 ; j < NUMSENSORS ; j++)
-        {
-            ADCON0 = sensorLocation[j];
-
-            ADCON0bits.GO_DONE = 1;
-            while(ADCON0bits.GO_DONE != 0);
-            sensorTemp[j][i] = (ADRESH << 2) + (ADRESL >> 6);
-        }
+        ADCON0 = sensorLocation[i];
+        ADCON0bits.GO_DONE = 1;
+        while(ADCON0bits.GO_DONE != 0);
+        sensorValue[i] = (ADRESH << 2) + (ADRESL >> 6);
     }
-
-    //Compute and write to variables
-    sensorComputation(sensorTemp,getCorrection);
 
 }
 
