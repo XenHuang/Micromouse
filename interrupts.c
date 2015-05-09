@@ -27,9 +27,9 @@
 
 /******************************************************************************/
 
-#define MOTORDELAYMIN 11         //the smaller the faster
-#define MOTORDELAYMAX 18         //the smaller the faster
-unsigned char MOTORDELAY  = 18;       //the bigger the slower   13,115,275 18,100,275
+#define MOTORDELAYMIN 8         //the smaller the faster
+#define MOTORDELAYMAX 19         //the smaller the faster
+unsigned char MOTORDELAY  = MOTORDELAYMAX;       //the bigger the slower   13,115,275 18,100,275
 #define ROTATE90 170            //steps require for doing 90 turn
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 #define REVERSEFACTOR 5         //factor that helps correct the 180 turn
@@ -215,6 +215,9 @@ void high_isr(void)
                 }
                 else if(controlToLeft > 0 || controlToRight > 0 || ForwardCounter > 0)
                 {
+
+                    if(sensorValue[LEFTFRONTSENSOR] > LFRONT85WALL || sensorValue[RIGHTFRONTSENSOR] > RFRONT85WALL)
+                        MOTORDELAY = MOTORDELAYMAX;
                     
                     KController();
                     if(ForwardCounter == FORWARDUPDATESTATE)
@@ -282,6 +285,9 @@ void high_isr(void)
                     KController();
                     forward();
                 }
+
+                if(sensorValue[LEFTFRONTSENSOR] > LFRONT85WALL || sensorValue[RIGHTFRONTSENSOR] > RFRONT85WALL)
+                    MOTORDELAY = MOTORDELAYMAX;
 
                 moveMouse(merge(LMotorCounter,RMotorCounter));
                 MotorDelayCounter = 0;       
