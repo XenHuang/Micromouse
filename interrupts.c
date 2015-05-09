@@ -227,6 +227,7 @@ void high_isr(void)
                 }
                 else if(ForwardCounter == 0)
                 {
+                    KController();
                     if(algorithm == LEFTWALL)
                     {
                         //if turned then must forward
@@ -256,8 +257,10 @@ void high_isr(void)
                             else if(doState == front)        initialRotation(RIGHT,0);
                         }
                     }
-                } else
+                } else {
+                    KController();
                     forward();
+                }
 
                 moveMouse(merge(LMotorCounter,RMotorCounter));
                 MotorDelayCounter = 0;       
@@ -376,7 +379,7 @@ int ABS(int x)
 
 void KController()
 {
-        if(sensorValue[LEFTFRONTSENSOR] < LFRONT75WALL || sensorValue[RIGHTFRONTSENSOR] < RFRONT75WALL )
+        if(sensorValue[LEFTFRONTSENSOR] < LFRONT65WALL || sensorValue[RIGHTFRONTSENSOR] < RFRONT65WALL )
     {
 
         if(sensorValue[LEFTSENSOR] > L60WALL)
