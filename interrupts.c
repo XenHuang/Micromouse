@@ -33,8 +33,8 @@ unsigned char MOTORDELAYMAX  = 2;       //the bigger the slower
 #define SMOOTHROTATEFACTOR 5    //factor that the outer/inter steps
 #define REVERSEFACTOR 5         //factor that helps correct the 180 turn
 #define FORWARDFACTOR 320         //factor that helps forward till 90 degree turn
-#define FORWARDFACTORAFTERTURN 350         //factor that helps forward till 90 degree turn
-#define FORWARDUPDATESTATE 220
+#define FORWARDFACTORAFTERTURN 320         //factor that helps forward till 90 degree turn
+#define FORWARDUPDATESTATE 275
 
 #define CONTROLLERFACTOR 3
 
@@ -384,10 +384,10 @@ void KController()
 
         if(sensorValue[LEFTSENSOR] > L60WALL)
         {
-            controlToRight = 5;
+            controlToRight = 1;
         } else if(sensorValue[RIGHTSENSOR] > R60WALL)
         {
-            controlToLeft = 5;
+            controlToLeft = 1;
         }
 //        else if(cState == leftside && sensorValue[LEFTSENSOR] > L70WALL && sensorValue[LEFTSENSOR] < L65WALL )
 //        {
